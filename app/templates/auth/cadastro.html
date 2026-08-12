@@ -3,23 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Criar conta - AAPM</title>
 </head>
-<body>
-    
-    <h1>Criar conta</h1>
+<body style="margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; display: flex; justify-content: center; align-items: center; color: #ffffff; padding: 20px 0;">
 
-    <form action="/auth/cadastro" method="post">
-        Nome: <input type="text" name="nome" required>
-        <br><br>
-        Email: <input type="email" name="email" required>
-        <br><br>
-        Senha: <input type="password" name="senha">
-        <br><br>
-        <button type="submit">Cadastrar</button>
-    </form>
+    <div style="background: rgba(255, 255, 255, 0.06); padding: 40px 30px; border-radius: 16px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; max-width: 400px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); box-sizing: border-box;">
+        
+        <h1 style="margin: 0 0 10px 0; font-size: 28px; font-weight: 600; text-align: center; letter-spacing: 0.5px;">Criar conta</h1>
+        <p style="margin: 0 0 25px 0; font-size: 14px; color: #b0bec5; font-weight: 300; text-align: center;">Preencha os dados abaixo para se cadastrar</p>
 
-    <p>Já tem conta? <a href="/auth/login">Entrar</a></p>
+        <!-- Exibe mensagem de erro se existir (ex: email já cadastrado) -->
+        {% if erro %}
+            <div style="background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #ff8a80; padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 20px; text-align: center; font-weight: 500;">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        <form action="/auth/cadastro" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Campo Nome -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 13px; color: #b0bec5; font-weight: 500; letter-spacing: 0.3px;">Nome</label>
+                <input type="text" name="nome" required placeholder="Nome Completo"
+                       style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #ffffff; font-size: 15px; outline: none; box-sizing: border-box; transition: all 0.3s ease;"
+                       onfocus="this.style.border='1px solid #00adb5'; this.style.background='rgba(255, 255, 255, 0.12)';"
+                       onblur="this.style.border='1px solid rgba(255, 255, 255, 0.2)'; this.style.background='rgba(255, 255, 255, 0.08)';">
+            </div>
+
+            <!-- Campo Email -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 13px; color: #b0bec5; font-weight: 500; letter-spacing: 0.3px;">E-mail</label>
+                <input type="email" name="email" required placeholder="seu@email.com"
+                       style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #ffffff; font-size: 15px; outline: none; box-sizing: border-box; transition: all 0.3s ease;"
+                       onfocus="this.style.border='1px solid #00adb5'; this.style.background='rgba(255, 255, 255, 0.12)';"
+                       onblur="this.style.border='1px solid rgba(255, 255, 255, 0.2)'; this.style.background='rgba(255, 255, 255, 0.08)';">
+            </div>
+            
+            <!-- Campo Senha -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label style="font-size: 13px; color: #b0bec5; font-weight: 500; letter-spacing: 0.3px;">Senha</label>
+                <input type="password" name="senha" required placeholder="Crie uma senha forte"
+                       style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #ffffff; font-size: 15px; outline: none; box-sizing: border-box; transition: all 0.3s ease;"
+                       onfocus="this.style.border='1px solid #00adb5'; this.style.background='rgba(255, 255, 255, 0.12)';"
+                       onblur="this.style.border='1px solid rgba(255, 255, 255, 0.2)'; this.style.background='rgba(255, 255, 255, 0.08)';">
+            </div>
+
+            <!-- Botão Cadastrar -->
+            <button type="submit" 
+                    style="width: 100%; padding: 14px; background: #00adb5; color: #ffffff; border: none; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3); margin-top: 10px;" 
+                    onmouseover="this.style.background='#00c4ce'; this.style.transform='translateY(-2px)';" 
+                    onmouseout="this.style.background='#00adb5'; this.style.transform='translateY(0)';">
+                Cadastrar
+            </button>
+        </form>
+
+        <!-- Link para Login -->
+        <p style="margin: 30px 0 0 0; text-align: center; font-size: 14px; color: #b0bec5; font-weight: 300;">
+            Já tem conta? 
+            <a href="/auth/login" style="color: #00adb5; text-decoration: none; font-weight: 600; transition: color 0.3s ease;"
+               onmouseover="this.style.color='#00c4ce'; this.style.textDecoration='underline';"
+               onmouseout="this.style.color='#00adb5'; this.style.textDecoration='none';">
+                Entrar
+            </a>
+        </p>
+
+    </div>
 
 </body>
 </html>

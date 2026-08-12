@@ -5,11 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pós - login</title>
 </head>
-<body>
-    <h1>Olá, {{ usuario.nome }}</h1>
-    <p>Perfil: {{ usuario.role }}</p>
+<body style="margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; display: flex; justify-content: center; align-items: center; color: #ffffff; padding: 20px;">
 
-    <a href="/auth/logout">Sair</a>
+    <div style="background: rgba(255, 255, 255, 0.06); padding: 40px 30px; border-radius: 16px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; max-width: 450px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); box-sizing: border-box; text-align: center;">
+        
+        <!-- Avatar / Ícone de Usuário -->
+        <div style="width: 80px; height: 80px; background: rgba(255, 255, 255, 0.1); border: 2px solid #00adb5; margin: 0 auto 20px auto; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(0, 173, 181, 0.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#00adb5" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+            </svg>
+        </div>
+
+        <h1 style="margin: 0 0 8px 0; font-size: 26px; font-weight: 600; letter-spacing: 0.5px;">Olá, {{ usuario.nome }}</h1>
+        
+        <!-- Badge de Perfil/Role -->
+        <div style="display: inline-block; padding: 6px 16px; background: rgba(0, 173, 181, 0.15); border: 1px solid rgba(0, 173, 181, 0.3); color: #00adb5; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px;">
+            Perfil: {{ usuario.role }}
+        </div>
+
+        <!-- Área de Conteúdo / Boas-vindas -->
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 12px; margin-bottom: 30px; font-size: 15px; color: #b0bec5; font-weight: 300; line-height: 1.5;">
+            Você foi autenticado com sucesso no sistema da AAPM. Use o menu ou os acessos da sua conta para navegar.
+        </div>
+
+        <!-- Botão Sair -->
+        <a href="/auth/logout" 
+           style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 28px; background: rgba(244, 67, 54, 0.1); color: #ff8a80; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; border: 1px solid rgba(244, 67, 54, 0.4); transition: all 0.3s ease; width: 100%; box-sizing: border-box;" 
+           onmouseover="this.style.background='rgba(244, 67, 54, 0.25)'; this.style.color='#ffffff'; this.style.transform='translateY(-1px)';" 
+           onmouseout="this.style.background='rgba(244, 67, 54, 0.1)'; this.style.color='#ff8a80'; this.style.transform='translateY(0)';">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+            </svg>
+            Sair do Sistema
+        </a>
+
+    </div>
 
 </body>
 </html>
