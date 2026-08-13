@@ -1,0 +1,107 @@
+/* Configurações Gerais */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Container Principal */
+.login-container {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 40px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Logo */
+.logo-icon {
+    width: 70px;
+    height: 70px;
+    background: #00adb5;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+    box-shadow: 0 0 20px rgba(0, 173, 181, 0.5);
+}
+
+.title {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    margin: 0 0 35px 0;
+    font-size: 14px;
+    color: #b0bec5;
+    font-weight: 300;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Botão Entrar */
+.btn-login {
+    display: block;
+    padding: 14px;
+    background: #00adb5;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+}
+
+.btn-login:hover {
+    background: #00c4ce;
+    transform: translateY(-2px);
+}
+
+/* Botão Criar Conta */
+.btn-register {
+    display: block;
+    padding: 14px;
+    background: transparent;
+    color: #00adb5;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid #00adb5;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    background: rgba(0, 173, 181, 0.1);
+    transform: translateY(-2px);
+}
+
+.footer {
+    margin-top: 40px;
+    font-size: 11px;
+    color: #78909c;
+    font-weight: 300;
+}

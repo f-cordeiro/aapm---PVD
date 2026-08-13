@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 40px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #00adb5;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 173, 181, 0.2);
+}
+
+
+.title {
+    margin: 0 0 8px 0;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 173, 181, 0.15);
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    color: #00adb5;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+}
+
+.welcome-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    color: #b0bec5;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: rgba(244, 67, 54, 0.1);
+    color: #ff8a80;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-logout:hover {
+    background: rgba(244, 67, 54, 0.25);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
