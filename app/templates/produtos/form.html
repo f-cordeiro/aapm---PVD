@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produto | Administração</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/produtos-css/form.css"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="topo">
+
+        <div class="logo">
+            AAPM
+        </div>
+
+        <div class="titulo-topo">
+            Administração de produtos
+        </div>
+
+        <a
+            href="/auth/produtos"
+            class="voltar"
+        >
+            ← Voltar
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="container">
+
+        <section class="form-card">
+
+
+            <!-- =================================================
+                 CABEÇALHO DO FORMULÁRIO
+            ================================================== -->
+
+            <div class="form-header">
+
+                <h1>
+
+                    {% if produto %}
+                        Editar produto
+                    {% else %}
+                        Novo produto
+                    {% endif %}
+
+                </h1>
+
+                <p>
+
+                    {% if produto %}
+                        Altere as informações do produto.
+                    {% else %}
+                        Cadastre um novo produto no catálogo.
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 MENSAGENS DO SISTEMA
+            ================================================== -->
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+                {% if mensagens %}
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="alert {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+            ================================================== -->
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="form-container"
+            >
+
+
+                <!-- =================================================
+                     NOME
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="nome">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        class="form-input"
+                        placeholder="Digite o nome do produto"
+                        value="{{ produto.nome if produto else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     DESCRIÇÃO
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        class="form-input textarea"
+                        placeholder="Digite uma descrição para o produto..."
+                        rows="4"
+                    >{{ produto.descricao if produto else '' }}</textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     CATEGORIA + PREÇO
+                ================================================== -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="categoria">
+                            Categoria
+                        </label>
+
+                        <select
+                            id="categoria"
+                            name="categoria_id"
+                            class="form-input"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione uma categoria
+                            </option>
+
+
+                            {% for categoria in categorias %}
+
+                                <option
+                                    value="{{ categoria.id }}"
+
+                                    {% if produto and produto.categoria_id == categoria.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {{ categoria.nome }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="preco">
+                            Preço
+                        </label>
+
+                        <input
+                            type="number"
+                            id="preco"
+                            name="preco"
+                            class="form-input"
+                            placeholder="0,00"
+                            step="0.01"
+                            min="0"
+                            value="{{ produto.preco if produto else '' }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ESTOQUE
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="estoque">
+                        Quantidade em estoque
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estoque"
+                        name="estoque"
+                        class="form-input"
+                        placeholder="Digite a quantidade disponível"
+                        min="0"
+                        value="{{ produto.estoque if produto else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     IMAGEM
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label>
+                        Imagem do produto
+                    </label>
+
+
+                    <!-- Preview -->
+
+                    <div class="imagem-preview">
+
+                        {% if produto and produto.imagem %}
+
+                            <img
+                                id="previewImagem"
+                                src="/static/uploads/{{ produto.imagem }}"
+                                alt="{{ produto.nome }}"
+                            >
+
+                        {% else %}
+
+                            <img
+                                id="previewImagem"
+                                src="/static/uploads/produto-generico.png"
+                                alt="Imagem padrão"
+                            >
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Botão para selecionar -->
+
+                    <label
+                        for="imagem"
+                        class="btn-imagem"
+                    >
+
+                        📷 Escolher imagem
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept="image/png, image/jpeg, image/webp"
+                        hidden
+                    >
+
+
+                    <small class="imagem-info">
+
+                        Formatos aceitos: JPG, PNG ou WEBP.
+
+                    </small>
+
+                </div>
+
+
+                <!-- =================================================
+                     STATUS
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+
+                    <label class="status-container">
+
+                        <input
+                            type="checkbox"
+                            name="ativo"
+
+                            {% if not produto or produto.ativo %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <span class="status-switch"></span>
+
+                        <span class="status-text">
+                            Produto ativo
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÕES
+                ================================================== -->
+
+                <div class="acoes-form">
+
+
+                    <a
+                        href="/auth/produtos"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+
+                        {% if produto %}
+                            Salvar alterações
+                        {% else %}
+                            Cadastrar produto
+                        {% endif %}
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         PREVIEW DA IMAGEM
+    ====================================================== -->
+
+    <script>
+
+        const inputImagem =
+            document.getElementById("imagem");
+
+        const previewImagem =
+            document.getElementById("previewImagem");
+
+
+        inputImagem.addEventListener(
+            "change",
+            function () {
+
+                const arquivo = this.files[0];
+
+                if (!arquivo) {
+                    return;
+                }
+
+                const leitor = new FileReader();
+
+
+                leitor.onload = function (evento) {
+
+                    previewImagem.src =
+                        evento.target.result;
+
+                };
+
+
+                leitor.readAsDataURL(arquivo);
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

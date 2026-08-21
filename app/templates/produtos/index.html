@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produtos</title>
+
+    <!-- CSS da página de produtos -->
+    <link rel="stylesheet" href="/static/produtos-css/index.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="topo">
+        <div class="logo">
+            AAPM
+        </div>
+
+        <div class="barra-pesquisa">
+            <input 
+                type="text" 
+                placeholder="Buscar produtos..."
+            >
+            <button>🔍</button>
+        </div>
+
+        <div class="acoes">
+            
+            <a href="/auth/produtos/form" class="botao-admin">
+            ⚙ Administração
+            </a>
+
+            <a href="#" class="carrinho">
+            🛒
+            <span>Carrinho</span>
+</a>
+        </div>
+    </header>
+
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+
+        <div class="titulo-pagina">
+            <h1>Produtos</h1>
+            <p>Confira os produtos disponíveis para compra.</p>
+        </div>
+
+
+        <!-- Área dos produtos -->
+        <section class="produtos-grid">
+
+            <!-- CARD DO PRODUTO -->
+            <div class="produto-card">
+
+                <div class="produto-imagem">
+                    <img 
+                        src="/static/uploads/produto.jpg" 
+                        alt="Produto"
+                    >
+                </div>
+
+                <div class="produto-info">
+
+                    <h2>Nome do Produto</h2>
+
+                    <div class="produto-preco">
+                        R$ 49,90
+                    </div>
+
+                    <button class="botao-comprar">
+                        🛒 Comprar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!--
+                Futuramente os produtos serão
+                carregados automaticamente pelo banco.
+            -->
+
+        </section>
+
+    </main>
+
+</body>
+</html>
