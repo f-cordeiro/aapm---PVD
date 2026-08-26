@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentações — AAPM SENAI</title>
+    <link rel="stylesheet" href="/static/index_move.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Cabeçalho -->
+        <div class="header-section">
+            <h1 class="title">Histórico de movimentações</h1>
+            <a href="/movimentacoes/nova" class="btn-primary">+ Registrar movimentação</a>
+        </div>
+
+        <!-- Barra de Filtros -->
+        <form class="filter-bar" method="get" action="/movimentacoes">
+            <select name="produto_id">
+                <option value="0">Todos os produtos</option>
+                {% for p in produtos %}
+                    <option value="{{ p.id }}" {{ 'selected' if produto_id == p.id else '' }}>
+                        {{ p.nome }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select name="tipo">
+                <option value="">Todos os tipos</option>
+                <option value="entrada" {{ 'selected' if tipo == 'entrada' else '' }}>
+                    Entrada
+                </option>
+                <option value="saida" {{ 'selected' if tipo == 'saida' else '' }}>
+                    Saída
+                </option>
+            </select>
+
+            <button type="submit" class="btn-primary btn-filter">Filtrar</button>
+
+            {% if produto_id or tipo %}
+                <a href="/movimentacoes" class="btn-clear">Limpar</a>
+            {% endif %}
+        </form>
+
+        <!-- Tabela -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Produto</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Preço unit.</th>
+                        <th>Total</th>
+                        <th>Observação</th>
+                        <th>Registrado por</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in movimentacoes %}
+                    <tr>
+                        <td>{{ m.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
+                        <td>
+                            <a href="/produtos/{{ m.produto_id }}">
+                                {{ m.produto.nome }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if m.tipo.value == 'entrada' %}
+                                <span class="badge badge-entrada">▲ Entrada</span>
+                            {% else %}
+                                <span class="badge badge-saida">▼ Saída</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ m.quantidade }}</td>
+                        <td>R$ {{ "%.2f"|format(m.preco_unitario) }}</td>
+                        <td>R$ {{ "%.2f"|format(m.valor_total) }}</td>
+                        <td>{{ m.observacao or "—" }}</td>
+                        <td>{{ m.usuario.nome if m.usuario else "—" }}</td>
+                    </tr>
+                    {% endfor %}
+
+                    {% if not movimentacoes %}
+                    <tr>
+                        <td colspan="8" class="empty-state">
+                            Nenhuma movimentação encontrada com os filtros atuais.
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Ação Inferior -->
+        <div class="footer-section">
+            <a href="/" class="btn-outline">← Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
