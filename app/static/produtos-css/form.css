@@ -1,0 +1,830 @@
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #0f2027,
+        #203a43,
+        #2c5364
+    );
+
+    color: #ffffff;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.topo {
+    width: 100%;
+
+    min-height: 75px;
+
+    padding: 15px 5%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.2);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    font-size: 25px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.8px;
+
+    color: #ffffff;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TÍTULO DO CABEÇALHO
+   ========================================================= */
+
+.titulo-topo {
+    flex: 1;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+   ========================================================= */
+
+.voltar {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 9px 16px;
+
+    background: rgba(0, 173, 181, 0.12);
+
+    border: 1px solid rgba(0, 173, 181, 0.35);
+
+    border-radius: 8px;
+
+    color: #00adb5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: all 0.3s ease;
+}
+
+.voltar:hover {
+    background: #00adb5;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 15px rgba(0, 173, 181, 0.25);
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
+
+.container {
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: 45px auto;
+
+    padding-bottom: 30px;
+}
+
+
+/* =========================================================
+   CARD DO FORMULÁRIO
+   ========================================================= */
+
+.form-card {
+    width: 100%;
+
+    padding: 35px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CABEÇALHO DO FORMULÁRIO
+   ========================================================= */
+
+.form-header {
+    margin-bottom: 30px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-header h1 {
+    margin-bottom: 8px;
+
+    color: #ffffff;
+
+    font-size: 27px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.4px;
+}
+
+.form-header p {
+    color: #b0bec5;
+
+    font-size: 14px;
+
+    font-weight: 300;
+}
+
+
+/* =========================================================
+   MENSAGENS / ALERTAS
+   ========================================================= */
+
+.alert {
+    margin-bottom: 25px;
+
+    padding: 13px 16px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+.alert.erro {
+    background: rgba(244, 67, 54, 0.12);
+
+    border: 1px solid rgba(244, 67, 54, 0.35);
+
+    color: #ff8a80;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.form-container {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   GRUPO DO FORMULÁRIO
+   ========================================================= */
+
+.form-group {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group > label {
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   LINHA COM DOIS CAMPOS
+   ========================================================= */
+
+.form-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.form-input {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 11px 14px;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #00adb5;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 0 12px rgba(0, 173, 181, 0.12);
+}
+
+.form-input::placeholder {
+    color: #78909c;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.textarea {
+    min-height: 110px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+select.form-input {
+    cursor: pointer;
+}
+
+select.form-input option {
+    background: #203a43;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   INPUT NUMBER
+   ========================================================= */
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    margin: 0;
+
+    -webkit-appearance: none;
+}
+
+
+/* =========================================================
+   PREVIEW DA IMAGEM
+   ========================================================= */
+
+.imagem-preview {
+    width: 100%;
+
+    height: 220px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    margin-top: 3px;
+
+    background: rgba(0, 0, 0, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 10px;
+}
+
+.imagem-preview img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 15px;
+
+    transition: transform 0.3s ease;
+}
+
+.imagem-preview:hover img {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   BOTÃO ESCOLHER IMAGEM
+   ========================================================= */
+
+.btn-imagem {
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px 16px;
+
+    background: rgba(0, 173, 181, 0.12);
+
+    border: 1px solid rgba(0, 173, 181, 0.35);
+
+    border-radius: 8px;
+
+    color: #00adb5;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.btn-imagem:hover {
+    background: #00adb5;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 15px rgba(0, 173, 181, 0.25);
+}
+
+
+/* =========================================================
+   INFORMAÇÃO DA IMAGEM
+   ========================================================= */
+
+.imagem-info {
+    color: #78909c;
+
+    font-size: 11px;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-container {
+    display: flex;
+
+    flex-direction: row !important;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    width: fit-content;
+}
+
+
+/* Esconde o checkbox original */
+
+.status-container input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.status-switch {
+    width: 42px;
+
+    height: 23px;
+
+    display: block;
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 20px;
+
+    transition: all 0.3s ease;
+}
+
+.status-switch::before {
+    content: "";
+
+    width: 17px;
+
+    height: 17px;
+
+    position: absolute;
+
+    top: 2px;
+
+    left: 3px;
+
+    background: #90a4ae;
+
+    border-radius: 50%;
+
+    transition: all 0.3s ease;
+}
+
+
+/* =========================================================
+   SWITCH ATIVO
+   ========================================================= */
+
+.status-container input:checked + .status-switch {
+    background: rgba(0, 173, 181, 0.25);
+
+    border-color: rgba(0, 173, 181, 0.5);
+}
+
+.status-container input:checked + .status-switch::before {
+    left: 20px;
+
+    background: #00adb5;
+
+    box-shadow:
+        0 0 10px rgba(0, 173, 181, 0.35);
+}
+
+
+/* =========================================================
+   TEXTO DO STATUS
+   ========================================================= */
+
+.status-text {
+    color: #b0bec5;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   BOTÕES DO FORMULÁRIO
+   ========================================================= */
+
+.acoes-form {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR
+   ========================================================= */
+
+.btn-cancelar {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 110px;
+
+    padding: 11px 18px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 8px;
+
+    color: #b0bec5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background: rgba(255, 255, 255, 0.1);
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   BOTÃO SALVAR
+   ========================================================= */
+
+.btn-salvar {
+    min-width: 160px;
+
+    padding: 11px 18px;
+
+    background: #00adb5;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0, 173, 181, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background: #00c4ce;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 20px rgba(0, 173, 181, 0.35);
+}
+
+.btn-salvar:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   ESTADOS DOS INPUTS
+   ========================================================= */
+
+.form-input:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .topo {
+        padding: 15px 4%;
+
+        gap: 20px;
+    }
+
+    .container {
+        width: 92%;
+
+        margin: 35px auto;
+    }
+
+    .form-card {
+        padding: 30px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .topo {
+        min-height: 65px;
+
+        padding: 12px 4%;
+
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .titulo-topo {
+        font-size: 15px;
+    }
+
+    .voltar {
+        padding: 8px 11px;
+
+        font-size: 12px;
+    }
+
+    .container {
+        width: 92%;
+
+        margin: 25px auto;
+    }
+
+    .form-card {
+        padding: 22px 18px;
+
+        border-radius: 10px;
+    }
+
+    .form-header {
+        margin-bottom: 25px;
+    }
+
+    .form-header h1 {
+        font-size: 23px;
+    }
+
+    .form-header p {
+        font-size: 13px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+    .imagem-preview {
+        height: 190px;
+    }
+
+    .acoes-form {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .titulo-topo {
+        display: none;
+    }
+
+    .form-card {
+        padding: 20px 15px;
+    }
+
+    .form-header h1 {
+        font-size: 21px;
+    }
+
+    .imagem-preview {
+        height: 170px;
+    }
+}
+
