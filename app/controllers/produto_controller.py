@@ -3,6 +3,7 @@ import shutil
 from fastapi import APIRouter, Depends, Request, Form, UploadFile, File, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from httpx import request
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -72,9 +73,9 @@ def form_novo_produto(
         request,
         "produtos/form.html",
         {
-            "request":    request,
-            "usuario":    admin,
-            "editando":   None,
+            "request": request,
+            "usuario": admin,
+            "produto": None,
             "categorias": categorias
         }
     )
@@ -303,3 +304,6 @@ def _remover_imagem(imagem_path: str | None) -> None:
 
     if os.path.exists(caminho):
         os.remove(caminho)
+
+
+    

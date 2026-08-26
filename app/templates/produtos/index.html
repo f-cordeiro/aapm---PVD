@@ -28,7 +28,7 @@
 
         <div class="acoes">
             
-            <a href="/auth/produtos/form" class="botao-admin">
+            <a href="/produtos/novo" class="botao-admin">
             ⚙ Administração
             </a>
 
@@ -49,34 +49,99 @@
         </div>
 
 
-        <!-- Área dos produtos -->
-        <section class="produtos-grid">
+        <!-- =====================================================
+     ÁREA DOS PRODUTOS
+====================================================== -->
 
-            <!-- CARD DO PRODUTO -->
-            <div class="produto-card">
+<section class="produtos-grid">
 
-                <div class="produto-imagem">
-                    <img 
-                        src="/static/uploads/produto.jpg" 
-                        alt="Produto"
+    {% for produto in produtos %}
+
+        <div class="produto-card">
+
+            <!-- IMAGEM -->
+            <div class="produto-imagem">
+
+                {% if produto.imagem_path %}
+
+                    <img
+                        src="/static/{{ produto.imagem_path }}"
+                        alt="{{ produto.nome }}"
                     >
-                </div>
 
-                <div class="produto-info">
+                {% else %}
 
-                    <h2>Nome do Produto</h2>
+                    <img
+                        src="/static/uploads/produto-generico.png"
+                        alt="Imagem padrão"
+                    >
 
-                    <div class="produto-preco">
-                        R$ 49,90
-                    </div>
-
-                    <button class="botao-comprar">
-                        🛒 Comprar
-                    </button>
-
-                </div>
+                {% endif %}
 
             </div>
+
+
+            <!-- INFORMAÇÕES -->
+            <div class="produto-info">
+
+                {% if produto.categoria %}
+
+                    <div class="produto-categoria">
+                        {{ produto.categoria.nome }}
+                    </div>
+
+                {% endif %}
+
+
+                <h2 class="produto-nome">
+                    {{ produto.nome }}
+                </h2>
+
+
+                <div class="produto-preco">
+                    R$ {{ "%.2f"|format(produto.preco) }}
+                </div>
+
+
+                <button
+                    class="botao-comprar"
+                    type="button"
+                >
+                    🛒 Comprar
+                </button>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+
+    <!-- =================================================
+         NENHUM PRODUTO
+    ================================================== -->
+
+    {% if not produtos %}
+
+        <div class="sem-produtos">
+
+            <div class="sem-produtos-icone">
+                📦
+            </div>
+
+            <h2>
+                Nenhum produto disponível
+            </h2>
+
+            <p>
+                Os produtos cadastrados aparecerão aqui.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
 
 
             <!--
