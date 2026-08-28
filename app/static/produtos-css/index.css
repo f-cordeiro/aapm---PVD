@@ -1,5 +1,5 @@
 /* =========================================================
-   CONFIGURAÇÕES GERAIS DA PÁGINA
+   CONFIGURAÇÕES GERAIS
    ========================================================= */
 
 * {
@@ -8,21 +8,94 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-    background: linear-gradient(
-        135deg,
-        #0f2027,
-        #203a43,
-        #2c5364
-    );
-
     color: #ffffff;
 
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 173, 181, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(0, 119, 255, 0.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #07151b,
+            #102c35,
+            #173f4c
+        );
+
     overflow-x: hidden;
+}
+
+
+/* =========================================================
+   EFEITOS FLUIDOS DO BACKGROUND
+   ========================================================= */
+
+body::before,
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(80px);
+
+    opacity: 0.18;
+
+    z-index: -1;
+
+    animation: fluido 14s ease-in-out infinite alternate;
+}
+
+body::before {
+    top: -180px;
+    left: -150px;
+
+    background: #00adb5;
+}
+
+body::after {
+    right: -180px;
+    bottom: -180px;
+
+    background: #0077ff;
+
+    animation-delay: -5s;
+}
+
+@keyframes fluido {
+
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(100px, 80px) scale(1.2);
+    }
+
+    100% {
+        transform: translate(-50px, 120px) scale(0.9);
+    }
 }
 
 
@@ -32,29 +105,26 @@ body {
 
 .topo {
     width: 100%;
-
     min-height: 75px;
 
     padding: 15px 5%;
 
     display: flex;
-
     align-items: center;
 
     gap: 30px;
 
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.055);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.2);
+        0 5px 30px rgba(0, 0, 0, 0.25);
 
     position: sticky;
-
     top: 0;
 
     z-index: 100;
@@ -68,9 +138,9 @@ body {
 .logo {
     font-size: 25px;
 
-    font-weight: 600;
+    font-weight: 700;
 
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
 
     color: #ffffff;
 
@@ -90,32 +160,34 @@ body {
     height: 45px;
 
     display: flex;
-
     align-items: center;
 
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.055);
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.13);
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     overflow: hidden;
 
-    transition: all 0.3s ease;
+    transition: 0.25s ease;
+}
+
+.barra-pesquisa:hover {
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .barra-pesquisa:focus-within {
     border-color: #00adb5;
 
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 173, 181, 0.06);
 
     box-shadow:
-        0 0 12px rgba(0, 173, 181, 0.15);
+        0 0 0 3px rgba(0, 173, 181, 0.08);
 }
 
 .barra-pesquisa input {
     width: 100%;
-
     height: 100%;
 
     padding: 0 16px;
@@ -123,21 +195,21 @@ body {
     background: transparent;
 
     border: none;
-
     outline: none;
 
     color: #ffffff;
+
+    font-family: inherit;
 
     font-size: 14px;
 }
 
 .barra-pesquisa input::placeholder {
-    color: #90a4ae;
+    color: #718890;
 }
 
 .barra-pesquisa button {
     width: 50px;
-
     height: 100%;
 
     border: none;
@@ -150,11 +222,11 @@ body {
 
     font-size: 17px;
 
-    transition: all 0.3s ease;
+    transition: 0.25s ease;
 }
 
 .barra-pesquisa button:hover {
-    color: #00adb5;
+    color: #00dce5;
 
     background: rgba(0, 173, 181, 0.08);
 }
@@ -174,13 +246,13 @@ body {
 
     padding: 9px 14px;
 
-    background: rgba(0, 173, 181, 0.12);
+    background: rgba(0, 173, 181, 0.10);
 
     border: 1px solid rgba(0, 173, 181, 0.35);
 
     border-radius: 8px;
 
-    color: #00adb5;
+    color: #00dce5;
 
     text-decoration: none;
 
@@ -190,7 +262,7 @@ body {
 
     white-space: nowrap;
 
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .carrinho:hover {
@@ -201,31 +273,29 @@ body {
     transform: translateY(-2px);
 
     box-shadow:
-        0 4px 15px rgba(0, 173, 181, 0.25);
+        0 5px 18px rgba(0, 173, 181, 0.25);
 }
 
 
-
 /* =========================================================
-   BOTÃO DE ADMINISTRAÇÃO
+   BOTÃO ADMINISTRAÇÃO
    ========================================================= */
 
 .botao-admin {
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 9px 14px;
 
-    background: rgba(0, 173, 181, 0.12);
+    background: rgba(0, 173, 181, 0.10);
 
     border: 1px solid rgba(0, 173, 181, 0.35);
 
     border-radius: 8px;
 
-    color: #00adb5;
+    color: #00dce5;
 
     text-decoration: none;
 
@@ -235,7 +305,7 @@ body {
 
     white-space: nowrap;
 
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .botao-admin:hover {
@@ -246,13 +316,12 @@ body {
     transform: translateY(-2px);
 
     box-shadow:
-        0 4px 15px rgba(0, 173, 181, 0.25);
+        0 5px 18px rgba(0, 173, 181, 0.25);
 }
 
 
-
 /* =========================================================
-   BARRA DE CATEGORIAS
+   CATEGORIAS
    ========================================================= */
 
 .categorias {
@@ -271,13 +340,11 @@ body {
 
 .categorias-container {
     width: 90%;
-
     max-width: 1400px;
 
     margin: 0 auto;
 
     display: flex;
-
     align-items: center;
 
     gap: 5px;
@@ -288,7 +355,7 @@ body {
 
     padding: 14px 18px;
 
-    color: #b0bec5;
+    color: #9fb2ba;
 
     text-decoration: none;
 
@@ -300,7 +367,7 @@ body {
 
     border-bottom: 2px solid transparent;
 
-    transition: all 0.3s ease;
+    transition: 0.25s ease;
 }
 
 .categoria:hover {
@@ -310,7 +377,7 @@ body {
 }
 
 .categoria.ativa {
-    color: #00adb5;
+    color: #00dce5;
 
     border-bottom-color: #00adb5;
 }
@@ -321,11 +388,12 @@ body {
    ========================================================= */
 
 .container {
-    width: 90%;
-
+    width: 92%;
     max-width: 1400px;
 
     margin: 40px auto;
+
+    padding-bottom: 40px;
 }
 
 
@@ -340,6 +408,8 @@ body {
 .titulo h1 {
     margin-bottom: 8px;
 
+    color: #ffffff;
+
     font-size: 28px;
 
     font-weight: 600;
@@ -348,11 +418,11 @@ body {
 }
 
 .titulo p {
-    color: #b0bec5;
+    color: #9fb2ba;
 
     font-size: 14px;
 
-    font-weight: 300;
+    font-weight: 400;
 }
 
 
@@ -384,17 +454,17 @@ body {
 
     overflow: hidden;
 
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.055);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 
     border-radius: 12px;
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.25);
+        0 10px 30px rgba(0, 0, 0, 0.25);
 
     transition:
         transform 0.3s ease,
@@ -408,8 +478,8 @@ body {
     border-color: rgba(0, 173, 181, 0.45);
 
     box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.35),
-        0 0 15px rgba(0, 173, 181, 0.08);
+        0 15px 40px rgba(0, 0, 0, 0.30),
+        0 0 18px rgba(0, 173, 181, 0.08);
 }
 
 
@@ -425,28 +495,52 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     overflow: hidden;
 
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.18);
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .produto-imagem img {
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
 
-    transition: transform 0.4s ease;
+    transition: 0.4s ease;
 }
 
 .produto-card:hover .produto-imagem img {
     transform: scale(1.04);
+}
+
+
+/* =========================================================
+   PRODUTO SEM IMAGEM
+   ========================================================= */
+
+.produto-sem-imagem {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #718890;
+
+    font-size: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(0, 0, 0, 0.15)
+        );
 }
 
 
@@ -472,15 +566,15 @@ body {
 .produto-categoria {
     margin-bottom: 7px;
 
-    color: #78909c;
+    color: #718890;
 
     font-size: 11px;
 
-    font-weight: 500;
+    font-weight: 600;
 
     text-transform: uppercase;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 }
 
 
@@ -516,7 +610,7 @@ body {
 .produto-preco {
     margin-bottom: 17px;
 
-    color: #00adb5;
+    color: #00dce5;
 
     font-size: 22px;
 
@@ -540,7 +634,6 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 6px;
@@ -555,6 +648,8 @@ body {
 
     text-decoration: none;
 
+    font-family: inherit;
+
     font-size: 14px;
 
     font-weight: 600;
@@ -562,9 +657,9 @@ body {
     cursor: pointer;
 
     box-shadow:
-        0 4px 15px rgba(0, 173, 181, 0.25);
+        0 5px 18px rgba(0, 173, 181, 0.25);
 
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .botao-comprar:hover {
@@ -573,7 +668,7 @@ body {
     transform: translateY(-2px);
 
     box-shadow:
-        0 6px 20px rgba(0, 173, 181, 0.35);
+        0 7px 22px rgba(0, 173, 181, 0.35);
 }
 
 .botao-comprar:active {
@@ -597,32 +692,35 @@ body {
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.055);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 
     border-radius: 12px;
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.25);
+        0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .sem-produtos-icone {
     margin-bottom: 15px;
+
+    color: #718890;
 
     font-size: 45px;
 }
 
 .sem-produtos h2 {
     margin-bottom: 8px;
+
+    color: #ffffff;
 
     font-size: 20px;
 
@@ -692,8 +790,12 @@ body {
         margin-left: auto;
     }
 
-    .barra-pesquisa {
+    .botao-admin {
         order: 3;
+    }
+
+    .barra-pesquisa {
+        order: 4;
 
         flex-basis: 100%;
 

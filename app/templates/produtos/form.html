@@ -5,15 +5,36 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Produto | Administração</title>
+    <title>Produtos | Administração</title>
 
-    <link rel="stylesheet" href="/static/produtos-css/form.css">
+    <link
+        rel="stylesheet"
+        href="/static/produtos-css/form.css"
+    >
 
 </head>
 
+
 <body>
+
+
+    <!-- =====================================================
+         FLUIDOS DO BACKGROUND
+    ====================================================== -->
+
+    <div class="fluidos">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
 
 
     <!-- =====================================================
@@ -26,78 +47,528 @@
             AAPM
         </div>
 
+
         <div class="titulo-topo">
+
             Administração de produtos
+
         </div>
 
-        <a href="/produtos/" class="voltar">
+
+        <a
+            href="/produtos/"
+            class="voltar"
+        >
             ← Voltar
         </a>
 
     </header>
 
 
+
     <!-- =====================================================
-         CONTEÚDO PRINCIPAL
+         CONTEÚDO
     ====================================================== -->
 
     <main class="container">
 
-        <section class="form-card">
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <section class="titulo-pagina">
+
+            <h1>
+                Gerenciamento de produtos
+            </h1>
+
+            <p>
+                Cadastre, pesquise, edite e exclua produtos.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AÇÃO PRINCIPAL
+        ================================================== -->
+
+        <div class="barra-acoes">
+
+            <button
+                type="button"
+                class="btn-novo"
+                onclick="abrirCadastro()"
+            >
+
+                ＋ Novo produto
+
+            </button>
+
+
+            <span class="contador">
+
+                {{ total_produtos }}
+                produto{% if total_produtos != 1 %}s{% endif %}
+
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTROS
+        ================================================== -->
+
+        <section class="filtros">
+
+
+            <form
+                method="GET"
+                action="/produtos/form"
+                class="filtro-form"
+            >
+
+
+                <!-- BUSCA -->
+
+                <div class="campo-filtro">
+
+                    <label for="busca">
+                        Buscar produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="busca"
+                        name="busca"
+                        value="{{ busca }}"
+                        placeholder="Digite o nome do produto..."
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORIA -->
+
+                <div class="campo-filtro">
+
+                    <label for="categoria_id">
+                        Categoria
+                    </label>
+
+                    <select
+                        id="categoria_id"
+                        name="categoria_id"
+                    >
+
+                        <option value="0">
+                            Todas as categorias
+                        </option>
+
+
+                        {% for categoria in categorias %}
+
+                        <option
+                            value="{{ categoria.id }}"
+                            {% if categoria_id == categoria.id %}
+                                selected
+                            {% endif %}
+                        >
+
+                            {{ categoria.nome }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="btn-filtrar"
+                >
+
+                    🔎 Filtrar
+
+                </button>
+
+
+                <a
+                    href="/produtos/form"
+                    class="btn-limpar"
+                >
+
+                    Limpar
+
+                </a>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LISTA DE PRODUTOS
+        ================================================== -->
+
+        <section class="lista-card">
+
+
+            <div class="lista-header">
+
+                <div>
+                    Produto
+                </div>
+
+                <div>
+                    Categoria
+                </div>
+
+                <div>
+                    Preço
+                </div>
+
+                <div>
+                    Estoque
+                </div>
+
+                <div>
+                    Ações
+                </div>
+
+            </div>
+
+
+
+            {% for produto in produtos %}
+
+
+            <div class="produto-item">
+
+
+                <!-- PRODUTO -->
+
+                <div class="produto">
+
+                    {% if produto.imagem_path %}
+
+                    <img
+                        src="/static/{{ produto.imagem_path }}"
+                        alt="{{ produto.nome }}"
+                    >
+
+                    {% else %}
+
+                    <div class="produto-sem-imagem">
+                        📦
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="produto-nome">
+
+                        <strong>
+                            {{ produto.nome }}
+                        </strong>
+
+                        <small>
+                            ID: #{{ produto.id }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CATEGORIA -->
+
+                <div class="categoria-produto">
+
+                    {% if produto.categoria %}
+
+                        {{ produto.categoria.nome }}
+
+                    {% else %}
+
+                        Sem categoria
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- PREÇO -->
+
+                <div class="preco-produto">
+
+                    R$
+                    {{ "%.2f"|format(produto.preco) }}
+
+                </div>
+
+
+
+                <!-- ESTOQUE -->
+
+                <div>
+
+                    {% if produto.estoque_atual == 0 %}
+
+                        <span class="estoque zerado">
+                            Sem estoque
+                        </span>
+
+                    {% elif produto.estoque_atual <= 5 %}
+
+                        <span class="estoque baixo">
+                            {{ produto.estoque_atual }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="estoque">
+                            {{ produto.estoque_atual }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- AÇÕES -->
+
+                <div class="acoes-produto">
+
+
+                    <a
+                        href="/produtos/{{ produto.id }}/editar"
+                        class="btn-editar"
+                    >
+
+                        ✎
+
+                        <span>
+                            Editar
+                        </span>
+
+                    </a>
+
+
+
+                    <form
+                        method="POST"
+                        action="/produtos/{{ produto.id }}/desativar"
+                        onsubmit="return confirmarExclusao('{{ produto.nome }}')"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn-excluir"
+                        >
+
+                            🗑
+
+                            <span>
+                                Excluir
+                            </span>
+
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% else %}
 
 
             <!-- =================================================
-                 CABEÇALHO DO FORMULÁRIO
+                 NENHUM RESULTADO
             ================================================== -->
 
-            <div class="form-header">
+            <div class="sem-produtos">
 
-                <h1>
+                <div class="icone-vazio">
+                    📦
+                </div>
 
-                    {% if produto %}
-                    Editar produto
-                    {% else %}
-                    Novo produto
-                    {% endif %}
-
-                </h1>
+                <h3>
+                    Nenhum produto encontrado
+                </h3>
 
                 <p>
-
-                    {% if produto %}
-                    Altere as informações do produto.
-                    {% else %}
-                    Cadastre um novo produto no catálogo.
-                    {% endif %}
-
+                    Tente alterar os filtros ou cadastre um novo produto.
                 </p>
 
             </div>
 
 
-            <!-- =================================================
-                 MENSAGENS DO SISTEMA
-            ================================================== -->
+            {% endfor %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGINAÇÃO
+        ================================================== -->
+
+        {% if total_paginas > 1 %}
+
+
+        <nav class="paginacao">
+
+
+            <!-- ANTERIOR -->
+
+            {% if pagina > 1 %}
+
+            <a
+                href="/produtos/form?busca={{ busca }}&categoria_id={{ categoria_id }}&pagina={{ pagina - 1 }}"
+                class="pagina-seta"
+            >
+
+                ‹
+
+            </a>
+
+            {% endif %}
+
+
+
+            <!-- NÚMEROS -->
+
+            {% for numero in range(1, total_paginas + 1) %}
+
+
+            <a
+                href="/produtos/form?busca={{ busca }}&categoria_id={{ categoria_id }}&pagina={{ numero }}"
+                class="
+                    pagina-numero
+                    {% if numero == pagina %}
+                        ativa
+                    {% endif %}
+                "
+            >
+
+                {{ numero }}
+
+            </a>
+
+
+            {% endfor %}
+
+
+
+            <!-- PRÓXIMO -->
+
+            {% if pagina < total_paginas %}
+
+            <a
+                href="/produtos/form?busca={{ busca }}&categoria_id={{ categoria_id }}&pagina={{ pagina + 1 }}"
+                class="pagina-seta"
+            >
+
+                ›
+
+            </a>
+
+            {% endif %}
+
+
+        </nav>
+
+
+        {% endif %}
+
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         MODAL DE CADASTRO
+    ====================================================== -->
+
+    <div
+        id="modalCadastro"
+        class="modal"
+    >
+
+
+        <div class="modal-card">
+
+
+            <button
+                type="button"
+                class="fechar-modal"
+                onclick="fecharCadastro()"
+            >
+
+                ×
+
+            </button>
+
+
+            <div class="form-header">
+
+                <h2>
+                    Novo produto
+                </h2>
+
+                <p>
+                    Cadastre um novo produto no catálogo.
+                </p>
+
+            </div>
+
+
+
+            <!-- ERRO -->
 
             {% if erro %}
 
             <div class="alert erro">
+
                 {{ erro }}
+
             </div>
 
             {% endif %}
 
 
-            <!-- =================================================
-                 FORMULÁRIO
-            ================================================== -->
 
-            <form method="POST" enctype="multipart/form-data" class="form-container">
+            <!-- FORMULÁRIO -->
+
+            <form
+                method="POST"
+                action="/produtos/novo"
+                enctype="multipart/form-data"
+                class="form-container"
+            >
 
 
-                <!-- =================================================
-                     NOME
-                ================================================== -->
+                <!-- NOME -->
 
                 <div class="form-group">
 
@@ -105,32 +576,21 @@
                         Nome do produto
                     </label>
 
-                    <input type="text" id="nome" name="nome" class="form-input" placeholder="Digite o nome do produto"
-                        value="{{ produto.nome if produto else '' }}" required>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        class="form-input"
+                        placeholder="Digite o nome do produto"
+                        value="{{ valores.nome if valores else '' }}"
+                        required
+                    >
 
                 </div>
 
 
-                <!-- =================================================
-                     DESCRIÇÃO
-                ================================================== -->
 
-                <div class="form-group">
-
-                    <label for="descricao">
-                        Descrição
-                    </label>
-
-                    <textarea id="descricao" name="descricao" class="form-input textarea"
-                        placeholder="Digite uma descrição para o produto..."
-                        rows="4">{{ produto.descricao if produto else '' }}</textarea>
-
-                </div>
-
-
-                <!-- =================================================
-                     CATEGORIA + PREÇO
-                ================================================== -->
+                <!-- CATEGORIA + PREÇO -->
 
                 <div class="form-row">
 
@@ -141,17 +601,25 @@
                             Categoria
                         </label>
 
-                        <select id="categoria" name="categoria_id" class="form-input" required>
+                        <select
+                            id="categoria"
+                            name="categoria_id"
+                            class="form-input"
+                        >
 
-                            <option value="">
-                                Selecione uma categoria
+                            <option value="0">
+                                Sem categoria
                             </option>
 
 
                             {% for categoria in categorias %}
 
-                            <option value="{{ categoria.id }}" {% if produto and produto.categoria_id==categoria.id %}
-                                selected {% endif %}>
+                            <option
+                                value="{{ categoria.id }}"
+                                {% if valores and valores.categoria_id == categoria.id %}
+                                    selected
+                                {% endif %}
+                            >
 
                                 {{ categoria.nome }}
 
@@ -164,40 +632,58 @@
                     </div>
 
 
+
                     <div class="form-group">
 
                         <label for="preco">
                             Preço
                         </label>
 
-                        <input type="number" id="preco" name="preco" class="form-input" placeholder="0,00" step="0.01"
-                            min="0" value="{{ produto.preco if produto else '' }}" required>
+                        <input
+                            type="number"
+                            id="preco"
+                            name="preco"
+                            class="form-input"
+                            placeholder="0,00"
+                            step="0.01"
+                            min="0"
+                            value="{{ valores.preco if valores else '' }}"
+                            required
+                        >
 
                     </div>
+
 
                 </div>
 
 
-                <!-- =================================================
-                     ESTOQUE
-                ================================================== -->
+
+                <!-- ESTOQUE -->
 
                 <div class="form-group">
 
                     <label for="estoque">
+
                         Quantidade em estoque
+
                     </label>
 
-                    <input type="number" id="estoque" name="estoque_atual" class="form-input"
-                        placeholder="Digite a quantidade disponível" min="0"
-                        value="{{ produto.estoque_atual if produto else '' }}" required>
+                    <input
+                        type="number"
+                        id="estoque"
+                        name="estoque_atual"
+                        class="form-input"
+                        placeholder="Digite a quantidade disponível"
+                        min="0"
+                        value="{{ valores.estoque_atual if valores else '' }}"
+                        required
+                    >
 
                 </div>
 
 
-                <!-- =================================================
-                     IMAGEM
-                ================================================== -->
+
+                <!-- IMAGEM -->
 
                 <div class="form-group">
 
@@ -206,141 +692,206 @@
                     </label>
 
 
-                    <!-- Preview -->
-
                     <div class="imagem-preview">
 
-                        {% if produto and produto.imagem_path %}
-
-                        <img id="previewImagem" src="/static/{{ produto.imagem_path }}" alt="{{ produto.nome }}">
-
-                        {% else %}
-
-                        <img id="previewImagem" src="/static/uploads/produto-generico.png" alt="Imagem padrão">
-
-                        {% endif %}
+                        <img
+                            id="previewImagem"
+                            src="/static/uploads/produto-generico.png"
+                            alt="Imagem padrão"
+                        >
 
                     </div>
 
 
-                    <!-- Botão para selecionar -->
-
-                    <label for="imagem" class="btn-imagem">
+                    <label
+                        for="imagem"
+                        class="btn-imagem"
+                    >
 
                         📷 Escolher imagem
 
                     </label>
 
 
-                    <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg, image/webp" hidden>
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept="image/png, image/jpeg, image/webp"
+                        hidden
+                    >
 
 
                     <small class="imagem-info">
 
-                        Formatos aceitos: JPG, PNG ou WEBP.
+                        Formatos aceitos:
+                        JPG, PNG ou WEBP.
 
                     </small>
 
                 </div>
 
 
-                <!-- =================================================
-                     STATUS
-                ================================================== -->
 
-                <div class="form-group">
-
-                    <label>
-                        Status
-                    </label>
-
-
-                    <label class="status-container">
-
-                        <input type="checkbox" name="ativo" {% if not produto or produto.ativo %} checked {% endif %}>
-
-                        <span class="status-switch"></span>
-
-                        <span class="status-text">
-                            Produto ativo
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <!-- =================================================
-                     BOTÕES
-                ================================================== -->
+                <!-- BOTÕES -->
 
                 <div class="acoes-form">
 
+                    <button
+                        type="button"
+                        class="btn-cancelar"
+                        onclick="fecharCadastro()"
+                    >
 
-                    <a href="/produtos/" class="btn-cancelar">
                         Cancelar
-                    </a>
-
-
-                    <button type="submit" class="btn-salvar">
-
-                        {% if produto %}
-                        Salvar alterações
-                        {% else %}
-                        Cadastrar produto
-                        {% endif %}
 
                     </button>
 
+
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+
+                        Cadastrar produto
+
+                    </button>
 
                 </div>
 
 
             </form>
 
-        </section>
 
-    </main>
+        </div>
+
+
+    </div>
+
 
 
     <!-- =====================================================
-         PREVIEW DA IMAGEM
+         JAVASCRIPT
     ====================================================== -->
 
     <script>
 
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        function abrirCadastro() {
+
+            document
+                .getElementById("modalCadastro")
+                .classList.add("ativo");
+
+        }
+
+
+        function fecharCadastro() {
+
+            document
+                .getElementById("modalCadastro")
+                .classList.remove("ativo");
+
+        }
+
+
+
+        /* =====================================================
+           CONFIRMAÇÃO DE EXCLUSÃO
+        ===================================================== */
+
+        function confirmarExclusao(nome) {
+
+            return confirm(
+                "Tem certeza que deseja excluir o produto \"" +
+                nome +
+                "\"?"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           PREVIEW DA IMAGEM
+        ===================================================== */
+
         const inputImagem =
             document.getElementById("imagem");
+
 
         const previewImagem =
             document.getElementById("previewImagem");
 
 
-        inputImagem.addEventListener(
-            "change",
-            function () {
+        if (inputImagem) {
 
-                const arquivo = this.files[0];
+            inputImagem.addEventListener(
+                "change",
+                function () {
 
-                if (!arquivo) {
-                    return;
+                    const arquivo =
+                        this.files[0];
+
+
+                    if (!arquivo) {
+
+                        return;
+
+                    }
+
+
+                    const leitor =
+                        new FileReader();
+
+
+                    leitor.onload =
+                        function (evento) {
+
+                            previewImagem.src =
+                                evento.target.result;
+
+                        };
+
+
+                    leitor.readAsDataURL(arquivo);
+
                 }
+            );
 
-                const leitor = new FileReader();
-
-
-                leitor.onload = function (evento) {
-
-                    previewImagem.src =
-                        evento.target.result;
-
-                };
+        }
 
 
-                leitor.readAsDataURL(arquivo);
 
-            }
-        );
+        /* =====================================================
+           FECHAR MODAL CLICANDO FORA
+        ===================================================== */
+
+        const modal =
+            document.getElementById("modalCadastro");
+
+
+        if (modal) {
+
+            modal.addEventListener(
+                "click",
+                function (evento) {
+
+                    if (evento.target === modal) {
+
+                        fecharCadastro();
+
+                    }
+
+                }
+            );
+
+        }
+
 
     </script>
 
@@ -348,4 +899,3 @@
 </body>
 
 </html>
-```
