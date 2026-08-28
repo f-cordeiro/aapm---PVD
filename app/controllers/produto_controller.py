@@ -63,21 +63,11 @@ def listar_produtos(
 
 @router.get("/novo")
 def form_novo_produto(
-    request: Request,
-    db: Session = Depends(get_db),
     admin = Depends(get_admin)
 ):
-    categorias = db.query(Categoria).filter(Categoria.ativo == True).all()
-
-    return templates.TemplateResponse(
-        request,
-        "produtos/form.html",
-        {
-            "request": request,
-            "usuario": admin,
-            "produto": None,
-            "categorias": categorias
-        }
+    return RedirectResponse(
+        url="/produtos/form",
+        status_code=302
     )
 
 
@@ -87,47 +77,139 @@ async def criar_produto(
     nome: str          = Form(...),
     preco: float       = Form(...),
     estoque_atual: int = Form(...),
-    categoria_id: int  = Form(0),   # 0 = sem categoria
-    imagem: UploadFile = File(None), # None = campo opcional
+    categoria_id: int  = Form(0),
+    imagem: UploadFile = File(None),
     db: Session        = Depends(get_db),
     admin              = Depends(get_admin)
 ):
-    categorias = db.query(Categoria).filter(Categoria.ativo == True).all()
+    categorias = db.query(Categoria).filter(
+        Categoria.ativo == True
+    ).all()
 
-    # Verifica duplicidade de nome
-    # ilike() para comparação case-insensitive, evitando produtos "Camiseta" e "camiseta".
-    if db.query(Produto).filter(Produto.nome.ilike(nome)).first():
+    # Verifica se já existe produto com esse nome
+    if db.query(Produto).filter(
+        Produto.nome.ilike(nome)
+    ).first():
+
         return templates.TemplateResponse(
             request,
             "produtos/form.html",
             {
-                "request":    request,
-                "usuario":    admin,
-                "editando":   None,
+                "request": request,
+                "usuario": admin,
+                "editando": None,
                 "categorias": categorias,
-                "erro":       "Já existe um produto com este nome.",
-                "valores":    {"nome": nome, "preco": preco,
-                               "estoque_atual": estoque_atual,
-                               "categoria_id": categoria_id}
+                "erro": "Já existe um produto com este nome.",
+                "valores": {
+                    "nome": nome,
+                    "preco": preco,
+                    "estoque_atual": estoque_atual,
+                    "categoria_id": categoria_id
+                }
             },
             status_code=400
         )
 
-    # Processa o upload da imagem
+    # Salva imagem
     imagem_path = await _salvar_imagem(imagem)
 
     produto = Produto(
-        nome          = nome,
-        preco         = preco,
-        estoque_atual = estoque_atual,
-        categoria_id  = categoria_id or None,  # 0 vira NULL no banco
-        imagem_path   = imagem_path,
+        nome=nome,
+        preco=preco,
+        estoque_atual=estoque_atual,
+        categoria_id=categoria_id or None,
+        imagem_path=imagem_path
     )
 
     db.add(produto)
     db.commit()
 
-    return RedirectResponse(url="/produtos?criado=ok", status_code=302)
+    return RedirectResponse(
+        url="/produtos?criado=ok",
+        status_code=302
+    )
+
+
+# ============================================================
+# ADMINISTRAÇÃO DE PRODUTOS
+# ============================================================
+
+@router.get("/form", response_class=HTMLResponse)
+def produtos_form(
+    request: Request,
+    busca: str = "",
+    categoria_id: int = 0,
+    pagina: int = 1,
+    db: Session = Depends(get_db),
+    admin = Depends(get_admin)
+):
+    POR_PAGINA = 15
+
+    if pagina < 1:
+        pagina = 1
+
+    query = db.query(Produto).filter(
+        Produto.ativo == True
+    )
+
+    # Busca pelo nome
+    if busca.strip():
+        query = query.filter(
+            Produto.nome.ilike(f"%{busca.strip()}%")
+        )
+
+    # Filtro por categoria
+    if categoria_id:
+        query = query.filter(
+            Produto.categoria_id == categoria_id
+        )
+
+    # Total encontrado
+    total_produtos = query.count()
+
+    # Total de páginas
+    total_paginas = max(
+        1,
+        (total_produtos + POR_PAGINA - 1) // POR_PAGINA
+    )
+
+    # Corrige página inválida
+    if pagina > total_paginas:
+        pagina = total_paginas
+
+    # Pula os produtos das páginas anteriores
+    offset = (pagina - 1) * POR_PAGINA
+
+    produtos = (
+        query
+        .order_by(Produto.nome)
+        .offset(offset)
+        .limit(POR_PAGINA)
+        .all()
+    )
+
+    categorias = (
+        db.query(Categoria)
+        .filter(Categoria.ativo == True)
+        .order_by(Categoria.nome)
+        .all()
+    )
+
+    return templates.TemplateResponse(
+        request,
+        "produtos/form.html",
+        {
+            "request": request,
+            "usuario": admin,
+            "produtos": produtos,
+            "categorias": categorias,
+            "busca": busca,
+            "categoria_id": categoria_id,
+            "pagina": pagina,
+            "total_paginas": total_paginas,
+            "total_produtos": total_produtos,
+        }
+    )
 
 
 # ============================================================
@@ -154,6 +236,9 @@ def detalhe_produto(
         "produtos/detalhe.html",
         {"request": request, "usuario": usuario, "produto": produto}
     )
+
+
+
 
 
 # ============================================================
