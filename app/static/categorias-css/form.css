@@ -1,0 +1,164 @@
+/* ============================================================
+   ESTILOS GERAIS DE FUNDO E CONTAINER
+   ============================================================ */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 40px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-sizing: border-box;
+}
+
+/* ============================================================
+   CABEÇALHO E BADGES
+   ============================================================ */
+.header-box {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.title {
+    margin: 0 0 10px 0;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 173, 181, 0.15);
+    border: 1px solid rgba(0, 173, 181, 0.3);
+    color: #00adb5;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================================
+   MENSAGEM DE ERRO
+   ============================================================ */
+.alert-error {
+    background: rgba(244, 67, 54, 0.15);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #ff8a80;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* ============================================================
+   CAMPOS DO FORMULÁRIO (INPUTS & LABELS)
+   ============================================================ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #b0bec5;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #00adb5;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(0, 173, 181, 0.3);
+}
+
+.form-group input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
+   BOTÕES E AÇÕES
+   ============================================================ */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px 20px;
+    background: #00adb5;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+}
+
+.btn-submit:hover {
+    background: #00969d;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 173, 181, 0.4);
+}
+
+.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #b0bec5;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}

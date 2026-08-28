@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ "Editar" if editando else "Nova" }} Categoria — AAPM SENAI</title>
+    <link rel="stylesheet" href="/static/categorias-css/form.css">
+</head>
+<body>
+    <div class="form-container">
+        <!-- Cabeçalho -->
+        <div class="header-box">
+            <h1 class="title">{{ "Editar Categoria" if editando else "Nova Categoria" }}</h1>
+            <span class="role-badge">AAPM SENAI</span>
+        </div>
+
+        <!-- Mensagem de Erro (se houver) -->
+        {% if erro %}
+            <div class="alert-error">
+                <span>⚠️ {{ erro }}</span>
+            </div>
+        {% endif %}
+
+        <!-- Formulário -->
+        <form action="{% if editando %}/categorias/{{ editando.id }}/editar{% else %}/categorias/nova{% endif %}" method="post">
+
+            <div class="form-group">
+                <label for="nome">Nome da Categoria</label>
+                <input type="text"
+                       id="nome"
+                       name="nome"
+                       placeholder="Ex: Bebidas, Lanches, Sobremesas..."
+                       value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                       required
+                       autofocus>
+            </div>
+
+            <!-- Ações -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    {{ "Salvar alterações" if editando else "Criar categoria" }}
+                </button>
+                <a href="/categorias" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
