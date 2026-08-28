@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produtos</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/produtos-css/index.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="topo">
+
+        <div class="logo">
+            AAPM
+        </div>
+
+
+        <div class="barra-pesquisa">
+
+            <input
+                type="text"
+                placeholder="Buscar produtos..."
+            >
+
+            <button type="button">
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="acoes">
+
+            <a
+                href="/produtos/form"
+                class="botao-admin"
+            >
+                ⚙ Administração
+            </a>
+
+
+            <a
+                href="#"
+                class="carrinho"
+            >
+                🛒
+
+                <span>
+                    Carrinho
+                </span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <div class="titulo">
+
+            <h1>
+                Produtos
+            </h1>
+
+            <p>
+                Confira os produtos disponíveis para compra.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ÁREA DOS PRODUTOS
+        ================================================== -->
+
+        <section class="produtos-grid">
+
+
+            {% for produto in produtos %}
+
+
+                <!-- =================================================
+                     CARD DO PRODUTO
+                ================================================== -->
+
+                <div class="produto-card">
+
+
+                    <!-- IMAGEM -->
+
+                    <div class="produto-imagem">
+
+
+                        {% if produto.imagem_path %}
+
+                            <img
+                                src="/static/{{ produto.imagem_path }}"
+                                alt="{{ produto.nome }}"
+                            >
+
+                        {% else %}
+
+                            <img
+                                src="/static/uploads/produto-generico.png"
+                                alt="Imagem padrão"
+                            >
+
+                        {% endif %}
+
+
+                    </div>
+
+
+
+                    <!-- INFORMAÇÕES -->
+
+                    <div class="produto-info">
+
+
+                        <!-- CATEGORIA -->
+
+                        {% if produto.categoria %}
+
+                            <div class="produto-categoria">
+
+                                {{ produto.categoria.nome }}
+
+                            </div>
+
+                        {% endif %}
+
+
+
+                        <!-- NOME -->
+
+                        <h2 class="produto-nome">
+
+                            {{ produto.nome }}
+
+                        </h2>
+
+
+
+                        <!-- PREÇO -->
+
+                        <div class="produto-preco">
+
+                            R$ {{ "%.2f"|format(produto.preco) }}
+
+                        </div>
+
+
+
+                        <!-- COMPRAR -->
+
+                        <button
+                            class="botao-comprar"
+                            type="button"
+                        >
+
+                            🛒 Comprar
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+
+            <!-- =================================================
+                 NENHUM PRODUTO
+            ================================================== -->
+
+            {% if not produtos %}
+
+                <div class="sem-produtos">
+
+                    <div class="sem-produtos-icone">
+                        📦
+                    </div>
+
+                    <h2>
+                        Nenhum produto disponível
+                    </h2>
+
+                    <p>
+                        Os produtos cadastrados aparecerão aqui.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
