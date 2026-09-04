@@ -56,6 +56,6 @@ def tela_inicial(
     #Logado - exibir a tela de funcionario
     return templates.TemplateResponse(
         request,
-        "home.html",
+        "pdv/index.html",
         {"request": request, "usuario": usuario}
     )
