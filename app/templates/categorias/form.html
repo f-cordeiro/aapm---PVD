@@ -1,52 +1,48 @@
-<!-- templates/categorias/form.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ "Editar" if editando else "Nova" }} Categoria — AAPM SENAI</title>
+    <link rel="stylesheet" href="/static/categorias-css/form.css">
 </head>
 <body>
-    <h1>{{ "Editar categoria" if editando else "Nova categoria" }}</h1>
+    <div class="form-container">
+        <!-- Cabeçalho -->
+        <div class="header-box">
+            <h1 class="title">{{ "Editar Categoria" if editando else "Nova Categoria" }}</h1>
+            <span class="role-badge">AAPM SENAI</span>
+        </div>
 
-    {% if erro %}
-        <p style="color:red">{{ erro }}</p>
-    {% endif %}
+        <!-- Mensagem de Erro (se houver) -->
+        {% if erro %}
+            <div class="alert-error">
+                <span>⚠️ {{ erro }}</span>
+            </div>
+        {% endif %}
 
-    <form action="{{ '/categorias/' + editando.id|string + '/editar' if editando else '/categorias/nova' }}"
-          method="post">
+        <!-- Formulário -->
+        <form action="{% if editando %}/categorias/{{ editando.id }}/editar{% else %}/categorias/nova{% endif %}" method="post">
 
-        <label>Nome:
-            <input type="text"
-                   name="nome"
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-                   required
-                   autofocus>
-        </label>
-        <br>
+            <div class="form-group">
+                <label for="nome">Nome da Categoria</label>
+                <input type="text"
+                       id="nome"
+                       name="nome"
+                       placeholder="Ex: Bebidas, Lanches, Sobremesas..."
+                       value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                       required
+                       autofocus>
+            </div>
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Criar categoria" }}
-        </button>
-        <a href="/categorias">Cancelar</a>
-    </form>
-
-    <!--
-        Na edição, exibe os produtos vinculados para o admin
-        ter contexto antes de fazer alterações.
-    -->
-    {% if editando and editando.produtos %}
-        <hr>
-        <h3>Produtos vinculados a esta categoria</h3>
-        <ul>
-            {% for p in editando.produtos if p.ativo %}
-                <li>
-                    <a href="/produtos/{{ p.id }}">{{ p.nome }}</a>
-                    — R$ {{ "%.2f"|format(p.preco) }}
-                </li>
-            {% else %}
-                <li>Nenhum produto ativo vinculado.</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            <!-- Ações -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    {{ "Salvar alterações" if editando else "Criar categoria" }}
+                </button>
+                <a href="/categorias" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
