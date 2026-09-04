@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 40px 20px;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background-color: #0a3871; /* Azul SENAI */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #222222;
+}
+
+/* Container Principal (Card Claro estilo SENAI) */
+.history-container {
+    background: #f2f4f7;
+    padding: 40px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    margin: auto;
+}
+
+/* Cabeçalho */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.header-section h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a3871;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Botão Pílula Azul SENAI */
+.btn-primary {
+    background: #0a3871;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(10, 56, 113, 0.25);
+}
+
+.btn-primary:hover {
+    background: #082d5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(10, 56, 113, 0.35);
+}
+
+/* Cards de Resumo em destaque */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 18px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.summary-label {
+    font-size: 12px;
+    color: #0a3871;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #222222;
+}
+
+.text-green {
+    color: #2e7d32;
+}
+
+.text-red {
+    color: #c62828;
+}
+
+/* Tabela de Dados */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.data-table th {
+    background: #0a3871;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 14px 16px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333333;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.empty-state {
+    text-align: center;
+    color: #757575;
+    padding: 30px !important;
+    font-weight: 500;
+}
+
+/* Badges Pílula (Entrada / Saída) */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-entrada {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.badge-saida {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+/* Footer & Link Voltar */
+.footer-nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.link-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #0a3871;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.link-back:hover {
+    color: #082d5a;
+    text-decoration: underline;
+}

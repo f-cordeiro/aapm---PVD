@@ -139,5 +139,21 @@
         inputQuantidade.addEventListener('input', atualizarSubtotal);
         inputPreco.addEventListener('input', atualizarSubtotal);
     </script>
+
+
+<!-- Modal de Confirmação em estilo SENAI -->
+<div id="confirmModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-icon">⚠️</div>
+        <h3 class="modal-title">Confirmar Movimentação</h3>
+        <p class="modal-text">Deseja realmente registrar esta movimentação de estoque?</p>
+
+        <div class="modal-actions">
+            <button type="button" id="btnCancel" class="btn-cancel">Cancelar</button>
+            <button type="button" id="btnConfirm" class="btn-confirm">Confirmar</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
