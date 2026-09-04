@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Vendas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/movimentacoes-css/dashboard.css">
+</head>
+<body>
+
+
+  <div class="app">
+
+    <!-- ===================== CABEÇALHO ===================== -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        <span class="topbar-mark">V</span>
+        <div>
+          <h1>Painel de Vendas</h1>
+          <p>Visão geral do desempenho comercial</p>
+        </div>
+      </div>
+      
+      <div class="attendant">
+        <input type="radio" name="attendant" id="attendant-1" class="visually-hidden-input" checked><input type="radio" name="attendant" id="attendant-2" class="visually-hidden-input"><input type="radio" name="attendant" id="attendant-3" class="visually-hidden-input"><input type="radio" name="attendant" id="attendant-4" class="visually-hidden-input"><input type="radio" name="attendant" id="attendant-5" class="visually-hidden-input">
+        <div class="attendant-info">
+          <span class="attendant-label">Atendente atual</span>
+          <span class="attendant-name"><span class="attendant-name-variant" data-attendant="1">Marina Costa</span><span class="attendant-name-variant" data-attendant="2">Rafael Andrade</span><span class="attendant-name-variant" data-attendant="3">Juliana Freitas</span><span class="attendant-name-variant" data-attendant="4">Bruno Tavares</span><span class="attendant-name-variant" data-attendant="5">Camila Rocha</span></span>
+        </div>
+        <span class="attendant-avatar-stack"><img class="attendant-avatar-variant" data-attendant="1" src="https://i.pravatar.cc/80?img=47" alt="Foto de Marina Costa"><img class="attendant-avatar-variant" data-attendant="2" src="https://i.pravatar.cc/80?img=13" alt="Foto de Rafael Andrade"><img class="attendant-avatar-variant" data-attendant="3" src="https://i.pravatar.cc/80?img=32" alt="Foto de Juliana Freitas"><img class="attendant-avatar-variant" data-attendant="4" src="https://i.pravatar.cc/80?img=59" alt="Foto de Bruno Tavares"><img class="attendant-avatar-variant" data-attendant="5" src="https://i.pravatar.cc/80?img=25" alt="Foto de Camila Rocha"></span>
+        <details class="select-fake">
+          <summary class="select-trigger">Trocar atendente</summary>
+          <div class="select-options">
+            <label for="attendant-1" class="attendant-option">Marina Costa</label><label for="attendant-2" class="attendant-option">Rafael Andrade</label><label for="attendant-3" class="attendant-option">Juliana Freitas</label><label for="attendant-4" class="attendant-option">Bruno Tavares</label><label for="attendant-5" class="attendant-option">Camila Rocha</label>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ===================== CARDS DE KPI ===================== -->
+      
+      <section class="kpi-row" data-period-panel="daily" aria-label="Indicadores principais — Diário">
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Total de vendas</span>
+            <span class="kpi-delta up">+8,4%</span>
+          </div>
+          <span class="kpi-value">R$ 6.200</span>
+          <span class="kpi-caption">em relação a ontem</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Lucro líquido</span>
+            <span class="kpi-delta up">+6,1%</span>
+          </div>
+          <span class="kpi-value">R$ 1.860</span>
+          <span class="kpi-caption">margem de 30%</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Ticket médio</span>
+            <span class="kpi-delta down">-1,2%</span>
+          </div>
+          <span class="kpi-value">R$ 214</span>
+          <span class="kpi-caption">por pedido</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Novos clientes</span>
+            <span class="kpi-delta up">+3</span>
+          </div>
+          <span class="kpi-value">18</span>
+          <span class="kpi-caption">cadastrados hoje</span>
+        </article>
+      </section>
+      <section class="kpi-row" data-period-panel="weekly" aria-label="Indicadores principais — Semanal">
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Total de vendas</span>
+            <span class="kpi-delta up">+13,5%</span>
+          </div>
+          <span class="kpi-value">R$ 33.700</span>
+          <span class="kpi-caption">vs. semana anterior</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Lucro líquido</span>
+            <span class="kpi-delta up">+9,8%</span>
+          </div>
+          <span class="kpi-value">R$ 10.110</span>
+          <span class="kpi-caption">margem de 30%</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Ticket médio</span>
+            <span class="kpi-delta up">+2,4%</span>
+          </div>
+          <span class="kpi-value">R$ 228</span>
+          <span class="kpi-caption">por pedido</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Novos clientes</span>
+            <span class="kpi-delta up">+11</span>
+          </div>
+          <span class="kpi-value">94</span>
+          <span class="kpi-caption">nesta semana</span>
+        </article>
+      </section>
+      <section class="kpi-row" data-period-panel="monthly" aria-label="Indicadores principais — Mensal">
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Total de vendas</span>
+            <span class="kpi-delta up">+9,7%</span>
+          </div>
+          <span class="kpi-value">R$ 152.300</span>
+          <span class="kpi-caption">vs. mês anterior</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Lucro líquido</span>
+            <span class="kpi-delta up">+7,3%</span>
+          </div>
+          <span class="kpi-value">R$ 44.170</span>
+          <span class="kpi-caption">margem de 29%</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Ticket médio</span>
+            <span class="kpi-delta down">-0,8%</span>
+          </div>
+          <span class="kpi-value">R$ 241</span>
+          <span class="kpi-caption">por pedido</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Novos clientes</span>
+            <span class="kpi-delta up">+38</span>
+          </div>
+          <span class="kpi-value">412</span>
+          <span class="kpi-caption">neste mês</span>
+        </article>
+      </section>
+      <section class="kpi-row" data-period-panel="yearly" aria-label="Indicadores principais — Anual">
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Total de vendas</span>
+            <span class="kpi-delta up">+16,6%</span>
+          </div>
+          <span class="kpi-value">R$ 1,29 mi</span>
+          <span class="kpi-caption">vs. ano anterior</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Lucro líquido</span>
+            <span class="kpi-delta up">+14,2%</span>
+          </div>
+          <span class="kpi-value">R$ 373 mil</span>
+          <span class="kpi-caption">margem de 29%</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Ticket médio</span>
+            <span class="kpi-delta up">+4,1%</span>
+          </div>
+          <span class="kpi-value">R$ 256</span>
+          <span class="kpi-caption">por pedido</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-card-top">
+            <span class="kpi-label">Novos clientes</span>
+            <span class="kpi-delta up">+520</span>
+          </div>
+          <span class="kpi-value">4.870</span>
+          <span class="kpi-caption">neste ano</span>
+        </article>
+      </section>
+
+      <!-- ===================== GRÁFICO PRINCIPAL ===================== -->
+      <section class="panel panel-main">
+        <div class="panel-header">
+          <div>
+            <h2>Desempenho de vendas</h2>
+            <span class="panel-sub range-label" data-period-panel="daily">Mostrando dados dos últimos 7 dias</span><span class="panel-sub range-label" data-period-panel="weekly">Mostrando dados das últimas 5 semanas</span><span class="panel-sub range-label" data-period-panel="monthly">Mostrando dados do período mensal (ano corrente)</span><span class="panel-sub range-label" data-period-panel="yearly">Mostrando dados do período anual</span>
+          </div>
+
+          <div class="panel-controls">
+            
+        <div class="segmented" role="group" aria-label="Filtro de período">
+          <input type="radio" name="period" id="period-daily" class="visually-hidden-input"><input type="radio" name="period" id="period-weekly" class="visually-hidden-input"><input type="radio" name="period" id="period-monthly" class="visually-hidden-input" checked><input type="radio" name="period" id="period-yearly" class="visually-hidden-input">
+          <label for="period-daily" class="segmented-option">Diário</label><label for="period-weekly" class="segmented-option">Semanal</label><label for="period-monthly" class="segmented-option">Mensal</label><label for="period-yearly" class="segmented-option">Anual</label>
+        </div>
+            
+        <input type="checkbox" id="compare-toggle" class="visually-hidden-input">
+        <label for="compare-toggle" class="btn btn-outline compare-toggle-label">Comparar períodos</label>
+            
+        <div class="segmented segmented-compact" role="group" aria-label="Tipo de gráfico">
+          <input type="radio" name="charttype" id="chart-line" class="visually-hidden-input" checked>
+          <label for="chart-line" class="segmented-option">Linha</label>
+          <input type="radio" name="charttype" id="chart-pie" class="visually-hidden-input">
+          <label for="chart-pie" class="segmented-option">Pizza</label>
+        </div>
+          </div>
+        </div>
+
+        <p class="compare-bar">As duas séries do período selecionado são plotadas juntas para comparação direta.</p>
+        <p class="pie-hint">A comparação fica disponível apenas no gráfico de linha.</p>
+
+        <div class="chart-wrap">
+          
+          <div class="chart-instance" data-chart="daily-single">
+            <span class="chart-legend-inline">Esta semana</span>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-daily-single-title">
+<title id="chart-daily-single-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,205.3 141.3,173.8 238.7,184.3 336.0,131.8 433.3,103.7 530.7,40.7 628.0,135.3 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,205.3 141.3,173.8 238.7,184.3 336.0,131.8 433.3,103.7 530.7,40.7 628.0,135.3" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="141.3" cy="173.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="238.7" cy="184.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="131.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="433.3" cy="103.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="530.7" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="135.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Seg</text>
+<text x="141.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Ter</text>
+<text x="238.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Qua</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Qui</text>
+<text x="433.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sex</text>
+<text x="530.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sáb</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Dom</text>
+</svg>
+          </div>
+          <div class="chart-instance" data-chart="daily-compare">
+            <div class="chart-legend-inline chart-legend-dual">
+              <span><i class="dot dot-primary"></i>Esta semana</span>
+              <span><i class="dot dot-secondary"></i>Semana anterior</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-daily-compare-title">
+<title id="chart-daily-compare-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,192.4 141.3,163.3 238.7,173.0 336.0,124.6 433.3,98.8 530.7,40.7 628.0,127.8 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,192.4 141.3,163.3 238.7,173.0 336.0,124.6 433.3,98.8 530.7,40.7 628.0,127.8" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="192.4" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="141.3" cy="163.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="238.7" cy="173.0" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="124.6" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="433.3" cy="98.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="530.7" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="127.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<polygon points="44.0,230.0 44.0,205.3 141.3,179.5 238.7,168.2 336.0,144.0 433.3,114.9 530.7,66.5 628.0,140.8 628.0,230.0" fill="rgba(184,134,46,0.15)" stroke="none"/>
+<polyline points="44.0,205.3 141.3,179.5 238.7,168.2 336.0,144.0 433.3,114.9 530.7,66.5 628.0,140.8" fill="none" stroke="#b8862e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="141.3" cy="179.5" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="238.7" cy="168.2" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="144.0" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="433.3" cy="114.9" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="530.7" cy="66.5" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="140.8" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Seg</text>
+<text x="141.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Ter</text>
+<text x="238.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Qua</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Qui</text>
+<text x="433.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sex</text>
+<text x="530.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sáb</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Dom</text>
+</svg>
+          </div>
+          <div class="chart-instance chart-instance-pie" data-chart="daily-pie">
+            <div class="pie-layout">
+              <svg class="chart-svg chart-svg-pie" viewBox="0 0 300 260" role="img" aria-labelledby="chart-daily-pie-title">
+<title id="chart-daily-pie-title">Distribuição de vendas por período</title>
+<path d="M130,130 L130.00,20.00 A110,110 0 0 1 193.87,40.44 Z" fill="#014073" stroke="#fff" stroke-width="2"><title>Seg: 4200</title></path>
+<path d="M130,130 L193.87,40.44 A110,110 0 0 1 237.83,108.24 Z" fill="#3a6c95" stroke="#fff" stroke-width="2"><title>Ter: 5100</title></path>
+<path d="M130,130 L237.83,108.24 A110,110 0 0 1 226.06,183.59 Z" fill="#6d97b8" stroke="#fff" stroke-width="2"><title>Qua: 4800</title></path>
+<path d="M130,130 L226.06,183.59 A110,110 0 0 1 144.56,239.03 Z" fill="#b8862e" stroke="#fff" stroke-width="2"><title>Qui: 6300</title></path>
+<path d="M130,130 L144.56,239.03 A110,110 0 0 1 42.85,197.12 Z" fill="#d9a95c" stroke="#fff" stroke-width="2"><title>Sex: 7100</title></path>
+<path d="M130,130 L42.85,197.12 A110,110 0 0 1 42.85,62.88 Z" fill="#e3c393" stroke="#fff" stroke-width="2"><title>Sáb: 8900</title></path>
+<path d="M130,130 L42.85,62.88 A110,110 0 0 1 130.00,20.00 Z" fill="#89a6bd" stroke="#fff" stroke-width="2"><title>Dom: 6200</title></path>
+</svg>
+              <ul class="pie-legend">
+<li><span class="legend-dot" style="background:#014073"></span>Seg</li>
+<li><span class="legend-dot" style="background:#3a6c95"></span>Ter</li>
+<li><span class="legend-dot" style="background:#6d97b8"></span>Qua</li>
+<li><span class="legend-dot" style="background:#b8862e"></span>Qui</li>
+<li><span class="legend-dot" style="background:#d9a95c"></span>Sex</li>
+<li><span class="legend-dot" style="background:#e3c393"></span>Sáb</li>
+<li><span class="legend-dot" style="background:#89a6bd"></span>Dom</li>
+</ul>
+
+===== daily KEYS ===== default=Esta semana other=Semana anterior
+            </div>
+          </div>
+          <div class="chart-instance" data-chart="weekly-single">
+            <span class="chart-legend-inline">Este mês</span>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-weekly-single-title">
+<title id="chart-weekly-single-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,205.3 190.0,125.9 336.0,167.1 482.0,40.7 628.0,52.5 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,205.3 190.0,125.9 336.0,167.1 482.0,40.7 628.0,52.5" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="125.9" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="167.1" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="52.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 1</text>
+<text x="190.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 2</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 3</text>
+<text x="482.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 4</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 5</text>
+</svg>
+          </div>
+          <div class="chart-instance" data-chart="weekly-compare">
+            <div class="chart-legend-inline chart-legend-dual">
+              <span><i class="dot dot-primary"></i>Este mês</span>
+              <span><i class="dot dot-secondary"></i>Mês anterior</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-weekly-compare-title">
+<title id="chart-weekly-compare-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,140.9 190.0,92.6 336.0,117.6 482.0,40.7 628.0,47.8 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,140.9 190.0,92.6 336.0,117.6 482.0,40.7 628.0,47.8" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="140.9" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="92.6" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="117.6" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="47.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<polygon points="44.0,230.0 44.0,205.3 190.0,162.4 336.0,148.1 482.0,110.5 628.0,96.2 628.0,230.0" fill="rgba(184,134,46,0.15)" stroke="none"/>
+<polyline points="44.0,205.3 190.0,162.4 336.0,148.1 482.0,110.5 628.0,96.2" fill="none" stroke="#b8862e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="162.4" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="148.1" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="110.5" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="96.2" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 1</text>
+<text x="190.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 2</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 3</text>
+<text x="482.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 4</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Sem. 5</text>
+</svg>
+          </div>
+          <div class="chart-instance chart-instance-pie" data-chart="weekly-pie">
+            <div class="pie-layout">
+              <svg class="chart-svg chart-svg-pie" viewBox="0 0 300 260" role="img" aria-labelledby="chart-weekly-pie-title">
+<title id="chart-weekly-pie-title">Distribuição de vendas por período</title>
+<path d="M130,130 L130.00,20.00 A110,110 0 0 1 229.88,83.91 Z" fill="#014073" stroke="#fff" stroke-width="2"><title>Sem. 1: 28500</title></path>
+<path d="M130,130 L229.88,83.91 A110,110 0 0 1 205.54,209.96 Z" fill="#3a6c95" stroke="#fff" stroke-width="2"><title>Sem. 2: 31200</title></path>
+<path d="M130,130 L205.54,209.96 A110,110 0 0 1 83.81,229.83 Z" fill="#6d97b8" stroke="#fff" stroke-width="2"><title>Sem. 3: 29800</title></path>
+<path d="M130,130 L83.81,229.83 A110,110 0 0 1 22.76,105.49 Z" fill="#b8862e" stroke="#fff" stroke-width="2"><title>Sem. 4: 34100</title></path>
+<path d="M130,130 L22.76,105.49 A110,110 0 0 1 130.00,20.00 Z" fill="#d9a95c" stroke="#fff" stroke-width="2"><title>Sem. 5: 33700</title></path>
+</svg>
+              <ul class="pie-legend">
+<li><span class="legend-dot" style="background:#014073"></span>Sem. 1</li>
+<li><span class="legend-dot" style="background:#3a6c95"></span>Sem. 2</li>
+<li><span class="legend-dot" style="background:#6d97b8"></span>Sem. 3</li>
+<li><span class="legend-dot" style="background:#b8862e"></span>Sem. 4</li>
+<li><span class="legend-dot" style="background:#d9a95c"></span>Sem. 5</li>
+</ul>
+
+===== weekly KEYS ===== default=Este mês other=Mês anterior
+            </div>
+          </div>
+          <div class="chart-instance" data-chart="monthly-single">
+            <span class="chart-legend-inline">2025</span>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-monthly-single-title">
+<title id="chart-monthly-single-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,205.3 97.1,191.7 150.2,165.3 203.3,172.3 256.4,140.4 309.5,124.1 362.5,107.7 415.6,115.6 468.7,90.4 521.8,74.3 574.9,81.9 628.0,40.7 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,205.3 97.1,191.7 150.2,165.3 203.3,172.3 256.4,140.4 309.5,124.1 362.5,107.7 415.6,115.6 468.7,90.4 521.8,74.3 574.9,81.9 628.0,40.7" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="97.1" cy="191.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="150.2" cy="165.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="203.3" cy="172.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="256.4" cy="140.4" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="309.5" cy="124.1" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="362.5" cy="107.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="415.6" cy="115.6" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="468.7" cy="90.4" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="521.8" cy="74.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="574.9" cy="81.9" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jan</text>
+<text x="97.1" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Fev</text>
+<text x="150.2" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Mar</text>
+<text x="203.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Abr</text>
+<text x="256.4" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Mai</text>
+<text x="309.5" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jun</text>
+<text x="362.5" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jul</text>
+<text x="415.6" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Ago</text>
+<text x="468.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Set</text>
+<text x="521.8" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Out</text>
+<text x="574.9" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Nov</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Dez</text>
+</svg>
+          </div>
+          <div class="chart-instance" data-chart="monthly-compare">
+            <div class="chart-legend-inline chart-legend-dual">
+              <span><i class="dot dot-primary"></i>2025</span>
+              <span><i class="dot dot-secondary"></i>2024</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-monthly-compare-title">
+<title id="chart-monthly-compare-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,176.5 97.1,165.3 150.2,143.5 203.3,149.3 256.4,123.0 309.5,109.5 362.5,96.0 415.6,102.5 468.7,81.7 521.8,68.5 574.9,74.7 628.0,40.7 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,176.5 97.1,165.3 150.2,143.5 203.3,149.3 256.4,123.0 309.5,109.5 362.5,96.0 415.6,102.5 468.7,81.7 521.8,68.5 574.9,74.7 628.0,40.7" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="176.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="97.1" cy="165.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="150.2" cy="143.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="203.3" cy="149.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="256.4" cy="123.0" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="309.5" cy="109.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="362.5" cy="96.0" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="415.6" cy="102.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="468.7" cy="81.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="521.8" cy="68.5" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="574.9" cy="74.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<polygon points="44.0,230.0 44.0,205.3 97.1,198.6 150.2,184.5 203.3,178.8 256.4,168.3 309.5,150.0 362.5,139.3 415.6,145.5 468.7,124.8 521.8,118.2 574.9,122.0 628.0,87.7 628.0,230.0" fill="rgba(184,134,46,0.15)" stroke="none"/>
+<polyline points="44.0,205.3 97.1,198.6 150.2,184.5 203.3,178.8 256.4,168.3 309.5,150.0 362.5,139.3 415.6,145.5 468.7,124.8 521.8,118.2 574.9,122.0 628.0,87.7" fill="none" stroke="#b8862e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="97.1" cy="198.6" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="150.2" cy="184.5" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="203.3" cy="178.8" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="256.4" cy="168.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="309.5" cy="150.0" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="362.5" cy="139.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="415.6" cy="145.5" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="468.7" cy="124.8" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="521.8" cy="118.2" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="574.9" cy="122.0" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="87.7" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jan</text>
+<text x="97.1" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Fev</text>
+<text x="150.2" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Mar</text>
+<text x="203.3" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Abr</text>
+<text x="256.4" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Mai</text>
+<text x="309.5" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jun</text>
+<text x="362.5" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Jul</text>
+<text x="415.6" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Ago</text>
+<text x="468.7" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Set</text>
+<text x="521.8" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Out</text>
+<text x="574.9" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Nov</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">Dez</text>
+</svg>
+          </div>
+          <div class="chart-instance chart-instance-pie" data-chart="monthly-pie">
+            <div class="pie-layout">
+              <svg class="chart-svg chart-svg-pie" viewBox="0 0 300 260" role="img" aria-labelledby="chart-monthly-pie-title">
+<title id="chart-monthly-pie-title">Distribuição de vendas por período</title>
+<path d="M130,130 L130.00,20.00 A110,110 0 0 1 174.16,29.25 Z" fill="#014073" stroke="#fff" stroke-width="2"><title>Jan: 98000</title></path>
+<path d="M130,130 L174.16,29.25 A110,110 0 0 1 212.28,57.00 Z" fill="#3a6c95" stroke="#fff" stroke-width="2"><title>Fev: 102500</title></path>
+<path d="M130,130 L212.28,57.00 A110,110 0 0 1 236.39,102.04 Z" fill="#6d97b8" stroke="#fff" stroke-width="2"><title>Mar: 111200</title></path>
+<path d="M130,130 L236.39,102.04 A110,110 0 0 1 237.76,152.07 Z" fill="#b8862e" stroke="#fff" stroke-width="2"><title>Abr: 108900</title></path>
+<path d="M130,130 L237.76,152.07 A110,110 0 0 1 213.76,201.31 Z" fill="#d9a95c" stroke="#fff" stroke-width="2"><title>Mai: 119400</title></path>
+<path d="M130,130 L213.76,201.31 A110,110 0 0 1 166.63,233.72 Z" fill="#e3c393" stroke="#fff" stroke-width="2"><title>Jun: 124800</title></path>
+<path d="M130,130 L166.63,233.72 A110,110 0 0 1 107.15,237.60 Z" fill="#89a6bd" stroke="#fff" stroke-width="2"><title>Jul: 130200</title></path>
+<path d="M130,130 L107.15,237.60 A110,110 0 0 1 55.25,210.70 Z" fill="#4e7fa3" stroke="#fff" stroke-width="2"><title>Ago: 127600</title></path>
+<path d="M130,130 L55.25,210.70 A110,110 0 0 1 23.44,157.31 Z" fill="#c99a4a" stroke="#fff" stroke-width="2"><title>Set: 135900</title></path>
+<path d="M130,130 L23.44,157.31 A110,110 0 0 1 26.45,92.88 Z" fill="#7fa0b9" stroke="#fff" stroke-width="2"><title>Out: 141200</title></path>
+<path d="M130,130 L26.45,92.88 A110,110 0 0 1 64.14,41.90 Z" fill="#2a5a86" stroke="#fff" stroke-width="2"><title>Nov: 138700</title></path>
+<path d="M130,130 L64.14,41.90 A110,110 0 0 1 130.00,20.00 Z" fill="#e0b678" stroke="#fff" stroke-width="2"><title>Dez: 152300</title></path>
+</svg>
+              <ul class="pie-legend">
+<li><span class="legend-dot" style="background:#014073"></span>Jan</li>
+<li><span class="legend-dot" style="background:#3a6c95"></span>Fev</li>
+<li><span class="legend-dot" style="background:#6d97b8"></span>Mar</li>
+<li><span class="legend-dot" style="background:#b8862e"></span>Abr</li>
+<li><span class="legend-dot" style="background:#d9a95c"></span>Mai</li>
+<li><span class="legend-dot" style="background:#e3c393"></span>Jun</li>
+<li><span class="legend-dot" style="background:#89a6bd"></span>Jul</li>
+<li><span class="legend-dot" style="background:#4e7fa3"></span>Ago</li>
+<li><span class="legend-dot" style="background:#c99a4a"></span>Set</li>
+<li><span class="legend-dot" style="background:#7fa0b9"></span>Out</li>
+<li><span class="legend-dot" style="background:#2a5a86"></span>Nov</li>
+<li><span class="legend-dot" style="background:#e0b678"></span>Dez</li>
+</ul>
+
+===== monthly KEYS ===== default=2025 other=2024
+            </div>
+          </div>
+          <div class="chart-instance" data-chart="yearly-single">
+            <span class="chart-legend-inline">Receita total</span>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-yearly-single-title">
+<title id="chart-yearly-single-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,205.3 190.0,169.0 336.0,133.3 482.0,93.8 628.0,40.7 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,205.3 190.0,169.0 336.0,133.3 482.0,93.8 628.0,40.7" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="169.0" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="133.3" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="93.8" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2021</text>
+<text x="190.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2022</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2023</text>
+<text x="482.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2024</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2025</text>
+</svg>
+          </div>
+          <div class="chart-instance" data-chart="yearly-compare">
+            <div class="chart-legend-inline chart-legend-dual">
+              <span><i class="dot dot-primary"></i>Receita total</span>
+              <span><i class="dot dot-secondary"></i>Meta anual</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 640 260" role="img" aria-labelledby="chart-yearly-compare-title">
+<title id="chart-yearly-compare-title">Gráfico de vendas</title>
+<line x1="44" y1="230" x2="628" y2="230" stroke="#e1e7ed" stroke-width="1"/>
+<polygon points="44.0,230.0 44.0,199.7 190.0,164.6 336.0,130.2 482.0,92.0 628.0,40.7 628.0,230.0" fill="rgba(1,64,115,0.12)" stroke="none"/>
+<polyline points="44.0,199.7 190.0,164.6 336.0,130.2 482.0,92.0 628.0,40.7" fill="none" stroke="#014073" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="199.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="164.6" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="130.2" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="92.0" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="40.7" r="3.2" fill="#014073" stroke="#fff" stroke-width="1.2"/>
+<polygon points="44.0,230.0 44.0,205.3 190.0,171.7 336.0,135.2 482.0,98.7 628.0,51.1 628.0,230.0" fill="rgba(184,134,46,0.15)" stroke="none"/>
+<polyline points="44.0,205.3 190.0,171.7 336.0,135.2 482.0,98.7 628.0,51.1" fill="none" stroke="#b8862e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44.0" cy="205.3" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="190.0" cy="171.7" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="336.0" cy="135.2" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="482.0" cy="98.7" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<circle cx="628.0" cy="51.1" r="3.2" fill="#b8862e" stroke="#fff" stroke-width="1.2"/>
+<text x="44.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2021</text>
+<text x="190.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2022</text>
+<text x="336.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2023</text>
+<text x="482.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2024</text>
+<text x="628.0" y="252" font-size="11" fill="#5b7186" text-anchor="middle" font-family="Manrope, sans-serif">2025</text>
+</svg>
+          </div>
+          <div class="chart-instance chart-instance-pie" data-chart="yearly-pie">
+            <div class="pie-layout">
+              <svg class="chart-svg chart-svg-pie" viewBox="0 0 300 260" role="img" aria-labelledby="chart-yearly-pie-title">
+<title id="chart-yearly-pie-title">Distribuição de vendas por período</title>
+<path d="M130,130 L130.00,20.00 A110,110 0 0 1 217.43,63.25 Z" fill="#014073" stroke="#fff" stroke-width="2"><title>2021: 720000</title></path>
+<path d="M130,130 L217.43,63.25 A110,110 0 0 1 230.16,175.48 Z" fill="#3a6c95" stroke="#fff" stroke-width="2"><title>2022: 845000</title></path>
+<path d="M130,130 L230.16,175.48 A110,110 0 0 1 120.05,239.55 Z" fill="#6d97b8" stroke="#fff" stroke-width="2"><title>2023: 968000</title></path>
+<path d="M130,130 L120.05,239.55 A110,110 0 0 1 20.28,137.85 Z" fill="#b8862e" stroke="#fff" stroke-width="2"><title>2024: 1104000</title></path>
+<path d="M130,130 L20.28,137.85 A110,110 0 0 1 130.00,20.00 Z" fill="#d9a95c" stroke="#fff" stroke-width="2"><title>2025: 1287000</title></path>
+</svg>
+              <ul class="pie-legend">
+<li><span class="legend-dot" style="background:#014073"></span>2021</li>
+<li><span class="legend-dot" style="background:#3a6c95"></span>2022</li>
+<li><span class="legend-dot" style="background:#6d97b8"></span>2023</li>
+<li><span class="legend-dot" style="background:#b8862e"></span>2024</li>
+<li><span class="legend-dot" style="background:#d9a95c"></span>2025</li>
+</ul>
+
+===== yearly KEYS ===== default=Receita total other=Meta anual
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PRODUTOS MAIS / MENOS VENDIDOS ===================== -->
+      <section class="split-row">
+        <div class="panel">
+          <div class="panel-header panel-header-tight">
+            <h2>Produtos mais vendidos</h2>
+            <span class="pill pill-up" data-period-panel="daily">Diário</span><span class="pill pill-up" data-period-panel="weekly">Semanal</span><span class="pill pill-up" data-period-panel="monthly">Mensal</span><span class="pill pill-up" data-period-panel="yearly">Anual</span>
+          </div>
+          <ol class="product-list" data-period-panel="daily">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Fone Bluetooth Aria</div>
+              <div class="product-meta">Áudio</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:92%"></div></div>
+            <span class="product-value">R$ 1.240</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Mouse Vertical Pro</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:78%"></div></div>
+            <span class="product-value">R$ 980</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Teclado Mecânico Nex</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:68%"></div></div>
+            <span class="product-value">R$ 860</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Carregador GaN 65W</div>
+              <div class="product-meta">Energia</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:51%"></div></div>
+            <span class="product-value">R$ 640</span>
+          </li></ol><ol class="product-list" data-period-panel="weekly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Fone Bluetooth Aria</div>
+              <div class="product-meta">Áudio</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:88%"></div></div>
+            <span class="product-value">R$ 6.180</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Monitor 27" QHD</div>
+              <div class="product-meta">Monitores</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:84%"></div></div>
+            <span class="product-value">R$ 5.940</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Teclado Mecânico Nex</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:66%"></div></div>
+            <span class="product-value">R$ 4.320</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Mouse Vertical Pro</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:59%"></div></div>
+            <span class="product-value">R$ 3.870</span>
+          </li></ol><ol class="product-list" data-period-panel="monthly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Notebook Slim 14"</div>
+              <div class="product-meta">Computadores</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:95%"></div></div>
+            <span class="product-value">R$ 38.400</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Monitor 27" QHD</div>
+              <div class="product-meta">Monitores</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:81%"></div></div>
+            <span class="product-value">R$ 27.600</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Fone Bluetooth Aria</div>
+              <div class="product-meta">Áudio</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:70%"></div></div>
+            <span class="product-value">R$ 21.900</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Cadeira Ergonômica</div>
+              <div class="product-meta">Mobiliário</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:62%"></div></div>
+            <span class="product-value">R$ 19.300</span>
+          </li></ol><ol class="product-list" data-period-panel="yearly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Notebook Slim 14"</div>
+              <div class="product-meta">Computadores</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:97%"></div></div>
+            <span class="product-value">R$ 412.000</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Monitor 27" QHD</div>
+              <div class="product-meta">Monitores</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:84%"></div></div>
+            <span class="product-value">R$ 318.500</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Cadeira Ergonômica</div>
+              <div class="product-meta">Mobiliário</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:71%"></div></div>
+            <span class="product-value">R$ 256.900</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Fone Bluetooth Aria</div>
+              <div class="product-meta">Áudio</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill up" style="width:64%"></div></div>
+            <span class="product-value">R$ 231.200</span>
+          </li></ol>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header panel-header-tight">
+            <h2>Produtos menos vendidos</h2>
+            <span class="pill pill-down" data-period-panel="daily">Diário</span><span class="pill pill-down" data-period-panel="weekly">Semanal</span><span class="pill pill-down" data-period-panel="monthly">Mensal</span><span class="pill pill-down" data-period-panel="yearly">Anual</span>
+          </div>
+          <ol class="product-list" data-period-panel="daily">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Suporte de Notebook</div>
+              <div class="product-meta">Acessórios</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:14%"></div></div>
+            <span class="product-value">R$ 90</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Capa Protetora Tablet</div>
+              <div class="product-meta">Acessórios</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:11%"></div></div>
+            <span class="product-value">R$ 76</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Cabo HDMI 2m</div>
+              <div class="product-meta">Cabos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:8%"></div></div>
+            <span class="product-value">R$ 58</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Limpa Telas 60ml</div>
+              <div class="product-meta">Manutenção</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:5%"></div></div>
+            <span class="product-value">R$ 34</span>
+          </li></ol><ol class="product-list" data-period-panel="weekly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Cabo HDMI 2m</div>
+              <div class="product-meta">Cabos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:13%"></div></div>
+            <span class="product-value">R$ 320</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Suporte de Notebook</div>
+              <div class="product-meta">Acessórios</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:11%"></div></div>
+            <span class="product-value">R$ 290</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Hub USB-C 6 em 1</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:9%"></div></div>
+            <span class="product-value">R$ 260</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Limpa Telas 60ml</div>
+              <div class="product-meta">Manutenção</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:5%"></div></div>
+            <span class="product-value">R$ 140</span>
+          </li></ol><ol class="product-list" data-period-panel="monthly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Suporte de Notebook</div>
+              <div class="product-meta">Acessórios</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:15%"></div></div>
+            <span class="product-value">R$ 1.180</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Hub USB-C 6 em 1</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:12%"></div></div>
+            <span class="product-value">R$ 980</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Cabo HDMI 2m</div>
+              <div class="product-meta">Cabos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:9%"></div></div>
+            <span class="product-value">R$ 740</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Limpa Telas 60ml</div>
+              <div class="product-meta">Manutenção</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:5%"></div></div>
+            <span class="product-value">R$ 410</span>
+          </li></ol><ol class="product-list" data-period-panel="yearly">
+          <li>
+            <span class="product-rank">1</span>
+            <div class="product-info">
+              <div class="product-name">Suporte de Notebook</div>
+              <div class="product-meta">Acessórios</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:16%"></div></div>
+            <span class="product-value">R$ 12.400</span>
+          </li>
+          <li>
+            <span class="product-rank">2</span>
+            <div class="product-info">
+              <div class="product-name">Hub USB-C 6 em 1</div>
+              <div class="product-meta">Periféricos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:12%"></div></div>
+            <span class="product-value">R$ 9.800</span>
+          </li>
+          <li>
+            <span class="product-rank">3</span>
+            <div class="product-info">
+              <div class="product-name">Cabo HDMI 2m</div>
+              <div class="product-meta">Cabos</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:9%"></div></div>
+            <span class="product-value">R$ 7.100</span>
+          </li>
+          <li>
+            <span class="product-rank">4</span>
+            <div class="product-info">
+              <div class="product-name">Limpa Telas 60ml</div>
+              <div class="product-meta">Manutenção</div>
+            </div>
+            <div class="product-bar-track"><div class="product-bar-fill down" style="width:5%"></div></div>
+            <span class="product-value">R$ 4.300</span>
+          </li></ol>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>Dados fictícios para demonstração — projeto 100% HTML + CSS, sem JavaScript.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
