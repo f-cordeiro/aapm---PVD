@@ -3,122 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AAPM</title>
-    <!-- O ?v=100 força o navegador a carregar a versão nova do CSS -->
-    <link rel="stylesheet" href="/static/login.css?v=100">
+    <title>Login - AAPM SENAI</title>
+    <!-- CSS Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='index.css') }}">
 </head>
 <body>
 
-    <!-- Canvas para o fundo animado -->
-    <canvas id="bg-canvas"></canvas>
+    <div class="login-container">
+        <!-- Lado Esquerdo: Banner SENAI com filtro e efeitos JS -->
+        <div class="left-panel js-animated-background">
+            <img src="{{ url_for('static', path='images/Senai-Francisco-Matarazzo.jpg') }}" alt="Logo SENAI" class="senai-logo filtered-image">
+            <div class="background-overlay"></div>
+            <canvas id="canvas-matrix"></canvas>
+        </div>
 
-    <div class="login-card">
-        
-        <h1>Entrar no Sistema</h1>
-        <p class="subtitle">Insira suas credenciais para continuar</p>
+        <!-- Lado Direito: Formulário de Login -->
+        <div class="right-panel">
+            <div class="login-card">
+                
+                <!-- Cabeçalho do Card -->
+                <div class="card-header">
+                    <h2>LOGIN</h2>
+                    <div class="divider"></div>
+                    <img src="{{ url_for('static', path='uploads/senai.png') }}" alt="Logo AAPM SENAI" class="aapm-logo">
+                </div>
 
-        <!-- Exibe mensagem de erro se existir -->
-        {% if erro %}
-            <div class="alert-error">
-                {{ erro }}
+                <!-- Formulário conectado à rota /auth/login -->
+                <form action="/auth/login" method="POST" class="login-form">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" name="email" placeholder="Usuário" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" name="senha" placeholder="Senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-login">LOGIN</button>
+                </form>
+
             </div>
-        {% endif %}
-
-        <!-- Exibe mensagem de confirmação após cadastro -->
-        {% if request.query_params.get("cadastro") == "ok" %}
-            <div class="alert-success">
-                Cadastro realizado! Faça login.
-            </div>
-        {% endif %}    
-        
-        <form action="/auth/login" method="post" class="form-container">
-            
-            <!-- Campo Email -->
-            <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" name="email" required placeholder="seu@email.com" class="form-input">
-            </div>
-            
-            <!-- Campo Senha -->
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" name="senha" required placeholder="••••••••" class="form-input">
-            </div>
-
-            <!-- Botão Entrar -->
-            <button type="submit" class="btn-submit">
-                Entrar
-            </button>
-        </form>
-
-        <!-- Link para voltar à Página Inicial -->
-        <div class="nav-link-container">
-            <a href="/" class="link-back">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                </svg>
-                Voltar para o início
-            </a>
         </div>
     </div>
 
-    <!-- Script de animação do fundo -->
-    <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const particles = [];
-        const colors = [
-            'rgba(0, 173, 181, 0.25)', 
-            'rgba(32, 58, 68, 0.5)', 
-            'rgba(0, 196, 206, 0.2)',
-            'rgba(44, 83, 100, 0.4)'
-        ];
-
-        for (let i = 0; i < 18; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 140 + 100,
-                vx: (Math.random() - 0.5) * 0.8,
-                vy: (Math.random() - 0.5) * 0.8,
-                color: colors[Math.floor(Math.random() * colors.length)]
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < -p.radius) p.x = canvas.width + p.radius;
-                if (p.x > canvas.width + p.radius) p.x = -p.radius;
-                if (p.y < -p.radius) p.y = canvas.height + p.radius;
-                if (p.y > canvas.height + p.radius) p.y = -p.radius;
-
-                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-                gradient.addColorStop(0, p.color);
-                gradient.addColorStop(1, 'transparent');
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
+    <!-- Script de efeitos JS -->
+    <script src="{{ url_for('static', path='js/effects.js') }}"></script>
 </body>
 </html>

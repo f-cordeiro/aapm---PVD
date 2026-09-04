@@ -12,7 +12,7 @@ app = FastAPI()
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(current_dir, "static")
-app.mount("/static", StaticFiles(directory=static_dir), name="static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
 from app.controllers import auth_controller
@@ -50,12 +50,12 @@ def tela_inicial(
     if usuario is None:
         return templates.TemplateResponse(
             request,
-            "index.html",
+            "auth/login.html",
             {"request": request}
         )
     #Logado - exibir a tela de funcionario
     return templates.TemplateResponse(
         request,
-        "home.html",
+        "pdv/index.html",
         {"request": request, "usuario": usuario}
     )
