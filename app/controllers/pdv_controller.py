@@ -23,7 +23,7 @@ from app.auth import get_usuario_logado
 router = APIRouter(prefix="/pdv", tags=["PDV"])
 templates = Jinja2Templates(directory="app/templates")
 
-DESCONTO_ASSOCIADO = 10.0  # percentual fixo
+DESCONTO_ASSOCIADO = 10  # percentual fixo
 
 
 @router.get("/")
