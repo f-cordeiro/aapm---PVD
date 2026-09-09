@@ -49,9 +49,7 @@
 
 
         <div class="titulo-topo">
-
             Administração de produtos
-
         </div>
 
 
@@ -97,14 +95,14 @@
 
         <div class="barra-acoes">
 
+            <!-- BOTÃO NOVO PRODUTO -->
+
             <button
                 type="button"
                 class="btn-novo"
                 onclick="abrirCadastro()"
             >
-
-                ＋ Novo produto
-
+                + Novo produto
             </button>
 
 
@@ -663,9 +661,7 @@
                 <div class="form-group">
 
                     <label for="estoque">
-
                         Quantidade em estoque
-
                     </label>
 
                     <input
@@ -776,25 +772,38 @@
 
     <script>
 
-
         /* =====================================================
-           MODAL
+           ABRIR MODAL
         ===================================================== */
 
         function abrirCadastro() {
 
-            document
-                .getElementById("modalCadastro")
-                .classList.add("ativo");
+            const modal =
+                document.getElementById("modalCadastro");
+
+            if (modal) {
+
+                modal.classList.add("ativo");
+
+            }
 
         }
 
 
+        /* =====================================================
+           FECHAR MODAL
+        ===================================================== */
+
         function fecharCadastro() {
 
-            document
-                .getElementById("modalCadastro")
-                .classList.remove("ativo");
+            const modal =
+                document.getElementById("modalCadastro");
+
+            if (modal) {
+
+                modal.classList.remove("ativo");
+
+            }
 
         }
 
@@ -828,7 +837,7 @@
             document.getElementById("previewImagem");
 
 
-        if (inputImagem) {
+        if (inputImagem && previewImagem) {
 
             inputImagem.addEventListener(
                 "change",
@@ -839,9 +848,7 @@
 
 
                     if (!arquivo) {
-
                         return;
-
                     }
 
 
@@ -891,7 +898,6 @@
             );
 
         }
-
 
     </script>
 

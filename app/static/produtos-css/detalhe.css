@@ -8,14 +8,11 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
-
     min-height: 100vh;
 
     display: flex;
@@ -28,105 +25,12 @@ body {
         Verdana,
         sans-serif;
 
-    color: #ffffff;
+    color: #172033;
 
-    background:
-
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(0, 173, 181, 0.15),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 75%,
-            rgba(0, 119, 255, 0.12),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            135deg,
-            #07151b,
-            #102c35,
-            #173f4c
-        );
+    background: #f5f7fa;
 
     overflow-x: hidden;
 }
-
-
-
-/* =========================================================
-   EFEITOS DO FUNDO
-   ========================================================= */
-
-body::before,
-body::after {
-
-    content: "";
-
-    position: fixed;
-
-    width: 450px;
-    height: 450px;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    filter: blur(80px);
-
-    opacity: 0.18;
-
-    z-index: -1;
-
-    animation:
-        fluido 14s ease-in-out infinite alternate;
-}
-
-
-body::before {
-
-    top: -180px;
-    left: -150px;
-
-    background: #00adb5;
-}
-
-
-body::after {
-
-    right: -180px;
-    bottom: -180px;
-
-    background: #0077ff;
-
-    animation-delay: -5s;
-}
-
-
-@keyframes fluido {
-
-    0% {
-        transform:
-            translate(0, 0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translate(100px, 80px)
-            scale(1.2);
-    }
-
-    100% {
-        transform:
-            translate(-50px, 120px)
-            scale(0.9);
-    }
-
-}
-
 
 
 /* =========================================================
@@ -134,38 +38,28 @@ body::after {
    ========================================================= */
 
 .topo {
-
     width: 100%;
+    min-height: 70px;
 
-    min-height: 75px;
-
-    padding: 15px 5%;
+    padding: 0 5%;
 
     display: flex;
-
     align-items: center;
 
     gap: 30px;
 
-    background:
-        rgba(255, 255, 255, 0.055);
+    background: #ffffff;
 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-
-    border-bottom:
-        1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid #e2e8f0;
 
     box-shadow:
-        0 5px 30px rgba(0, 0, 0, 0.25);
+        0 2px 10px rgba(16, 45, 74, 0.06);
 
     position: sticky;
-
     top: 0;
 
     z-index: 100;
 }
-
 
 
 /* =========================================================
@@ -173,18 +67,15 @@ body::after {
    ========================================================= */
 
 .logo {
+    color: #164b7a;
 
     font-size: 25px;
-
     font-weight: 700;
 
     letter-spacing: 1px;
 
-    color: #ffffff;
-
     white-space: nowrap;
 }
-
 
 
 /* =========================================================
@@ -192,16 +83,13 @@ body::after {
    ========================================================= */
 
 .titulo-topo {
-
     flex: 1;
 
-    color: #ffffff;
+    color: #102d4a;
 
     font-size: 18px;
-
-    font-weight: 500;
+    font-weight: 600;
 }
-
 
 
 /* =========================================================
@@ -209,7 +97,6 @@ body::after {
    ========================================================= */
 
 .acoes-topo {
-
     display: flex;
 
     align-items: center;
@@ -218,14 +105,12 @@ body::after {
 }
 
 
-
 /* =========================================================
    BOTÕES DO TOPO
    ========================================================= */
 
 .botao-topo,
 .carrinho {
-
     display: inline-flex;
 
     align-items: center;
@@ -235,44 +120,43 @@ body::after {
 
     padding: 9px 14px;
 
-    background:
-        rgba(0, 173, 181, 0.12);
+    background: #ffffff;
 
-    border:
-        1px solid rgba(0, 173, 181, 0.35);
+    border: 1px solid #d5dee8;
 
     border-radius: 8px;
 
-    color: #00dce5;
+    color: #164b7a;
 
     text-decoration: none;
 
     font-size: 13px;
-
     font-weight: 600;
 
     white-space: nowrap;
 
     transition:
-        0.3s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
 .botao-topo:hover,
 .carrinho:hover {
+    background: #164b7a;
 
-    background: #00adb5;
+    border-color: #164b7a;
 
     color: #ffffff;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-1px);
 
     box-shadow:
-        0 5px 20px
-        rgba(0, 173, 181, 0.3);
+        0 4px 12px rgba(22, 75, 122, 0.18);
 }
-
 
 
 /* =========================================================
@@ -280,9 +164,7 @@ body::after {
    ========================================================= */
 
 .container {
-
     width: 90%;
-
     max-width: 1350px;
 
     margin: 35px auto 50px;
@@ -291,49 +173,57 @@ body::after {
 }
 
 
-
 /* =========================================================
    BREADCRUMB
    ========================================================= */
 
 .breadcrumb {
-
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 
     margin-bottom: 22px;
 
-    color: #90a4ae;
+    color: #64748b;
 
     font-size: 14px;
 }
 
 
 .breadcrumb a {
-
-    color: #00dce5;
+    color: #164b7a;
 
     text-decoration: none;
 
-    transition: 0.25s ease;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
 }
 
 
 .breadcrumb a:hover {
-
-    color: #ffffff;
+    color: #0d5ca8;
 }
 
 
 .breadcrumb span:nth-child(2) {
+    color: #94a3b8;
 
-    color: #607d86;
-
+    font-size: 18px;
 }
 
+
+.breadcrumb span:last-child {
+    color: #64748b;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
 
 
 /* =========================================================
@@ -341,35 +231,26 @@ body::after {
    ========================================================= */
 
 .detalhe-card {
-
     width: 100%;
 
     padding: 30px;
 
-    background:
-        rgba(255, 255, 255, 0.055);
+    background: #ffffff;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid #e2e8f0;
 
-    border:
-        1px solid rgba(255, 255, 255, 0.10);
-
-    border-radius: 16px;
+    border-radius: 14px;
 
     box-shadow:
-        0 15px 45px
-        rgba(0, 0, 0, 0.25);
+        0 4px 18px rgba(16, 45, 74, 0.07);
 }
 
 
-
 /* =========================================================
-   ALERTA
+   ALERTAS
    ========================================================= */
 
 .alerta {
-
     width: 100%;
 
     display: flex;
@@ -378,11 +259,11 @@ body::after {
 
     gap: 12px;
 
-    padding: 15px 18px;
+    padding: 14px 17px;
 
     margin-bottom: 28px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     font-size: 14px;
 
@@ -391,23 +272,15 @@ body::after {
 
 
 .alerta.sucesso {
+    background: #ecfdf5;
 
-    background:
-        rgba(0, 173, 181, 0.12);
+    border: 1px solid #bbf7d0;
 
-    border:
-        1px solid rgba(0, 173, 181, 0.35);
-
-    color: #48e5ea;
-
-    box-shadow:
-        0 5px 20px
-        rgba(0, 173, 181, 0.08);
+    color: #15803d;
 }
 
 
 .alerta-icone {
-
     width: 25px;
     height: 25px;
 
@@ -416,16 +289,16 @@ body::after {
     align-items: center;
     justify-content: center;
 
+    flex-shrink: 0;
+
     border-radius: 50%;
 
-    background:
-        rgba(0, 173, 181, 0.20);
+    background: #dcfce7;
 
-    color: #00dce5;
+    color: #16a34a;
 
     font-weight: 700;
 }
-
 
 
 /* =========================================================
@@ -433,13 +306,11 @@ body::after {
    ========================================================= */
 
 .produto-detalhe {
-
     width: 100%;
 
     display: grid;
 
-    grid-template-columns:
-        380px 1fr;
+    grid-template-columns: 380px minmax(0, 1fr);
 
     gap: 45px;
 
@@ -447,15 +318,12 @@ body::after {
 }
 
 
-
 /* =========================================================
    IMAGEM
    ========================================================= */
 
 .imagem-container {
-
     width: 100%;
-
     height: 400px;
 
     display: flex;
@@ -465,22 +333,18 @@ body::after {
 
     overflow: hidden;
 
-    background:
-        rgba(0, 0, 0, 0.16);
+    background: #f8fafc;
 
-    border:
-        1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid #e2e8f0;
 
-    border-radius: 14px;
+    border-radius: 12px;
 
     box-shadow:
-        inset 0 0 30px
-        rgba(0, 0, 0, 0.12);
+        inset 0 0 25px rgba(16, 45, 74, 0.025);
 }
 
 
 .imagem-produto {
-
     width: 100%;
     height: 100%;
 
@@ -489,24 +353,21 @@ body::after {
     padding: 25px;
 
     transition:
-        transform 0.4s ease;
+        transform 0.3s ease;
 }
 
 
-.imagem-container:hover
-.imagem-produto {
-
-    transform:
-        scale(1.04);
+.imagem-container:hover .imagem-produto {
+    transform: scale(1.03);
 }
-
 
 
 /* =========================================================
-   INFORMAÇÕES
+   INFORMAÇÕES DO PRODUTO
    ========================================================= */
 
 .informacoes-produto {
+    min-width: 0;
 
     display: flex;
 
@@ -517,80 +378,81 @@ body::after {
 
 
 .categoria {
+    width: fit-content;
 
     margin-bottom: 10px;
 
-    color: #00dce5;
+    padding: 5px 10px;
+
+    background: #eff6ff;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 6px;
+
+    color: #164b7a;
 
     font-size: 12px;
 
-    font-weight: 600;
+    font-weight: 700;
 
     text-transform: uppercase;
 
-    letter-spacing: 1px;
+    letter-spacing: 0.7px;
 }
 
 
 .informacoes-produto h1 {
-
     margin-bottom: 28px;
 
-    color: #ffffff;
+    color: #102d4a;
 
     font-size: 38px;
 
-    font-weight: 600;
+    font-weight: 700;
 
     line-height: 1.2;
+
+    overflow-wrap: anywhere;
 }
 
 
-
 /* =========================================================
-   INFORMAÇÕES CARD
+   CARD DE INFORMAÇÕES
    ========================================================= */
 
 .informacoes-card {
-
     width: 100%;
 
     overflow: hidden;
 
-    border:
-        1px solid rgba(255, 255, 255, 0.14);
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
 
     border-radius: 10px;
-
-    background:
-        rgba(0, 0, 0, 0.10);
 }
 
 
 .informacao {
-
     min-height: 68px;
 
     display: grid;
 
-    grid-template-columns:
-        280px 1fr;
+    grid-template-columns: 280px minmax(0, 1fr);
 
     align-items: center;
 
-    border-bottom:
-        1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid #e2e8f0;
 }
 
 
 .informacao:last-child {
-
     border-bottom: none;
 }
 
 
 .informacao-label {
-
     height: 100%;
 
     display: flex;
@@ -599,36 +461,36 @@ body::after {
 
     padding: 0 24px;
 
-    color: #ffffff;
+    background: #f8fafc;
 
-    font-size: 15px;
+    color: #475569;
+
+    font-size: 14px;
 
     font-weight: 600;
 
-    border-right:
-        1px solid rgba(255, 255, 255, 0.10);
+    border-right: 1px solid #e2e8f0;
 }
 
 
 .informacao-valor {
-
     padding: 0 24px;
 
-    color: #00dce5;
+    color: #164b7a;
 
     font-size: 20px;
-
-    font-weight: 500;
-}
-
-
-.informacao-valor.preco {
-
-    font-size: 24px;
 
     font-weight: 600;
 }
 
+
+.informacao-valor.preco {
+    color: #164b7a;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
 
 
 /* =========================================================
@@ -636,26 +498,23 @@ body::after {
    ========================================================= */
 
 .acoes-produto {
-
     width: 100%;
 
     display: flex;
 
     align-items: center;
 
-    gap: 0;
+    gap: 8px;
 
     margin-top: 30px;
 
     padding-top: 25px;
 
-    border-top:
-        1px solid rgba(255, 255, 255, 0.10);
+    border-top: 1px solid #e2e8f0;
 }
 
 
 .acao {
-
     min-height: 42px;
 
     display: inline-flex;
@@ -664,15 +523,17 @@ body::after {
 
     justify-content: center;
 
-    gap: 9px;
+    gap: 8px;
 
-    padding: 8px 22px;
+    padding: 9px 18px;
 
-    color: #00dce5;
+    background: #ffffff;
 
-    background: transparent;
+    border: 1px solid #d5dee8;
 
-    border: none;
+    border-radius: 8px;
+
+    color: #164b7a;
 
     text-decoration: none;
 
@@ -681,28 +542,48 @@ body::after {
     font-weight: 600;
 
     transition:
-        0.3s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
 .acao:hover {
+    background: #f1f5f9;
 
-    color: #ffffff;
+    border-color: #164b7a;
 
-    transform:
-        translateY(-2px);
+    color: #102d4a;
+
+    transform: translateY(-1px);
 }
 
 
 .acao.principal {
+    background: #164b7a;
 
-    color: #00dce5;
+    border-color: #164b7a;
+
+    color: #ffffff;
+}
+
+
+.acao.principal:hover {
+    background: #0d5ca8;
+
+    border-color: #0d5ca8;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 12px rgba(22, 75, 122, 0.20);
 }
 
 
 .acao-icone {
-
-    font-size: 22px;
+    font-size: 20px;
 
     font-weight: 400;
 
@@ -711,16 +592,12 @@ body::after {
 
 
 .espacador {
-
     flex: 1;
 
     height: 28px;
 
-    border-left:
-        1px solid
-        rgba(255, 255, 255, 0.18);
+    border-left: 1px solid #dbe2ea;
 }
-
 
 
 /* =========================================================
@@ -728,26 +605,22 @@ body::after {
    ========================================================= */
 
 .rodape {
-
     width: 100%;
 
     padding: 25px 20px;
 
     text-align: center;
 
-    background:
-        rgba(0, 0, 0, 0.12);
+    background: #ffffff;
 
-    border-top:
-        1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid #e2e8f0;
 
-    color: #90a4ae;
+    color: #64748b;
 
     font-size: 13px;
 
     line-height: 1.8;
 }
-
 
 
 /* =========================================================
@@ -757,34 +630,27 @@ body::after {
 @media (max-width: 1000px) {
 
     .produto-detalhe {
-
-        grid-template-columns:
-            320px 1fr;
+        grid-template-columns: 320px minmax(0, 1fr);
 
         gap: 30px;
     }
 
 
     .imagem-container {
-
         height: 350px;
     }
 
 
     .informacoes-produto h1 {
-
         font-size: 32px;
     }
 
 
     .informacao {
-
-        grid-template-columns:
-            180px 1fr;
+        grid-template-columns: 180px minmax(0, 1fr);
     }
 
 }
-
 
 
 /* =========================================================
@@ -794,7 +660,6 @@ body::after {
 @media (max-width: 750px) {
 
     .topo {
-
         flex-wrap: wrap;
 
         padding: 12px 4%;
@@ -804,41 +669,33 @@ body::after {
 
 
     .titulo-topo {
-
         display: none;
     }
 
 
     .acoes-topo {
-
         margin-left: auto;
     }
 
 
     .botao-topo {
-
         display: none;
     }
 
 
     .carrinho {
-
-        padding:
-            8px 12px;
+        padding: 8px 12px;
     }
 
 
     .container {
-
         width: 92%;
 
-        margin:
-            25px auto 35px;
+        margin: 25px auto 35px;
     }
 
 
     .detalhe-card {
-
         padding: 20px;
 
         border-radius: 12px;
@@ -846,7 +703,6 @@ body::after {
 
 
     .produto-detalhe {
-
         grid-template-columns: 1fr;
 
         gap: 25px;
@@ -854,13 +710,11 @@ body::after {
 
 
     .imagem-container {
-
         height: 320px;
     }
 
 
     .informacoes-produto h1 {
-
         font-size: 28px;
 
         margin-bottom: 20px;
@@ -868,26 +722,20 @@ body::after {
 
 
     .informacao {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
 
     .informacao-label {
-
         min-height: 45px;
 
         border-right: none;
 
-        border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.10);
+        border-bottom: 1px solid #e2e8f0;
     }
 
 
     .informacao-valor {
-
         min-height: 55px;
 
         display: flex;
@@ -897,44 +745,36 @@ body::after {
 
 
     .acoes-produto {
-
         flex-direction: column;
 
         align-items: stretch;
 
-        gap: 5px;
+        gap: 7px;
     }
 
 
     .acao {
-
         width: 100%;
 
         justify-content: flex-start;
 
-        padding:
-            12px 8px;
+        padding: 12px;
     }
 
 
     .espacador {
-
         width: 100%;
 
         height: 1px;
 
         border-left: none;
 
-        border-top:
-            1px solid
-            rgba(255, 255, 255, 0.15);
+        border-top: 1px solid #e2e8f0;
 
-        margin:
-            8px 0;
+        margin: 8px 0;
     }
 
 }
-
 
 
 /* =========================================================
@@ -944,32 +784,32 @@ body::after {
 @media (max-width: 400px) {
 
     .logo {
-
         font-size: 21px;
     }
 
 
     .imagem-container {
-
         height: 260px;
     }
 
 
     .informacoes-produto h1 {
-
         font-size: 24px;
     }
 
 
     .informacao-valor {
-
         font-size: 18px;
     }
 
 
     .informacao-valor.preco {
-
         font-size: 21px;
+    }
+
+
+    .detalhe-card {
+        padding: 16px;
     }
 
 }

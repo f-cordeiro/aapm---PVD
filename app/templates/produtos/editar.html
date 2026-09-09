@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Editar produto | Administração</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/produtos-css/form.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         FLUIDOS DO BACKGROUND
+    ====================================================== -->
+
+    <div class="fluidos">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="topo">
+
+        <div class="logo">
+            AAPM
+        </div>
+
+
+        <div class="titulo-topo">
+            Administração de produtos
+        </div>
+
+
+        <a
+            href="/produtos/form"
+            class="voltar"
+        >
+            ← Voltar
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <section class="titulo-pagina">
+
+            <h1>
+                Editar produto
+            </h1>
+
+            <p>
+                Altere as informações do produto abaixo.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FORMULÁRIO
+        ================================================== -->
+
+        <div
+            class="modal ativo"
+            style="position: relative; display: flex; min-height: auto; padding: 30px 0; background: transparent;"
+        >
+
+            <div class="modal-card">
+
+
+                <!-- =================================================
+                     CABEÇALHO DO FORMULÁRIO
+                ================================================== -->
+
+                <div class="form-header">
+
+                    <h2>
+                        Editar produto
+                    </h2>
+
+                    <p>
+                        Atualize os dados de
+                        <strong>{{ produto.nome }}</strong>.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ERRO
+                ================================================== -->
+
+                {% if erro %}
+
+                <div class="alert erro">
+
+                    {{ erro }}
+
+                </div>
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                     FORMULÁRIO
+                ================================================== -->
+
+                <form
+                    method="POST"
+                    action="/produtos/{{ produto.id }}/editar"
+                    enctype="multipart/form-data"
+                    class="form-container"
+                >
+
+
+                    <!-- =================================================
+                         NOME
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome do produto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            class="form-input"
+                            value="{{ produto.nome }}"
+                            placeholder="Digite o nome do produto"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         CATEGORIA + PREÇO
+                    ================================================== -->
+
+                    <div class="form-row">
+
+
+                        <!-- CATEGORIA -->
+
+                        <div class="form-group">
+
+                            <label for="categoria">
+                                Categoria
+                            </label>
+
+                            <select
+                                id="categoria"
+                                name="categoria_id"
+                                class="form-input"
+                            >
+
+                                <option value="0">
+                                    Sem categoria
+                                </option>
+
+
+                                {% for categoria in categorias %}
+
+                                <option
+                                    value="{{ categoria.id }}"
+                                    {% if produto.categoria_id == categoria.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {{ categoria.nome }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- PREÇO -->
+
+                        <div class="form-group">
+
+                            <label for="preco">
+                                Preço
+                            </label>
+
+                            <input
+                                type="number"
+                                id="preco"
+                                name="preco"
+                                class="form-input"
+                                step="0.01"
+                                min="0"
+                                value="{{ produto.preco }}"
+                                placeholder="0,00"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         ESTOQUE
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="estoque">
+
+                            Quantidade em estoque
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="estoque"
+                            name="estoque_atual"
+                            class="form-input"
+                            min="0"
+                            value="{{ produto.estoque_atual }}"
+                            placeholder="Digite a quantidade disponível"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         IMAGEM
+                    ================================================== -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Imagem do produto
+                        </label>
+
+
+                        <div class="imagem-preview">
+
+                            {% if produto.imagem_path %}
+
+                            <img
+                                id="previewImagem"
+                                src="/static/{{ produto.imagem_path }}"
+                                alt="{{ produto.nome }}"
+                            >
+
+                            {% else %}
+
+                            <img
+                                id="previewImagem"
+                                src="/static/uploads/produto-generico.png"
+                                alt="Imagem padrão"
+                            >
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <label
+                            for="imagem"
+                            class="btn-imagem"
+                        >
+
+                            📷 Escolher nova imagem
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="imagem"
+                            name="imagem"
+                            accept="image/png, image/jpeg, image/webp"
+                            hidden
+                        >
+
+
+                        <small class="imagem-info">
+
+                            Selecione uma nova imagem apenas se quiser
+                            substituir a atual.
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         BOTÕES
+                    ================================================== -->
+
+                    <div class="acoes-form">
+
+
+                        <a
+                            href="/produtos/form"
+                            class="btn-cancelar"
+                        >
+
+                            Cancelar
+
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="btn-salvar"
+                        >
+
+                            ✓ Salvar alterações
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =====================================================
+           PREVIEW DA IMAGEM
+        ===================================================== */
+
+        const inputImagem =
+            document.getElementById("imagem");
+
+
+        const previewImagem =
+            document.getElementById("previewImagem");
+
+
+        if (inputImagem && previewImagem) {
+
+            inputImagem.addEventListener(
+                "change",
+                function () {
+
+                    const arquivo =
+                        this.files[0];
+
+
+                    if (!arquivo) {
+                        return;
+                    }
+
+
+                    const leitor =
+                        new FileReader();
+
+
+                    leitor.onload =
+                        function (evento) {
+
+                            previewImagem.src =
+                                evento.target.result;
+
+                        };
+
+
+                    leitor.readAsDataURL(arquivo);
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
