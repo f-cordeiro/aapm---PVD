@@ -1,48 +1,391 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>{{ produto.nome }} — AAPM SENAI</title>
-    <link rel="stylesheet" href="/static/detalhe.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ produto.nome }} | Produtos</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/produtos-css/detalhe.css"
+    >
+
 </head>
+
+
 <body>
-    {% if request.query_params.get('editado') == 'ok' %}
-        <p style="color:green">Produto atualizado com sucesso!</p>
-    {% endif %}
 
-    <img src="{{ produto.imagem_url }}"
-         alt="{{ produto.nome }}"
-         width="200"
-         style="object-fit:cover">
 
-    <h1>{{ produto.nome }}</h1>
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
-    <p>Categoria: {{ produto.categoria.nome if produto.categoria else "—" }}</p>
+    <header class="topo">
 
-    <table border="1" cellpadding="8">
-        <tr><td><strong>Preço</strong></td>
-            <td>R$ {{ "%.2f"|format(produto.preco) }}</td></tr>
-        <tr><td><strong>Estoque atual</strong></td>
-            <td>{{ produto.estoque_atual }}</td></tr>
-    </table>
+        <div class="logo">
+            AAPM
+        </div>
 
-    {% if request.query_params.get('movimentacao') == 'ok' %}
-        <p style="color:green">Movimentação registrada com sucesso!</p>
-    {% endif %}
 
-    <!-- Links de movimentação -->
-    <a href="/movimentacoes/nova?produto_id={{ produto.id }}">
-        + Registrar movimentação
-    </a>
-    &nbsp;|&nbsp;
-    <a href="/movimentacoes/produto/{{ produto.id }}">
-        Ver histórico completo
-    </a>
+        <div class="titulo-topo">
+            Produtos
+        </div>
 
-    {% if usuario.role == 'admin' %}
-        <a href="/produtos/{{ produto.id }}/editar">Editar</a>
-    {% endif %}
 
-    <a href="/produtos">← Voltar</a>
+        <div class="acoes-topo">
+
+            <a
+                href="/produtos/"
+                class="botao-topo"
+            >
+                🛍 Produtos
+            </a>
+
+
+            <a
+                href="/produtos/novo"
+                class="botao-topo"
+            >
+                ⚙ Administração
+            </a>
+
+
+            <a
+                href="#"
+                class="carrinho"
+            >
+                🛒
+                <span>Carrinho</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             CAMINHO
+        ================================================== -->
+
+        <div class="breadcrumb">
+
+            <a href="/produtos/">
+                Produtos
+            </a>
+
+            <span>›</span>
+
+            <span>
+                {{ produto.nome }}
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CARD PRINCIPAL
+        ================================================== -->
+
+        <section class="detalhe-card">
+
+
+            <!-- =================================================
+                 MENSAGEM DE PRODUTO ATUALIZADO
+            ================================================== -->
+
+            {% if request.query_params.get('editado') == 'ok' %}
+
+            <div class="alerta sucesso">
+
+                <span class="alerta-icone">
+                    ✓
+                </span>
+
+                <span>
+                    Produto atualizado com sucesso!
+                </span>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 INFORMAÇÕES DO PRODUTO
+            ================================================== -->
+
+            <div class="produto-detalhe">
+
+
+                <!-- =================================================
+                     IMAGEM
+                ================================================== -->
+
+                <div class="imagem-container">
+
+                    {% if produto.imagem_path %}
+
+                        <img
+                            src="/static/{{ produto.imagem_path }}"
+                            alt="{{ produto.nome }}"
+                            class="imagem-produto"
+                        >
+
+                    {% else %}
+
+                        <img
+                            src="/static/uploads/produto-generico.png"
+                            alt="Imagem padrão"
+                            class="imagem-produto"
+                        >
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INFORMAÇÕES
+                ================================================== -->
+
+                <div class="informacoes-produto">
+
+
+                    {% if produto.categoria %}
+
+                    <div class="categoria">
+
+                        {{ produto.categoria.nome }}
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="categoria">
+                        Sem categoria
+                    </div>
+
+                    {% endif %}
+
+
+
+                    <h1>
+                        {{ produto.nome }}
+                    </h1>
+
+
+
+                    <!-- =================================================
+                         TABELA DE INFORMAÇÕES
+                    ================================================== -->
+
+                    <div class="informacoes-card">
+
+
+                        <div class="informacao">
+
+                            <div class="informacao-label">
+                                Preço
+                            </div>
+
+                            <div class="informacao-valor preco">
+
+                                R$
+                                {{ "%.2f"|format(produto.preco) }}
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="informacao">
+
+                            <div class="informacao-label">
+                                Estoque atual
+                            </div>
+
+                            <div class="informacao-valor">
+
+                                {{ produto.estoque_atual }}
+
+                                {% if produto.estoque_atual == 1 %}
+                                    unidade
+                                {% else %}
+                                    unidades
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MENSAGEM DE MOVIMENTAÇÃO
+            ================================================== -->
+
+            {% if request.query_params.get('movimentacao') == 'ok' %}
+
+            <div class="alerta sucesso">
+
+                <span class="alerta-icone">
+                    ✓
+                </span>
+
+                <span>
+                    Movimentação registrada com sucesso!
+                </span>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 AÇÕES DO PRODUTO
+            ================================================== -->
+
+            <div class="acoes-produto">
+
+
+                <!-- REGISTRAR MOVIMENTAÇÃO -->
+
+                <a
+                    href="/movimentacoes/nova?produto_id={{ produto.id }}"
+                    class="acao principal"
+                >
+
+                    <span class="acao-icone">
+                        ＋
+                    </span>
+
+                    <span>
+                        Registrar movimentação
+                    </span>
+
+                </a>
+
+
+
+                <!-- HISTÓRICO -->
+
+                <a
+                    href="/movimentacoes/produto/{{ produto.id }}"
+                    class="acao"
+                >
+
+                    <span class="acao-icone">
+                        ↻
+                    </span>
+
+                    <span>
+                        Ver histórico completo
+                    </span>
+
+                </a>
+
+
+
+                <!-- ESPAÇADOR -->
+
+                <div class="espacador"></div>
+
+
+
+                <!-- EDITAR -->
+
+                {% if usuario.role == 'admin' %}
+
+                <a
+                    href="/produtos/{{ produto.id }}/editar"
+                    class="acao"
+                >
+
+                    <span class="acao-icone">
+                        ✎
+                    </span>
+
+                    <span>
+                        Editar
+                    </span>
+
+                </a>
+
+                {% endif %}
+
+
+
+                <!-- VOLTAR -->
+
+                <a
+                    href="/produtos/"
+                    class="acao"
+                >
+
+                    <span class="acao-icone">
+                        ←
+                    </span>
+
+                    <span>
+                        Voltar
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer class="rodape">
+
+        <p>
+            © 2026 AAPM - Sistema de Produtos
+        </p>
+
+        <p>
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
 </body>
 </html>

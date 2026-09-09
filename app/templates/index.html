@@ -1,90 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo - AAPM</title>
-    <!-- O ?v=100 força o navegador a ignorar o cache antigo do CSS -->
-    <link rel="stylesheet" href="/static/index.css?v=100">
-</head>
-
+    <title>Bem-Vindo - AAPM</title>
+    
 <body>
+    <h1> Sistema da AAPM</h1>
+    <p> Faça login para acesar o sistema</p>
 
-    <canvas id="bg-canvas"></canvas>
+    <a href="/auth/login"> Entrar</a>
+    <br><br>
 
-    <div class="login-container">
-        <div class="logo-icon">A</div>
-
-        <h1 class="title">Sistema da AAPM</h1>
-        <p class="subtitle">Faça login para acessar o sistema</p>
-
-        <div class="button-group">
-            <a href="/auth/login" class="btn-login">Entrar</a>
-        </div>
-
-        <div class="footer">
-            &copy; 2026 AAPM. Todos os direitos reservados.
-        </div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const particles = [];
-        const colors = [
-            'rgba(0, 173, 181, 0.25)', 
-            'rgba(32, 58, 68, 0.5)', 
-            'rgba(0, 196, 206, 0.2)',
-            'rgba(44, 83, 100, 0.4)'
-        ];
-
-        for (let i = 0; i < 18; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 140 + 100,
-                vx: (Math.random() - 0.5) * 0.8,
-                vy: (Math.random() - 0.5) * 0.8,
-                color: colors[Math.floor(Math.random() * colors.length)]
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < -p.radius) p.x = canvas.width + p.radius;
-                if (p.x > canvas.width + p.radius) p.x = -p.radius;
-                if (p.y < -p.radius) p.y = canvas.height + p.radius;
-                if (p.y > canvas.height + p.radius) p.y = -p.radius;
-
-                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-                gradient.addColorStop(0, p.color);
-                gradient.addColorStop(1, 'transparent');
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
+    
 </body>
-
 </html>
