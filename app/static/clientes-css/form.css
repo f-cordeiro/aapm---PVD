@@ -1,0 +1,552 @@
+/* ============================================================
+   FORMULÁRIO DE CLIENTES — AAPM SENAI
+   ============================================================ */
+
+:root {
+    --azul: #164b7a;
+    --azul-escuro: #102d4a;
+    --azul-hover: #0d5ca8;
+
+    --fundo: #f5f7fa;
+    --branco: #ffffff;
+
+    --texto: #172033;
+    --texto-secundario: #64748b;
+
+    --borda: #e2e8f0;
+
+    --verde: #16a34a;
+    --verde-fundo: #dcfce7;
+
+    --vermelho: #dc2626;
+    --vermelho-fundo: #fee2e2;
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f7fa 0%,
+            #edf3f8 100%
+        );
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--texto);
+}
+
+
+/* ============================================================
+   TOPO
+   ============================================================ */
+
+.topo {
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 40px;
+
+    background: var(--azul-escuro);
+
+    color: white;
+
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+.logo {
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.titulo-topo {
+    margin-left: 28px;
+
+    padding-left: 28px;
+
+    border-left:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+
+.voltar {
+    margin-left: auto;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.voltar:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+    width: min(720px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding: 50px 0;
+
+    flex: 1;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.form-card {
+    background: white;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 16px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.07);
+}
+
+
+/* ============================================================
+   CABEÇALHO DO FORM
+   ============================================================ */
+
+.form-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 30px;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid var(--borda);
+}
+
+
+.icone-form {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #e8f1f8;
+
+    color: var(--azul);
+
+    font-size: 24px;
+}
+
+
+.form-header h1 {
+    color: var(--azul-escuro);
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+}
+
+
+.form-header p {
+    color: var(--texto-secundario);
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   ALERTA
+   ============================================================ */
+
+.alerta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.alerta.erro {
+    background: var(--vermelho-fundo);
+
+    color: #991b1b;
+
+    border:
+        1px solid #fecaca;
+}
+
+
+/* ============================================================
+   FORMULÁRIO
+   ============================================================ */
+
+.formulario {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.campo label {
+    color: var(--texto);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.campo label span {
+    color: var(--texto-secundario);
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    margin-left: 4px;
+}
+
+
+.campo input {
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 14px;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: var(--texto);
+
+    background: white;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+
+.campo input::placeholder {
+    color: #94a3b8;
+}
+
+
+.campo input:focus {
+    border-color: var(--azul);
+
+    box-shadow:
+        0 0 0 3px rgba(22, 75, 122, 0.1);
+}
+
+
+/* ============================================================
+   ASSOCIADO
+   ============================================================ */
+
+.associado-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.associado-box:hover {
+    border-color: #bfd0df;
+
+    background: #f4f8fb;
+}
+
+
+.associado-box input {
+    width: 19px;
+    height: 19px;
+
+    flex-shrink: 0;
+
+    accent-color: var(--azul);
+
+    cursor: pointer;
+}
+
+
+.associado-box strong {
+    display: block;
+
+    color: var(--azul-escuro);
+
+    font-size: 14px;
+
+    margin-bottom: 4px;
+}
+
+
+.associado-box span {
+    display: block;
+
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.acoes-form {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 10px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid var(--borda);
+}
+
+
+.btn-cancelar,
+.btn-salvar {
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.btn-cancelar {
+    color: var(--texto);
+
+    background: white;
+
+    border:
+        1px solid var(--borda);
+}
+
+
+.btn-cancelar:hover {
+    background: var(--fundo);
+}
+
+
+.btn-salvar {
+    border: none;
+
+    background: var(--azul);
+
+    color: white;
+}
+
+
+.btn-salvar:hover {
+    background: var(--azul-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(22, 75, 122, 0.2);
+}
+
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+
+.rodape {
+    padding: 20px;
+
+    text-align: center;
+
+    border-top:
+        1px solid var(--borda);
+
+    background: white;
+
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .topo {
+        height: auto;
+
+        min-height: 70px;
+
+        padding: 15px 20px;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+    }
+
+
+    .titulo-topo {
+        width: 100%;
+
+        order: 3;
+
+        margin: 0;
+
+        padding: 0;
+
+        border: none;
+
+        font-size: 14px;
+    }
+
+
+    .container {
+        width: calc(100% - 25px);
+
+        padding: 25px 0;
+    }
+
+
+    .form-card {
+        padding: 25px 20px;
+    }
+
+
+    .acoes-form {
+        flex-direction: column-reverse;
+    }
+
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+
+}

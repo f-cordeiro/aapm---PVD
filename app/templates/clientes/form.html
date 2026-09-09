@@ -1,47 +1,296 @@
-<!-- template/clientes/form.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta charset="UTF-8">
-<title>{{ "Editar" if editando else "Novo" }} Cliente — AAPM SENAI</title>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ "Editar cliente" if editando else "Novo cliente" }}
+        | AAPM SENAI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/clientes-css/form.css"
+    >
+
 </head>
+
+
 <body>
-    <h1>{{ "Editar cliente" if editando else "Novo cliente" }}</h1>
 
-    {% if erro %}<p style="color:red">{{ erro }}</p>{% endif %}
-    {% if request.query_params.get('erro') == 'matricula' %}
-        <p style="color:red">Esta matrícula já está em uso.</p>
-    {% endif %}
 
-    <form action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
-          method="post">
+    <!-- =====================================================
+         TOPO
+    ====================================================== -->
 
-        <label>Nome completo:
-            <input type="text" name="nome" required autofocus
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}">
-        </label><br>
+    <header class="topo">
 
-        <label>Matrícula SENAI (opcional):
-            <input type="text" name="matricula"
-                   placeholder="Ex: 2024001"
-                   value="{{ editando.matricula if editando else (valores.matricula if valores else '') }}">
-        </label><br>
+        <div class="logo">
+            AAPM
+        </div>
 
-        <label>Telefone (opcional):
-            <input type="text" name="telefone"
-                   placeholder="Ex: (11) 99999-9999"
-                   value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}">
-        </label><br>
+        <div class="titulo-topo">
+            {{ "Editar cliente" if editando else "Novo cliente" }}
+        </div>
 
-        <label>
-            <input type="checkbox" name="is_associado" value="true"
-                {{ 'checked' if (editando and editando.is_associado) or (valores and valores.is_associado) }}>
-            É associado AAPM (recebe 10% de desconto)
-        </label><br><br>
+        <a
+            href="/clientes/"
+            class="voltar"
+        >
+            ← Clientes
+        </a>
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
-        </button>
-        <a href="/clientes">Cancelar</a>
-    </form>
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <div class="form-card">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="form-header">
+
+                <div class="icone-form">
+                    {% if editando %}
+                        ✎
+                    {% else %}
+                        👤
+                    {% endif %}
+                </div>
+
+                <div>
+
+                    <h1>
+                        {{ "Editar cliente" if editando else "Novo cliente" }}
+                    </h1>
+
+                    <p>
+                        {% if editando %}
+                            Atualize os dados do cliente abaixo.
+                        {% else %}
+                            Cadastre um novo cliente ou associado.
+                        {% endif %}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ERRO -->
+
+            {% if erro %}
+
+            <div class="alerta erro">
+
+                <span>
+                    ⚠
+                </span>
+
+                {{ erro }}
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if request.query_params.get('erro') == 'matricula' %}
+
+            <div class="alerta erro">
+
+                <span>
+                    ⚠
+                </span>
+
+                Esta matrícula já está em uso.
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+            ================================================== -->
+
+            <form
+                action="{% if editando %}/clientes/{{ editando.id }}/editar{% else %}/clientes/novo{% endif %}"
+                method="post"
+                class="formulario"
+            >
+
+
+                <!-- NOME -->
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome completo"
+                        required
+                        autofocus
+                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                    >
+
+                </div>
+
+
+
+                <!-- MATRÍCULA -->
+
+                <div class="campo">
+
+                    <label for="matricula">
+
+                        Matrícula SENAI
+
+                        <span>
+                            opcional
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="matricula"
+                        name="matricula"
+                        placeholder="Ex: 2024001"
+                        value="{{ editando.matricula if editando else (valores.matricula if valores else '') }}"
+                    >
+
+                </div>
+
+
+
+                <!-- TELEFONE -->
+
+                <div class="campo">
+
+                    <label for="telefone">
+
+                        Telefone
+
+                        <span>
+                            opcional
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Ex: (11) 99999-9999"
+                        value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}"
+                    >
+
+                </div>
+
+
+
+                <!-- ASSOCIADO -->
+
+                <label class="associado-box">
+
+                    <input
+                        type="checkbox"
+                        name="is_associado"
+                        value="true"
+                        {% if (editando and editando.is_associado) or (valores and valores.is_associado) %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <div>
+
+                        <strong>
+                            É associado AAPM
+                        </strong>
+
+                        <span>
+                            O associado recebe 10% de desconto
+                            nas compras.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+
+                <!-- BOTÕES -->
+
+                <div class="acoes-form">
+
+                    <a
+                        href="/clientes/"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+
+                        {% if editando %}
+                            ✓ Salvar alterações
+                        {% else %}
+                            ✓ Cadastrar cliente
+                        {% endif %}
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer class="rodape">
+
+        © 2026 AAPM SENAI — Sistema de gerenciamento
+
+    </footer>
+
+
 </body>
+
 </html>

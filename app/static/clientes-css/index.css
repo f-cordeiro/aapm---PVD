@@ -1,0 +1,995 @@
+/* ============================================================
+   CLIENTES — AAPM SENAI
+   ============================================================ */
+
+:root {
+    --azul: #164b7a;
+    --azul-escuro: #102d4a;
+    --azul-hover: #0d5ca8;
+
+    --fundo: #f5f7fa;
+    --branco: #ffffff;
+
+    --texto: #172033;
+    --texto-secundario: #64748b;
+
+    --borda: #e2e8f0;
+
+    --verde: #16a34a;
+    --verde-fundo: #dcfce7;
+
+    --vermelho: #dc2626;
+    --vermelho-fundo: #fee2e2;
+
+    --azul-fundo: #e8f1f8;
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: 
+        linear-gradient(
+            135deg,
+            #f5f7fa 0%,
+            #edf3f8 100%
+        );
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--texto);
+}
+
+
+/* ============================================================
+   TOPO
+   ============================================================ */
+
+.topo {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 40px;
+
+    background: var(--azul-escuro);
+
+    color: white;
+
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.12);
+
+    position: relative;
+    z-index: 10;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+.titulo-topo {
+    margin-left: 28px;
+
+    padding-left: 28px;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.voltar {
+    margin-left: auto;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+
+.voltar:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+    width: min(1400px, calc(100% - 60px));
+
+    flex: 1;
+
+    margin: 0 auto;
+
+    padding: 45px 0 50px;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+.titulo-pagina {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+
+.titulo-pagina h1 {
+    font-size: 30px;
+
+    color: var(--azul-escuro);
+
+    margin-bottom: 8px;
+}
+
+
+.titulo-pagina p {
+    color: var(--texto-secundario);
+
+    font-size: 15px;
+}
+
+
+/* ============================================================
+   BOTÃO NOVO
+   ============================================================ */
+
+.btn-novo {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 13px 20px;
+
+    border-radius: 9px;
+
+    background: var(--azul);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.btn-novo:hover {
+    background: var(--azul-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(22, 75, 122, 0.22);
+}
+
+
+/* ============================================================
+   ALERTAS
+   ============================================================ */
+
+.alerta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 18px;
+
+    margin-bottom: 25px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+}
+
+
+.alerta.sucesso {
+    background: var(--verde-fundo);
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+.alerta-icone {
+    font-size: 18px;
+}
+
+
+/* ============================================================
+   RESUMO
+   ============================================================ */
+
+.resumo {
+    margin-bottom: 25px;
+}
+
+
+.resumo-card {
+    width: 260px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    background: white;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.05);
+}
+
+
+.resumo-icone {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--azul-fundo);
+
+    border-radius: 10px;
+
+    font-size: 22px;
+}
+
+
+.resumo-card span {
+    display: block;
+
+    color: var(--texto-secundario);
+
+    font-size: 13px;
+
+    margin-bottom: 4px;
+}
+
+
+.resumo-card strong {
+    font-size: 23px;
+
+    color: var(--azul-escuro);
+}
+
+
+/* ============================================================
+   FILTROS
+   ============================================================ */
+
+.filtros {
+    background: white;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+
+.filtro-form {
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+}
+
+
+.campo-busca {
+    flex: 1;
+
+    min-width: 280px;
+}
+
+
+.campo-busca label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--texto);
+}
+
+
+.campo-busca input {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: var(--texto);
+
+    transition: 0.2s;
+}
+
+
+.campo-busca input:focus {
+    border-color: var(--azul);
+
+    box-shadow:
+        0 0 0 3px rgba(22, 75, 122, 0.1);
+}
+
+
+/* ============================================================
+   CHECKBOX
+   ============================================================ */
+
+.checkbox-associado {
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+
+.checkbox-associado input {
+    width: 16px;
+    height: 16px;
+
+    accent-color: var(--azul);
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   BOTÕES DE FILTRO
+   ============================================================ */
+
+.btn-filtrar,
+.btn-limpar {
+    height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+
+.btn-filtrar {
+    border: none;
+
+    background: var(--azul);
+
+    color: white;
+}
+
+
+.btn-filtrar:hover {
+    background: var(--azul-hover);
+}
+
+
+.btn-limpar {
+    border: 1px solid var(--borda);
+
+    color: var(--texto);
+
+    background: white;
+}
+
+
+.btn-limpar:hover {
+    background: var(--fundo);
+}
+
+
+/* ============================================================
+   TABELA
+   ============================================================ */
+
+.tabela-card {
+    background: white;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+
+.tabela-topo {
+    padding: 20px 24px;
+
+    border-bottom: 1px solid var(--borda);
+}
+
+
+.tabela-topo h2 {
+    color: var(--azul-escuro);
+
+    font-size: 18px;
+
+    margin-bottom: 4px;
+}
+
+
+.tabela-topo span {
+    color: var(--texto-secundario);
+
+    font-size: 13px;
+}
+
+
+.tabela-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 950px;
+}
+
+
+thead {
+    background: #f8fafc;
+}
+
+
+th {
+    padding: 15px 20px;
+
+    text-align: left;
+
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+    font-weight: 700;
+
+    border-bottom: 1px solid var(--borda);
+}
+
+
+td {
+    padding: 15px 20px;
+
+    border-bottom: 1px solid #eef2f7;
+
+    font-size: 14px;
+
+    vertical-align: middle;
+}
+
+
+tbody tr {
+    transition: background 0.15s;
+}
+
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================================================
+   CLIENTE
+   ============================================================ */
+
+.cliente-nome {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--azul-fundo);
+
+    color: var(--azul);
+
+    font-weight: 800;
+
+    font-size: 16px;
+}
+
+
+.cliente-nome strong {
+    display: block;
+
+    color: var(--texto);
+
+    margin-bottom: 3px;
+}
+
+
+.cliente-nome small {
+    display: block;
+
+    color: var(--texto-secundario);
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   MATRÍCULA
+   ============================================================ */
+
+.matricula {
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: #f1f5f9;
+
+    color: var(--texto);
+
+    font-family: monospace;
+
+    font-size: 13px;
+}
+
+
+.sem-dado {
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.badge.associado {
+    background: var(--verde-fundo);
+
+    color: #166534;
+}
+
+
+.badge.comum {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+.badge.ativo {
+    background: var(--verde-fundo);
+
+    color: #166534;
+}
+
+
+.badge.inativo {
+    background: var(--vermelho-fundo);
+
+    color: #991b1b;
+}
+
+
+.desconto {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--verde);
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   AÇÕES
+   ============================================================ */
+
+.acoes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.acoes form {
+    margin: 0;
+}
+
+
+.btn-editar,
+.btn-desativar,
+.btn-ativar {
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 0 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.btn-editar {
+    background: var(--azul-fundo);
+
+    color: var(--azul);
+
+    border: 1px solid #cbddea;
+}
+
+
+.btn-editar:hover {
+    background: #dbeaf5;
+}
+
+
+.btn-desativar {
+    background: var(--vermelho-fundo);
+
+    color: var(--vermelho);
+
+    border: 1px solid #fecaca;
+}
+
+
+.btn-desativar:hover {
+    background: #fecaca;
+}
+
+
+.btn-ativar {
+    background: var(--verde-fundo);
+
+    color: var(--verde);
+
+    border: 1px solid #bbf7d0;
+}
+
+
+.btn-ativar:hover {
+    background: #bbf7d0;
+}
+
+
+/* ============================================================
+   NENHUM CLIENTE
+   ============================================================ */
+
+.nenhum-cliente {
+    text-align: center;
+
+    padding: 70px 20px !important;
+}
+
+
+.vazio-icone {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+
+.nenhum-cliente h3 {
+    color: var(--azul-escuro);
+
+    margin-bottom: 7px;
+}
+
+
+.nenhum-cliente p {
+    color: var(--texto-secundario);
+
+    margin-bottom: 20px;
+}
+
+
+.btn-novo-vazio {
+    display: inline-flex;
+
+    padding: 10px 16px;
+
+    background: var(--azul);
+
+    color: white;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+
+.rodape {
+    padding: 20px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border-top: 1px solid var(--borda);
+
+    background: white;
+
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+    .topo {
+        padding: 0 20px;
+    }
+
+    .titulo-topo {
+        margin-left: 15px;
+        padding-left: 15px;
+    }
+
+    .container {
+        width: calc(100% - 25px);
+
+        padding: 25px 0;
+    }
+
+    .titulo-pagina {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .btn-novo {
+        width: 100%;
+    }
+
+    .filtro-form {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .campo-busca {
+        min-width: 0;
+    }
+
+    .checkbox-associado,
+    .btn-filtrar,
+    .btn-limpar {
+        width: 100%;
+    }
+
+    .rodape {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 40px;
+
+    border-top: 1px solid var(--borda);
+
+    color: var(--texto-secundario);
+
+    font-size: 12px;
+
+    background: white;
+
+    text-align: center;
+}
+}
+
+
+@media (max-width: 550px) {
+
+    .topo {
+        height: auto;
+
+        min-height: 70px;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+        padding: 15px 20px;
+    }
+
+    .titulo-topo {
+        border: none;
+
+        margin: 0;
+
+        padding: 0;
+
+        width: 100%;
+
+        order: 3;
+
+        font-size: 14px;
+    }
+
+    .voltar {
+        font-size: 13px;
+    }
+
+}
