@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Movimentação — AAPM SENAI</title>
+{% extends "base.html" %}
+
+{% block title %}Nova Movimentação — AAPM SENAI{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="/static/form_move.css">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <div class="container">
         <h1 class="title">Registrar movimentação</h1>
 
@@ -94,6 +94,22 @@
         </form>
     </div>
 
+    <!-- Modal de Confirmação em estilo SENAI -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon">⚠️</div>
+            <h3 class="modal-title">Confirmar Movimentação</h3>
+            <p class="modal-text">Deseja realmente registrar esta movimentação de estoque?</p>
+
+            <div class="modal-actions">
+                <button type="button" id="btnCancel" class="btn-cancel">Cancelar</button>
+                <button type="button" id="btnConfirm" class="btn-confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
     <script>
         const selectProduto  = document.getElementById('select-produto');
         const inputQuantidade = document.getElementById('input-quantidade');
@@ -139,21 +155,4 @@
         inputQuantidade.addEventListener('input', atualizarSubtotal);
         inputPreco.addEventListener('input', atualizarSubtotal);
     </script>
-
-
-<!-- Modal de Confirmação em estilo SENAI -->
-<div id="confirmModal" class="modal-overlay">
-    <div class="modal-card">
-        <div class="modal-icon">⚠️</div>
-        <h3 class="modal-title">Confirmar Movimentação</h3>
-        <p class="modal-text">Deseja realmente registrar esta movimentação de estoque?</p>
-
-        <div class="modal-actions">
-            <button type="button" id="btnCancel" class="btn-cancel">Cancelar</button>
-            <button type="button" id="btnConfirm" class="btn-confirm">Confirmar</button>
-        </div>
-    </div>
-</div>
-
-</body>
-</html>
+{% endblock %}

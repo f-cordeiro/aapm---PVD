@@ -5,7 +5,6 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from httpx import request
 from sqlalchemy.orm import Session
-
 from app.database import get_db
 from app.models.produto import Produto
 from app.models.categoria import Categoria
