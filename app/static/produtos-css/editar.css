@@ -1,0 +1,153 @@
+/* ============================================================
+   TELA DE EDIÇÃO DE PRODUTO
+   ============================================================ */
+
+/* Mantém o formulário de edição centralizado */
+.container > .modal {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card principal da edição */
+.container > .modal .modal-card {
+    width: min(720px, 100%);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Cabeçalho */
+.container > .modal .form-header {
+    margin-bottom: 25px;
+}
+
+.container > .modal .form-header h2 {
+    margin: 0 0 8px;
+}
+
+.container > .modal .form-header p {
+    margin: 0;
+}
+
+
+/* ============================================================
+   CAMPOS
+   ============================================================ */
+
+.container > .modal .form-container {
+    width: 100%;
+}
+
+.container > .modal .form-group {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container > .modal .form-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   IMAGEM DO PRODUTO
+   ============================================================ */
+
+.container > .modal .imagem-preview {
+    width: 180px;
+    height: 180px;
+    margin: 10px auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.container > .modal .imagem-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* ============================================================
+   BOTÃO DE ESCOLHER IMAGEM
+   ============================================================ */
+
+.container > .modal .btn-imagem {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   ÁREA DOS BOTÕES
+   ============================================================ */
+
+.container > .modal .acoes-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+/* ============================================================
+   BOTÃO CANCELAR
+   ============================================================ */
+
+.container > .modal .btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   BOTÃO SALVAR
+   ============================================================ */
+
+.container > .modal .btn-salvar {
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .container > .modal {
+        padding: 15px 0 !important;
+    }
+
+    .container > .modal .modal-card {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .container > .modal .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .container > .modal .acoes-form {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .container > .modal .btn-cancelar,
+    .container > .modal .btn-salvar {
+        width: 100%;
+    }
+
+}

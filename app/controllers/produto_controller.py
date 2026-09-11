@@ -3,7 +3,6 @@ import shutil
 from fastapi import APIRouter, Depends, Request, Form, UploadFile, File, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
-from httpx import request
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.produto import Produto
@@ -244,30 +243,39 @@ def detalhe_produto(
 # EDIÇÃO
 # ============================================================
 
-@router.get("/{produto_id}/editar")
+@router.get("/{produto_id}/editar", response_class=HTMLResponse)
 def form_editar_produto(
     produto_id: int,
     request: Request,
     db: Session = Depends(get_db),
-    admin = Depends(get_admin)
+    admin=Depends(get_admin)
 ):
-    editando   = db.query(Produto).filter(Produto.id == produto_id).first()
-    categorias = db.query(Categoria).filter(Categoria.ativo == True).all()
+    produto = db.query(Produto).filter(
+        Produto.id == produto_id
+    ).first()
 
-    if not editando:
-        return RedirectResponse(url="/produtos", status_code=302)
+    if not produto:
+        return RedirectResponse(
+            url="/produtos",
+            status_code=302
+        )
+
+    categorias = db.query(Categoria).filter(
+        Categoria.ativo == True
+    ).order_by(
+        Categoria.nome
+    ).all()
 
     return templates.TemplateResponse(
         request,
-        "produtos/form.html",
+        "produtos/editar.html",
         {
-            "request":    request,
-            "usuario":    admin,
-            "editando":   editando,
+            "request": request,
+            "usuario": admin,
+            "produto": produto,
             "categorias": categorias
         }
     )
-
 
 @router.post("/{produto_id}/editar")
 async def editar_produto(

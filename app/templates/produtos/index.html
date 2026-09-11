@@ -10,11 +10,17 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Produtos</title>
+    <title>Produtos | PDV AAPM SENAI</title>
 
     <link
         rel="stylesheet"
         href="/static/produtos-css/index.css"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     >
 
 </head>
@@ -24,85 +30,199 @@
 
 
     <!-- =====================================================
-         CABEÇALHO
+         NAVBAR
     ====================================================== -->
 
-    <header class="topo">
+    <header class="topbar">
 
-        <div class="logo">
-            AAPM
+
+        <!-- LOGO -->
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
+
+            <div>
+                <h1>PDV — AAPM SENAI</h1>
+                <span>Sistema de vendas</span>
+            </div>
+
         </div>
 
 
-        <div class="barra-pesquisa">
 
-            <input
-                type="text"
-                placeholder="Buscar produtos..."
+        <!-- MENU -->
+
+        <nav class="menu">
+
+
+            <a
+                href="/"
+                class="menu-item"
             >
-
-            <button type="button">
-                🔍
-            </button>
-
-        </div>
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
 
 
-        <div class="acoes">
+            <a
+                href="/produtos/"
+                class="menu-item active"
+            >
+                <i class="fa-solid fa-box"></i>
+                Produtos
+            </a>
+
+
+            <a
+                href="/estoque"
+                class="menu-item"
+            >
+                <i class="fa-solid fa-boxes-stacked"></i>
+                Estoque
+            </a>
+
+
+            <a
+                href="/vendas"
+                class="menu-item"
+            >
+                <i class="fa-solid fa-cart-shopping"></i>
+                Vendas
+            </a>
+
+
+            <a
+                href="/clientes"
+                class="menu-item"
+            >
+                <i class="fa-solid fa-users"></i>
+                Clientes
+            </a>
+
+
+            <a
+                href="/relatorios"
+                class="menu-item"
+            >
+                <i class="fa-solid fa-chart-line"></i>
+                Relatórios
+            </a>
+
 
             <a
                 href="/produtos/form"
-                class="botao-admin"
+                class="menu-item"
             >
-                ⚙ Administração
+                <i class="fa-solid fa-gear"></i>
+                Administração
             </a>
 
 
-            <a
-                href="#"
-                class="carrinho"
-            >
-                🛒
+        </nav>
+
+
+
+        <!-- USUÁRIO -->
+
+        <div class="usuario">
+
+            <div class="usuario-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="usuario-info">
+
+                <strong>
+                    Administrador
+                </strong>
 
                 <span>
-                    Carrinho
+                    PDV
                 </span>
 
-            </a>
+            </div>
+
+            <i class="fa-solid fa-chevron-down seta"></i>
 
         </div>
+
 
     </header>
 
 
 
+
     <!-- =====================================================
-         CONTEÚDO PRINCIPAL
+         CONTEÚDO
     ====================================================== -->
 
-    <main class="container">
+    <main class="pagina-produtos">
 
 
         <!-- =================================================
-             TÍTULO
+             CABEÇALHO DA PÁGINA
         ================================================== -->
 
-        <div class="titulo">
+        <section class="pagina-header">
 
-            <h1>
-                Produtos
-            </h1>
 
-            <p>
-                Confira os produtos disponíveis para compra.
-            </p>
+            <div>
+
+                <h2>
+                    Produtos
+                </h2>
+
+                <p>
+                    Confira os produtos disponíveis para compra.
+                </p>
+
+            </div>
+
+
+
+            <a
+                href="/produtos/form"
+                class="btn-administracao"
+            >
+                <i class="fa-solid fa-gear"></i>
+
+                Administração
+            </a>
+
+
+        </section>
+
+
+
+
+        <!-- =================================================
+             BUSCA
+        ================================================== -->
+
+        <div class="busca-container">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="buscarProduto"
+                placeholder="Buscar produto por nome..."
+            >
+
+            <span class="atalho">
+                Ctrl + K
+            </span>
 
         </div>
 
 
 
+
         <!-- =================================================
-             ÁREA DOS PRODUTOS
+             PRODUTOS
         ================================================== -->
 
         <section class="produtos-grid">
@@ -111,14 +231,12 @@
             {% for produto in produtos %}
 
 
-                <!-- =================================================
-                     CARD DO PRODUTO
-                ================================================== -->
-
-                <div class="produto-card">
+                <article class="produto-card">
 
 
-                    <!-- IMAGEM -->
+                    <!-- =============================================
+                         IMAGEM
+                    ============================================== -->
 
                     <div class="produto-imagem">
 
@@ -128,34 +246,25 @@
                             <img
                                 src="/static/{{ produto.imagem_path }}"
                                 alt="{{ produto.nome }}"
+                                onerror="
+                                    this.style.display='none';
+                                    this.nextElementSibling.style.display='flex';
+                                "
                             >
+
+                            <div
+                                class="imagem-sem-produto"
+                                style="display:none;"
+                            >
+                                <i class="fa-solid fa-box"></i>
+                            </div>
+
 
                         {% else %}
 
-                            <img
-                                src="/static/uploads/produto-generico.png"
-                                alt="Imagem padrão"
-                            >
+                            <div class="imagem-sem-produto">
 
-                        {% endif %}
-
-
-                    </div>
-
-
-
-                    <!-- INFORMAÇÕES -->
-
-                    <div class="produto-info">
-
-
-                        <!-- CATEGORIA -->
-
-                        {% if produto.categoria %}
-
-                            <div class="produto-categoria">
-
-                                {{ produto.categoria.nome }}
+                                <i class="fa-solid fa-box"></i>
 
                             </div>
 
@@ -163,34 +272,111 @@
 
 
 
+                        <!-- ESTOQUE -->
+
+                        <span class="estoque-tag">
+
+                            {% if produto.estoque_atual > 0 %}
+
+                                {{ produto.estoque_atual }} em estoque
+
+                            {% else %}
+
+                                Sem estoque
+
+                            {% endif %}
+
+                        </span>
+
+
+                    </div>
+
+
+
+
+                    <!-- =============================================
+                         INFORMAÇÕES
+                    ============================================== -->
+
+                    <div class="produto-conteudo">
+
+
+                        <!-- CATEGORIA -->
+
+                        <span class="produto-categoria">
+
+                            {% if produto.categoria %}
+
+                                {{ produto.categoria.nome }}
+
+                            {% else %}
+
+                                Sem categoria
+
+                            {% endif %}
+
+                        </span>
+
+
+
                         <!-- NOME -->
 
-                        <h2 class="produto-nome">
+                        <h3 class="produto-nome">
 
                             {{ produto.nome }}
 
-                        </h2>
+                        </h3>
 
 
 
                         <!-- PREÇO -->
 
-                        <div class="produto-preco">
+                        <strong class="preco">
 
                             R$ {{ "%.2f"|format(produto.preco) }}
 
-                        </div>
+                        </strong>
 
 
 
-                        <!-- COMPRAR -->
+                        <!-- ESTOQUE -->
+
+                        <span class="estoque">
+
+                            Estoque:
+                            {{ produto.estoque_atual }}
+
+                        </span>
+
+
+
+                        <!-- BOTÃO -->
 
                         <button
-                            class="botao-comprar"
                             type="button"
+                            class="btn-adicionar"
+
+                            data-id="{{ produto.id }}"
+                            data-nome="{{ produto.nome }}"
+                            data-preco="{{ produto.preco }}"
+                            data-estoque="{{ produto.estoque_atual }}"
+
+                            {% if produto.estoque_atual <= 0 %}
+                                disabled
+                            {% endif %}
                         >
 
-                            🛒 Comprar
+                            {% if produto.estoque_atual > 0 %}
+
+                                <i class="fa-solid fa-cart-shopping"></i>
+
+                                Comprar
+
+                            {% else %}
+
+                                Indisponível
+
+                            {% endif %}
 
                         </button>
 
@@ -198,23 +384,22 @@
                     </div>
 
 
-                </div>
+                </article>
 
 
-            {% endfor %}
+            {% else %}
 
 
-
-            <!-- =================================================
-                 NENHUM PRODUTO
-            ================================================== -->
-
-            {% if not produtos %}
+                <!-- =============================================
+                     SEM PRODUTOS
+                ============================================== -->
 
                 <div class="sem-produtos">
 
                     <div class="sem-produtos-icone">
-                        📦
+
+                        <i class="fa-solid fa-box-open"></i>
+
                     </div>
 
                     <h2>
@@ -225,15 +410,98 @@
                         Os produtos cadastrados aparecerão aqui.
                     </p>
 
+                    <a
+                        href="/produtos/form"
+                        class="btn-cadastrar-produto"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Cadastrar produto
+
+                    </a>
+
                 </div>
 
-            {% endif %}
+
+            {% endfor %}
 
 
         </section>
 
 
     </main>
+
+
+
+
+    <!-- =====================================================
+         SCRIPT DE BUSCA
+    ====================================================== -->
+
+    <script>
+
+        const campoBusca =
+            document.getElementById("buscarProduto");
+
+
+        const produtos =
+            document.querySelectorAll(".produto-card");
+
+
+
+        campoBusca.addEventListener(
+            "input",
+            function () {
+
+                const pesquisa =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+
+                produtos.forEach(
+                    function (produto) {
+
+                        const nome =
+                            produto
+                                .querySelector(".produto-nome")
+                                .textContent
+                                .toLowerCase();
+
+
+                        produto.style.display =
+                            nome.includes(pesquisa)
+                                ? ""
+                                : "none";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.ctrlKey &&
+                    event.key.toLowerCase() === "k"
+                ) {
+
+                    event.preventDefault();
+
+                    campoBusca.focus();
+
+                }
+
+            }
+        );
+
+    </script>
 
 
 </body>

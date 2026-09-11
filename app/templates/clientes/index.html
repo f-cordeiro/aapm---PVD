@@ -1,78 +1,530 @@
-<!-- template/clientes/index.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta charset="UTF-8"><title>Clientes — AAPM SENAI</title></head>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Clientes | AAPM SENAI</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/clientes-css/index.css"
+    >
+
+</head>
+
+
 <body>
-    <h1>Clientes</h1>
 
-    {% if request.query_params.get('criado') == 'ok' %}
-        <p style="color:green">Cliente cadastrado!</p>
-    {% endif %}
-    {% if request.query_params.get('editado') == 'ok' %}
-        <p style="color:green">Cliente atualizado!</p>
-    {% endif %}
 
-    <p>Associados ativos: <strong>{{ total_associados }}</strong></p>
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
-    <form method="get" action="/clientes">
-        <input type="text" name="busca"
-               placeholder="Buscar por nome ou matrícula..."
-               value="{{ busca }}">
-        <label>
-            <input type="checkbox" name="apenas_associados" value="true"
-                {{ 'checked' if apenas_associados }}>
-            Apenas associados
-        </label>
-        <button type="submit">Filtrar</button>
-        {% if busca or apenas_associados %}
-            <a href="/clientes">Limpar</a>
+    <header class="topo">
+
+        <div class="logo">
+            AAPM
+        </div>
+
+        <div class="titulo-topo">
+            Clientes / Associados
+        </div>
+
+        <a
+            href="/"
+            class="voltar"
+        >
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <section class="titulo-pagina">
+
+            <div>
+
+                <h1>
+                    Clientes e Associados
+                </h1>
+
+                <p>
+                    Gerencie os clientes cadastrados no sistema.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/clientes/novo"
+                class="btn-novo"
+            >
+                + Novo cliente
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% if request.query_params.get('criado') == 'ok' %}
+
+        <div class="alerta sucesso">
+
+            <span class="alerta-icone">
+                ✓
+            </span>
+
+            Cliente cadastrado com sucesso!
+
+        </div>
+
         {% endif %}
-    </form>
 
-    <a href="/clientes/novo">+ Novo cliente</a>
 
-    <table border="1" cellpadding="8">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Matrícula</th>
-                <th>Telefone</th>
-                <th>Associado</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for c in clientes %}
-            <tr>
-                <td>{{ c.nome }}</td>
-                <td>{{ c.matricula or "—" }}</td>
-                <td>{{ c.telefone or "—" }}</td>
-                <td>
-                    {% if c.is_associado %}
-                        <span style="color:green">✓ Sim (10% desc.)</span>
-                    {% else %}
-                        Não
-                    {% endif %}
-                </td>
-                <td>{{ "Ativo" if c.ativo else "Inativo" }}</td>
-                <td>
-                    <a href="/clientes/{{ c.id }}/editar">Editar</a>
-                    <form action="/clientes/{{ c.id }}/toggle-ativo"
-                          method="post" style="display:inline">
-                        <button type="submit">
-                            {{ "Desativar" if c.ativo else "Ativar" }}
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-            {% if not clientes %}
-            <tr><td colspan="6" style="text-align:center">Nenhum cliente.</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
 
-    <p><a href="/">← Dashboard</a></p>
+        {% if request.query_params.get('editado') == 'ok' %}
+
+        <div class="alerta sucesso">
+
+            <span class="alerta-icone">
+                ✓
+            </span>
+
+            Cliente atualizado com sucesso!
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             RESUMO
+        ================================================== -->
+
+        <section class="resumo">
+
+            <div class="resumo-card">
+
+                <div class="resumo-icone">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Associados ativos
+                    </span>
+
+                    <strong>
+                        {{ total_associados }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FILTROS
+        ================================================== -->
+
+        <section class="filtros">
+
+            <form
+                method="get"
+                action="/clientes/"
+                class="filtro-form"
+            >
+
+
+                <div class="campo-busca">
+
+                    <label for="busca">
+                        Buscar cliente
+                    </label>
+
+                    <input
+                        type="text"
+                        id="busca"
+                        name="busca"
+                        placeholder="Nome ou matrícula..."
+                        value="{{ busca }}"
+                    >
+
+                </div>
+
+
+                <label class="checkbox-associado">
+
+                    <input
+                        type="checkbox"
+                        name="apenas_associados"
+                        value="true"
+                        {% if apenas_associados %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        Apenas associados
+                    </span>
+
+                </label>
+
+
+                <button
+                    type="submit"
+                    class="btn-filtrar"
+                >
+                    🔎 Filtrar
+                </button>
+
+
+                {% if busca or apenas_associados %}
+
+                <a
+                    href="/clientes/"
+                    class="btn-limpar"
+                >
+                    Limpar
+                </a>
+
+                {% endif %}
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TABELA
+        ================================================== -->
+
+        <section class="tabela-card">
+
+
+            <div class="tabela-topo">
+
+                <div>
+
+                    <h2>
+                        Clientes cadastrados
+                    </h2>
+
+                    <span>
+                        {{ clientes|length }}
+                        cliente{% if clientes|length != 1 %}s{% endif %}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="tabela-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Nome
+                            </th>
+
+                            <th>
+                                Matrícula
+                            </th>
+
+                            <th>
+                                Telefone
+                            </th>
+
+                            <th>
+                                Associado
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Ações
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for c in clientes %}
+
+                        <tr>
+
+
+                            <!-- NOME -->
+
+                            <td>
+
+                                <div class="cliente-nome">
+
+                                    <div class="avatar">
+                                        {{ c.nome[0]|upper }}
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            {{ c.nome }}
+                                        </strong>
+
+                                        <small>
+                                            ID #{{ c.id }}
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- MATRÍCULA -->
+
+                            <td>
+
+                                {% if c.matricula %}
+
+                                    <span class="matricula">
+                                        {{ c.matricula }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="sem-dado">
+                                        —
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- TELEFONE -->
+
+                            <td>
+
+                                {% if c.telefone %}
+
+                                    {{ c.telefone }}
+
+                                {% else %}
+
+                                    <span class="sem-dado">
+                                        —
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- ASSOCIADO -->
+
+                            <td>
+
+                                {% if c.is_associado %}
+
+                                    <span class="badge associado">
+                                        ✓ Associado
+                                    </span>
+
+                                    <small class="desconto">
+                                        10% de desconto
+                                    </small>
+
+                                {% else %}
+
+                                    <span class="badge comum">
+                                        Cliente
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if c.ativo %}
+
+                                    <span class="badge ativo">
+                                        Ativo
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge inativo">
+                                        Inativo
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- AÇÕES -->
+
+                            <td>
+
+                                <div class="acoes">
+
+
+                                    <a
+                                        href="/clientes/{{ c.id }}/editar"
+                                        class="btn-editar"
+                                    >
+                                        ✎
+                                        <span>
+                                            Editar
+                                        </span>
+                                    </a>
+
+
+                                    <form
+                                        action="/clientes/{{ c.id }}/toggle-ativo"
+                                        method="post"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="{% if c.ativo %}btn-desativar{% else %}btn-ativar{% endif %}"
+                                        >
+
+                                            {% if c.ativo %}
+                                                ⏸
+                                                <span>Desativar</span>
+                                            {% else %}
+                                                ✓
+                                                <span>Ativar</span>
+                                            {% endif %}
+
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+
+
+                        {% if not clientes %}
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="nenhum-cliente"
+                            >
+
+                                <div class="vazio-icone">
+                                    👥
+                                </div>
+
+                                <h3>
+                                    Nenhum cliente encontrado
+                                </h3>
+
+                                <p>
+                                    Tente alterar os filtros ou cadastre
+                                    um novo cliente.
+                                </p>
+
+                                <a
+                                    href="/clientes/novo"
+                                    class="btn-novo-vazio"
+                                >
+                                    + Cadastrar cliente
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer class="rodape">
+
+        © 2026 AAPM SENAI — Sistema de gerenciamento
+
+    </footer>
+
+
 </body>
+
 </html>

@@ -1,4 +1,7 @@
-# controllers/cliente_controller.py — CRUD de clientes
+# controllers/cliente_controller.py
+# ============================================================
+# CRUD DE CLIENTES / ASSOCIADOS
+# Somente administradores podem realizar alterações.
 # ============================================================
 
 from fastapi import APIRouter, Depends, Request, Form
@@ -10,163 +13,360 @@ from app.database import get_db
 from app.models.cliente import Cliente
 from app.auth import get_admin
 
-router = APIRouter(prefix="/clientes", tags=["Clientes"])
-templates = Jinja2Templates(directory="app/templates")
+
+router = APIRouter(
+    prefix="/clientes",
+    tags=["Clientes"]
+)
+
+templates = Jinja2Templates(
+    directory="app/templates"
+)
 
 
-@router.get("/")
+# ============================================================
+# LISTAR CLIENTES
+# ============================================================
+
+@router.get("/", response_class=HTMLResponse)
 def listar_clientes(
     request: Request,
     busca: str = "",
     apenas_associados: bool = False,
     db: Session = Depends(get_db),
-    admin = Depends(get_admin)
+    admin=Depends(get_admin)
 ):
+
     query = db.query(Cliente)
 
-    if busca:
+    # --------------------------------------------------------
+    # BUSCA POR NOME OU MATRÍCULA
+    # --------------------------------------------------------
+
+    if busca.strip():
+
+        termo = busca.strip()
+
         query = query.filter(
-            Cliente.nome.ilike(f"%{busca}%") |
-            Cliente.matricula.ilike(f"%{busca}%")
+            Cliente.nome.ilike(f"%{termo}%") |
+            Cliente.matricula.ilike(f"%{termo}%")
         )
 
-    if apenas_associados:
-        query = query.filter(Cliente.is_associado == True)
+    # --------------------------------------------------------
+    # FILTRO DE ASSOCIADOS
+    # --------------------------------------------------------
 
-    clientes = query.order_by(Cliente.nome).all()
+    if apenas_associados:
+
+        query = query.filter(
+            Cliente.is_associado == True
+        )
+
+    # --------------------------------------------------------
+    # CLIENTES
+    # --------------------------------------------------------
+
+    clientes = query.order_by(
+        Cliente.nome
+    ).all()
+
+    # --------------------------------------------------------
+    # TOTAL DE ASSOCIADOS ATIVOS
+    # --------------------------------------------------------
 
     total_associados = db.query(Cliente).filter(
         Cliente.is_associado == True,
         Cliente.ativo == True
     ).count()
 
+    # --------------------------------------------------------
+    # TEMPLATE
+    # --------------------------------------------------------
+
     return templates.TemplateResponse(
         request,
         "clientes/index.html",
         {
-            "request":           request,
-            "usuario":           admin,
-            "clientes":          clientes,
-            "busca":             busca,
+            "request": request,
+            "usuario": admin,
+            "clientes": clientes,
+            "busca": busca,
             "apenas_associados": apenas_associados,
-            "total_associados":  total_associados,
+            "total_associados": total_associados,
         }
     )
 
 
-@router.get("/novo")
-def form_novo(request: Request, admin = Depends(get_admin)):
+# ============================================================
+# FORMULÁRIO — NOVO CLIENTE
+# Somente ADMIN
+# ============================================================
+
+@router.get("/novo", response_class=HTMLResponse)
+def form_novo(
+    request: Request,
+    admin=Depends(get_admin)
+):
+
     return templates.TemplateResponse(
         request,
         "clientes/form.html",
-        {"request": request, "usuario": admin, "editando": None}
+        {
+            "request": request,
+            "usuario": admin,
+            "editando": None,
+            "valores": None,
+            "erro": None
+        }
     )
 
+
+# ============================================================
+# CADASTRAR CLIENTE
+# Somente ADMIN
+# ============================================================
 
 @router.post("/novo")
 def criar(
     request: Request,
-    nome: str          = Form(...),
-    matricula: str     = Form(""),
-    telefone: str      = Form(""),
+    nome: str = Form(...),
+    matricula: str = Form(""),
+    telefone: str = Form(""),
     is_associado: bool = Form(False),
-    db: Session        = Depends(get_db),
-    admin              = Depends(get_admin)
+    db: Session = Depends(get_db),
+    admin=Depends(get_admin)
 ):
-    # Verifica duplicidade de matrícula (apenas se preenchida)
+
+    # --------------------------------------------------------
+    # LIMPAR DADOS
+    # --------------------------------------------------------
+
+    nome = nome.strip()
+    matricula = matricula.strip()
+    telefone = telefone.strip()
+
+    # --------------------------------------------------------
+    # VERIFICAR MATRÍCULA DUPLICADA
+    # --------------------------------------------------------
+
     if matricula:
+
         existente = db.query(Cliente).filter(
-            Cliente.matricula == matricula.strip()
+            Cliente.matricula == matricula
         ).first()
 
         if existente:
+
             return templates.TemplateResponse(
                 request,
                 "clientes/form.html",
                 {
-                    "request":  request,
-                    "usuario":  admin,
+                    "request": request,
+                    "usuario": admin,
                     "editando": None,
-                    "erro":     f"Matrícula {matricula} já cadastrada.",
-                    "valores":  {
-                        "nome": nome, "matricula": matricula,
-                        "telefone": telefone, "is_associado": is_associado
+                    "erro": f"Matrícula {matricula} já cadastrada.",
+                    "valores": {
+                        "nome": nome,
+                        "matricula": matricula,
+                        "telefone": telefone,
+                        "is_associado": is_associado
                     }
                 },
                 status_code=400
             )
 
-    db.add(Cliente(
-        nome         = nome.strip(),
-        matricula    = matricula.strip() or None,
-        telefone     = telefone.strip() or None,
-        is_associado = is_associado,
-    ))
+    # --------------------------------------------------------
+    # CRIAR CLIENTE
+    # --------------------------------------------------------
+
+    cliente = Cliente(
+        nome=nome,
+        matricula=matricula or None,
+        telefone=telefone or None,
+        is_associado=is_associado
+    )
+
+    db.add(cliente)
+
     db.commit()
 
-    return RedirectResponse(url="/clientes?criado=ok", status_code=302)
+    # --------------------------------------------------------
+    # VOLTAR PARA LISTA
+    # --------------------------------------------------------
+
+    return RedirectResponse(
+        url="/clientes?criado=ok",
+        status_code=302
+    )
 
 
-@router.get("/{cliente_id}/editar")
+# ============================================================
+# FORMULÁRIO — EDITAR CLIENTE
+# Somente ADMIN
+# ============================================================
+
+@router.get(
+    "/{cliente_id}/editar",
+    response_class=HTMLResponse
+)
 def form_editar(
     cliente_id: int,
     request: Request,
     db: Session = Depends(get_db),
-    admin = Depends(get_admin)
+    admin=Depends(get_admin)
 ):
-    editando = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+
+    # --------------------------------------------------------
+    # BUSCAR CLIENTE
+    # --------------------------------------------------------
+
+    editando = db.query(Cliente).filter(
+        Cliente.id == cliente_id
+    ).first()
+
+    # --------------------------------------------------------
+    # CLIENTE NÃO ENCONTRADO
+    # --------------------------------------------------------
+
     if not editando:
-        return RedirectResponse(url="/clientes", status_code=302)
+
+        return RedirectResponse(
+            url="/clientes",
+            status_code=302
+        )
+
+    # --------------------------------------------------------
+    # ABRIR FORMULÁRIO
+    # --------------------------------------------------------
 
     return templates.TemplateResponse(
         request,
         "clientes/form.html",
-        {"request": request, "usuario": admin, "editando": editando}
+        {
+            "request": request,
+            "usuario": admin,
+            "editando": editando,
+            "valores": None,
+            "erro": None
+        }
     )
 
+
+# ============================================================
+# EDITAR CLIENTE
+# Somente ADMIN
+# ============================================================
 
 @router.post("/{cliente_id}/editar")
 def editar(
     cliente_id: int,
-    nome: str          = Form(...),
-    matricula: str     = Form(""),
-    telefone: str      = Form(""),
+    request: Request,
+    nome: str = Form(...),
+    matricula: str = Form(""),
+    telefone: str = Form(""),
     is_associado: bool = Form(False),
-    db: Session        = Depends(get_db),
-    admin              = Depends(get_admin)
+    db: Session = Depends(get_db),
+    admin=Depends(get_admin)
 ):
-    editando = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+
+    # --------------------------------------------------------
+    # LIMPAR DADOS
+    # --------------------------------------------------------
+
+    nome = nome.strip()
+    matricula = matricula.strip()
+    telefone = telefone.strip()
+
+    # --------------------------------------------------------
+    # BUSCAR CLIENTE
+    # --------------------------------------------------------
+
+    editando = db.query(Cliente).filter(
+        Cliente.id == cliente_id
+    ).first()
+
     if not editando:
-        return RedirectResponse(url="/clientes", status_code=302)
+
+        return RedirectResponse(
+            url="/clientes",
+            status_code=302
+        )
+
+    # --------------------------------------------------------
+    # VERIFICAR MATRÍCULA DUPLICADA
+    # --------------------------------------------------------
 
     if matricula:
+
         conflito = db.query(Cliente).filter(
-            Cliente.matricula == matricula.strip(),
+            Cliente.matricula == matricula,
             Cliente.id != cliente_id
         ).first()
+
         if conflito:
-            return RedirectResponse(
-                url=f"/clientes/{cliente_id}/editar?erro=matricula",
-                status_code=302
+
+            return templates.TemplateResponse(
+                request,
+                "clientes/form.html",
+                {
+                    "request": request,
+                    "usuario": admin,
+                    "editando": editando,
+                    "erro": f"Matrícula {matricula} já está em uso.",
+                    "valores": {
+                        "nome": nome,
+                        "matricula": matricula,
+                        "telefone": telefone,
+                        "is_associado": is_associado
+                    }
+                },
+                status_code=400
             )
 
-    editando.nome         = nome.strip()
-    editando.matricula    = matricula.strip() or None
-    editando.telefone     = telefone.strip() or None
+    # --------------------------------------------------------
+    # ATUALIZAR CLIENTE
+    # --------------------------------------------------------
+
+    editando.nome = nome
+    editando.matricula = matricula or None
+    editando.telefone = telefone or None
     editando.is_associado = is_associado
+
     db.commit()
 
-    return RedirectResponse(url="/clientes?editado=ok", status_code=302)
+    # --------------------------------------------------------
+    # VOLTAR PARA LISTA
+    # --------------------------------------------------------
 
+    return RedirectResponse(
+        url="/clientes?editado=ok",
+        status_code=302
+    )
+
+
+# ============================================================
+# ATIVAR / DESATIVAR CLIENTE
+# Somente ADMIN
+# ============================================================
 
 @router.post("/{cliente_id}/toggle-ativo")
 def toggle_ativo(
     cliente_id: int,
     db: Session = Depends(get_db),
-    admin = Depends(get_admin)
+    admin=Depends(get_admin)
 ):
-    cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+
+    cliente = db.query(Cliente).filter(
+        Cliente.id == cliente_id
+    ).first()
+
     if cliente:
+
         cliente.ativo = not cliente.ativo
+
         db.commit()
-    return RedirectResponse(url="/clientes", status_code=302)
+
+    return RedirectResponse(
+        url="/clientes",
+        status_code=302
+    )

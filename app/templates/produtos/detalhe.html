@@ -49,8 +49,10 @@
             </a>
 
 
+            <!-- ADMINISTRAÇÃO -->
+
             <a
-                href="/produtos/novo"
+                href="/produtos/form"
                 class="botao-topo"
             >
                 ⚙ Administração
@@ -172,9 +174,7 @@
                     {% if produto.categoria %}
 
                     <div class="categoria">
-
                         {{ produto.categoria.nome }}
-
                     </div>
 
                     {% else %}
@@ -194,7 +194,7 @@
 
 
                     <!-- =================================================
-                         TABELA DE INFORMAÇÕES
+                         INFORMAÇÕES
                     ================================================== -->
 
                     <div class="informacoes-card">
