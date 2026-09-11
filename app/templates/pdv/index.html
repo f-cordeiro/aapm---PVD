@@ -1,745 +1,502 @@
-<!-- template/pdv/index.html -->
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PDV — AAPM SENAI</title>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    <link rel="stylesheet" href="/static/pdv-css/index.css">
 
-        /* ── Topo ── */
-        .topbar {
-            background: #1e293b;
-            color: #f8fafc;
-            padding: 0 24px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
+    <!-- Ícones -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
 
-        .topbar-title {
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: .02em;
-        }
+<body>
 
-        .topbar-links a {
-            color: #94a3b8;
-            font-size: 13px;
-            margin-left: 20px;
-            text-decoration: none;
-        }
+    <!-- =====================================================
+         BARRA SUPERIOR / BASE
+    ====================================================== -->
 
-        .topbar-links a:hover { color: #f8fafc; }
+    <header class="topbar">
 
-        /* ── Layout principal ── */
-        .pdv-layout {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            flex: 1;
-            overflow: hidden;
-        }
+        <div class="logo-area">
 
-        <!DOCTYPE html>
-        <html lang="pt-BR">
+            <div class="logo-icon">
+                <i class="fa-solid fa-store"></i>
+            </div>
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <div>
+                <h1>PDV — AAPM SENAI</h1>
+                <span>Sistema de vendas</span>
+            </div>
 
-            <title>PDV — AAPM SENAI</title>
-
-            <link rel="stylesheet" href="/static/pdv-css/index.css">
-
-            <!-- Ícones -->
-            <link rel="stylesheet"
-                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-        </head>
-
-        <body>
-
-            <!-- =====================================================
-                 BARRA SUPERIOR / BASE
-            ====================================================== -->
-
-            <header class="topbar">
-
-                <div class="logo-area">
-
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-store"></i>
-                    </div>
-
-                    <div>
-                        <h1>PDV — AAPM SENAI</h1>
-                        <span>Sistema de vendas</span>
-                    </div>
-
-                </div>
+        </div>
 
 
-                <nav class="menu">
+        <nav class="menu">
 
-                    <a href="/pdv/" class="menu-item active">
-                        <i class="fa-solid fa-house"></i>
-                        Home
-                    </a>
+            <a href="/pdv/" class="menu-item active">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
 
-                    <a href="/produtos/" class="menu-item">
-                        <i class="fa-solid fa-box"></i>
-                        Produtos
-                    </a>
+            <a href="/produtos/" class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                Produtos
+            </a>
 
-                    <a href="/estoque/" class="menu-item">
-                        <i class="fa-solid fa-warehouse"></i>
-                        Estoque
-                    </a>
+            <a href="/estoque/" class="menu-item">
+                <i class="fa-solid fa-warehouse"></i>
+                Estoque
+            </a>
 
-                    <a href="/pdv/" class="menu-item">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        Vendas
-                    </a>
+            <a href="/pdv/" class="menu-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Vendas
+            </a>
 
-                    <a href="/clientes/" class="menu-item">
-                        <i class="fa-solid fa-users"></i>
-                        Clientes
-                    </a>
+            <a href="/clientes/" class="menu-item">
+                <i class="fa-solid fa-users"></i>
+                Clientes
+            </a>
 
-                    <a href="/relatorios/" class="menu-item">
-                        <i class="fa-solid fa-chart-line"></i>
-                        Relatórios
-                    </a>
+            <a href="/relatorios/" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                Relatórios
+            </a>
 
-                    <a href="/administracao/" class="menu-item">
-                        <i class="fa-solid fa-gear"></i>
-                        Administração
-                    </a>
+            <a href="/produtos/form" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                Administração
+            </a>
 
-                </nav>
+        </nav>
 
 
-                <div class="usuario">
+        <div class="usuario">
 
-                    <div class="usuario-icon">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
+            <div class="usuario-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
 
-                    <div class="usuario-info">
-                        <strong>Administrador</strong>
-                        <span>PDV</span>
-                    </div>
+            <div class="usuario-info">
+                <strong>Administrador</strong>
+                <span>PDV</span>
+            </div>
 
-                    <i class="fa-solid fa-chevron-down seta"></i>
+            <i class="fa-solid fa-chevron-down seta"></i>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="layout">
+
+
+        <!-- =================================================
+             ÁREA DE PRODUTOS
+        ================================================== -->
+
+        <section class="produtos-area">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="pagina-header">
+
+                <div>
+
+                    <h2>Nova venda</h2>
+
+                    <p>
+                        Selecione os produtos para adicionar ao carrinho.
+                    </p>
 
                 </div>
 
-            </header>
+                <div class="status-caixa">
 
+                    <span class="status-dot"></span>
 
-            <!-- =====================================================
-                 CONTEÚDO PRINCIPAL
-            ====================================================== -->
-
-            <main class="layout">
-
-
-                <!-- =================================================
-                     ÁREA DE PRODUTOS
-                ================================================== -->
-
-                <section class="produtos-area">
-
-
-                    <!-- CABEÇALHO -->
-
-                    <div class="pagina-header">
-
-                        <div>
-
-                            <h2>Nova venda</h2>
-
-                            <p>
-                                Selecione os produtos para adicionar ao carrinho.
-                            </p>
-
-                        </div>
-
-                        <div class="status-caixa">
-
-                            <span class="status-dot"></span>
-
-                            Caixa aberto
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- BUSCA -->
-
-                    <div class="busca-container">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        <input
-                            type="text"
-                            id="buscarProduto"
-                            placeholder="Buscar produto por nome ou código..."
-                        >
-
-                        <span class="atalho">
-                            Ctrl + K
-                        </span>
-
-                    </div>
-
-
-                    <!-- CATEGORIAS -->
-
-                    <div class="categorias">
-
-                        <button class="categoria active">
-                            Todos
-                        </button>
-
-                        <button class="categoria">
-                            Alimentos
-                        </button>
-
-                        <button class="categoria">
-                            Bebidas
-                        </button>
-
-                        <button class="categoria">
-                            Uniformes
-                        </button>
-
-                        <button class="categoria">
-                            Materiais
-                        </button>
-
-                        <button class="categoria">
-                            Outros
-                        </button>
-
-                    </div>
-
-
-        <!-- ==============================
-             CARDS DOS PRODUTOS
-             ============================== -->
-
-        <div class="produtos-grid">
-
-            {% for produto in produtos %}
-
-            <div class="produto-card">
-
-                <!-- IMAGEM -->
-                <div class="produto-imagem">
-
-                    {% if produto.imagem_path %}
-
-                        <img
-                            src="{{ produto.imagem_path }}"
-                            alt="{{ produto.nome }}"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                        >
-
-                        <div
-                            class="imagem-sem-produto"
-                            style="display: none;"
-                        >
-                            📦
-                        </div>
-
-                    {% else %}
-
-                        <div class="imagem-sem-produto">
-                            📦
-                        </div>
-
-                    {% endif %}
-
-                    <!-- ESTOQUE -->
-                    <span class="estoque-tag">
-                
-
-                        {% if produto.estoque_atual > 0 %}
-                            {{ produto.estoque_atual }} em estoque
-                        {% else %}
-                            Sem estoque
-                        {% endif %}
-
-                    </span>
-
-                </div>
-
-
-                <!-- INFORMAÇÕES -->
-                <div class="produto-conteudo">
-
-                    <!-- CATEGORIA -->
-                    <span class="produto-categoria">
-
-                        {% if produto.categoria %}
-                            {{ produto.categoria.nome }}
-                        {% else %}
-                            Sem categoria
-                        {% endif %}
-
-                    </span>
-
-
-                    <!-- NOME -->
-                    <h3>
-                        {{ produto.nome }}
-                    </h3>
-
-
-                    <!-- PREÇO -->
-                    <strong class="preco">
-                        R$ {{ "%.2f"|format(produto.preco) }}
-                    </strong>
-
-
-                    <!-- ESTOQUE -->
-                    <span class="estoque">
-                        Estoque: {{ produto.estoque_atual }}
-                    </span>
-
-
-                    <!-- BOTÃO -->
-                    <button
-                        type="button"
-                        class="btn-adicionar"
-
-                        data-id="{{ produto.id }}"
-                        data-nome="{{ produto.nome }}"
-                        data-preco="{{ produto.preco }}"
-                        data-estoque="{{ produto.estoque_atual }}"
-
-                        {% if produto.estoque_atual <= 0 %}
-                            disabled
-                        {% endif %}
-                    >
-
-                        {% if produto.estoque_atual > 0 %}
-                            🛒 Adicionar
-                        {% else %}
-                            Sem estoque
-                        {% endif %}
-
-                    </button>
+                    Caixa aberto
 
                 </div>
 
             </div>
 
+
+            <!-- BUSCA -->
+
+            <div class="busca-container">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="buscarProduto"
+                    placeholder="Buscar produto por nome ou código..."
+                >
+
+                <span class="atalho">
+                    Ctrl + K
+                </span>
+
+            </div>
+
+
+            <!-- CATEGORIAS -->
+
+            <div class="categorias">
+
+                <button class="categoria active">
+                    Todos
+                </button>
+
+                <button class="categoria">
+                    Alimentos
+                </button>
+
+                <button class="categoria">
+                    Bebidas
+                </button>
+
+                <button class="categoria">
+                    Uniformes
+                </button>
+
+                <button class="categoria">
+                    Materiais
+                </button>
+
+                <button class="categoria">
+                    Outros
+                </button>
+
+            </div>
+
+
+<!-- ==============================
+     CARDS DOS PRODUTOS
+     ============================== -->
+
+<div class="produtos-grid">
+
+    {% for produto in produtos %}
+
+    <div class="produto-card">
+
+        <!-- IMAGEM -->
+        <div class="produto-imagem">
+
+            {% if produto.imagem_path %}
+
+                <img
+                    src="{{ produto.imagem_path }}"
+                    alt="{{ produto.nome }}"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+
+                <div
+                    class="imagem-sem-produto"
+                    style="display: none;"
+                >
+                    📦
+                </div>
+
             {% else %}
-
-            <!-- CASO NÃO TENHA PRODUTOS -->
-
-            <div class="sem-produtos">
 
                 <div class="imagem-sem-produto">
                     📦
                 </div>
 
-                <h3>
-                    Nenhum produto cadastrado
-                </h3>
+            {% endif %}
 
-                <p>
-                    Cadastre produtos na administração
-                    para que eles apareçam no caixa.
-                </p>
+            <!-- ESTOQUE -->
+            <span class="estoque-tag">
+                
 
-            </div>
+                {% if produto.estoque_atual > 0 %}
+                    {{ produto.estoque_atual }} em estoque
+                {% else %}
+                    Sem estoque
+                {% endif %}
 
-            {% endfor %}
+            </span>
 
         </div>
 
-        </section>
 
-                <!-- =================================================
-                     CARRINHO
-                ================================================== -->
+        <!-- INFORMAÇÕES -->
+        <div class="produto-conteudo">
 
-                <aside class="carrinho">
+            <!-- CATEGORIA -->
+            <span class="produto-categoria">
 
+                {% if produto.categoria %}
+                    {{ produto.categoria.nome }}
+                {% else %}
+                    Sem categoria
+                {% endif %}
 
-                    <!-- CABEÇALHO -->
+            </span>
 
-                    <div class="carrinho-header">
 
-                        <div>
+            <!-- NOME -->
+            <h3>
+                {{ produto.nome }}
+            </h3>
 
-                            <h2>
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                Carrinho
-                            </h2>
 
-                            <span id="quantidadeItens">
-                                0 itens
-                            </span>
+            <!-- PREÇO -->
+            <strong class="preco">
+                R$ {{ "%.2f"|format(produto.preco) }}
+            </strong>
 
-                        </div>
 
-                        <button class="btn-limpar">
-                            Limpar
-                        </button>
+            <!-- ESTOQUE -->
+            <span class="estoque">
+                Estoque: {{ produto.estoque_atual }}
+            </span>
 
-                    </div>
 
+            <!-- BOTÃO -->
+            <button
+                type="button"
+                class="btn-adicionar"
 
-                    <!-- CLIENTE -->
+                data-id="{{ produto.id }}"
+                data-nome="{{ produto.nome }}"
+                data-preco="{{ produto.preco }}"
+                data-estoque="{{ produto.estoque_atual }}"
 
-                    <div class="cliente-area">
+                {% if produto.estoque_atual <= 0 %}
+                    disabled
+                {% endif %}
+            >
 
-                        <label>
-                            Cliente
-                        </label>
+                {% if produto.estoque_atual > 0 %}
+                    🛒 Adicionar
+                {% else %}
+                    Sem estoque
+                {% endif %}
 
-                        <select>
+            </button>
 
-                            <option>
-                                Sem identificação (sem desconto)
-                            </option>
+        </div>
 
-                            <option>
-                                Cliente cadastrado
-                            </option>
+    </div>
 
-                        </select>
+    {% else %}
 
-                    </div>
+    <!-- CASO NÃO TENHA PRODUTOS -->
 
+    <div class="sem-produtos">
 
-                    <!-- PRODUTOS DO CARRINHO -->
+        <div class="imagem-sem-produto">
+            📦
+        </div>
 
-                    <div class="carrinho-produtos">
+        <h3>
+            Nenhum produto cadastrado
+        </h3>
 
-                        <div class="carrinho-vazio">
+        <p>
+            Cadastre produtos na administração
+            para que eles apareçam no caixa.
+        </p>
 
-                            <div class="carrinho-icon">
+    </div>
 
-                                <i class="fa-solid fa-cart-shopping"></i>
+    {% endfor %}
 
-                            </div>
+</div>
 
-                            <h3>
-                                Carrinho vazio
-                            </h3>
+</section>
 
-                            <p>
-                                Clique em um produto para adicioná-lo à venda.
-                            </p>
+        <!-- =================================================
+             CARRINHO
+        ================================================== -->
 
-                        </div>
+        <aside class="carrinho">
 
-                    </div>
 
+            <!-- CABEÇALHO -->
 
-                    <!-- RODAPÉ DO CARRINHO -->
+            <div class="carrinho-header">
 
-                    <div class="carrinho-footer">
+                <div>
 
+                    <h2>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Carrinho
+                    </h2>
 
-                        <div class="observacao">
+                    <span id="quantidadeItens">
+                        0 itens
+                    </span>
 
-                            <label>
-                                Observação
-                            </label>
-
-                            <textarea
-                                placeholder="Observação opcional..."
-                            ></textarea>
-
-                        </div>
-
-
-                        <div class="resumo">
-
-                            <div>
-                                <span>Subtotal</span>
-                                <strong>R$ 0,00</strong>
-                            </div>
-
-                            <div>
-                                <span>Desconto</span>
-                                <strong>R$ 0,00</strong>
-                            </div>
-
-                            <div class="total">
-
-                                <span>Total</span>
-
-                                <strong>
-                                    R$ 0,00
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <button class="btn-finalizar" disabled>
-
-                            <i class="fa-solid fa-check"></i>
-
-                            Finalizar venda
-
-                        </button>
-
-                    </div>
-
-                </aside>
-
-            </main>
-
-
-            <!-- =====================================================
-                 JAVASCRIPT
-            ====================================================== -->
-
-            <script>
-
-                const busca = document.getElementById("buscarProduto");
-
-                document.addEventListener("keydown", function(event) {
-
-                    if (event.ctrlKey && event.key.toLowerCase() === "k") {
-
-                        event.preventDefault();
-
-                        busca.focus();
-
-                    }
-
-                });
-
-
-                const categorias = document.querySelectorAll(".categoria");
-
-                categorias.forEach(botao => {
-
-                    botao.addEventListener("click", function() {
-
-                        categorias.forEach(item => {
-                            item.classList.remove("active");
-                        });
-
-                        this.classList.add("active");
-
-                    });
-
-                });
-
-            </script>
-
-        </body>
-
-        </html>
-let carrinho = [];
-let clienteAtual = { id: 0, associado: false };
-const DESCONTO_PCT = { desconto_associado };  // vem do template
-
-// ── Adicionar produto ao carrinho ────────────────────────────
-
-function adicionarAoCarrinho(card) {
-    const id       = parseInt(card.dataset.id);
-    const nome     = card.dataset.nome;
-    const preco    = parseFloat(card.dataset.preco);
-    const estoque  = parseInt(card.dataset.estoque);
-
-    const existente = carrinho.find(i => i.produto_id === id);
-
-    if (existente) {
-        // Produto já está no carrinho — aumenta a quantidade se tiver estoque
-        if (existente.quantidade < existente.estoque_max) {
-            existente.quantidade++;
-        } else {
-            alert(`Estoque máximo atingido: ${existente.estoque_max} unidade(s).`);
-            return;
-        }
-    } else {
-        // Produto novo no carrinho
-        carrinho.push({ produto_id: id, nome, preco, quantidade: 1, estoque_max: estoque });
-    }
-
-    renderizarCarrinho();
-}
-
-// ── Alterar quantidade ────────────────────────────────────────
-
-function alterarQtd(produtoId, delta) {
-    const item = carrinho.find(i => i.produto_id === produtoId);
-    if (!item) return;
-
-    item.quantidade += delta;
-
-    // Remove o item se a quantidade chegar a zero
-    if (item.quantidade <= 0) {
-        removerItem(produtoId);
-        return;
-    }
-
-    // Limita pelo estoque disponível
-    if (item.quantidade > item.estoque_max) {
-        item.quantidade = item.estoque_max;
-    }
-
-    renderizarCarrinho();
-}
-
-function removerItem(produtoId) {
-    carrinho = carrinho.filter(i => i.produto_id !== produtoId);
-    renderizarCarrinho();
-}
-
-// ── Atualizar cliente selecionado ─────────────────────────────
-
-function atualizarCliente(select) {
-    const opt = select.options[select.selectedIndex];
-    clienteAtual.id        = parseInt(opt.value);
-    clienteAtual.associado = opt.dataset.associado === 'true';
-
-    // Exibe ou esconde o badge de desconto
-    const badge = document.getElementById('badge-desconto');
-    badge.style.display = clienteAtual.associado ? 'inline-flex' : 'none';
-
-    // Recalcula os totais com o novo desconto
-    renderizarTotais();
-}
-
-// ── Renderizar lista do carrinho ──────────────────────────────
-
-function renderizarCarrinho() {
-    const lista    = document.getElementById('lista-carrinho');
-    const vazio    = document.getElementById('msg-vazio');
-    const totais   = document.getElementById('totais');
-    const btnFinal = document.getElementById('btn-finalizar');
-
-    if (carrinho.length === 0) {
-        lista.innerHTML = '';
-        lista.appendChild(vazio);
-        vazio.style.display = 'flex';
-        totais.style.display = 'none';
-        btnFinal.disabled = true;
-        return;
-    }
-
-    vazio.style.display = 'none';
-    totais.style.display = 'block';
-    btnFinal.disabled = false;
-
-    lista.innerHTML = '';
-
-    carrinho.forEach(item => {
-        const subtotal = item.preco * item.quantidade;
-        const div = document.createElement('div');
-        div.className = 'item-carrinho';
-        div.innerHTML = `
-            <div style="flex:1">
-                <div class="item-nome">${item.nome}</div>
-                <div class="item-preco-unit">
-                    R$ ${item.preco.toFixed(2).replace('.', ',')} / un.
                 </div>
+
+                <button class="btn-limpar">
+                    Limpar
+                </button>
+
             </div>
-            <div class="item-qty-ctrl">
-                <button class="qty-btn"
-                        onclick="alterarQtd(${item.produto_id}, -1)">−</button>
-                <span class="qty-value">${item.quantidade}</span>
-                <button class="qty-btn"
-                        onclick="alterarQtd(${item.produto_id}, +1)">+</button>
+
+
+            <!-- CLIENTE -->
+
+            <div class="cliente-area">
+
+                <label>
+                    Cliente
+                </label>
+
+                <select>
+
+                    <option>
+                        Sem identificação (sem desconto)
+                    </option>
+
+                    <option>
+                        Cliente cadastrado
+                    </option>
+
+                </select>
+
             </div>
-            <div class="item-subtotal">
-                R$ ${subtotal.toFixed(2).replace('.', ',')}
+
+
+            <!-- PRODUTOS DO CARRINHO -->
+
+            <div class="carrinho-produtos">
+
+                <div class="carrinho-vazio">
+
+                    <div class="carrinho-icon">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                    </div>
+
+                    <h3>
+                        Carrinho vazio
+                    </h3>
+
+                    <p>
+                        Clique em um produto para adicioná-lo à venda.
+                    </p>
+
+                </div>
+
             </div>
-            <button class="item-remover"
-                    onclick="removerItem(${item.produto_id})"
-                    title="Remover">×</button>
-        `;
-        lista.appendChild(div);
-    });
 
-    renderizarTotais();
-}
 
-// ── Calcular e exibir totais ──────────────────────────────────
+            <!-- RODAPÉ DO CARRINHO -->
 
-function renderizarTotais() {
-    const subtotal = carrinho.reduce(
-        (acc, i) => acc + i.preco * i.quantidade, 0
-    );
+            <div class="carrinho-footer">
 
-    const descontoValor  = clienteAtual.associado
-        ? subtotal * (DESCONTO_PCT / 100)
-        : 0;
-    const total = subtotal - descontoValor;
 
-    const fmt = v => 'R$ ' + v.toFixed(2).replace('.', ',');
+                <div class="observacao">
 
-    document.getElementById('val-subtotal').textContent = fmt(subtotal);
-    document.getElementById('val-total').textContent    = fmt(total);
+                    <label>
+                        Observação
+                    </label>
 
-    const linhaDesc  = document.getElementById('linha-desconto');
-    const labelDesc  = document.getElementById('label-desconto');
-    const valDesc    = document.getElementById('val-desconto');
+                    <textarea
+                        placeholder="Observação opcional..."
+                    ></textarea>
 
-    if (clienteAtual.associado && descontoValor > 0) {
-        linhaDesc.style.display  = 'flex';
-        labelDesc.textContent    = `Desconto (${DESCONTO_PCT}%)`;
-        valDesc.textContent      = `− ${fmt(descontoValor)}`;
-    } else {
-        linhaDesc.style.display = 'none';
-    }
-}
+                </div>
 
-// ── Submeter a venda ──────────────────────────────────────────
 
-function finalizarVenda() {
-    if (carrinho.length === 0) return;
+                <div class="resumo">
 
-    // Serializa o carrinho para o campo oculto
-    document.getElementById('input-carrinho').value =
-        JSON.stringify(carrinho.map(i => ({
-            produto_id: i.produto_id,
-            nome:       i.nome,
-            preco:      i.preco,
-            quantidade: i.quantidade,
-        })));
+                    <div>
+                        <span>Subtotal</span>
+                        <strong>R$ 0,00</strong>
+                    </div>
 
-    document.getElementById('input-cliente-id').value = clienteAtual.id;
-    document.getElementById('input-obs').value =
-        document.getElementById('obs-input').value;
+                    <div>
+                        <span>Desconto</span>
+                        <strong>R$ 0,00</strong>
+                    </div>
 
-    document.getElementById('form-venda').submit();
-}
+                    <div class="total">
 
-// ── Filtro de busca de produtos ───────────────────────────────
+                        <span>Total</span>
 
-document.getElementById('busca-produto').addEventListener('input', function () {
-    const termo = this.value.toLowerCase().trim();
-    document.querySelectorAll('.produto-card').forEach(card => {
-        const nome = card.dataset.nomeLower || '';
-        card.style.display = nome.includes(termo) ? '' : 'none';
-    });
-});
-</script>
+                        <strong>
+                            R$ 0,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn-finalizar" disabled>
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Finalizar venda
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const busca = document.getElementById("buscarProduto");
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.ctrlKey && event.key.toLowerCase() === "k") {
+
+                event.preventDefault();
+
+                busca.focus();
+
+            }
+
+        });
+
+
+        const categorias = document.querySelectorAll(".categoria");
+
+        categorias.forEach(botao => {
+
+            botao.addEventListener("click", function() {
+
+                categorias.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+            });
+
+        });
+
+    </script>
+
 </body>
+
 </html>
