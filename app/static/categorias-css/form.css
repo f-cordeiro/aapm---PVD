@@ -1,164 +1,157 @@
-/* ============================================================
-   ESTILOS GERAIS DE FUNDO E CONTAINER
-   ============================================================ */
-body {
+/* =========================================================
+   BLOCO 1: PALETA DE CORES E BASE GLOBAL (TEMA CLARO)
+   ========================================================= */
+:root {
+    /* Fundo do ecrã e do cartão */
+    --fundo-pagina: #f4f7fb;
+    --fundo-card: #ffffff;
+    
+    /* Textos */
+    --texto-titulo: #0f172a;
+    --texto-label: #1e293b;
+    --texto-placeholder: #94a3b8;
+    
+    /* Cores do Azul SENAI */
+    --azul-senai: #1a4971;
+    --azul-senai-hover: #123452;
+    --azul-badge-bg: #eef4fa;
+    
+    /* Bordas e Sombras */
+    --borda-input: #1a4971;
+    --borda-cancelar: #e2e8f0;
+    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    min-height: 100vh;
+}
+
+body {
+    background-color: var(--fundo-pagina);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff;
+    min-height: 100vh;
     padding: 20px;
 }
 
-.form-container {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 40px 30px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* =========================================================
+   BLOCO 2: ESTRUTURA DO CARTÃO E CABEÇALHO
+   ========================================================= */
+.form-container, .modal-card {
+    background-color: var(--fundo-card);
     width: 100%;
-    max-width: 450px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    box-sizing: border-box;
+    max-width: 520px;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--sombra-card);
 }
 
-/* ============================================================
-   CABEÇALHO E BADGES
-   ============================================================ */
-.header-box {
-    text-align: center;
-    margin-bottom: 25px;
+.form-header, .header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
 }
 
-.title {
-    margin: 0 0 10px 0;
-    font-size: 26px;
-    font-weight: 600;
+.form-header h2, .title {
+    font-size: 22px;
+    color: var(--texto-titulo);
+    font-weight: 700;
+}
+
+.badge-senai, .role-badge {
+    background-color: var(--azul-badge-bg);
+    color: var(--azul-senai);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px;
     letter-spacing: 0.5px;
 }
 
-.role-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: rgba(0, 173, 181, 0.15);
-    border: 1px solid rgba(0, 173, 181, 0.3);
-    color: #00adb5;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ============================================================
-   MENSAGEM DE ERRO
-   ============================================================ */
-.alert-error {
-    background: rgba(244, 67, 54, 0.15);
-    border: 1px solid rgba(244, 67, 54, 0.4);
-    color: #ff8a80;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    text-align: center;
-    font-weight: 500;
-}
-
-/* ============================================================
-   CAMPOS DO FORMULÁRIO (INPUTS & LABELS)
-   ============================================================ */
+/* =========================================================
+   BLOCO 3: CAMPOS DE TEXTO E RÓTULOS
+   ========================================================= */
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
-    text-align: left;
+    gap: 8px;
+    margin-bottom: 28px;
 }
 
 .form-group label {
-    font-size: 14px;
-    color: #b0bec5;
-    margin-bottom: 8px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-label);
 }
 
-.form-group input[type="text"] {
+.form-input, .form-group input[type="text"] {
     width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid var(--borda-input);
     border-radius: 8px;
-    color: #ffffff;
-    font-size: 15px;
-    box-sizing: border-box;
+    font-size: 14px;
+    color: var(--texto-label);
     outline: none;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.2s;
 }
 
-.form-group input[type="text"]:focus {
-    border-color: #00adb5;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 10px rgba(0, 173, 181, 0.3);
+.form-input::placeholder, .form-group input::placeholder {
+    color: var(--texto-placeholder);
 }
 
-.form-group input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+.form-input:focus, .form-group input[type="text"]:focus {
+    box-shadow: 0 0 0 3px rgba(26, 73, 113, 0.15);
 }
 
-/* ============================================================
-   BOTÕES E AÇÕES
-   ============================================================ */
-.form-actions {
+/* =========================================================
+   BLOCO 4: BOTÕES DE AÇÃO
+   ========================================================= */
+.form-actions, .acoes-form {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     gap: 12px;
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 12px 20px;
-    background: #00adb5;
+.btn-submit, .btn-salvar {
+    background-color: var(--azul-senai);
     color: #ffffff;
     border: none;
+    padding: 10px 20px;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
+    transition: background-color 0.2s;
 }
 
-.btn-submit:hover {
-    background: #00969d;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0, 173, 181, 0.4);
+.btn-submit:hover, .btn-salvar:hover {
+    background-color: var(--azul-senai-hover);
 }
 
-.btn-cancel {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #b0bec5;
-    text-decoration: none;
+.btn-cancel, .btn-cancelar {
+    background-color: #ffffff;
+    color: var(--texto-label);
+    border: 1px solid var(--borda-cancelar);
+    padding: 10px 20px;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
-    box-sizing: border-box;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.2);
+.btn-cancel:hover, .btn-cancelar:hover {
+    background-color: #f8fafc;
 }

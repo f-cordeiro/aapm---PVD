@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="/static/categorias-css/form.css">
 </head>
 <body>
-    <div class="form-container">
+    <main class="form-container">
         <!-- Cabeçalho -->
-        <div class="header-box">
+        <header class="header-box">
             <h1 class="title">{{ "Editar Categoria" if editando else "Nova Categoria" }}</h1>
             <span class="role-badge">AAPM SENAI</span>
-        </div>
+        </header>
 
         <!-- Mensagem de Erro (se houver) -->
         {% if erro %}
-            <div class="alert-error">
+            <div class="alert-error" role="alert">
                 <span>⚠️ {{ erro }}</span>
             </div>
         {% endif %}
@@ -31,6 +31,8 @@
                        name="nome"
                        placeholder="Ex: Bebidas, Lanches, Sobremesas..."
                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                       minlength="2"
+                       maxlength="50"
                        required
                        autofocus>
             </div>
@@ -43,6 +45,6 @@
                 <a href="/categorias" class="btn-cancel">Cancelar</a>
             </div>
         </form>
-    </div>
+    </main>
 </body>
 </html>
