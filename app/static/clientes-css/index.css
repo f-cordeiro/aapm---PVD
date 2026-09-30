@@ -1,33 +1,12 @@
-/* ============================================================
+/* =========================================================
    CLIENTES — AAPM SENAI
-   ============================================================ */
-
-:root {
-    --azul: #164b7a;
-    --azul-escuro: #102d4a;
-    --azul-hover: #0d5ca8;
-
-    --fundo: #f5f7fa;
-    --branco: #ffffff;
-
-    --texto: #172033;
-    --texto-secundario: #64748b;
-
-    --borda: #e2e8f0;
-
-    --verde: #16a34a;
-    --verde-fundo: #dcfce7;
-
-    --vermelho: #dc2626;
-    --vermelho-fundo: #fee2e2;
-
-    --azul-fundo: #e8f1f8;
-}
+   Estilo baseado na tela de Movimentações
+========================================================= */
 
 
-/* ============================================================
-   RESET
-   ============================================================ */
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -35,888 +14,1023 @@
     padding: 0;
 }
 
-
 body {
+    width: 100%;
     min-height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-    background: 
-        linear-gradient(
-            135deg,
-            #f5f7fa 0%,
-            #edf3f8 100%
-        );
+    padding: 30px 20px;
 
     font-family:
-        Arial,
-        Helvetica,
+        "Segoe UI",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Roboto",
         sans-serif;
 
-    color: var(--texto);
+    background: #f4f6f8;
+    color: #263746;
 }
 
 
-/* ============================================================
-   TOPO
-   ============================================================ */
-
-.topo {
-    height: 70px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 40px;
-
-    background: var(--azul-escuro);
-
-    color: white;
-
-    box-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.12);
-
-    position: relative;
-    z-index: 10;
-}
-
-
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-
-.titulo-topo {
-    margin-left: 28px;
-
-    padding-left: 28px;
-
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-
-    font-size: 17px;
-    font-weight: 600;
-}
-
-
-.voltar {
-    margin-left: auto;
-
-    color: white;
-
-    text-decoration: none;
-
-    padding: 10px 16px;
-
-    border-radius: 8px;
-
-    transition: 0.2s;
-}
-
-
-.voltar:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-
-/* ============================================================
-   CONTAINER
-   ============================================================ */
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
 
 .container {
-    width: min(1400px, calc(100% - 60px));
-
-    flex: 1;
+    width: 100%;
+    max-width: 1280px;
 
     margin: 0 auto;
+    padding: 30px;
 
-    padding: 45px 0 50px;
+    background: #ffffff;
+
+    border: 1px solid #e0e6ec;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(15, 45, 70, 0.06);
+
+    color: #263746;
 }
 
 
-/* ============================================================
-   TÍTULO
-   ============================================================ */
+/* =========================================================
+   TÍTULO DA PÁGINA
+========================================================= */
 
 .titulo-pagina {
     display: flex;
-
+    justify-content: space-between;
     align-items: center;
 
-    justify-content: space-between;
+    margin-bottom: 25px;
 
-    gap: 25px;
-
-    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
-
 
 .titulo-pagina h1 {
-    font-size: 30px;
+    margin: 0;
 
-    color: var(--azul-escuro);
+    font-size: 24px;
+    font-weight: 700;
 
-    margin-bottom: 8px;
+    color: #132f4c;
+
+    text-transform: none;
+    letter-spacing: 0;
 }
-
 
 .titulo-pagina p {
-    color: var(--texto-secundario);
+    margin: 0;
 
-    font-size: 15px;
+    color: #7a8997;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.5;
 }
 
 
-/* ============================================================
-   BOTÃO NOVO
-   ============================================================ */
+/* =========================================================
+   BOTÃO NOVO CLIENTE
+========================================================= */
 
 .btn-novo {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
-    padding: 13px 20px;
+    padding: 11px 18px;
 
-    border-radius: 9px;
-
-    background: var(--azul);
-
-    color: white;
+    background: #15588a;
+    color: #ffffff;
 
     text-decoration: none;
 
-    font-weight: 700;
-
+    border-radius: 6px;
     border: none;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
 
     cursor: pointer;
 
     transition:
-        background 0.2s,
-        transform 0.2s,
-        box-shadow 0.2s;
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
 }
 
+/* ANIMAÇÃO SOMENTE AO PASSAR O MOUSE */
 
 .btn-novo:hover {
-    background: var(--azul-hover);
+    background: #124b76;
 
-    transform: translateY(-1px);
+    transform: translateY(-3px);
 
-    box-shadow:
-        0 5px 14px rgba(22, 75, 122, 0.22);
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.22);
 }
 
 
-/* ============================================================
+/* =========================================================
    ALERTAS
-   ============================================================ */
+========================================================= */
 
 .alerta {
     display: flex;
-
     align-items: center;
 
     gap: 10px;
 
-    padding: 14px 18px;
+    padding: 13px 16px;
+    margin-bottom: 20px;
 
-    margin-bottom: 25px;
+    border-radius: 7px;
 
-    border-radius: 9px;
-
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
 }
-
 
 .alerta.sucesso {
-    background: var(--verde-fundo);
+    background: #edf8f0;
+    color: #2e7d32;
 
-    color: #166534;
-
-    border: 1px solid #bbf7d0;
+    border: 1px solid #c8e6c9;
 }
-
 
 .alerta-icone {
-    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: #2e7d32;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    flex-shrink: 0;
 }
 
 
-/* ============================================================
+/* =========================================================
    RESUMO
-   ============================================================ */
+========================================================= */
 
 .resumo {
     margin-bottom: 25px;
 }
 
-
 .resumo-card {
     width: 260px;
 
     display: flex;
-
     align-items: center;
 
     gap: 15px;
 
-    padding: 18px 20px;
+    padding: 16px 18px;
 
-    background: white;
+    background: #ffffff;
 
-    border: 1px solid var(--borda);
+    border: 1px solid #e0e6ec;
+    border-radius: 8px;
 
-    border-radius: 12px;
-
-    box-shadow:
-        0 3px 12px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
-
 
 .resumo-icone {
     width: 45px;
     height: 45px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    background: var(--azul-fundo);
+    background: #f1f4f7;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
-    font-size: 22px;
+    color: #15588a;
+
+    font-size: 21px;
 }
-
 
 .resumo-card span {
     display: block;
 
-    color: var(--texto-secundario);
+    margin-bottom: 4px;
+
+    color: #7a8997;
 
     font-size: 13px;
-
-    margin-bottom: 4px;
+    font-weight: 400;
 }
-
 
 .resumo-card strong {
-    font-size: 23px;
+    display: block;
 
-    color: var(--azul-escuro);
+    color: #132f4c;
+
+    font-size: 23px;
+    font-weight: 700;
 }
 
 
-/* ============================================================
-   FILTROS
-   ============================================================ */
+/* =========================================================
+   BARRA DE FILTROS
+========================================================= */
 
 .filtros {
-    background: white;
+    display: flex;
+    align-items: center;
 
-    border: 1px solid var(--borda);
+    gap: 10px;
 
-    border-radius: 12px;
+    background: #ffffff;
 
-    padding: 20px;
-
+    padding: 14px 16px;
     margin-bottom: 25px;
 
-    box-shadow:
-        0 3px 12px rgba(15, 23, 42, 0.04);
+    border-radius: 8px;
+
+    border: 1px solid #e0e6ec;
+
+    flex-wrap: wrap;
+
+    box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
-
 .filtro-form {
-    display: flex;
+    width: 100%;
 
+    display: flex;
     align-items: flex-end;
 
-    gap: 14px;
+    gap: 10px;
 
     flex-wrap: wrap;
 }
 
 
+/* =========================================================
+   CAMPO DE BUSCA
+========================================================= */
+
 .campo-busca {
     flex: 1;
-
     min-width: 280px;
 }
-
 
 .campo-busca label {
     display: block;
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
+
+    color: #34495e;
 
     font-size: 13px;
-
-    font-weight: 700;
-
-    color: var(--texto);
+    font-weight: 600;
 }
-
 
 .campo-busca input {
     width: 100%;
+    height: 40px;
 
-    height: 42px;
+    padding: 10px 13px;
 
-    padding: 0 13px;
+    background: #ffffff;
 
-    border: 1px solid var(--borda);
+    border: 1px solid #d9e1e8;
+    border-radius: 6px;
 
-    border-radius: 8px;
+    color: #263746;
+
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 400;
 
     outline: none;
 
-    font-size: 14px;
-
-    color: var(--texto);
-
-    transition: 0.2s;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+.campo-busca input::placeholder {
+    color: #9aa7b2;
+    font-weight: 400;
+}
+
+.campo-busca input:hover {
+    border-color: #b8c7d4;
+}
 
 .campo-busca input:focus {
-    border-color: var(--azul);
+    border-color: #185b8f;
 
-    box-shadow:
-        0 0 0 3px rgba(22, 75, 122, 0.1);
+    background: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(24, 91, 143, 0.10);
 }
 
 
-/* ============================================================
+/* =========================================================
    CHECKBOX
-   ============================================================ */
+========================================================= */
 
 .checkbox-associado {
-    height: 42px;
+    height: 40px;
 
     display: flex;
-
     align-items: center;
 
     gap: 8px;
 
-    padding: 0 14px;
+    padding: 0 5px;
 
-    border: 1px solid var(--borda);
+    color: #435466;
 
-    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
 
     cursor: pointer;
 
-    font-size: 14px;
-
     white-space: nowrap;
 }
-
 
 .checkbox-associado input {
     width: 16px;
     height: 16px;
 
-    accent-color: var(--azul);
+    margin: 0;
+
+    accent-color: #15588a;
 
     cursor: pointer;
 }
 
+.checkbox-associado span {
+    font-weight: 400;
+}
 
-/* ============================================================
+
+/* =========================================================
    BOTÕES DE FILTRO
-   ============================================================ */
+========================================================= */
 
 .btn-filtrar,
 .btn-limpar {
-    height: 42px;
-
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
-    padding: 0 18px;
+    padding: 10px 17px;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   BOTÃO FILTRAR
+========================================================= */
+
+.btn-filtrar {
+    height: 40px;
+
+    background: #15588a;
+    color: #ffffff;
+
+    border: none;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+}
+
+/* ANIMAÇÃO SOMENTE AO PASSAR O MOUSE */
+
+.btn-filtrar:hover {
+    background: #124b76;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.22);
+}
+
+
+/* =========================================================
+   BOTÃO LIMPAR
+========================================================= */
+
+.btn-limpar {
+    height: 40px;
+
+    background: #ffffff;
+
+    color: #15588a;
+
+    border: 1px solid #15588a;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.btn-limpar:hover {
+    background: #eef5fa;
+
+    color: #124b76;
+
+    border-color: #124b76;
+}
+
+
+/* =========================================================
+   CARD DA TABELA
+========================================================= */
+
+.tabela-card {
+    overflow: hidden;
 
     border-radius: 8px;
 
-    font-size: 14px;
+    background: #ffffff;
 
-    font-weight: 700;
+    border: 1px solid #e0e6ec;
 
-    cursor: pointer;
-
-    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
 
-.btn-filtrar {
-    border: none;
-
-    background: var(--azul);
-
-    color: white;
-}
-
-
-.btn-filtrar:hover {
-    background: var(--azul-hover);
-}
-
-
-.btn-limpar {
-    border: 1px solid var(--borda);
-
-    color: var(--texto);
-
-    background: white;
-}
-
-
-.btn-limpar:hover {
-    background: var(--fundo);
-}
-
-
-/* ============================================================
-   TABELA
-   ============================================================ */
-
-.tabela-card {
-    background: white;
-
-    border: 1px solid var(--borda);
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 4px 16px rgba(15, 23, 42, 0.05);
-}
-
+/* =========================================================
+   TOPO DA TABELA
+========================================================= */
 
 .tabela-topo {
-    padding: 20px 24px;
+    padding: 16px 20px;
 
-    border-bottom: 1px solid var(--borda);
+    border-bottom: 1px solid #e8edf1;
+
+    background: #ffffff;
 }
-
 
 .tabela-topo h2 {
-    color: var(--azul-escuro);
+    margin: 0 0 4px 0;
 
-    font-size: 18px;
+    color: #132f4c;
 
-    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 700;
+
+    line-height: 1.3;
 }
-
 
 .tabela-topo span {
-    color: var(--texto-secundario);
+    color: #7a8997;
 
     font-size: 13px;
+    font-weight: 400;
 }
 
+
+/* =========================================================
+   WRAPPER DA TABELA
+========================================================= */
 
 .tabela-wrapper {
-    width: 100%;
-
     overflow-x: auto;
+
+    margin-bottom: 0;
+
+    border-radius: 0;
+
+    background: #ffffff;
 }
 
 
-table {
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-wrapper table {
     width: 100%;
+    min-width: 900px;
 
     border-collapse: collapse;
 
-    min-width: 950px;
-}
-
-
-thead {
-    background: #f8fafc;
-}
-
-
-th {
-    padding: 15px 20px;
-
     text-align: left;
+}
 
-    color: var(--texto-secundario);
 
-    font-size: 12px;
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
 
-    text-transform: uppercase;
+.tabela-wrapper th,
+.tabela-wrapper td {
+    padding: 14px 16px;
 
-    letter-spacing: 0.4px;
+    border-bottom: 1px solid #e8edf1;
+
+    font-size: 14px;
+}
+
+.tabela-wrapper th {
+    background: #f1f4f7;
+
+    color: #34495e;
 
     font-weight: 700;
 
-    border-bottom: 1px solid var(--borda);
+    font-size: 13px;
+
+    white-space: nowrap;
 }
 
 
-td {
-    padding: 15px 20px;
+/* =========================================================
+   CÉLULAS
+========================================================= */
 
-    border-bottom: 1px solid #eef2f7;
+.tabela-wrapper td {
+    color: #435466;
 
     font-size: 14px;
+    font-weight: 400;
 
     vertical-align: middle;
 }
 
 
-tbody tr {
-    transition: background 0.15s;
+/* =========================================================
+   HOVER DA TABELA
+========================================================= */
+
+.tabela-wrapper tbody tr {
+    background: #ffffff;
+
+    transition: background-color 0.2s ease;
 }
 
-
-tbody tr:hover {
-    background: #f8fafc;
+.tabela-wrapper tbody tr:hover {
+    background: #f7fafc;
 }
 
-
-tbody tr:last-child td {
+.tabela-wrapper tbody tr:last-child td {
     border-bottom: none;
 }
 
 
-/* ============================================================
-   CLIENTE
-   ============================================================ */
+/* =========================================================
+   LINKS
+========================================================= */
+
+.tabela-wrapper td a {
+    color: #15588a;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.tabela-wrapper td a:hover {
+    color: #124b76;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CLIENTE / AVATAR
+========================================================= */
 
 .cliente-nome {
     display: flex;
-
     align-items: center;
 
-    gap: 12px;
+    gap: 11px;
 }
 
-
 .avatar {
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
+    flex-shrink: 0;
+
     border-radius: 50%;
 
-    background: var(--azul-fundo);
+    background: #eef5fa;
 
-    color: var(--azul);
+    color: #15588a;
 
-    font-weight: 800;
-
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 700;
 }
-
 
 .cliente-nome strong {
     display: block;
 
-    color: var(--texto);
-
     margin-bottom: 3px;
-}
 
+    color: #263746;
+
+    font-size: 14px;
+    font-weight: 600;
+}
 
 .cliente-nome small {
     display: block;
 
-    color: var(--texto-secundario);
+    color: #7a8997;
 
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 
-/* ============================================================
+/* =========================================================
    MATRÍCULA
-   ============================================================ */
+========================================================= */
 
 .matricula {
+    display: inline-flex;
+    align-items: center;
+
     padding: 5px 9px;
 
-    border-radius: 6px;
+    background: #f1f4f7;
 
-    background: #f1f5f9;
+    color: #34495e;
 
-    color: var(--texto);
+    border: 1px solid #e0e6ec;
 
-    font-family: monospace;
+    border-radius: 5px;
+
+    font-family: inherit;
 
     font-size: 13px;
+    font-weight: 500;
 }
-
 
 .sem-dado {
-    color: #94a3b8;
+    color: #9aa7b2;
+
+    font-size: 14px;
+    font-weight: 400;
 }
 
 
-/* ============================================================
+/* =========================================================
    BADGES
-   ============================================================ */
+========================================================= */
 
 .badge {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
-    padding: 5px 9px;
+    padding: 5px 10px;
 
-    border-radius: 20px;
+    border-radius: 5px;
 
     font-size: 12px;
+    font-weight: 600;
 
-    font-weight: 700;
+    white-space: nowrap;
 }
 
+
+/* =========================================================
+   BADGE ASSOCIADO
+========================================================= */
 
 .badge.associado {
-    background: var(--verde-fundo);
+    background: #edf8f0;
 
-    color: #166534;
+    color: #2e7d32;
+
+    border: 1px solid #c8e6c9;
 }
 
+
+/* =========================================================
+   BADGE CLIENTE
+========================================================= */
 
 .badge.comum {
-    background: #f1f5f9;
+    background: #f1f4f7;
 
-    color: #475569;
+    color: #5f6f7e;
+
+    border: 1px solid #dce3e8;
 }
 
+
+/* =========================================================
+   BADGE ATIVO
+========================================================= */
 
 .badge.ativo {
-    background: var(--verde-fundo);
+    background: #edf8f0;
 
-    color: #166534;
+    color: #2e7d32;
+
+    border: 1px solid #c8e6c9;
 }
 
+
+/* =========================================================
+   BADGE INATIVO
+========================================================= */
 
 .badge.inativo {
-    background: var(--vermelho-fundo);
+    background: #fff1f1;
 
-    color: #991b1b;
+    color: #c62828;
+
+    border: 1px solid #f3caca;
 }
 
+
+/* =========================================================
+   DESCONTO
+========================================================= */
 
 .desconto {
     display: block;
 
     margin-top: 4px;
 
-    color: var(--verde);
+    color: #2e7d32;
 
     font-size: 11px;
+    font-weight: 400;
 }
 
 
-/* ============================================================
+/* =========================================================
    AÇÕES
-   ============================================================ */
+========================================================= */
 
 .acoes {
     display: flex;
-
     align-items: center;
 
     gap: 7px;
-}
 
+    white-space: nowrap;
+}
 
 .acoes form {
     margin: 0;
 }
 
 
+/* =========================================================
+   BOTÕES DE AÇÃO
+========================================================= */
+
 .btn-editar,
 .btn-desativar,
 .btn-ativar {
-    height: 34px;
-
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 5px;
 
+    height: 34px;
+
     padding: 0 10px;
 
-    border-radius: 7px;
+    border-radius: 6px;
 
-    font-size: 12px;
+    font-family: inherit;
 
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
 
     cursor: pointer;
 
     text-decoration: none;
 
-    transition: 0.2s;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
+
+/* =========================================================
+   EDITAR
+========================================================= */
 
 .btn-editar {
-    background: var(--azul-fundo);
+    background: #ffffff;
 
-    color: var(--azul);
+    color: #15588a;
 
-    border: 1px solid #cbddea;
+    border: 1px solid #15588a;
 }
-
 
 .btn-editar:hover {
-    background: #dbeaf5;
+    background: #eef5fa;
+
+    color: #124b76;
+
+    border-color: #124b76;
 }
 
+
+/* =========================================================
+   DESATIVAR
+========================================================= */
 
 .btn-desativar {
-    background: var(--vermelho-fundo);
+    background: #fff1f1;
 
-    color: var(--vermelho);
+    color: #c62828;
 
-    border: 1px solid #fecaca;
+    border: 1px solid #f3caca;
 }
-
 
 .btn-desativar:hover {
-    background: #fecaca;
+    background: #fff1f1;
+
+    color: #c62828;
+
+    border-color: #e8aaaa;
 }
 
+
+/* =========================================================
+   ATIVAR
+========================================================= */
 
 .btn-ativar {
-    background: var(--verde-fundo);
+    background: #edf8f0;
 
-    color: var(--verde);
+    color: #2e7d32;
 
-    border: 1px solid #bbf7d0;
+    border: 1px solid #c8e6c9;
 }
-
 
 .btn-ativar:hover {
-    background: #bbf7d0;
+    background: #edf8f0;
+
+    color: #2e7d32;
+
+    border-color: #a8d5ab;
 }
 
 
-/* ============================================================
-   NENHUM CLIENTE
-   ============================================================ */
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
 
 .nenhum-cliente {
+    padding: 55px 30px !important;
+
     text-align: center;
 
-    padding: 70px 20px !important;
-}
+    color: #7a8997;
 
+    font-size: 14px;
+    font-weight: 400;
+}
 
 .vazio-icone {
-    font-size: 45px;
+    display: flex;
 
-    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 15px;
+
+    background: #f1f4f7;
+
+    border-radius: 50%;
+
+    font-size: 24px;
 }
-
 
 .nenhum-cliente h3 {
-    color: var(--azul-escuro);
+    margin: 0 0 7px;
 
-    margin-bottom: 7px;
+    color: #34495e;
+
+    font-size: 16px;
+    font-weight: 600;
 }
-
 
 .nenhum-cliente p {
-    color: var(--texto-secundario);
+    max-width: 500px;
 
-    margin-bottom: 20px;
+    margin: 0 auto 18px;
+
+    color: #7a8997;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.5;
 }
 
+
+/* =========================================================
+   BOTÃO ESTADO VAZIO
+========================================================= */
 
 .btn-novo-vazio {
     display: inline-flex;
 
+    align-items: center;
+    justify-content: center;
+
     padding: 10px 16px;
 
-    background: var(--azul);
+    background: #15588a;
 
-    color: white;
+    color: #ffffff;
 
-    border-radius: 8px;
+    border: none;
+
+    border-radius: 6px;
 
     text-decoration: none;
 
+    font-family: inherit;
+
     font-size: 13px;
+    font-weight: 600;
 
-    font-weight: 700;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+    
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+}
+
+.btn-novo-vazio:hover {
+    background: #124b76;
+
+    box-shadow: 0 4px 8px rgba(21, 88, 138, 0.22);
 }
 
 
-/* ============================================================
-   RODAPÉ
-   ============================================================ */
-
-.rodape {
-    padding: 20px;
-
-    width: 100%;
-    box-sizing: border-box;
-
-    text-align: center;
-
-    border-top: 1px solid var(--borda);
-
-    background: white;
-
-    color: var(--texto-secundario);
-
-    font-size: 12px;
-}
-
-
-/* ============================================================
+/* =========================================================
    RESPONSIVIDADE
-   ============================================================ */
+========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
 
-    .topo {
-        padding: 0 20px;
-    }
-
-    .titulo-topo {
-        margin-left: 15px;
-        padding-left: 15px;
+    body {
+        padding: 20px 12px;
     }
 
     .container {
-        width: calc(100% - 25px);
-
-        padding: 25px 0;
+        padding: 20px;
     }
 
     .titulo-pagina {
-        align-items: flex-start;
-
         flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 21px;
     }
 
     .btn-novo {
@@ -925,71 +1039,83 @@ tbody tr:last-child td {
 
     .filtro-form {
         align-items: stretch;
-
         flex-direction: column;
     }
 
     .campo-busca {
+        width: 100%;
         min-width: 0;
     }
 
-    .checkbox-associado,
+    .checkbox-associado {
+        width: 100%;
+    }
+
     .btn-filtrar,
     .btn-limpar {
         width: 100%;
     }
 
-    .rodape {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px 40px;
-
-    border-top: 1px solid var(--borda);
-
-    color: var(--texto-secundario);
-
-    font-size: 12px;
-
-    background: white;
-
-    text-align: center;
-}
-}
-
-
-@media (max-width: 550px) {
-
-    .topo {
-        height: auto;
-
-        min-height: 70px;
-
-        flex-wrap: wrap;
-
-        gap: 10px;
-
-        padding: 15px 20px;
+    .tabela-wrapper {
+        overflow-x: auto;
     }
 
-    .titulo-topo {
-        border: none;
+    .tabela-wrapper table {
+        min-width: 900px;
+    }
+}
 
-        margin: 0;
 
-        padding: 0;
+/* =========================================================
+   TELAS PEQUENAS
+========================================================= */
 
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    .container {
+        padding: 15px;
+
+        border-radius: 8px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 20px;
+    }
+
+    .resumo-card {
         width: 100%;
-
-        order: 3;
-
-        font-size: 14px;
     }
 
-    .voltar {
-        font-size: 13px;
+    .tabela-topo {
+        padding: 15px;
     }
 
+    .tabela-wrapper th,
+    .tabela-wrapper td {
+        padding: 12px;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .btn-novo:hover,
+    .btn-filtrar:hover {
+        transform: none;
+    }
 }
