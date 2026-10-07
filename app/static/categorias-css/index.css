@@ -1,35 +1,4 @@
-/* =========================================================
-   BLOCO 1: VARIÁVEIS, RESET E CONTAINER (TEMA CLARO SENAI)
-   ========================================================= */
-:root {
-    /* Fundo e Cartão (Iguais ao form.css) */
-    --fundo-pagina: #f4f7fb;
-    --fundo-card: #ffffff;
-
-    /* Cores SENAI */
-    --azul-senai: #1a4971;
-    --azul-senai-hover: #123452;
-    --azul-badge-bg: #eef4fa;
-
-    /* Textos */
-    --texto-titulo: #0f172a;
-    --texto-corpo: #334155;
-    --texto-mutado: #64748b;
-
-    /* Bordas e Sombras */
-    --borda-suave: #e2e8f0;
-    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.06);
-
-    /* Status e Alertas */
-    --verde-sucesso: #16a34a;
-    --verde-bg: #dcfce7;
-    --verde-borda: #bbf7d0;
-
-    --vermelho-erro: #dc2626;
-    --vermelho-bg: #fee2e2;
-    --vermelho-borda: #fecaca;
-}
-
+/* Reset Básico */
 * {
     margin: 0;
     padding: 0;
@@ -37,223 +6,124 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--fundo-pagina);
-    color: var(--texto-corpo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    color: #ffffff;
     padding: 40px 20px;
 }
 
-.container, .glass-container {
-    background-color: var(--fundo-card);
-    padding: 35px 30px;
-    border-radius: 12px;
-    border: 1px solid var(--borda-suave);
+/* Card Estilo Glassmorphism (Largo para Tabelas) */
+.glass-container {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 40px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
-    max-width: 960px;
-    box-shadow: var(--sombra-card);
+    max-width: 900px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* =========================================================
-   BLOCO 2: CABEÇALHO E BOTÃO DE NOVA CATEGORIA
-   ========================================================= */
-.page-header, .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.page-header h1, h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--texto-titulo);
-}
-
-.btn-primary {
-    background-color: var(--azul-senai);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 14px;
+/* Títulos e Subtítulos */
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
     font-weight: 600;
-    display: inline-block;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
 }
 
-.btn-primary:hover {
-    background-color: var(--azul-senai-hover);
-    text-decoration: none;
-    transform: translateY(-1px);
-}
-
-/* =========================================================
-   BLOCO 3: MENSAGENS DE ALERTA (FEEDBACK)
-   ========================================================= */
+/* Mensagens de Alerta */
 .alert {
     padding: 12px 16px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-size: 14px;
-    font-weight: 500;
 }
 
 .alert-success {
-    background-color: var(--verde-bg);
-    border: 1px solid var(--verde-borda);
-    color: var(--verde-sucesso);
+    background: rgba(46, 204, 113, 0.15);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
 }
 
-.alert-error, .alert-danger {
-    background-color: var(--vermelho-bg);
-    border: 1px solid var(--vermelho-borda);
-    color: var(--vermelho-erro);
+.alert-danger {
+    background: rgba(231, 76, 60, 0.15);
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
 }
 
-/* =========================================================
-   BLOCO 4: TABELA DE CATEGORIAS E BADGES DE STATUS
-   ========================================================= */
+/* Topo / Barra de Ações */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Links */
+a {
+    color: #00adb5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00c4ce;
+    text-decoration: underline;
+}
+
+/* Tabela Personalizada */
 .table-responsive {
     overflow-x: auto;
-    width: 100%;
 }
 
-.categories-table, .custom-table {
+.custom-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.categories-table th,
-.categories-table td,
 .custom-table th,
 .custom-table td {
     padding: 14px 16px;
     text-align: left;
-    border-bottom: 1px solid var(--borda-suave);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.categories-table th, .custom-table th {
-    background-color: #f8fafc;
-    color: var(--texto-mutado);
-    font-size: 12px;
-    font-weight: 700;
+.custom-table th {
+    background: rgba(255, 255, 255, 0.05);
+    color: #b0bec5;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.categories-table td, .custom-table td {
-    font-size: 14px;
-    color: var(--texto-corpo);
+.custom-table td {
+    font-size: 15px;
 }
 
-.categories-table tr:hover, .custom-table tr:hover {
-    background-color: #f8fafc;
+.custom-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
 }
 
-/* Badges de Status (Ativo / Inativo) */
-.badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.badge-active {
-    background-color: var(--verde-bg);
-    color: var(--verde-sucesso);
-    border: 1px solid var(--verde-borda);
-}
-
-.badge-inactive {
-    background-color: var(--vermelho-bg);
-    color: var(--vermelho-erro);
-    border: 1px solid var(--vermelho-borda);
-}
-
-.empty-state {
-    text-align: center;
-    color: var(--texto-mutado);
-    padding: 30px !important;
-}
-
-/* =========================================================
-   BLOCO 5: AÇÕES (EDITAR/DESATIVAR/ATIVAR) E RODAPÉ
-   ========================================================= */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.form-inline {
-    display: inline;
-}
-
-.btn-edit {
-    color: var(--azul-senai);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.btn-edit:hover {
-    color: var(--azul-senai-hover);
-    text-decoration: underline;
-}
-
-.btn-toggle, .btn-inline, .btn-activate, .btn-deactivate {
+/* Botão Inline da Tabela (Ativar/Desativar) */
+.btn-inline {
+    background: #00adb5;
+    color: #ffffff;
+    border: none;
     border-radius: 6px;
     padding: 6px 14px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-.btn-activate {
-    background-color: var(--verde-bg);
-    color: var(--verde-sucesso);
-    border: 1px solid var(--verde-borda);
-}
-
-.btn-activate:hover {
-    background-color: #bbf7d0;
-}
-
-.btn-deactivate {
-    background-color: var(--vermelho-bg);
-    color: var(--vermelho-erro);
-    border: 1px solid var(--vermelho-borda);
-}
-
-.btn-deactivate:hover {
-    background-color: #fecaca;
-}
-
-.page-footer {
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid var(--borda-suave);
-}
-
-.btn-back, a {
-    color: var(--azul-senai);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.btn-back:hover, a:hover {
-    color: var(--azul-senai-hover);
-    text-decoration: underline;
+.btn-inline:hover {
+    background: #00c4ce;
 }
