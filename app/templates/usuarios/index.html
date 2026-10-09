@@ -1,0 +1,130 @@
+<escape>{% extends "base.html" %}
+
+{% block title %}Usuários | PDV AAPM{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="/static/usuarios-css/index.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="content-card">
+    <div class="page-header">
+        <div>
+            <h1>Gerenciamento de usuários</h1>
+            <p>Cadastre funcionários e gerencie seus acessos ao sistema.</p>
+        </div>
+
+```
+    <a href="/usuarios/novo" class="btn btn-primary">
+        + Novo usuário
+    </a>
+</div>
+
+{% if request.query_params.get('criado') == 'ok' %}
+    <div class="alert success">Usuário cadastrado com sucesso!</div>
+{% elif request.query_params.get('editado') == 'ok' %}
+    <div class="alert success">Usuário atualizado com sucesso!</div>
+{% elif request.query_params.get('erro') == 'autoproprio' %}
+    <div class="alert error">Você não pode desativar sua própria conta.</div>
+{% endif %}
+
+<form method="get" action="/usuarios/" class="filter-bar">
+    <input
+        type="search"
+        name="busca"
+        placeholder="Buscar usuários..."
+        value="{{ request.query_params.get('busca', '') }}"
+        aria-label="Buscar usuários"
+    >
+
+    <button type="submit" class="btn btn-primary">Buscar</button>
+    <a href="/usuarios/" class="btn btn-outline">Limpar</a>
+</form>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Usuário</th>
+                <th>E-mail</th>
+                <th>Perfil</th>
+                <th>Status</th>
+                <th>Data de cadastro</th>
+                <th class="actions-heading">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in usuarios %}
+            <tr>
+                <td>
+                    <div class="person-cell">
+                        <div class="person-avatar">
+                            {{ item.nome[:1]|upper }}
+                        </div>
+                        <strong>{{ item.nome }}</strong>
+                    </div>
+                </td>
+
+                <td>{{ item.email }}</td>
+
+                <td>
+                    <span class="role-badge {{ 'role-admin' if item.role == 'admin' else 'role-operator' }}">
+                        {{ 'Administrador' if item.role == 'admin' else 'Operador' }}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="status-badge {{ 'status-active' if item.ativo else 'status-inactive' }}">
+                        {{ 'Ativo' if item.ativo else 'Inativo' }}
+                    </span>
+                </td>
+
+                <td>
+                    {{ item.criando_em.strftime('%d/%m/%Y') if item.criando_em else '—' }}
+                </td>
+
+                <td>
+                    <div class="actions">
+                        <a
+                            href="/usuarios/{{ item.id }}/editar"
+                            class="btn-action edit"
+                            title="Editar usuário"
+                        >
+                            Editar
+                        </a>
+
+                        <form method="post" action="/usuarios/{{ item.id }}/toggle-ativo" onsubmit="return confirm({{ ('Deseja realmente desativar este usuário?' if item.ativo else 'Deseja realmente ativar este usuário?') | tojson }});" >
+                            <button
+                                type="submit"
+                                class="btn-action {{ 'deactivate' if item.ativo else 'activate' }}"
+                            >
+                                {{ 'Desativar' if item.ativo else 'Ativar' }}
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            {% else %}
+            <tr>
+                <td colspan="6" class="empty-state">
+                    <div class="empty-icon">♙</div>
+                    <strong>Nenhum usuário encontrado</strong>
+                    <p>Cadastre um usuário ou altere sua pesquisa.</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="page-footer">
+    <a href="/pdv/" class="btn btn-outline">← Voltar ao PDV</a>
+    <span>{{ usuarios|length }} usuário(s) listado(s)</span>
+</div>
+
+</section>
+{% endblock %}</escape>
