@@ -1,43 +1,62 @@
+
 /* =========================================================
-   ADMINISTRAÇÃO DE PRODUTOS
-   PADRÃO PDV — AAPM SENAI
+   ADMINISTRAÇÃO DE PRODUTOS — AAPM SENAI
+   PADRÃO VISUAL DA PÁGINA DE CLIENTES
+========================================================= */
+
+
+/* =========================================================
+   1. CONFIGURAÇÕES GERAIS
 ========================================================= */
 
 :root {
-    --azul-senai: #164b7a;
-    --azul-escuro: #102d4a;
-    --azul-hover: #0d5ca8;
+    --azul-senai: #15588a;
+    --azul-escuro: #132f4c;
+    --azul-hover: #124b76;
 
-    --fundo: #f5f7fa;
+    --fundo: #f4f6f8;
     --branco: #ffffff;
 
-    --texto: #172033;
-    --texto-secundario: #64748b;
+    --texto: #263746;
+    --texto-secundario: #7a8997;
 
-    --borda: #e2e8f0;
+    --borda: #e0e6ec;
+    --borda-suave: #e8edf1;
 
-    --verde: #16a34a;
-    --vermelho: #dc2626;
+    --verde: #2e7d32;
+    --verde-fundo: #edf8f0;
+    --verde-borda: #c8e6c9;
 
-    --sombra: 0 2px 8px rgba(15, 23, 42, 0.06);
+    --vermelho: #c62828;
+    --vermelho-fundo: #fff1f1;
+    --vermelho-borda: #f3caca;
+
+    --sombra: 0 2px 8px rgba(15, 45, 70, 0.06);
 }
 
-
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+
+    font-family:
+        "Segoe UI",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Roboto",
+        sans-serif;
+
     background: var(--fundo);
     color: var(--texto);
-    min-height: 100vh;
 }
 
 button,
@@ -47,376 +66,453 @@ textarea {
     font-family: inherit;
 }
 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 a {
     text-decoration: none;
 }
 
 
 /* =========================================================
-   CABEÇALHO
+   2. CONTAINER PRINCIPAL BRANCO
 ========================================================= */
 
-.topo {
-    height: 64px;
-
-    background: var(--azul-escuro);
-    color: white;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 26px;
-
-    border-bottom: 1px solid #dbe4ec;
-
-    position: sticky;
-    top: 0;
-
-    z-index: 1000;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: 700;
-
-    margin-right: 25px;
-}
-
-.titulo-topo {
-    font-size: 15px;
-    font-weight: 600;
-
-    flex: 1;
-}
-
-.voltar {
-    height: 36px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 14px;
-
-    border: 1px solid rgba(255,255,255,0.20);
-    border-radius: 7px;
-
-    color: white;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    transition: 0.2s;
-}
-
-.voltar:hover {
-    background: rgba(255,255,255,0.10);
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
+.page-container > .container,
 .container {
-    width: min(1180px, calc(100% - 48px));
+    width: 100%;
+    max-width: 1280px;
 
-    margin: 0 auto;
+    margin: 30px auto;
+    padding: 30px;
 
-    padding: 32px 0 50px;
+    background: var(--branco);
+    color: var(--texto);
+
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+
+    box-shadow: var(--sombra);
+
+    position: relative;
+    z-index: 1;
 }
 
 
 /* =========================================================
-   TÍTULO
+   3. EFEITOS DE FUNDO
+   Mantém os elementos do HTML sem cobrir a página
+========================================================= */
+
+.fluidos {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.fluidos span {
+    position: absolute;
+
+    display: block;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(21, 88, 138, 0.025);
+
+    filter: blur(2px);
+}
+
+.fluidos span:nth-child(1) {
+    top: 15%;
+    left: 5%;
+}
+
+.fluidos span:nth-child(2) {
+    top: 50%;
+    right: 4%;
+
+    width: 230px;
+    height: 230px;
+}
+
+.fluidos span:nth-child(3) {
+    bottom: 5%;
+    left: 25%;
+
+    width: 150px;
+    height: 150px;
+}
+
+.fluidos span:nth-child(4) {
+    top: 8%;
+    right: 25%;
+
+    width: 120px;
+    height: 120px;
+}
+
+
+/* =========================================================
+   4. TÍTULO DA PÁGINA
 ========================================================= */
 
 .titulo-pagina {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 25px;
 }
 
 .titulo-pagina h1 {
-    font-size: 25px;
+    margin: 0;
+
+    color: var(--azul-escuro);
+
+    font-size: 24px;
     font-weight: 700;
 
-    color: var(--texto);
+    line-height: 1.35;
 
-    margin-bottom: 6px;
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 .titulo-pagina p {
+    margin: 0;
+
     color: var(--texto-secundario);
 
     font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   BARRA DE AÇÕES
+   5. BARRA DE AÇÕES
 ========================================================= */
 
 .barra-acoes {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
-    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-bottom: 20px;
 }
 
 .btn-novo {
-    height: 40px;
+    min-height: 40px;
 
-    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    border: none;
-    border-radius: 7px;
+    padding: 10px 18px;
 
     background: var(--azul-senai);
-    color: white;
+    color: var(--branco);
 
-    font-size: 13px;
-    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn-novo:hover {
     background: var(--azul-hover);
 
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.20);
 }
 
 .contador {
     color: var(--texto-secundario);
 
     font-size: 13px;
+    font-weight: 400;
 }
 
 
 /* =========================================================
-   FILTROS
+   6. CARD DOS FILTROS
 ========================================================= */
 
 .filtros {
-    background: white;
+    width: 100%;
+
+    padding: 16px;
+
+    margin-bottom: 25px;
+
+    background: var(--branco);
 
     border: 1px solid var(--borda);
-    border-radius: 9px;
+    border-radius: 8px;
 
-    padding: 18px;
-
-    margin-bottom: 20px;
-
-    box-shadow: var(--sombra);
+    box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
 .filtro-form {
+    width: 100%;
+
     display: grid;
 
-    grid-template-columns: minmax(280px, 1fr) minmax(220px, 0.55fr) auto auto;
-
-    gap: 12px;
+    grid-template-columns:
+        minmax(240px, 1fr)
+        minmax(190px, 0.65fr)
+        auto
+        auto;
 
     align-items: end;
+    gap: 12px;
 }
 
-.campo-filtro {
-    display: flex;
 
+/* =========================================================
+   7. CAMPOS DOS FILTROS
+========================================================= */
+
+.campo-filtro {
+    min-width: 0;
+
+    display: flex;
     flex-direction: column;
 
     gap: 6px;
 }
 
 .campo-filtro label {
-    font-size: 12px;
+    color: #34495e;
 
-    font-weight: 700;
-
-    color: var(--texto);
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .campo-filtro input,
 .campo-filtro select {
     width: 100%;
-
     height: 40px;
 
     padding: 0 12px;
 
-    border: 1px solid var(--borda);
-
-    border-radius: 7px;
-
-    background: white;
-
+    background: var(--branco);
     color: var(--texto);
+
+    border: 1px solid #d9e1e8;
+    border-radius: 6px;
 
     outline: none;
 
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 400;
 
-    transition: 0.2s;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-filtro input::placeholder {
+    color: #9aa7b2;
+}
+
+.campo-filtro input:hover,
+.campo-filtro select:hover {
+    border-color: #b8c7d4;
 }
 
 .campo-filtro input:focus,
 .campo-filtro select:focus {
     border-color: var(--azul-senai);
 
-    box-shadow:
-        0 0 0 3px rgba(22, 75, 122, 0.10);
+    box-shadow: 0 0 0 3px rgba(21, 88, 138, 0.10);
 }
 
 
 /* =========================================================
-   BOTÃO FILTRAR
+   8. BOTÃO FILTRAR
 ========================================================= */
 
 .btn-filtrar {
-    height: 40px;
+    min-height: 40px;
 
-    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    border: none;
-
-    border-radius: 7px;
+    padding: 10px 17px;
 
     background: var(--azul-senai);
+    color: var(--branco);
 
-    color: white;
+    border: none;
+    border-radius: 6px;
 
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn-filtrar:hover {
     background: var(--azul-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.20);
 }
 
 
 /* =========================================================
-   BOTÃO LIMPAR
+   9. BOTÃO LIMPAR
 ========================================================= */
 
 .btn-limpar {
-    height: 40px;
+    min-height: 40px;
 
-    padding: 0 15px;
-
-    display: flex;
-
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid var(--borda);
+    padding: 10px 16px;
 
-    border-radius: 7px;
+    background: var(--branco);
+    color: var(--azul-senai);
 
-    background: white;
+    border: 1px solid var(--azul-senai);
+    border-radius: 6px;
 
-    color: var(--texto-secundario);
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 600;
 
-    transition: 0.2s;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .btn-limpar:hover {
-    background: #f8fafc;
+    background: #eef5fa;
+    color: var(--azul-hover);
 
-    color: var(--texto);
+    border-color: var(--azul-hover);
 }
 
 
 /* =========================================================
-   LISTA DE PRODUTOS
+   10. CARD DA LISTA DE PRODUTOS
 ========================================================= */
 
 .lista-card {
-    background: white;
-
-    border: 1px solid var(--borda);
-
-    border-radius: 9px;
+    width: 100%;
 
     overflow: hidden;
 
-    box-shadow: var(--sombra);
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
 
 /* =========================================================
-   CABEÇALHO DA LISTA
+   11. CABEÇALHO DA LISTA
 ========================================================= */
 
 .lista-header {
-    min-height: 46px;
+    min-height: 48px;
 
     display: grid;
 
     grid-template-columns:
-        minmax(300px, 2fr)
-        minmax(130px, 1fr)
-        minmax(100px, 0.7fr)
-        minmax(100px, 0.7fr)
-        minmax(180px, 1fr);
+        minmax(230px, 2fr)
+        minmax(120px, 1fr)
+        minmax(100px, 0.8fr)
+        minmax(100px, 0.8fr)
+        minmax(160px, 1.1fr);
 
     align-items: center;
-
-    background: #f8fafc;
-
-    border-bottom: 1px solid var(--borda);
+    gap: 12px;
 
     padding: 0 18px;
 
-    color: #64748b;
+    background: #f1f4f7;
 
-    font-size: 11px;
+    border-bottom: 1px solid var(--borda);
 
+    color: #34495e;
+
+    font-size: 13px;
     font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.3px;
 }
 
 
 /* =========================================================
-   ITEM DO PRODUTO
+   12. LINHAS DOS PRODUTOS
 ========================================================= */
 
 .produto-item {
-    min-height: 76px;
+    min-height: 78px;
 
     display: grid;
 
     grid-template-columns:
-        minmax(300px, 2fr)
-        minmax(130px, 1fr)
-        minmax(100px, 0.7fr)
-        minmax(100px, 0.7fr)
-        minmax(180px, 1fr);
+        minmax(230px, 2fr)
+        minmax(120px, 1fr)
+        minmax(100px, 0.8fr)
+        minmax(100px, 0.8fr)
+        minmax(160px, 1.1fr);
 
     align-items: center;
+    gap: 12px;
 
-    padding: 10px 18px;
+    padding: 12px 18px;
 
-    border-bottom: 1px solid #eef2f7;
+    background: var(--branco);
 
-    transition: background 0.15s;
+    border-bottom: 1px solid var(--borda-suave);
+
+    transition: background-color 0.2s ease;
 }
 
 .produto-item:hover {
-    background: #f8fafc;
+    background: #f7fafc;
 }
 
 .produto-item:last-child {
@@ -425,12 +521,13 @@ a {
 
 
 /* =========================================================
-   PRODUTO
+   13. INFORMAÇÕES DO PRODUTO
 ========================================================= */
 
 .produto {
-    display: flex;
+    min-width: 0;
 
+    display: flex;
     align-items: center;
 
     gap: 12px;
@@ -443,18 +540,16 @@ a {
 
     flex-shrink: 0;
 
-    border-radius: 7px;
-
     object-fit: cover;
 
-    border: 1px solid var(--borda);
+    background: #f1f4f7;
 
-    background: #f8fafc;
+    border: 1px solid var(--borda);
+    border-radius: 7px;
 }
 
 .produto-sem-imagem {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -462,93 +557,112 @@ a {
 }
 
 .produto-nome {
-    display: flex;
+    min-width: 0;
 
+    display: flex;
     flex-direction: column;
 
-    gap: 3px;
+    gap: 4px;
 }
 
 .produto-nome strong {
-    font-size: 13px;
-
-    font-weight: 700;
+    overflow-wrap: anywhere;
 
     color: var(--texto);
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .produto-nome small {
-    font-size: 10px;
-
     color: var(--texto-secundario);
+
+    font-size: 12px;
+    font-weight: 400;
 }
 
 
 /* =========================================================
-   CATEGORIA
+   14. CATEGORIA
 ========================================================= */
 
 .categoria-produto {
-    color: var(--texto-secundario);
+    color: #435466;
 
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 400;
+
+    overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   PREÇO
+   15. PREÇO
 ========================================================= */
 
 .preco-produto {
-    color: var(--azul-senai);
+    color: var(--azul-escuro);
 
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
 
 /* =========================================================
-   ESTOQUE
+   16. ESTOQUE
 ========================================================= */
 
 .estoque {
-    display: inline-flex;
+    min-width: 42px;
+    min-height: 34px;
 
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    width: fit-content;
+    padding: 5px 12px;
 
-    min-width: 34px;
-
-    height: 28px;
-
-    padding: 0 9px;
-
-    border-radius: 6px;
-
-    background: #eff6ff;
-
-    border: 1px solid #dbeafe;
-
+    background: #eef5fa;
     color: var(--azul-senai);
 
-    font-size: 12px;
+    border: 1px solid #d5e6f2;
+    border-radius: 6px;
 
+    font-size: 15px;
     font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.estoque.baixo {
+    background: #fff8e6;
+    color: #9a6700;
+
+    border-color: #f2dfaa;
+}
+
+.estoque.zerado {
+    background: var(--vermelho-fundo);
+    color: var(--vermelho);
+
+    border-color: var(--vermelho-borda);
+
+    font-size: 12px;
+    font-weight: 600;
 }
 
 
 /* =========================================================
-   AÇÕES
+   17. AÇÕES DO PRODUTO
 ========================================================= */
 
 .acoes-produto {
     display: flex;
-
     align-items: center;
 
+    flex-wrap: wrap;
     gap: 7px;
 }
 
@@ -556,172 +670,199 @@ a {
     margin: 0;
 }
 
+
+/* =========================================================
+   18. BOTÕES DE AÇÃO
+========================================================= */
+
 .btn-editar,
 .btn-excluir {
-    height: 32px;
-
-    padding: 0 11px;
-
-    border-radius: 6px;
+    min-height: 34px;
 
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
     gap: 5px;
 
-    font-size: 11px;
+    padding: 0 10px;
 
+    border-radius: 6px;
+
+    font-size: 13px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 
 /* EDITAR */
 
 .btn-editar {
-    background: #eff6ff;
-
+    background: var(--branco);
     color: var(--azul-senai);
 
-    border: 1px solid #bfdbfe;
+    border: 1px solid var(--azul-senai);
 }
 
 .btn-editar:hover {
-    background: #dbeafe;
+    background: #eef5fa;
+    color: var(--azul-hover);
+
+    border-color: var(--azul-hover);
 }
 
 
 /* EXCLUIR */
 
 .btn-excluir {
-    background: #fff1f2;
-
+    background: var(--vermelho-fundo);
     color: var(--vermelho);
 
-    border: 1px solid #fecdd3;
+    border: 1px solid var(--vermelho-borda);
 }
 
 .btn-excluir:hover {
-    background: #ffe4e6;
+    background: #ffe8e8;
+
+    border-color: #e8aaaa;
 }
 
 
 /* =========================================================
-   SEM PRODUTOS
+   19. ESTADO SEM PRODUTOS
 ========================================================= */
 
 .sem-produtos {
     min-height: 280px;
 
-    padding: 40px 20px;
-
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
     justify-content: center;
 
+    padding: 45px 25px;
+
+    background: var(--branco);
+
     text-align: center;
 }
 
 .icone-vazio {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     margin-bottom: 15px;
 
-    font-size: 42px;
+    background: #f1f4f7;
+
+    border-radius: 50%;
+
+    font-size: 27px;
 }
 
 .sem-produtos h3 {
-    margin-bottom: 7px;
+    margin-bottom: 8px;
 
-    font-size: 18px;
+    color: var(--azul-escuro);
 
-    color: var(--texto);
+    font-size: 17px;
+    font-weight: 700;
 }
 
 .sem-produtos p {
+    max-width: 450px;
+
     color: var(--texto-secundario);
 
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   PAGINAÇÃO
+   20. PAGINAÇÃO
 ========================================================= */
 
 .paginacao {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
+    flex-wrap: wrap;
     gap: 6px;
 
     margin-top: 22px;
 }
 
 .paginacao a {
-    min-width: 34px;
-    height: 34px;
+    min-width: 36px;
+    height: 36px;
 
-    padding: 0 9px;
-
-    display: flex;
-
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid var(--borda);
+    padding: 0 10px;
 
-    border-radius: 6px;
-
-    background: white;
-
+    background: var(--branco);
     color: var(--texto);
 
-    font-size: 12px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
 
+    font-size: 13px;
     font-weight: 600;
 
-    transition: 0.2s;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .paginacao a:hover {
-    background: #f8fafc;
+    background: #eef5fa;
+
+    border-color: #b8cfe0;
 }
 
-.paginacao .ativa {
+.paginacao a.ativa {
     background: var(--azul-senai);
-
-    color: white;
+    color: var(--branco);
 
     border-color: var(--azul-senai);
 }
 
 
 /* =========================================================
-   MODAL
+   21. MODAL DE CADASTRO
 ========================================================= */
 
 .modal {
     position: fixed;
-
     inset: 0;
 
     display: none;
-
     align-items: center;
     justify-content: center;
 
     padding: 20px;
 
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(19, 47, 76, 0.50);
 
     z-index: 2000;
 }
@@ -732,145 +873,166 @@ a {
 
 .modal-card {
     width: min(600px, 100%);
-
     max-height: calc(100vh - 40px);
-
-    overflow-y: auto;
 
     position: relative;
 
-    background: white;
+    overflow-y: auto;
+
+    padding: 26px;
+
+    background: var(--branco);
 
     border: 1px solid var(--borda);
-
     border-radius: 10px;
 
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.20);
-
-    padding: 24px;
+    box-shadow: 0 20px 50px rgba(15, 45, 70, 0.20);
 }
 
 
 /* =========================================================
-   FECHAR MODAL
+   22. BOTÃO FECHAR MODAL
 ========================================================= */
 
 .fechar-modal {
     position: absolute;
 
-    top: 16px;
-    right: 16px;
+    top: 14px;
+    right: 14px;
 
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f4f7;
+    color: #64748b;
 
     border: none;
-
     border-radius: 6px;
 
-    background: #f1f5f9;
-
-    color: var(--texto-secundario);
-
-    font-size: 20px;
+    font-size: 23px;
+    line-height: 1;
 
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .fechar-modal:hover {
-    background: #e2e8f0;
-
-    color: var(--texto);
+    background: #e4eaf0;
+    color: var(--azul-escuro);
 }
 
 
 /* =========================================================
-   CABEÇALHO DO FORMULÁRIO
+   23. CABEÇALHO DO FORMULÁRIO
 ========================================================= */
 
 .form-header {
-    padding-right: 40px;
+    padding-right: 38px;
 
     margin-bottom: 22px;
 }
 
 .form-header h2 {
-    font-size: 20px;
+    margin-bottom: 6px;
 
-    color: var(--texto);
+    color: var(--azul-escuro);
 
-    margin-bottom: 5px;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 .form-header p {
     color: var(--texto-secundario);
 
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   FORMULÁRIO
+   24. FORMULÁRIO DE CADASTRO
 ========================================================= */
 
 .form-container {
     display: flex;
-
     flex-direction: column;
 
     gap: 16px;
 }
 
-.form-group {
-    display: flex;
+.form-row {
+    display: grid;
 
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+.form-group {
+    min-width: 0;
+
+    display: flex;
     flex-direction: column;
 
     gap: 6px;
 }
 
 .form-group label {
-    font-size: 12px;
+    color: #34495e;
 
-    font-weight: 700;
-
-    color: var(--texto);
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .form-input,
 .form-container select {
     width: 100%;
-
-    height: 40px;
+    height: 42px;
 
     padding: 0 12px;
 
-    border: 1px solid var(--borda);
-
-    border-radius: 7px;
-
-    background: white;
-
+    background: var(--branco);
     color: var(--texto);
+
+    border: 1px solid #d9e1e8;
+    border-radius: 6px;
 
     outline: none;
 
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 400;
 
-    transition: 0.2s;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-input::placeholder {
+    color: #9aa7b2;
+}
+
+.form-input:hover,
+.form-container select:hover {
+    border-color: #b8c7d4;
 }
 
 .form-input:focus,
 .form-container select:focus {
     border-color: var(--azul-senai);
 
-    box-shadow:
-        0 0 0 3px rgba(22, 75, 122, 0.10);
+    box-shadow: 0 0 0 3px rgba(21, 88, 138, 0.10);
 }
 
 
 /* =========================================================
-   IMAGEM
+   25. PRÉ-VISUALIZAÇÃO DA IMAGEM
 ========================================================= */
 
 .imagem-preview {
@@ -879,16 +1041,17 @@ a {
 
     margin-bottom: 4px;
 
-    border: 1px solid var(--borda);
-
-    border-radius: 8px;
-
-    background: #f8fafc;
-
     overflow: hidden;
+
+    background: #f1f4f7;
+
+    border: 1px solid var(--borda);
+    border-radius: 8px;
 }
 
 .imagem-preview img {
+    display: block;
+
     width: 100%;
     height: 100%;
 
@@ -898,121 +1061,155 @@ a {
 .btn-imagem {
     width: fit-content;
 
-    padding: 9px 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    border: 1px solid #bfdbfe;
+    padding: 10px 14px;
 
-    border-radius: 7px;
-
-    background: #eff6ff;
-
+    background: #eef5fa;
     color: var(--azul-senai);
 
-    font-size: 12px;
+    border: 1px solid #d5e6f2;
+    border-radius: 6px;
 
+    font-size: 13px;
     font-weight: 600;
 
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .btn-imagem:hover {
-    background: #dbeafe;
+    background: #e0edf7;
+
+    border-color: #b8cfe0;
 }
 
 .imagem-info {
     color: var(--texto-secundario);
 
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 
 /* =========================================================
-   BOTÕES DO FORMULÁRIO
+   26. BOTÕES DO FORMULÁRIO
 ========================================================= */
 
 .acoes-form {
     display: flex;
-
+    align-items: center;
     justify-content: flex-end;
 
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 9px;
 
-    padding-top: 10px;
+    padding-top: 16px;
+    margin-top: 4px;
 
-    border-top: 1px solid var(--borda);
+    border-top: 1px solid var(--borda-suave);
 }
 
 .btn-cancelar,
 .btn-salvar {
-    height: 40px;
+    min-height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     padding: 0 16px;
 
-    border-radius: 7px;
+    border-radius: 6px;
 
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 600;
 
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.btn-cancelar {
-    background: white;
 
-    color: var(--texto);
+/* CANCELAR */
+
+.btn-cancelar {
+    background: var(--branco);
+    color: var(--azul-senai);
 
     border: 1px solid var(--borda);
 }
 
 .btn-cancelar:hover {
-    background: #f8fafc;
+    background: #f1f4f7;
+
+    border-color: #cbd5df;
 }
+
+
+/* SALVAR */
 
 .btn-salvar {
     background: var(--azul-senai);
-
-    color: white;
+    color: var(--branco);
 
     border: 1px solid var(--azul-senai);
+
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.15);
 }
 
 .btn-salvar:hover {
     background: var(--azul-hover);
+
+    border-color: var(--azul-hover);
 }
 
 
 /* =========================================================
-   ALERTAS
+   27. ALERTAS
 ========================================================= */
 
 .alert {
-    padding: 11px 13px;
-
+    padding: 12px 14px;
     margin-bottom: 15px;
 
     border-radius: 7px;
 
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .alert.erro {
-    background: #fff1f2;
-
-    border: 1px solid #fecdd3;
-
+    background: var(--vermelho-fundo);
     color: #991b1b;
+
+    border: 1px solid var(--vermelho-borda);
 }
 
 
 /* =========================================================
-   RESPONSIVIDADE
+   28. RESPONSIVIDADE — TABLETS
 ========================================================= */
 
 @media (max-width: 1000px) {
 
+    .page-container > .container,
+    .container {
+        max-width: calc(100% - 32px);
+
+        padding: 25px;
+    }
+
     .filtro-form {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
 
     .lista-card {
@@ -1026,41 +1223,154 @@ a {
 }
 
 
+/* =========================================================
+   29. RESPONSIVIDADE — CELULARES
+========================================================= */
+
 @media (max-width: 700px) {
 
-    .topo {
-        padding: 0 16px;
-    }
-
-    .titulo-topo {
-        display: none;
-    }
-
+    .page-container > .container,
     .container {
         width: calc(100% - 24px);
+        max-width: none;
 
-        padding-top: 24px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .titulo-pagina {
+        margin-bottom: 20px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 21px;
+    }
+
+    .titulo-pagina p {
+        font-size: 13px;
+    }
+
+    .barra-acoes {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .btn-novo {
+        width: 100%;
+    }
+
+    .contador {
+        align-self: flex-start;
+    }
+
+    .filtros {
+        padding: 14px;
     }
 
     .filtro-form {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .barra-acoes {
-        align-items: flex-start;
+    .btn-filtrar,
+    .btn-limpar {
+        width: 100%;
+    }
 
-        gap: 12px;
-
-        flex-direction: column;
+    .lista-header,
+    .produto-item {
+        min-width: 800px;
     }
 
     .modal {
-        padding: 10px;
+        padding: 12px;
     }
 
     .modal-card {
-        max-height: calc(100vh - 20px);
+        max-height: calc(100vh - 24px);
 
-        padding: 18px;
+        padding: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
+
+
+/* =========================================================
+   30. TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .page-container > .container,
+    .container {
+        width: calc(100% - 20px);
+
+        margin: 15px auto;
+        padding: 16px;
+
+        border-radius: 8px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 20px;
+    }
+
+    .btn-novo {
+        font-size: 13px;
+    }
+
+    .filtros {
+        padding: 12px;
+    }
+
+    .modal {
+        padding: 8px;
+    }
+
+    .modal-card {
+        max-height: calc(100vh - 16px);
+
+        padding: 18px;
+
+        border-radius: 8px;
+    }
+
+    .form-header h2 {
+        font-size: 19px;
+    }
+
+    .acoes-form {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   31. ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .btn-novo:hover,
+    .btn-filtrar:hover {
+        transform: none;
+    }
+}
+

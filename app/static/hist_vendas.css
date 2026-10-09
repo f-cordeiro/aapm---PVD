@@ -1,0 +1,140 @@
+:root {
+    --azul-principal: #104e7a;
+    --azul-hover: #0c3d61;
+    --azul-claro: #f0f4f8;
+    --fundo: #f2f5f8;
+    --branco: #ffffff;
+    --texto: #112233;
+    --texto-suave: #8395a7;
+    --borda: #e1e8ed;
+    --verde: #218653;
+    --fundo-header-tabela: #edf2f7;
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Cartão Principal */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+    background: var(--branco);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+/* Cabeçalho */
+.header-top {
+    margin-bottom: 24px;
+}
+
+h1 {
+    margin: 0;
+    color: var(--texto);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border: 1px solid var(--borda);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--branco);
+    margin-bottom: 24px;
+}
+
+thead {
+    background: var(--fundo-header-tabela);
+}
+
+th {
+    padding: 14px 18px;
+    border: 0;
+    color: var(--texto);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 18px;
+    border: 0;
+    border-top: 1px solid var(--borda);
+    color: var(--texto);
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* Links na tabela */
+td a {
+    color: var(--azul-principal);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Tag de desconto */
+td span {
+    color: var(--verde);
+    font-weight: 600;
+}
+
+/* Mensagem de tabela vazia */
+td.empty-msg {
+    color: var(--texto-suave);
+    text-align: center;
+    padding: 40px 18px;
+}
+
+/* Botão Secundário (← Voltar ao PDV) */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--azul-principal);
+    border-radius: 6px;
+    background: var(--branco);
+    color: var(--azul-principal);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--azul-claro);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
