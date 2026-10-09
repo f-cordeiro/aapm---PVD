@@ -33,8 +33,7 @@
             href="/produtos/form"
             class="btn-administracao"
         >
-            <i class="fa-solid fa-gear"></i>
-            Administração
+            Gerenciamento
         </a>
 
     </section>
@@ -53,7 +52,6 @@
             aria-label="Buscar produto por nome"
         >
 
-        <span class="atalho">Ctrl + K</span>
 
     </div>
 
@@ -150,13 +148,6 @@
                 <strong class="preco">
                     R$ {{ "%.2f"|format(produto.preco) }}
                 </strong>
-
-
-                <!-- QUANTIDADE EM ESTOQUE -->
-
-                <span class="estoque">
-                    Estoque: {{ produto.estoque_atual }}
-                </span>
 
 
                 <!-- BOTÃO DE COMPRA -->

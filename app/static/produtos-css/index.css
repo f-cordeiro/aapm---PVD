@@ -1,943 +1,616 @@
-/* =========================================================
-   RESET
-========================================================= */
-
+/* ============================== RESET BÁSICO ============================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-   CORES
-========================================================= */
-
 :root {
-
-    --azul-senai: #164b7a;
-    --azul-escuro: #102d4a;
-    --azul-hover: #0d5ca8;
-
-    --fundo: #f5f7fa;
+    --azul-principal: #0f3b63;
+    --azul-secundario: #164e7a;
+    --azul-claro: #e8f2fb;
+    --fundo: #f3f6fa;
     --branco: #ffffff;
-
-    --texto: #172033;
+    --texto: #263746;
     --texto-secundario: #64748b;
-
-    --borda: #e2e8f0;
-
-    --verde: #16a34a;
+    --borda: #e0e6ec;
+    --verde: #15803d;
     --vermelho: #dc2626;
-
+    --sombra: 0 4px 15px rgba(15, 45, 70, 0.08);
 }
-
-
-/* =========================================================
-   BODY
-========================================================= */
 
 body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: var(--fundo);
-
     color: var(--texto);
-
     min-height: 100vh;
-
+    line-height: 1.5;
 }
 
-
-/* =========================================================
-   TOPBAR
-========================================================= */
-
+/* ============================== BARRA SUPERIOR ============================== */
 .topbar {
-
-    height: 70px;
-
-    background: var(--azul-escuro);
-
-    color: white;
-
+    width: 100%;
+    background: var(--azul-principal);
+    color: var(--branco);
+    padding: 14px 30px;
     display: flex;
-
     align-items: center;
-
-    padding: 0 28px;
-
-    gap: 35px;
-
-    border-bottom: 3px solid var(--azul-senai);
-
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.logo-area {
-
+.logo {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
-    min-width: 245px;
-
 }
 
-
-.logo-icon {
-
-    width: 40px;
-
-    height: 40px;
-
-    background: white;
-
-    color: var(--azul-senai);
-
-    border-radius: 8px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 18px;
-
+.logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
+.logo h1,
+.logo span {
+    color: var(--branco);
+}
 
-.logo-area h1 {
-
-    font-size: 17px;
-
+.logo h1 {
+    font-size: 20px;
     font-weight: 700;
-
 }
 
-
-.logo-area span {
-
-    font-size: 11px;
-
-    color: #b8c7d9;
-
+.logo p {
+    font-size: 12px;
+    opacity: 0.85;
 }
 
-
-/* =========================================================
-   MENU
-========================================================= */
-
-.menu {
-
+.nav {
     display: flex;
-
     align-items: center;
-
-    gap: 5px;
-
-    flex: 1;
-
+    gap: 20px;
 }
 
-
-.menu-item {
-
-    color: #d7e0eb;
-
+.nav a {
+    color: var(--branco);
     text-decoration: none;
-
-    padding: 10px 12px;
-
-    border-radius: 6px;
-
-    font-size: 13px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    transition: 0.2s;
-
-}
-
-
-.menu-item:hover {
-
-    background: rgba(255, 255, 255, 0.1);
-
-    color: white;
-
-}
-
-
-.menu-item.active {
-
-    background: white;
-
-    color: var(--azul-escuro);
-
+    font-size: 14px;
     font-weight: 600;
-
+    transition: opacity 0.2s ease;
 }
 
-
-/* =========================================================
-   USUÁRIO
-========================================================= */
+.nav a:hover {
+    opacity: 0.75;
+}
 
 .usuario {
-
     display: flex;
-
     align-items: center;
-
-    gap: 9px;
-
-    padding-left: 15px;
-
-    border-left: 1px solid rgba(255,255,255,0.15);
-
+    gap: 10px;
+    font-size: 14px;
 }
 
-
-.usuario-icon {
-
-    width: 34px;
-
-    height: 34px;
-
+.usuario img {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-
-    background: white;
-
-    color: var(--azul-senai);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
+    object-fit: cover;
 }
 
-
-.usuario-info {
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-.usuario-info strong {
-
-    font-size: 12px;
-
-}
-
-
-.usuario-info span {
-
-    font-size: 10px;
-
-    color: #aebed0;
-
-}
-
-
-.seta {
-
-    font-size: 10px;
-
-    margin-left: 5px;
-
-}
-
-
-/* =========================================================
-   PÁGINA
-========================================================= */
-
+/* ============================== CONTAINER DA PÁGINA ============================== */
 .pagina-produtos {
-
-    max-width: 1450px;
-
-    margin: 0 auto;
-
-    padding: 30px;
-
+    width: calc(100% - 60px);
+    max-width: 1600px;
+    margin: 30px auto;
+    padding: 28px;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+    color: var(--texto);
 }
 
-
-/* =========================================================
-   CABEÇALHO DA PÁGINA
-========================================================= */
-
+/* ============================== CABEÇALHO DA PÁGINA ============================== */
 .pagina-header {
-
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
-
-    margin-bottom: 22px;
-
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
-
-.pagina-header h2 {
-
-    font-size: 24px;
-
-    margin-bottom: 5px;
-
+.pagina-header h1 {
+    color: var(--azul-principal);
+    font-size: 28px;
+    font-weight: 700;
 }
-
 
 .pagina-header p {
-
     color: var(--texto-secundario);
-
-    font-size: 13px;
-
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-
-/* =========================================================
-   ADMINISTRAÇÃO
-========================================================= */
-
+/* ============================== BOTÃO DE ADMINISTRAÇÃO ============================== */
 .btn-administracao {
-
-    text-decoration: none;
-
-    background: var(--azul-senai);
-
-    color: white;
-
-    height: 40px;
-
-    padding: 0 16px;
-
-    border-radius: 7px;
-
-    display: flex;
-
+    display: inline-flex;
     align-items: center;
-
-    gap: 7px;
-
-    font-size: 12px;
-
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--azul-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 14px;
     font-weight: 600;
-
-    transition: 0.2s;
-
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
-
 
 .btn-administracao:hover {
-
-    background: var(--azul-hover);
-
+    background: var(--azul-secundario);
 }
 
-
-/* =========================================================
-   BUSCA
-========================================================= */
-
+/* ============================== CAMPO DE BUSCA ============================== */
 .busca-container {
+    width: 100%;
+    margin-bottom: 22px;
+}
 
-    height: 48px;
-
-    background: white;
-
-    border: 1px solid var(--borda);
-
-    border-radius: 8px;
-
+.busca-container form {
     display: flex;
-
     align-items: center;
-
-    padding: 0 15px;
-
-    margin-bottom: 25px;
-
-    transition: 0.2s;
-
+    gap: 10px;
 }
-
-
-.busca-container:focus-within {
-
-    border-color: var(--azul-senai);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(22, 75, 122, 0.08);
-
-}
-
-
-.busca-container > i {
-
-    color: #94a3b8;
-
-    margin-right: 10px;
-
-}
-
 
 .busca-container input {
-
     flex: 1;
-
-    border: none;
-
+    min-width: 0;
+    padding: 12px 15px;
+    border: 1px solid var(--borda);
+    border-radius: 7px;
     outline: none;
-
-    font-size: 14px;
-
+    background: #fff;
     color: var(--texto);
-
-    background: transparent;
-
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.busca-container input:focus {
+    border-color: var(--azul-secundario);
+    box-shadow: 0 0 0 3px rgba(22, 78, 122, 0.12);
+}
 
+.busca-container button {
+    padding: 12px 18px;
+    background: var(--azul-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.busca-container button:hover {
+    background: var(--azul-secundario);
+}
+
+/* ============================== ATALHOS ============================== */
 .atalho {
-
-    color: #94a3b8;
-
-    font-size: 11px;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    margin-bottom: 20px;
     border: 1px solid var(--borda);
-
-    padding: 4px 7px;
-
-    border-radius: 5px;
-
+    border-radius: 7px;
+    color: var(--azul-principal);
+    background: #f8fafc;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s ease;
 }
 
+.atalho:hover {
+    background: var(--azul-claro);
+}
 
-/* =========================================================
-   GRID DOS PRODUTOS
-========================================================= */
-
+/* ============================== GRADE DOS PRODUTOS Cards um pouco menores ============================== */
 .produtos-grid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(210px, 1fr));
-
-    gap: 18px;
-
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+    align-items: stretch;
 }
 
-
-/* =========================================================
-   CARD
-========================================================= */
-
+/* ============================== CARD DO PRODUTO ============================== */
 .produto-card {
-
-    background: white;
-
-    border: 1px solid var(--borda);
-
-    border-radius: 10px;
-
+    min-width: 0;
     overflow: hidden;
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s,
-        border-color 0.2s;
-
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    box-shadow: 0 2px 7px rgba(15, 45, 70, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 
 .produto-card:hover {
-
     transform: translateY(-3px);
-
-    border-color: #b9c8d8;
-
-    box-shadow:
-        0 8px 20px
-        rgba(15, 23, 42, 0.08);
-
+    box-shadow: 0 7px 18px rgba(15, 45, 70, 0.12);
 }
 
-
-/* =========================================================
-   IMAGEM
-========================================================= */
-
+/* ============================== IMAGEM DO PRODUTO ============================== */
 .produto-imagem {
-
-    height: 190px;
-
+    height: 160px;
     background: #f1f5f9;
-
     position: relative;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
+    overflow: hidden;
 }
-
 
 .produto-imagem img {
-
     width: 100%;
-
     height: 100%;
-
-    object-fit: cover;
-
+    object-fit: contain;
+    padding: 10px;
+    transition: transform 0.25s ease;
 }
 
+.produto-card:hover .produto-imagem img {
+    transform: scale(1.04);
+}
 
 .imagem-sem-produto {
-
-    width: 100%;
-
-    height: 100%;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
+    width: 100%;
+    height: 100%;
     color: #94a3b8;
-
-    font-size: 45px;
-
+    font-size: 38px;
 }
 
-
-/* =========================================================
-   ESTOQUE
-========================================================= */
-
+/* ============================== ETIQUETA DE ESTOQUE ============================== */
 .estoque-tag {
-
     position: absolute;
-
     top: 9px;
-
     right: 9px;
-
-    background: rgba(16, 45, 74, 0.9);
-
-    color: white;
-
-    padding: 5px 8px;
-
+    padding: 5px 9px;
+    background: var(--verde);
+    color: var(--branco);
     border-radius: 5px;
-
-    font-size: 10px;
-
+    font-size: 11px;
+    font-weight: 700;
 }
 
+.estoque-tag.baixo {
+    background: #d97706;
+}
 
-/* =========================================================
-   CONTEÚDO CARD
-========================================================= */
+.estoque-tag.esgotado {
+    background: var(--vermelho);
+}
 
+/* ============================== CONTEÚDO DO CARD ============================== */
 .produto-conteudo {
-
-    padding: 14px;
-
+    padding: 12px;
 }
-
 
 .produto-categoria {
-
-    color: var(--azul-senai);
-
-    font-size: 10px;
-
-    font-weight: 600;
-
+    display: inline-block;
+    margin-bottom: 6px;
+    color: var(--azul-secundario);
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-
+    letter-spacing: 0.4px;
 }
-
 
 .produto-nome {
-
-    font-size: 14px;
-
-    margin: 6px 0 10px;
-
-    min-height: 34px;
-
+    min-height: 42px;
+    margin-bottom: 8px;
+    color: var(--texto);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
 }
 
-
+/* ============================== PREÇO ============================== */
 .preco {
-
-    display: block;
-
-    color: var(--azul-senai);
-
-    font-size: 18px;
-
-    margin-bottom: 6px;
-
+    margin-bottom: 8px;
+    color: var(--azul-principal);
+    font-size: 21px;
+    font-weight: 800;
 }
 
-
+/* ============================== QUANTIDADE EM ESTOQUE Texto maior e mais visível ============================== */
 .estoque {
-
     display: block;
-
-    font-size: 11px;
-
-    color: var(--texto-secundario);
-
     margin-bottom: 13px;
-
+    color: #334155;
+    font-size: 16px;
+    font-weight: 700;
 }
 
+.estoque strong {
+    color: var(--verde);
+    font-size: 20px;
+    font-weight: 800;
+}
 
-/* =========================================================
-   BOTÃO COMPRAR
-========================================================= */
+.estoque.baixo,
+.estoque.baixo strong {
+    color: #d97706;
+}
 
+.estoque.esgotado,
+.estoque.esgotado strong {
+    color: var(--vermelho);
+}
+
+/* ============================== BOTÃO ADICIONAR ============================== */
 .btn-adicionar {
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-
-    height: 38px;
-
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--azul-principal);
+    color: var(--branco);
     border: none;
-
     border-radius: 6px;
-
-    background: var(--azul-senai);
-
-    color: white;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
-
-    transition: 0.2s;
-
+    transition: background 0.2s ease;
 }
 
-
-.btn-adicionar:hover:not(:disabled) {
-
-    background: var(--azul-hover);
-
+.btn-adicionar:hover {
+    background: var(--azul-secundario);
 }
-
-
-.btn-adicionar i {
-
-    margin-right: 6px;
-
-}
-
 
 .btn-adicionar:disabled {
-
-    background: #dbe3ec;
-
-    color: #94a3b8;
-
+    background: #cbd5e1;
+    color: #64748b;
     cursor: not-allowed;
-
 }
 
-
-/* =========================================================
-   SEM PRODUTOS
-========================================================= */
-
+/* ============================== QUANDO NÃO HÁ PRODUTOS ============================== */
 .sem-produtos {
-
-    grid-column: 1 / -1;
-
-    min-height: 350px;
-
-    background: white;
-
-    border: 1px dashed var(--borda);
-
-    border-radius: 10px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
+    padding: 50px 20px;
     text-align: center;
-
-    padding: 40px;
-
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
 }
-
 
 .sem-produtos-icone {
-
-    width: 70px;
-
-    height: 70px;
-
-    background: #eef4f9;
-
-    color: var(--azul-senai);
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-size: 28px;
-
-    margin-bottom: 15px;
-
+    margin-bottom: 14px;
+    color: #94a3b8;
+    font-size: 48px;
 }
-
 
 .sem-produtos h2 {
-
-    font-size: 17px;
-
-    margin-bottom: 7px;
-
+    margin-bottom: 8px;
+    color: var(--texto);
+    font-size: 21px;
 }
-
 
 .sem-produtos p {
-
+    margin-bottom: 20px;
     color: var(--texto-secundario);
-
-    font-size: 13px;
-
-    margin-bottom: 18px;
-
+    font-size: 14px;
 }
 
-
+/* ============================== BOTÃO CADASTRAR PRODUTO ============================== */
 .btn-cadastrar-produto {
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    background: var(--azul-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 7px;
     text-decoration: none;
-
-    background: var(--azul-senai);
-
-    color: white;
-
-    padding: 10px 16px;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
-
 
 .btn-cadastrar-produto:hover {
-
-    background: var(--azul-hover);
-
+    background: var(--azul-secundario);
 }
 
-
-/* =========================================================
-   RESPONSIVIDADE
-========================================================= */
-
+/* ============================== RESPONSIVIDADE TABLETS E TELAS MÉDIAS ============================== */
 @media (max-width: 1200px) {
-
-    .menu-item {
-
-        padding: 9px 8px;
-
+    .pagina-produtos {
+        width: calc(100% - 40px);
+        padding: 24px;
     }
 
-
-    .menu-item i {
-
-        display: none;
-
+    .produtos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
-
-
-    .logo-area {
-
-        min-width: 210px;
-
-    }
-
 }
-
 
 @media (max-width: 950px) {
-
     .topbar {
-
-        padding: 0 15px;
-
-        gap: 15px;
-
-    }
-
-
-    .usuario-info {
-
-        display: none;
-
-    }
-
-}
-
-
-@media (max-width: 700px) {
-
-    .topbar {
-
-        height: auto;
-
-        min-height: 65px;
-
+        padding: 14px 20px;
         flex-wrap: wrap;
-
-        padding: 10px 15px;
-
     }
 
-
-    .logo-area {
-
-        min-width: auto;
-
-        flex: 1;
-
+    .nav {
+        gap: 14px;
+        flex-wrap: wrap;
     }
-
-
-    .menu {
-
-        order: 3;
-
-        width: 100%;
-
-        overflow-x: auto;
-
-    }
-
-
-    .menu-item {
-
-        white-space: nowrap;
-
-    }
-
 
     .pagina-produtos {
-
-        padding: 18px;
-
+        width: calc(100% - 30px);
+        margin: 20px auto;
+        padding: 20px;
     }
 
-
-    .pagina-header {
-
-        align-items: flex-start;
-
-        gap: 15px;
-
+    .pagina-header h1 {
+        font-size: 25px;
     }
-
 
     .produtos-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 12px;
     }
-
-
-    .produto-imagem {
-
-        height: 140px;
-
-    }
-
 }
 
+/* ============================== CELULARES ============================== */
+@media (max-width: 700px) {
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 15px;
+    }
 
-@media (max-width: 500px) {
+    .nav {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .nav a {
+        font-size: 13px;
+    }
+
+    .usuario {
+        font-size: 13px;
+    }
+
+    .pagina-produtos {
+        width: calc(100% - 20px);
+        margin: 12px auto;
+        padding: 15px;
+        border-radius: 9px;
+    }
 
     .pagina-header {
-
+        align-items: flex-start;
         flex-direction: column;
-
+        gap: 12px;
     }
 
+    .pagina-header h1 {
+        font-size: 23px;
+    }
 
-    .btn-administracao {
+    .busca-container form {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
+    .busca-container input,
+    .busca-container button {
         width: 100%;
-
-        justify-content: center;
-
     }
-
 
     .produtos-grid {
-
-        grid-template-columns: 1fr;
-
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
     }
 
-
-    .atalho {
-
-        display: none;
-
+    .produto-imagem {
+        height: 135px;
     }
 
+    .produto-conteudo {
+        padding: 10px;
+    }
+
+    .produto-nome {
+        font-size: 14px;
+    }
+
+    .preco {
+        font-size: 18px;
+    }
+
+    .estoque {
+        font-size: 14px;
+    }
+
+    .estoque strong {
+        font-size: 18px;
+    }
+
+    .btn-adicionar {
+        padding: 9px 6px;
+        font-size: 12px;
+    }
+}
+
+/* ============================== CELULARES PEQUENOS ============================== */
+@media (max-width: 500px) {
+    .logo h1 {
+        font-size: 18px;
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pagina-produtos {
+        padding: 12px;
+    }
+
+    .produtos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .produto-imagem {
+        height: 115px;
+    }
+
+    .produto-conteudo {
+        padding: 9px;
+    }
+
+    .produto-categoria {
+        font-size: 10px;
+    }
+
+    .produto-nome {
+        font-size: 13px;
+    }
+
+    .preco {
+        font-size: 17px;
+    }
+
+    .estoque {
+        font-size: 13px;
+    }
+
+    .estoque strong {
+        font-size: 17px;
+    }
+
+    .estoque-tag {
+        top: 6px;
+        right: 6px;
+        padding: 4px 6px;
+        font-size: 10px;
+    }
 }
