@@ -1,0 +1,222 @@
+<escape>{% extends "base.html" %}
+
+{% block title %}
+{{ 'Editar usuário' if editando else 'Novo usuário' }} | PDV AAPM
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="/static/usuarios-css/form.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="content-card">
+
+<!-- CABEÇALHO -->
+<div class="page-header">
+    <div>
+        <span class="eyebrow">ADMINISTRAÇÃO</span>
+
+        <h1>
+            {{ 'Editar usuário' if editando else 'Cadastrar usuário' }}
+        </h1>
+
+        <p>
+            {% if editando %}
+                Atualize os dados e as permissões deste usuário.
+            {% else %}
+                Cadastre um funcionário e defina seu acesso ao sistema.
+            {% endif %}
+        </p>
+    </div>
+
+    <a href="/usuarios/" class="btn btn-outline">
+        <i data-lucide="arrow-left"></i>
+        Voltar
+    </a>
+</div>
+
+<!-- MENSAGEM DE ERRO -->
+{% if erro %}
+    <div class="alert error">
+        <i data-lucide="alert-circle"></i>
+        <span>{{ erro }}</span>
+    </div>
+{% endif %}
+
+<!-- FORMULÁRIO -->
+<form
+    method="post"
+    action="{{ '/usuarios/' ~ editando.id ~ '/editar' if editando else '/usuarios/novo' }}"
+    class="user-form"
+>
+
+    <!-- DADOS PESSOAIS -->
+    <div class="section-heading">
+        <div class="section-icon">
+            <i data-lucide="user-round"></i>
+        </div>
+
+        <div>
+            <h2>Dados do usuário</h2>
+            <p>Informações básicas para identificação no sistema.</p>
+        </div>
+    </div>
+
+    <div class="form-grid">
+
+        <!-- NOME -->
+        <div class="form-group full-width">
+            <label for="nome">
+                Nome completo <span>*</span>
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                maxlength="100"
+                placeholder="Digite o nome completo"
+                value="{{ valores.nome if valores is defined else (editando.nome if editando else '') }}"
+                autocomplete="name"
+                required
+            >
+        </div>
+
+        <!-- E-MAIL -->
+        <div class="form-group">
+            <label for="email">
+                E-mail <span>*</span>
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                maxlength="150"
+                placeholder="funcionario@empresa.com"
+                value="{{ valores.email if valores is defined else (editando.email if editando else '') }}"
+                autocomplete="email"
+                required
+            >
+
+            <small>O e-mail será utilizado para identificar a conta.</small>
+        </div>
+
+        <!-- PERFIL -->
+        <div class="form-group">
+            <label for="role">
+                Perfil de acesso <span>*</span>
+            </label>
+
+            {% set perfil_atual = valores.role if valores is defined else (editando.role if editando else 'operador') %}
+
+            <select id="role" name="role" required>
+                <option
+                    value="operador"
+                    {{ 'selected' if perfil_atual == 'operador' else '' }}
+                >
+                    Operador
+                </option>
+
+                <option
+                    value="admin"
+                    {{ 'selected' if perfil_atual == 'admin' else '' }}
+                >
+                    Administrador
+                </option>
+            </select>
+
+            <small>Define as permissões disponíveis para a conta.</small>
+        </div>
+
+    </div>
+
+    <!-- SEGURANÇA -->
+    <div class="section-heading security-heading">
+        <div class="section-icon">
+            <i data-lucide="shield-check"></i>
+        </div>
+
+        <div>
+            <h2>Segurança e senha</h2>
+            <p>Configure a senha de acesso do funcionário.</p>
+        </div>
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group full-width">
+            <label for="senha">
+                Senha
+                {% if not editando %}
+                    <span>*</span>
+                {% endif %}
+            </label>
+
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                autocomplete="new-password"
+                placeholder="{{ 'Deixe em branco para manter a senha atual' if editando else 'Digite uma senha' }}"
+                {{ 'required' if not editando else '' }}
+            >
+
+            {% if editando %}
+                <small>
+                    Para manter a senha atual, deixe este campo vazio.
+                </small>
+            {% else %}
+                <small>
+                    A senha será armazenada com hash, conforme a autenticação do sistema.
+                </small>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- AVISO -->
+    <div class="security-note">
+        <i data-lucide="info"></i>
+
+        <p>
+            <strong>Atenção às permissões.</strong>
+            Administradores podem acessar o gerenciamento de usuários.
+            Conceda esse perfil apenas a pessoas autorizadas.
+        </p>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="form-actions">
+
+        <a href="/usuarios/" class="btn btn-outline">
+            Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-primary">
+            <i data-lucide="{{ 'save' if editando else 'user-plus' }}"></i>
+
+            {{ 'Salvar alterações' if editando else 'Cadastrar usuário' }}
+        </button>
+
+    </div>
+
+</form>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    });
+</script>
+
+{% endblock %}</escape>
