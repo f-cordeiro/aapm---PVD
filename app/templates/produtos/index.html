@@ -1,509 +1,279 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
+{% block title %}Produtos | PDV AAPM SENAI{% endblock %}
 
-    <meta charset="UTF-8">
+{% block extra_css %}
+<link rel="stylesheet" href="/static/produtos-css/index.css">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<!-- Font Awesome: ícones utilizados nos cards de produtos -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+>
+{% endblock %}
 
-    <title>Produtos | PDV AAPM SENAI</title>
+{% block content %}
 
-    <link
-        rel="stylesheet"
-        href="/static/produtos-css/index.css"
-    >
+<!-- =====================================================
+     PÁGINA DE PRODUTOS
+====================================================== -->
 
-    <!-- FONT AWESOME -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    >
+<main class="pagina-produtos">
 
-</head>
+    <!-- CABEÇALHO DA PÁGINA -->
 
+    <section class="pagina-header">
 
-<body>
-
-
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
-    <header class="topbar">
-
-
-        <!-- LOGO -->
-
-        <div class="logo-area">
-
-            <div class="logo-icon">
-                <i class="fa-solid fa-store"></i>
-            </div>
-
-            <div>
-                <h1>PDV — AAPM SENAI</h1>
-                <span>Sistema de vendas</span>
-            </div>
-
+        <div>
+            <h2>Produtos</h2>
+            <p>Confira os produtos disponíveis para compra.</p>
         </div>
 
+        <a
+            href="/produtos/form"
+            class="btn-administracao"
+        >
+            <i class="fa-solid fa-gear"></i>
+            Administração
+        </a>
+
+    </section>
 
 
-        <!-- MENU -->
+    <!-- BUSCA DE PRODUTOS -->
 
-        <nav class="menu">
+    <div class="busca-container">
 
+        <i class="fa-solid fa-magnifying-glass"></i>
 
-            <a
-                href="/"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-house"></i>
-                Home
-            </a>
+        <input
+            type="text"
+            id="buscarProduto"
+            placeholder="Buscar produto por nome..."
+            aria-label="Buscar produto por nome"
+        >
 
+        <span class="atalho">Ctrl + K</span>
 
-            <a
-                href="/produtos/"
-                class="menu-item active"
-            >
-                <i class="fa-solid fa-box"></i>
-                Produtos
-            </a>
+    </div>
 
 
-            <a
-                href="/estoque"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-boxes-stacked"></i>
-                Estoque
-            </a>
+    <!-- LISTAGEM DE PRODUTOS -->
+
+    <section class="produtos-grid">
+
+        {% for produto in produtos %}
+
+        <article class="produto-card">
+
+            <!-- IMAGEM DO PRODUTO -->
+
+            <div class="produto-imagem">
+
+                {% if produto.imagem_path %}
+
+                <img
+                    src="/static/{{ produto.imagem_path }}"
+                    alt="{{ produto.nome }}"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='flex';
+                    "
+                >
+
+                <div
+                    class="imagem-sem-produto"
+                    style="display: none;"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                {% else %}
+
+                <div class="imagem-sem-produto">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                {% endif %}
 
 
-            <a
-                href="/vendas"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-cart-shopping"></i>
-                Vendas
-            </a>
+                <!-- ETIQUETA DE ESTOQUE -->
 
+                <span class="estoque-tag">
 
-            <a
-                href="/clientes"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-users"></i>
-                Clientes
-            </a>
+                    {% if produto.estoque_atual > 0 %}
 
+                        {{ produto.estoque_atual }} em estoque
 
-            <a
-                href="/relatorios"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-chart-line"></i>
-                Relatórios
-            </a>
+                    {% else %}
 
+                        Sem estoque
 
-            <a
-                href="/produtos/form"
-                class="menu-item"
-            >
-                <i class="fa-solid fa-gear"></i>
-                Administração
-            </a>
+                    {% endif %}
 
-
-        </nav>
-
-
-
-        <!-- USUÁRIO -->
-
-        <div class="usuario">
-
-            <div class="usuario-icon">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div class="usuario-info">
-
-                <strong>
-                    Administrador
-                </strong>
-
-                <span>
-                    PDV
                 </span>
 
             </div>
 
-            <i class="fa-solid fa-chevron-down seta"></i>
 
-        </div>
+            <!-- INFORMAÇÕES DO PRODUTO -->
 
+            <div class="produto-conteudo">
 
-    </header>
+                <!-- CATEGORIA -->
 
+                <span class="produto-categoria">
 
+                    {% if produto.categoria %}
 
+                        {{ produto.categoria.nome }}
 
-    <!-- =====================================================
-         CONTEÚDO
-    ====================================================== -->
+                    {% else %}
 
-    <main class="pagina-produtos">
+                        Sem categoria
 
+                    {% endif %}
 
-        <!-- =================================================
-             CABEÇALHO DA PÁGINA
-        ================================================== -->
-
-        <section class="pagina-header">
+                </span>
 
 
-            <div>
+                <!-- NOME -->
 
-                <h2>
-                    Produtos
-                </h2>
+                <h3 class="produto-nome">
+                    {{ produto.nome }}
+                </h3>
 
-                <p>
-                    Confira os produtos disponíveis para compra.
-                </p>
+
+                <!-- PREÇO -->
+
+                <strong class="preco">
+                    R$ {{ "%.2f"|format(produto.preco) }}
+                </strong>
+
+
+                <!-- QUANTIDADE EM ESTOQUE -->
+
+                <span class="estoque">
+                    Estoque: {{ produto.estoque_atual }}
+                </span>
+
+
+                <!-- BOTÃO DE COMPRA -->
+
+                <button
+                    type="button"
+                    class="btn-adicionar"
+                    data-id="{{ produto.id }}"
+                    data-nome="{{ produto.nome }}"
+                    data-preco="{{ produto.preco }}"
+                    data-estoque="{{ produto.estoque_atual }}"
+                    {% if produto.estoque_atual <= 0 %}
+                    disabled
+                    {% endif %}
+                >
+
+                    {% if produto.estoque_atual > 0 %}
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Comprar
+
+                    {% else %}
+
+                        Indisponível
+
+                    {% endif %}
+
+                </button>
 
             </div>
 
+        </article>
 
+        {% else %}
+
+        <!-- ESTADO VAZIO -->
+
+        <div class="sem-produtos">
+
+            <div class="sem-produtos-icone">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <h2>Nenhum produto disponível</h2>
+
+            <p>Os produtos cadastrados aparecerão aqui.</p>
 
             <a
                 href="/produtos/form"
-                class="btn-administracao"
+                class="btn-cadastrar-produto"
             >
-                <i class="fa-solid fa-gear"></i>
-
-                Administração
+                <i class="fa-solid fa-plus"></i>
+                Cadastrar produto
             </a>
-
-
-        </section>
-
-
-
-
-        <!-- =================================================
-             BUSCA
-        ================================================== -->
-
-        <div class="busca-container">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                id="buscarProduto"
-                placeholder="Buscar produto por nome..."
-            >
-
-            <span class="atalho">
-                Ctrl + K
-            </span>
 
         </div>
 
+        {% endfor %}
 
+    </section>
 
+</main>
 
-        <!-- =================================================
-             PRODUTOS
-        ================================================== -->
+{% endblock %}
 
-        <section class="produtos-grid">
 
+<!-- =====================================================
+     JAVASCRIPT DA PÁGINA
+====================================================== -->
 
-            {% for produto in produtos %}
+{% block scripts %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-                <article class="produto-card">
+        const campoBusca = document.getElementById("buscarProduto");
 
+        const produtos = document.querySelectorAll(".produto-card");
 
-                    <!-- =============================================
-                         IMAGEM
-                    ============================================== -->
+        // Busca de produtos pelo nome
+        campoBusca.addEventListener("input", function () {
 
-                    <div class="produto-imagem">
+            const pesquisa = this.value
+                .toLowerCase()
+                .trim();
 
+            produtos.forEach(function (produto) {
 
-                        {% if produto.imagem_path %}
+                const elementoNome =
+                    produto.querySelector(".produto-nome");
 
-                            <img
-                                src="/static/{{ produto.imagem_path }}"
-                                alt="{{ produto.nome }}"
-                                onerror="
-                                    this.style.display='none';
-                                    this.nextElementSibling.style.display='flex';
-                                "
-                            >
+                const nome = elementoNome.textContent
+                    .toLowerCase()
+                    .trim();
 
-                            <div
-                                class="imagem-sem-produto"
-                                style="display:none;"
-                            >
-                                <i class="fa-solid fa-box"></i>
-                            </div>
+                produto.style.display =
+                    nome.includes(pesquisa) ? "" : "none";
 
+            });
 
-                        {% else %}
+        });
 
-                            <div class="imagem-sem-produto">
 
-                                <i class="fa-solid fa-box"></i>
+        // Atalho Ctrl + K para acessar a busca
+        document.addEventListener("keydown", function (event) {
 
-                            </div>
-
-                        {% endif %}
-
-
-
-                        <!-- ESTOQUE -->
-
-                        <span class="estoque-tag">
-
-                            {% if produto.estoque_atual > 0 %}
-
-                                {{ produto.estoque_atual }} em estoque
-
-                            {% else %}
-
-                                Sem estoque
-
-                            {% endif %}
-
-                        </span>
-
-
-                    </div>
-
-
-
-
-                    <!-- =============================================
-                         INFORMAÇÕES
-                    ============================================== -->
-
-                    <div class="produto-conteudo">
-
-
-                        <!-- CATEGORIA -->
-
-                        <span class="produto-categoria">
-
-                            {% if produto.categoria %}
-
-                                {{ produto.categoria.nome }}
-
-                            {% else %}
-
-                                Sem categoria
-
-                            {% endif %}
-
-                        </span>
-
-
-
-                        <!-- NOME -->
-
-                        <h3 class="produto-nome">
-
-                            {{ produto.nome }}
-
-                        </h3>
-
-
-
-                        <!-- PREÇO -->
-
-                        <strong class="preco">
-
-                            R$ {{ "%.2f"|format(produto.preco) }}
-
-                        </strong>
-
-
-
-                        <!-- ESTOQUE -->
-
-                        <span class="estoque">
-
-                            Estoque:
-                            {{ produto.estoque_atual }}
-
-                        </span>
-
-
-
-                        <!-- BOTÃO -->
-
-                        <button
-                            type="button"
-                            class="btn-adicionar"
-
-                            data-id="{{ produto.id }}"
-                            data-nome="{{ produto.nome }}"
-                            data-preco="{{ produto.preco }}"
-                            data-estoque="{{ produto.estoque_atual }}"
-
-                            {% if produto.estoque_atual <= 0 %}
-                                disabled
-                            {% endif %}
-                        >
-
-                            {% if produto.estoque_atual > 0 %}
-
-                                <i class="fa-solid fa-cart-shopping"></i>
-
-                                Comprar
-
-                            {% else %}
-
-                                Indisponível
-
-                            {% endif %}
-
-                        </button>
-
-
-                    </div>
-
-
-                </article>
-
-
-            {% else %}
-
-
-                <!-- =============================================
-                     SEM PRODUTOS
-                ============================================== -->
-
-                <div class="sem-produtos">
-
-                    <div class="sem-produtos-icone">
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                    </div>
-
-                    <h2>
-                        Nenhum produto disponível
-                    </h2>
-
-                    <p>
-                        Os produtos cadastrados aparecerão aqui.
-                    </p>
-
-                    <a
-                        href="/produtos/form"
-                        class="btn-cadastrar-produto"
-                    >
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        Cadastrar produto
-
-                    </a>
-
-                </div>
-
-
-            {% endfor %}
-
-
-        </section>
-
-
-    </main>
-
-
-
-
-    <!-- =====================================================
-         SCRIPT DE BUSCA
-    ====================================================== -->
-
-    <script>
-
-        const campoBusca =
-            document.getElementById("buscarProduto");
-
-
-        const produtos =
-            document.querySelectorAll(".produto-card");
-
-
-
-        campoBusca.addEventListener(
-            "input",
-            function () {
-
-                const pesquisa =
-                    this.value
-                        .toLowerCase()
-                        .trim();
-
-
-                produtos.forEach(
-                    function (produto) {
-
-                        const nome =
-                            produto
-                                .querySelector(".produto-nome")
-                                .textContent
-                                .toLowerCase();
-
-
-                        produto.style.display =
-                            nome.includes(pesquisa)
-                                ? ""
-                                : "none";
-
-                    }
-                );
-
+            if (
+                event.ctrlKey &&
+                event.key.toLowerCase() === "k"
+            ) {
+                event.preventDefault();
+                campoBusca.focus();
             }
-        );
 
+        });
 
+    });
+</script>
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.ctrlKey &&
-                    event.key.toLowerCase() === "k"
-                ) {
-
-                    event.preventDefault();
-
-                    campoBusca.focus();
-
-                }
-
-            }
-        );
-
-    </script>
-
-
-</body>
-
-</html>
+{% endblock %}
