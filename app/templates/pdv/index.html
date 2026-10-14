@@ -1,502 +1,295 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>PDV — AAPM SENAI</title>
+{% block title %}PDV — AAPM SENAI{% endblock %}
 
-    <link rel="stylesheet" href="/static/pdv-css/index.css">
+{% block extra_css %}
+<link rel="stylesheet" href="/static/pdv-css/index.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+{% endblock %}
 
-    <!-- Ícones -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
+{% block content %}
 
-<body>
+<div class="layout">
 
-    <!-- =====================================================
-         BARRA SUPERIOR / BASE
-    ====================================================== -->
+    <!-- ÁREA DE PRODUTOS -->
+    <section class="produtos-area">
 
-    <header class="topbar">
-
-        <div class="logo-area">
-
-            <div class="logo-icon">
-                <i class="fa-solid fa-store"></i>
-            </div>
-
+        <div class="pagina-header">
             <div>
-                <h1>PDV — AAPM SENAI</h1>
-                <span>Sistema de vendas</span>
+                <h2>Nova venda</h2>
+                <p>Selecione os produtos para adicionar ao carrinho.</p>
             </div>
 
+            <div class="status-caixa">
+                <span class="status-dot"></span>
+                Caixa aberto
+            </div>
         </div>
 
-
-        <nav class="menu">
-
-            <a href="/pdv/" class="menu-item active">
-                <i class="fa-solid fa-house"></i>
-                Home
-            </a>
-
-            <a href="/produtos/" class="menu-item">
-                <i class="fa-solid fa-box"></i>
-                Produtos
-            </a>
-
-            <a href="/movimentacoes" class="menu-item">
-                <i class="fa-solid fa-warehouse"></i>
-                Estoque
-            </a>
-
-            <a href="/pdv/" class="menu-item">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Vendas
-            </a>
-
-            <a href="/clientes/" class="menu-item">
-                <i class="fa-solid fa-users"></i>
-                Clientes
-            </a>
-
-            <a href="/relatorios/" class="menu-item">
-                <i class="fa-solid fa-chart-line"></i>
-                Relatórios
-            </a>
-
-            <a href="/produtos/form" class="menu-item">
-                <i class="fa-solid fa-gear"></i>
-                Administração
-            </a>
-
-        </nav>
-
-
-        <div class="usuario">
-
-            <div class="usuario-icon">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div class="usuario-info">
-                <strong>Administrador</strong>
-                <span>PDV</span>
-            </div>
-
-            <i class="fa-solid fa-chevron-down seta"></i>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         CONTEÚDO PRINCIPAL
-    ====================================================== -->
-
-    <main class="layout">
-
-
-        <!-- =================================================
-             ÁREA DE PRODUTOS
-        ================================================== -->
-
-        <section class="produtos-area">
-
-
-            <!-- CABEÇALHO -->
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>Nova venda</h2>
-
-                    <p>
-                        Selecione os produtos para adicionar ao carrinho.
-                    </p>
-
-                </div>
-
-                <div class="status-caixa">
-
-                    <span class="status-dot"></span>
-
-                    Caixa aberto
-
-                </div>
-
-            </div>
-
-
-            <!-- BUSCA -->
-
-            <div class="busca-container">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="buscarProduto"
-                    placeholder="Buscar produto por nome ou código..."
-                >
-
-                <span class="atalho">
-                    Ctrl + K
-                </span>
-
-            </div>
-
-
-            <!-- CATEGORIAS -->
-
-            <div class="categorias">
-
-                <button class="categoria active">
-                    Todos
-                </button>
-
-                <button class="categoria">
-                    Alimentos
-                </button>
-
-                <button class="categoria">
-                    Bebidas
-                </button>
-
-                <button class="categoria">
-                    Uniformes
-                </button>
-
-                <button class="categoria">
-                    Materiais
-                </button>
-
-                <button class="categoria">
-                    Outros
-                </button>
-
-            </div>
-
-
-<!-- ==============================
-     CARDS DOS PRODUTOS
-     ============================== -->
-
-<div class="produtos-grid">
-
-    {% for produto in produtos %}
-
-    <div class="produto-card">
-
-        <!-- IMAGEM -->
-        <div class="produto-imagem">
-
-            {% if produto.imagem_path %}
-
-                <img
-                    src="{{ produto.imagem_path }}"
-                    alt="{{ produto.nome }}"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                >
-
-                <div
-                    class="imagem-sem-produto"
-                    style="display: none;"
-                >
-                    📦
-                </div>
-
-            {% else %}
-
-                <div class="imagem-sem-produto">
-                    📦
-                </div>
-
-            {% endif %}
-
-            <!-- ESTOQUE -->
-            <span class="estoque-tag">
-                
-
-                {% if produto.estoque_atual > 0 %}
-                    {{ produto.estoque_atual }} em estoque
-                {% else %}
-                    Sem estoque
-                {% endif %}
-
-            </span>
-
-        </div>
-
-
-        <!-- INFORMAÇÕES -->
-        <div class="produto-conteudo">
-
-            <!-- CATEGORIA -->
-            <span class="produto-categoria">
-
-                {% if produto.categoria %}
-                    {{ produto.categoria.nome }}
-                {% else %}
-                    Sem categoria
-                {% endif %}
-
-            </span>
-
-
-            <!-- NOME -->
-            <h3>
-                {{ produto.nome }}
-            </h3>
-
-
-            <!-- PREÇO -->
-            <strong class="preco">
-                R$ {{ "%.2f"|format(produto.preco) }}
-            </strong>
-
-
-            <!-- ESTOQUE -->
-            <span class="estoque">
-                Estoque: {{ produto.estoque_atual }}
-            </span>
-
-
-            <!-- BOTÃO -->
-            <button
-                type="button"
-                class="btn-adicionar"
-
-                data-id="{{ produto.id }}"
-                data-nome="{{ produto.nome }}"
-                data-preco="{{ produto.preco }}"
-                data-estoque="{{ produto.estoque_atual }}"
-
-                {% if produto.estoque_atual <= 0 %}
-                    disabled
-                {% endif %}
+        <!-- BUSCA -->
+        <div class="busca-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="buscarProduto"
+                placeholder="Buscar produto por nome ou código..."
             >
 
-                {% if produto.estoque_atual > 0 %}
-                    🛒 Adicionar
-                {% else %}
-                    Sem estoque
-                {% endif %}
+            <span class="atalho">Ctrl + K</span>
+        </div>
 
+        <!-- CATEGORIAS -->
+        <div class="categorias">
+            <button type="button" class="categoria active">
+                Todos
             </button>
 
+            <button type="button" class="categoria">
+                Alimentos
+            </button>
+
+            <button type="button" class="categoria">
+                Bebidas
+            </button>
+
+            <button type="button" class="categoria">
+                Uniformes
+            </button>
+
+            <button type="button" class="categoria">
+                Materiais
+            </button>
+
+            <button type="button" class="categoria">
+                Outros
+            </button>
         </div>
 
-    </div>
+        <!-- CARDS DOS PRODUTOS -->
+        <div class="produtos-grid">
 
-    {% else %}
+            {% for produto in produtos %}
 
-    <!-- CASO NÃO TENHA PRODUTOS -->
+            <div class="produto-card">
 
-    <div class="sem-produtos">
+                <!-- IMAGEM -->
+                <div class="produto-imagem">
 
-        <div class="imagem-sem-produto">
-            📦
-        </div>
+                    {% if produto.imagem_path %}
+                    <img
+                        src="{{ produto.imagem_path }}"
+                        alt="{{ produto.nome }}"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
 
-        <h3>
-            Nenhum produto cadastrado
-        </h3>
+                    <div
+                        class="imagem-sem-produto"
+                        style="display: none;"
+                    >
+                        📦
+                    </div>
+                    {% else %}
+                    <div class="imagem-sem-produto">
+                        📦
+                    </div>
+                    {% endif %}
 
-        <p>
-            Cadastre produtos na administração
-            para que eles apareçam no caixa.
-        </p>
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
-</section>
-
-        <!-- =================================================
-             CARRINHO
-        ================================================== -->
-
-        <aside class="carrinho">
-
-
-            <!-- CABEÇALHO -->
-
-            <div class="carrinho-header">
-
-                <div>
-
-                    <h2>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        Carrinho
-                    </h2>
-
-                    <span id="quantidadeItens">
-                        0 itens
+                    <!-- ESTOQUE -->
+                    <span class="estoque-tag">
+                        {% if produto.estoque_atual > 0 %}
+                            {{ produto.estoque_atual }} em estoque
+                        {% else %}
+                            Sem estoque
+                        {% endif %}
                     </span>
 
                 </div>
 
-                <button class="btn-limpar">
-                    Limpar
-                </button>
+                <!-- INFORMAÇÕES -->
+                <div class="produto-conteudo">
 
-            </div>
+                    <span class="produto-categoria">
+                        {% if produto.categoria %}
+                            {{ produto.categoria.nome }}
+                        {% else %}
+                            Sem categoria
+                        {% endif %}
+                    </span>
 
+                    <h3>{{ produto.nome }}</h3>
 
-            <!-- CLIENTE -->
+                    <strong class="preco">
+                        R$ {{ "%.2f"|format(produto.preco) }}
+                    </strong>
 
-            <div class="cliente-area">
+                    <span class="estoque">
+                        Estoque: {{ produto.estoque_atual }}
+                    </span>
 
-                <label>
-                    Cliente
-                </label>
-
-                <select>
-
-                    <option>
-                        Sem identificação (sem desconto)
-                    </option>
-
-                    <option>
-                        Cliente cadastrado
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- PRODUTOS DO CARRINHO -->
-
-            <div class="carrinho-produtos">
-
-                <div class="carrinho-vazio">
-
-                    <div class="carrinho-icon">
-
-                        <i class="fa-solid fa-cart-shopping"></i>
-
-                    </div>
-
-                    <h3>
-                        Carrinho vazio
-                    </h3>
-
-                    <p>
-                        Clique em um produto para adicioná-lo à venda.
-                    </p>
+                    <button
+                        type="button"
+                        class="btn-adicionar"
+                        data-id="{{ produto.id }}"
+                        data-nome="{{ produto.nome }}"
+                        data-preco="{{ produto.preco }}"
+                        data-estoque="{{ produto.estoque_atual }}"
+                        {% if produto.estoque_atual <= 0 %}
+                        disabled
+                        {% endif %}
+                    >
+                        {% if produto.estoque_atual > 0 %}
+                            🛒 Adicionar
+                        {% else %}
+                            Sem estoque
+                        {% endif %}
+                    </button>
 
                 </div>
-
             </div>
 
+            {% else %}
 
-            <!-- RODAPÉ DO CARRINHO -->
+            <div class="sem-produtos">
+                <div class="imagem-sem-produto">📦</div>
 
-            <div class="carrinho-footer">
+                <h3>Nenhum produto cadastrado</h3>
 
-
-                <div class="observacao">
-
-                    <label>
-                        Observação
-                    </label>
-
-                    <textarea
-                        placeholder="Observação opcional..."
-                    ></textarea>
-
-                </div>
-
-
-                <div class="resumo">
-
-                    <div>
-                        <span>Subtotal</span>
-                        <strong>R$ 0,00</strong>
-                    </div>
-
-                    <div>
-                        <span>Desconto</span>
-                        <strong>R$ 0,00</strong>
-                    </div>
-
-                    <div class="total">
-
-                        <span>Total</span>
-
-                        <strong>
-                            R$ 0,00
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <button class="btn-finalizar" disabled>
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Finalizar venda
-
-                </button>
-
+                <p>
+                    Cadastre produtos na administração
+                    para que eles apareçam no caixa.
+                </p>
             </div>
 
-        </aside>
+            {% endfor %}
 
-    </main>
+        </div>
+    </section>
 
+    <!-- CARRINHO -->
+    <aside class="carrinho">
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+        <!-- CABEÇALHO -->
+        <div class="carrinho-header">
+            <div>
+                <h2>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Carrinho
+                </h2>
 
-    <script>
+                <span id="quantidadeItens">0 itens</span>
+            </div>
 
-        const busca = document.getElementById("buscarProduto");
+            <button type="button" class="btn-limpar">
+                Limpar
+            </button>
+        </div>
 
-        document.addEventListener("keydown", function(event) {
+        <!-- CLIENTE -->
+        <div class="cliente-area">
+            <label for="clienteSelect">Cliente</label>
 
-            if (event.ctrlKey && event.key.toLowerCase() === "k") {
+            <select id="clienteSelect">
+                <option value="0">
+                    Sem identificação (sem desconto)
+                </option>
 
-                event.preventDefault();
+                <option value="1">
+                    Cliente cadastrado
+                </option>
+            </select>
+        </div>
 
-                busca.focus();
+        <!-- PRODUTOS DO CARRINHO -->
+        <div class="carrinho-produtos">
 
-            }
+            <div class="carrinho-vazio">
+                <div class="carrinho-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
 
-        });
+                <h3>Carrinho vazio</h3>
 
+                <p>
+                    Clique em um produto para adicioná-lo à venda.
+                </p>
+            </div>
 
-        const categorias = document.querySelectorAll(".categoria");
+        </div>
 
-        categorias.forEach(botao => {
+        <!-- RODAPÉ DO CARRINHO -->
+        <div class="carrinho-footer">
 
-            botao.addEventListener("click", function() {
+            <div class="observacao">
+                <label for="observacao">Observação</label>
 
-                categorias.forEach(item => {
-                    item.classList.remove("active");
-                });
+                <textarea
+                    id="observacao"
+                    placeholder="Observação opcional..."
+                ></textarea>
+            </div>
 
-                this.classList.add("active");
+            <div class="resumo">
+                <div>
+                    <span>Subtotal</span>
+                    <strong>R$ 0,00</strong>
+                </div>
 
+                <div>
+                    <span>Desconto</span>
+                    <strong>R$ 0,00</strong>
+                </div>
+
+                <div class="total">
+                    <span>Total</span>
+                    <strong>R$ 0,00</strong>
+                </div>
+            </div>
+
+            <button type="button" class="btn-finalizar" disabled>
+                <i class="fa-solid fa-check"></i>
+                Finalizar venda
+            </button>
+
+        </div>
+    </aside>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const busca = document.getElementById("buscarProduto");
+
+    // Atalho Ctrl + K para pesquisar produtos
+    document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            busca.focus();
+        }
+    });
+
+    // Seleção visual das categorias
+    const categorias = document.querySelectorAll(".categoria");
+
+    categorias.forEach(function (botao) {
+        botao.addEventListener("click", function () {
+
+            categorias.forEach(function (item) {
+                item.classList.remove("active");
             });
 
+            this.classList.add("active");
         });
+    });
 
-    </script>
-
-</body>
-
-</html>
+});
+</script>
+{% endblock %}
