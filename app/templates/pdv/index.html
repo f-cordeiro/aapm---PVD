@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PDV — AAPM SENAI</title>
 
     <link rel="stylesheet" href="/static/pdv-css/index.css">
-
-    <!-- Ícones -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
-
-    <!-- =====================================================
-         BARRA SUPERIOR / BASE
-    ====================================================== -->
-
+    <!-- BARRA SUPERIOR -->
     <header class="topbar">
-
         <div class="logo-area">
-
             <div class="logo-icon">
                 <i class="fa-solid fa-store"></i>
             </div>
@@ -32,12 +21,9 @@
                 <h1>PDV — AAPM SENAI</h1>
                 <span>Sistema de vendas</span>
             </div>
-
         </div>
 
-
         <nav class="menu">
-
             <a href="/pdv/" class="menu-item active">
                 <i class="fa-solid fa-house"></i>
                 Home
@@ -72,12 +58,9 @@
                 <i class="fa-solid fa-gear"></i>
                 Administração
             </a>
-
         </nav>
 
-
         <div class="usuario">
-
             <div class="usuario-icon">
                 <i class="fa-solid fa-user"></i>
             </div>
@@ -88,55 +71,28 @@
             </div>
 
             <i class="fa-solid fa-chevron-down seta"></i>
-
         </div>
-
     </header>
 
-
-    <!-- =====================================================
-         CONTEÚDO PRINCIPAL
-    ====================================================== -->
-
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="layout">
 
-
-        <!-- =================================================
-             ÁREA DE PRODUTOS
-        ================================================== -->
-
+        <!-- ÁREA DE PRODUTOS -->
         <section class="produtos-area">
-
-
-            <!-- CABEÇALHO -->
-
             <div class="pagina-header">
-
                 <div>
-
                     <h2>Nova venda</h2>
-
-                    <p>
-                        Selecione os produtos para adicionar ao carrinho.
-                    </p>
-
+                    <p>Selecione os produtos para adicionar ao carrinho.</p>
                 </div>
 
                 <div class="status-caixa">
-
                     <span class="status-dot"></span>
-
                     Caixa aberto
-
                 </div>
-
             </div>
 
-
             <!-- BUSCA -->
-
             <div class="busca-container">
-
                 <i class="fa-solid fa-magnifying-glass"></i>
 
                 <input
@@ -145,358 +101,749 @@
                     placeholder="Buscar produto por nome ou código..."
                 >
 
-                <span class="atalho">
-                    Ctrl + K
-                </span>
-
+                <span class="atalho">Ctrl + K</span>
             </div>
-
 
             <!-- CATEGORIAS -->
-
             <div class="categorias">
-
-                <button class="categoria active">
-                    Todos
-                </button>
-
-                <button class="categoria">
-                    Alimentos
-                </button>
-
-                <button class="categoria">
-                    Bebidas
-                </button>
-
-                <button class="categoria">
-                    Uniformes
-                </button>
-
-                <button class="categoria">
-                    Materiais
-                </button>
-
-                <button class="categoria">
-                    Outros
-                </button>
-
+                <button type="button" class="categoria active">Todos</button>
+                <button type="button" class="categoria">Alimentos</button>
+                <button type="button" class="categoria">Bebidas</button>
+                <button type="button" class="categoria">Uniformes</button>
+                <button type="button" class="categoria">Materiais</button>
+                <button type="button" class="categoria">Outros</button>
             </div>
 
+            <!-- GRID DE PRODUTOS -->
+            <div class="produtos-grid">
+                {% for produto in produtos %}
+                <div class="produto-card">
+                    <div class="produto-imagem">
+                        {% if produto.imagem_path %}
+                        <img
+                            src="{{ produto.imagem_path }}"
+                            alt="{{ produto.nome }}"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
 
-<!-- ==============================
-     CARDS DOS PRODUTOS
-     ============================== -->
+                        <div class="imagem-sem-produto" style="display: none;">
+                            📦
+                        </div>
+                        {% else %}
+                        <div class="imagem-sem-produto">
+                            📦
+                        </div>
+                        {% endif %}
 
-<div class="produtos-grid">
+                        <span class="estoque-tag">
+                            {% if produto.estoque_atual > 0 %}
+                                {{ produto.estoque_atual }} em estoque
+                            {% else %}
+                                Sem estoque
+                            {% endif %}
+                        </span>
+                    </div>
 
-    {% for produto in produtos %}
+                    <div class="produto-conteudo">
+                        <span class="produto-categoria">
+                            {% if produto.categoria %}
+                                {{ produto.categoria.nome }}
+                            {% else %}
+                                Sem categoria
+                            {% endif %}
+                        </span>
 
-    <div class="produto-card">
+                        <h3>{{ produto.nome }}</h3>
 
-        <!-- IMAGEM -->
-        <div class="produto-imagem">
+                        <strong class="preco">
+                            R$ {{ "%.2f"|format(produto.preco) }}
+                        </strong>
 
-            {% if produto.imagem_path %}
+                        <span class="estoque">
+                            Estoque: {{ produto.estoque_atual }}
+                        </span>
 
-                <img
-                    src="{{ produto.imagem_path }}"
-                    alt="{{ produto.nome }}"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                >
-
-                <div
-                    class="imagem-sem-produto"
-                    style="display: none;"
-                >
-                    📦
+                        <button
+                            type="button"
+                            class="btn-adicionar"
+                            data-id="{{ produto.id }}"
+                            data-nome="{{ produto.nome }}"
+                            data-preco="{{ produto.preco }}"
+                            data-estoque="{{ produto.estoque_atual }}"
+                            data-categoria="{{ produto.categoria.nome if produto.categoria else 'Sem categoria' }}"
+                            {% if produto.estoque_atual <= 0 %}disabled{% endif %}
+                        >
+                            🛒 Adicionar
+                        </button>
+                    </div>
                 </div>
+                {% else %}
+                <div class="sem-produtos">
+                    <div class="imagem-sem-produto">📦</div>
 
-            {% else %}
+                    <h3>Nenhum produto cadastrado</h3>
 
-                <div class="imagem-sem-produto">
-                    📦
+                    <p>
+                        Cadastre produtos na administração
+                        para que eles apareçam no caixa.
+                    </p>
                 </div>
+                {% endfor %}
+            </div>
+        </section>
 
-            {% endif %}
-
-            <!-- ESTOQUE -->
-            <span class="estoque-tag">
-                
-
-                {% if produto.estoque_atual > 0 %}
-                    {{ produto.estoque_atual }} em estoque
-                {% else %}
-                    Sem estoque
-                {% endif %}
-
-            </span>
-
-        </div>
-
-
-        <!-- INFORMAÇÕES -->
-        <div class="produto-conteudo">
-
-            <!-- CATEGORIA -->
-            <span class="produto-categoria">
-
-                {% if produto.categoria %}
-                    {{ produto.categoria.nome }}
-                {% else %}
-                    Sem categoria
-                {% endif %}
-
-            </span>
-
-
-            <!-- NOME -->
-            <h3>
-                {{ produto.nome }}
-            </h3>
-
-
-            <!-- PREÇO -->
-            <strong class="preco">
-                R$ {{ "%.2f"|format(produto.preco) }}
-            </strong>
-
-
-            <!-- ESTOQUE -->
-            <span class="estoque">
-                Estoque: {{ produto.estoque_atual }}
-            </span>
-
-
-            <!-- BOTÃO -->
-            <button
-                type="button"
-                class="btn-adicionar"
-
-                data-id="{{ produto.id }}"
-                data-nome="{{ produto.nome }}"
-                data-preco="{{ produto.preco }}"
-                data-estoque="{{ produto.estoque_atual }}"
-
-                {% if produto.estoque_atual <= 0 %}
-                    disabled
-                {% endif %}
-            >
-
-                {% if produto.estoque_atual > 0 %}
-                    🛒 Adicionar
-                {% else %}
-                    Sem estoque
-                {% endif %}
-
-            </button>
-
-        </div>
-
-    </div>
-
-    {% else %}
-
-    <!-- CASO NÃO TENHA PRODUTOS -->
-
-    <div class="sem-produtos">
-
-        <div class="imagem-sem-produto">
-            📦
-        </div>
-
-        <h3>
-            Nenhum produto cadastrado
-        </h3>
-
-        <p>
-            Cadastre produtos na administração
-            para que eles apareçam no caixa.
-        </p>
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
-</section>
-
-        <!-- =================================================
-             CARRINHO
-        ================================================== -->
-
+        <!-- CARRINHO: EXISTE APENAS UM -->
         <aside class="carrinho">
 
-
-            <!-- CABEÇALHO -->
-
+            <!-- CABEÇALHO DO CARRINHO -->
             <div class="carrinho-header">
-
                 <div>
-
                     <h2>
                         <i class="fa-solid fa-cart-shopping"></i>
                         Carrinho
                     </h2>
 
-                    <span id="quantidadeItens">
-                        0 itens
-                    </span>
-
+                    <span id="quantidadeItens">0 itens</span>
                 </div>
 
-                <button class="btn-limpar">
+                <button type="button" class="btn-limpar" disabled>
                     Limpar
                 </button>
-
             </div>
 
+            <!-- FORMULÁRIO ÚNICO DE FINALIZAÇÃO -->
+            <form id="formFinalizar" action="/pdv/finalizar" method="post">
 
-            <!-- CLIENTE -->
+                <input
+                    type="hidden"
+                    name="carrinho_json"
+                    id="carrinho_json"
+                >
 
-            <div class="cliente-area">
+                <!-- CLIENTE -->
+                <div class="cliente-area">
+                    <label for="cliente_id">Cliente</label>
 
-                <label>
-                    Cliente
-                </label>
+                    <select id="cliente_id" name="cliente_id">
+                        <option
+                            value="0"
+                            data-associado="false"
+                        >
+                            Sem identificação
+                        </option>
 
-                <select>
+                        {% for cliente in clientes %}
+                        <option
+                            value="{{ cliente.id }}"
+                            data-associado="{{ 'true' if cliente.is_associado else 'false' }}"
+                        >
+                            {{ cliente.nome }}
+                            {% if cliente.is_associado %}(Associado){% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
 
-                    <option>
-                        Sem identificação (sem desconto)
-                    </option>
-
-                    <option>
-                        Cliente cadastrado
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- PRODUTOS DO CARRINHO -->
-
-            <div class="carrinho-produtos">
-
-                <div class="carrinho-vazio">
-
-                    <div class="carrinho-icon">
-
-                        <i class="fa-solid fa-cart-shopping"></i>
-
-                    </div>
-
-                    <h3>
-                        Carrinho vazio
-                    </h3>
-
-                    <p>
-                        Clique em um produto para adicioná-lo à venda.
-                    </p>
-
+                    <small id="avisoAssociado"></small>
                 </div>
 
-            </div>
+                <!-- PRODUTOS DO CARRINHO: UM ÚNICO CONTAINER -->
+                <div class="carrinho-produtos" id="carrinhoProdutos">
+                    <div class="carrinho-vazio">
+                        <div class="carrinho-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
 
+                        <h3>Carrinho vazio</h3>
 
-            <!-- RODAPÉ DO CARRINHO -->
-
-            <div class="carrinho-footer">
-
-
-                <div class="observacao">
-
-                    <label>
-                        Observação
-                    </label>
-
-                    <textarea
-                        placeholder="Observação opcional..."
-                    ></textarea>
-
+                        <p>
+                            Clique em um produto para adicioná-lo à venda.
+                        </p>
+                    </div>
                 </div>
 
+                <!-- RODAPÉ ÚNICO DO CARRINHO -->
+                <div class="carrinho-footer" id="carrinhoFooter" hidden></div>
 
-                <div class="resumo">
+                    <!-- OBSERVAÇÃO -->
+                    <div class="observacao">
+                        <label for="observacao">Observação</label>
 
-                    <div>
-                        <span>Subtotal</span>
-                        <strong>R$ 0,00</strong>
+                        <textarea
+                            id="observacao"
+                            name="observacao"
+                            maxlength="255"
+                            placeholder="Observação opcional..."
+                        ></textarea>
                     </div>
 
-                    <div>
-                        <span>Desconto</span>
-                        <strong>R$ 0,00</strong>
+                    <!-- DESCONTO -->
+                    <div class="observacao">
+                        <label for="desconto_manual">
+                            Desconto manual (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="desconto_manual"
+                            name="desconto_manual"
+                            value="0"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                        >
+
+                        <small id="avisoDesconto"></small>
                     </div>
 
-                    <div class="total">
+                    <!-- PAGAMENTOS -->
+                    <div class="pagamentos">
+                        <h3>Pagamento</h3>
 
-                        <span>Total</span>
+                        <label for="forma_pagamento_1">
+                            Primeira forma
+                        </label>
 
-                        <strong>
-                            R$ 0,00
-                        </strong>
+                        <select
+                            id="forma_pagamento_1"
+                            name="forma_pagamento_1"
+                            required
+                        >
+                            <option value="pix">PIX</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="debito">Cartão de débito</option>
+                            <option value="credito">Cartão de crédito</option>
+                        </select>
 
+                        <label for="valor_pagamento_1">
+                            Valor da primeira forma (R$)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="valor_pagamento_1"
+                            name="valor_pagamento_1"
+                            min="0"
+                            step="0.01"
+                            value="0.00"
+                            required
+                        >
+
+                        <label for="forma_pagamento_2">
+                            Segunda forma (opcional)
+                        </label>
+
+                        <select
+                            id="forma_pagamento_2"
+                            name="forma_pagamento_2"
+                        >
+                            <option value="">Não utilizar</option>
+                            <option value="pix">PIX</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="debito">Cartão de débito</option>
+                            <option value="credito">Cartão de crédito</option>
+                        </select>
+
+                        <label for="valor_pagamento_2">
+                            Valor da segunda forma (R$)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="valor_pagamento_2"
+                            name="valor_pagamento_2"
+                            value="0.00"
+                            min="0"
+                            step="0.01"
+                            disabled
+                        >
                     </div>
 
+                    <!-- RESUMO ÚNICO -->
+                    <div class="resumo">
+                        <div>
+                            <span>Subtotal</span>
+                            <strong id="subtotal">R$ 0,00</strong>
+                        </div>
+
+                        <div>
+                            <span>Desconto</span>
+                            <strong id="valorDesconto">R$ 0,00</strong>
+                        </div>
+
+                        <div class="total">
+                            <span>Total</span>
+                            <strong id="total">R$ 0,00</strong>
+                        </div>
+                    </div>
+
+                    <!-- BOTÃO ÚNICO DE FINALIZAÇÃO -->
+                    <button
+                        type="submit"
+                        class="btn-finalizar"
+                        id="btnFinalizar"
+                        disabled
+                    >
+                        <i class="fa-solid fa-check"></i>
+                        Finalizar venda
+                    </button>
                 </div>
-
-
-                <button class="btn-finalizar" disabled>
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Finalizar venda
-
-                </button>
-
-            </div>
-
+            </form>
         </aside>
-
     </main>
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
+    <!-- JAVASCRIPT -->
     <script>
-
         const busca = document.getElementById("buscarProduto");
+        const botoesAdicionar = document.querySelectorAll(".btn-adicionar");
+        const areaCarrinho = document.getElementById("carrinhoProdutos");
+        const quantidadeItens = document.getElementById("quantidadeItens");
+        const btnLimpar = document.querySelector(".btn-limpar");
+        const btnFinalizar = document.getElementById("btnFinalizar");
+        const form = document.getElementById("formFinalizar");
 
-        document.addEventListener("keydown", function(event) {
+        const clienteSelect = document.getElementById("cliente_id");
+        const descontoInput = document.getElementById("desconto_manual");
 
-            if (event.ctrlKey && event.key.toLowerCase() === "k") {
+        const forma1 = document.getElementById("forma_pagamento_1");
+        const valor1 = document.getElementById("valor_pagamento_1");
+        const forma2 = document.getElementById("forma_pagamento_2");
+        const valor2 = document.getElementById("valor_pagamento_2");
 
-                event.preventDefault();
+        const dinheiroBR = valor =>
+            Number(valor).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
 
-                busca.focus();
+        let carrinho = [];
 
+        // Recupera o carrinho salvo na sessão.
+        try {
+            const salvo = JSON.parse(
+                sessionStorage.getItem("pdv_carrinho") || "[]"
+            );
+
+            if (Array.isArray(salvo)) {
+                carrinho = salvo.filter(item =>
+                    Number.isInteger(Number(item.produto_id)) &&
+                    Number.isInteger(Number(item.quantidade)) &&
+                    Number(item.quantidade) > 0
+                );
+            }
+        } catch {
+            carrinho = [];
+        }
+
+        function salvarCarrinho() {
+            sessionStorage.setItem(
+                "pdv_carrinho",
+                JSON.stringify(carrinho)
+            );
+        }
+
+        // Calcula o desconto do associado e o desconto manual.
+        function obterDesconto() {
+            const opcao = clienteSelect.selectedOptions[0];
+            const associado = opcao?.dataset.associado === "true";
+            const manual = Number(descontoInput.value) || 0;
+
+            document.getElementById("avisoAssociado").textContent =
+                associado ? "Desconto de associado: 10%." : "";
+
+            if (manual < 0 || manual > 100) {
+                document.getElementById("avisoDesconto").textContent =
+                    "Informe um desconto entre 0 e 100%.";
+
+                return null;
             }
 
+            document.getElementById("avisoDesconto").textContent = "";
+
+            const desconto = (associado ? 10 : 0) + manual;
+
+            if (desconto > 100) {
+                document.getElementById("avisoDesconto").textContent =
+                    "A soma dos descontos não pode ultrapassar 100%.";
+
+                return null;
+            }
+
+            return desconto;
+        }
+
+        // Atualiza subtotal, desconto e total.
+        function calcularTotais() {
+            const subtotal = carrinho.reduce(
+                (soma, item) =>
+                    soma + Number(item.preco) * Number(item.quantidade),
+                0
+            );
+
+            const desconto = obterDesconto();
+
+            const valorDesconto = desconto === null
+                ? 0
+                : Math.round(subtotal * desconto) / 100;
+
+            const total = Math.max(0, subtotal - valorDesconto);
+
+            document.getElementById("subtotal").textContent =
+                dinheiroBR(subtotal);
+
+            document.getElementById("valorDesconto").textContent =
+                dinheiroBR(valorDesconto);
+
+            document.getElementById("total").textContent =
+                dinheiroBR(total);
+
+            if (!forma2.value) {
+                valor1.value = total.toFixed(2);
+                valor2.value = "0.00";
+            }
+
+            return {
+                subtotal,
+                valorDesconto,
+                total,
+                desconto
+            };
+        }
+
+        function criarBotao(texto, classe, acao, descricao) {
+            const botao = document.createElement("button");
+
+            botao.type = "button";
+            botao.className = classe;
+            botao.textContent = texto;
+            botao.setAttribute("aria-label", descricao);
+            botao.addEventListener("click", acao);
+
+            return botao;
+        }
+
+        // Renderiza os itens no único container do carrinho.
+        
+function renderizarCarrinho() {
+    areaCarrinho.replaceChildren();
+
+    const totalUnidades = carrinho.reduce(
+        (soma, item) => soma + Number(item.quantidade),
+        0
+    );
+
+    quantidadeItens.textContent =
+        `${totalUnidades} ${totalUnidades === 1 ? "item" : "itens"}`;
+
+    const carrinhoVazio = carrinho.length === 0;
+
+    // Exibe ou oculta o rodapé conforme o carrinho.
+    const carrinhoFooter = document.getElementById("carrinhoFooter");
+    carrinhoFooter.hidden = carrinhoVazio;
+
+    if (carrinhoVazio) {
+        const vazio = document.createElement("div");
+        vazio.className = "carrinho-vazio";
+
+        const icone = document.createElement("div");
+        icone.className = "carrinho-icon";
+
+        const elementoIcone = document.createElement("i");
+        elementoIcone.className = "fa-solid fa-cart-shopping";
+        icone.appendChild(elementoIcone);
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = "Carrinho vazio";
+
+        const texto = document.createElement("p");
+        texto.textContent =
+            "Clique em um produto para adicioná-lo à venda.";
+
+        vazio.append(icone, titulo, texto);
+        areaCarrinho.appendChild(vazio);
+    } else {
+        carrinho.forEach(item => {
+            const linha = document.createElement("div");
+            linha.className = "item-carrinho";
+
+            const nome = document.createElement("strong");
+            nome.textContent = item.nome;
+
+            const preco = document.createElement("p");
+            preco.textContent = dinheiroBR(item.preco);
+
+            const controles = document.createElement("div");
+            controles.className = "controles-quantidade";
+
+            const menos = criarBotao(
+                "−",
+                "btn-quantidade",
+                () => alterarQuantidade(item.produto_id, -1),
+                `Diminuir quantidade de ${item.nome}`
+            );
+
+            const qtd = document.createElement("span");
+            qtd.textContent = item.quantidade;
+
+            const mais = criarBotao(
+                "+",
+                "btn-quantidade",
+                () => alterarQuantidade(item.produto_id, 1),
+                `Aumentar quantidade de ${item.nome}`
+            );
+
+            const remover = criarBotao(
+                "Remover",
+                "btn-remover",
+                () => removerProduto(item.produto_id),
+                `Remover ${item.nome} do carrinho`
+            );
+
+            const subtotal = document.createElement("p");
+            subtotal.textContent = dinheiroBR(
+                Number(item.preco) * Number(item.quantidade)
+            );
+
+            controles.append(menos, qtd, mais, remover);
+            linha.append(nome, preco, controles, subtotal);
+
+            areaCarrinho.appendChild(linha);
+        });
+    }
+
+    btnLimpar.disabled = carrinhoVazio;
+    btnFinalizar.disabled = carrinhoVazio;
+
+    salvarCarrinho();
+    calcularTotais();
+}
+
+
+        // Adiciona um produto respeitando o estoque.
+        function adicionarProduto(botao) {
+            const id = Number(botao.dataset.id);
+            const nome = botao.dataset.nome;
+            const preco = Number(botao.dataset.preco);
+            const estoque = Number(botao.dataset.estoque);
+
+            const existente = carrinho.find(
+                item => item.produto_id === id
+            );
+
+            const quantidadeAtual = existente
+                ? existente.quantidade
+                : 0;
+
+            if (quantidadeAtual >= estoque) {
+                alert("Não há estoque suficiente para adicionar mais unidades.");
+                return;
+            }
+
+            if (existente) {
+                existente.quantidade++;
+            } else {
+                carrinho.push({
+                    produto_id: id,
+                    nome,
+                    preco,
+                    quantidade: 1,
+                    estoque
+                });
+            }
+
+            renderizarCarrinho();
+        }
+
+        function alterarQuantidade(id, diferenca) {
+            const item = carrinho.find(
+                produto => produto.produto_id === id
+            );
+
+            if (!item) return;
+
+            const novaQuantidade = item.quantidade + diferenca;
+
+            if (novaQuantidade <= 0) {
+                removerProduto(id);
+                return;
+            }
+
+            if (novaQuantidade > item.estoque) {
+                alert("Quantidade maior que o estoque disponível.");
+                return;
+            }
+
+            item.quantidade = novaQuantidade;
+            renderizarCarrinho();
+        }
+
+        function removerProduto(id) {
+            carrinho = carrinho.filter(
+                item => item.produto_id !== id
+            );
+
+            renderizarCarrinho();
+        }
+
+        // Eventos dos botões de adicionar.
+        botoesAdicionar.forEach(botao => {
+            botao.addEventListener("click", () => {
+                adicionarProduto(botao);
+            });
         });
 
+        // Limpa o carrinho.
+        btnLimpar.addEventListener("click", () => {
+            if (confirm("Deseja limpar todos os produtos do carrinho?")) {
+                carrinho = [];
+                renderizarCarrinho();
+            }
+        });
 
-        const categorias = document.querySelectorAll(".categoria");
+        // Busca por nome ou categoria.
+        busca.addEventListener("input", () => {
+            const termo = busca.value.toLocaleLowerCase("pt-BR");
 
-        categorias.forEach(botao => {
+            document.querySelectorAll(".produto-card").forEach(card => {
+                const nome =
+                    card.querySelector("h3")?.textContent || "";
 
-            botao.addEventListener("click", function() {
+                const categoria =
+                    card.querySelector(".produto-categoria")?.textContent || "";
 
-                categorias.forEach(item => {
+                card.hidden = !`${nome} ${categoria}`
+                    .toLocaleLowerCase("pt-BR")
+                    .includes(termo);
+            });
+        });
+
+        // Atalho Ctrl + K para a busca.
+        document.addEventListener("keydown", event => {
+            if (event.ctrlKey && event.key.toLowerCase() === "k") {
+                event.preventDefault();
+                busca.focus();
+            }
+        });
+
+        // Filtro por categoria.
+        document.querySelectorAll(".categoria").forEach(botao => {
+            botao.addEventListener("click", () => {
+                document.querySelectorAll(".categoria").forEach(item => {
                     item.classList.remove("active");
                 });
 
-                this.classList.add("active");
+                botao.classList.add("active");
 
+                const categoria = botao.textContent
+                    .trim()
+                    .toLocaleLowerCase("pt-BR");
+
+                document.querySelectorAll(".produto-card").forEach(card => {
+                    const nomeCategoria = (
+                        card.querySelector(".produto-categoria")?.textContent || ""
+                    ).trim().toLocaleLowerCase("pt-BR");
+
+                    card.hidden =
+                        categoria !== "todos" &&
+                        nomeCategoria !== categoria;
+                });
+
+                busca.value = "";
             });
-
         });
 
+        // Atualiza o total quando cliente ou desconto mudarem.
+        clienteSelect.addEventListener("change", renderizarCarrinho);
+        descontoInput.addEventListener("input", renderizarCarrinho);
+
+        // Ativa ou desativa o segundo pagamento.
+        forma2.addEventListener("change", () => {
+            const segundaAtiva = Boolean(forma2.value);
+
+            valor2.disabled = !segundaAtiva;
+
+            if (!segundaAtiva) {
+                valor2.value = "0.00";
+            }
+
+            calcularTotais();
+        });
+
+        // Calcula automaticamente o valor do segundo pagamento.
+        valor1.addEventListener("input", () => {
+            if (!forma2.value) return;
+
+            const total = calcularTotais().total;
+            const primeira = Number(valor1.value);
+
+            if (Number.isFinite(primeira)) {
+                valor2.value = Math.max(0, total - primeira).toFixed(2);
+            }
+        });
+
+        // Calcula automaticamente o valor do primeiro pagamento.
+        valor2.addEventListener("input", () => {
+            if (!forma2.value) return;
+
+            const total = calcularTotais().total;
+            const segunda = Number(valor2.value);
+
+            if (Number.isFinite(segunda)) {
+                valor1.value = Math.max(0, total - segunda).toFixed(2);
+            }
+        });
+
+        // Valida e envia a venda ao backend.
+        form.addEventListener("submit", event => {
+            const totais = calcularTotais();
+
+            if (carrinho.length === 0) {
+                event.preventDefault();
+                alert("Adicione pelo menos um produto.");
+                return;
+            }
+
+            if (totais.desconto === null) {
+                event.preventDefault();
+                alert("Corrija o desconto antes de finalizar.");
+                return;
+            }
+
+            const primeiroValor = Number(valor1.value);
+            const segundoValor = Number(valor2.value);
+            const totalPago = primeiroValor + segundoValor;
+
+            if (
+                !Number.isFinite(primeiroValor) ||
+                !Number.isFinite(segundoValor) ||
+                primeiroValor < 0 ||
+                segundoValor < 0 ||
+                Math.abs(totalPago - totais.total) > 0.009
+            ) {
+                event.preventDefault();
+                alert("Os valores de pagamento devem corresponder ao total.");
+                return;
+            }
+
+            if (forma2.value && segundoValor <= 0) {
+                event.preventDefault();
+                alert("Informe um valor positivo para a segunda forma de pagamento.");
+                return;
+            }
+
+            document.getElementById("carrinho_json").value =
+                JSON.stringify(
+                    carrinho.map(item => ({
+                        produto_id: item.produto_id,
+                        quantidade: item.quantidade
+                    }))
+                );
+
+            btnFinalizar.disabled = true;
+            btnFinalizar.textContent = "Processando venda...";
+        });
+
+        // Inicializa o carrinho ao abrir a página.
+        renderizarCarrinho();
     </script>
-
 </body>
-
 </html>

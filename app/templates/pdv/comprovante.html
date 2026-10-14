@@ -1,95 +1,312 @@
-<!-- templates/pdv/comprovante.html -->
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Comprovante #{{ venda.id }} — AAPM SENAI</title>
+
     <style>
-        body { font-family: 'Courier New', monospace; max-width: 400px;
-               margin: 40px auto; background: #f8fafc; color: #1e293b; }
-        .cupom { background: #fff; border: 1px solid #e2e8f0;
-                 border-radius: 12px; padding: 28px; }
-        .titulo { text-align: center; font-weight: 700;
-                  font-size: 18px; margin-bottom: 4px; }
-        .subtitulo { text-align: center; color: #64748b;
-                     font-size: 12px; margin-bottom: 20px; }
-        .linha-sep { border: none; border-top: 1px dashed #e2e8f0;
-                     margin: 14px 0; }
-        .item-linha { display: flex; justify-content: space-between;
-                      font-size: 13px; margin-bottom: 6px; }
-        .item-desc { color: #64748b; font-size: 11px; margin-bottom: 8px; }
-        .total-linha { display: flex; justify-content: space-between;
-                       font-size: 13px; margin-bottom: 6px; color: #64748b; }
-        .total-final { display: flex; justify-content: space-between;
-                       font-size: 18px; font-weight: 800; margin-top: 10px; }
-        .desc-linha { color: #16a34a; }
-        .btn { display: block; text-align: center; margin-top: 20px;
-               padding: 12px; border-radius: 8px; font-weight: 700;
-               font-size: 14px; text-decoration: none; }
-        .btn-nova { background: #1e293b; color: #fff; }
-        .btn-hist  { background: #f1f5f9; color: #1e293b; margin-top: 8px; }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Courier New", monospace;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 0 10px;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .cupom {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .titulo {
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .linha-sep {
+            border: none;
+            border-top: 1px dashed #e2e8f0;
+            margin: 14px 0;
+        }
+
+        .secao-titulo {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 14px 0 10px;
+            color: #475569;
+        }
+
+        .item-linha,
+        .total-linha,
+        .pagamento-linha {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .item-linha span:first-child,
+        .total-linha span:first-child,
+        .pagamento-linha span:first-child {
+            overflow-wrap: anywhere;
+        }
+
+        .item-linha span:last-child,
+        .total-linha span:last-child,
+        .pagamento-linha span:last-child {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .item-desc {
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .total-linha {
+            color: #64748b;
+        }
+
+        .total-final {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 12px;
+        }
+
+        .total-final span:last-child {
+            text-align: right;
+        }
+
+        .desc-linha {
+            color: #16a34a;
+        }
+
+        .observacao {
+            font-size: 12px;
+            color: #64748b;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        .mensagem-final {
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-nova {
+            background: #1e293b;
+            color: #fff;
+        }
+
+        .btn-hist {
+            background: #f1f5f9;
+            color: #1e293b;
+            margin-top: 8px;
+        }
+
+        .btn-imprimir {
+            background: #e2e8f0;
+            color: #1e293b;
+            margin-top: 8px;
+        }
+
+        @media print {
+            body {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                background: #fff;
+            }
+
+            .cupom {
+                border: none;
+                border-radius: 0;
+                padding: 10px;
+            }
+
+            .btn {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
+
     <div class="cupom">
+
         <div class="titulo">AAPM SENAI</div>
+
         <div class="subtitulo">
-            Venda #{{ venda.id }} —
-            {{ venda.criado_em.strftime('%d/%m/%Y %H:%M') }}
+            Comprovante de venda #{{ venda.id }}<br>
+
+            {% if venda.criado_em %}
+                {{ venda.criado_em.strftime('%d/%m/%Y %H:%M') }}
+            {% endif %}
         </div>
+
         <hr class="linha-sep">
 
+        <!-- CLIENTE -->
         {% if venda.cliente %}
-        <div class="item-linha">
-            <span>Cliente</span>
-            <span>{{ venda.cliente.nome }}</span>
-        </div>
-        {% if venda.cliente.is_associado %}
-        <div class="item-linha desc-linha">
-            <span>Associado</span>
-            <span>✓ {{ venda.desconto_percentual|int }}% desc.</span>
-        </div>
+            <div class="item-linha">
+                <span>Cliente</span>
+                <span>{{ venda.cliente.nome }}</span>
+            </div>
+
+            {% if venda.cliente.is_associado %}
+                <div class="item-linha desc-linha">
+                    <span>Associado</span>
+                    <span>Desconto de associado</span>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="item-linha">
+                <span>Cliente</span>
+                <span>Venda de balcão</span>
+            </div>
         {% endif %}
+
         <hr class="linha-sep">
-        {% endif %}
+
+        <!-- ITENS -->
+        <div class="secao-titulo">Produtos</div>
 
         {% for item in venda.itens %}
-        <div class="item-linha">
-            <span>{{ item.produto_nome }}</span>
-            <span>R$ {{ "%.2f"|format(item.subtotal) }}</span>
-        </div>
-        <div class="item-desc">
-            {{ item.quantidade }} × R$ {{ "%.2f"|format(item.preco_unitario) }}
-        </div>
+            <div class="item-linha">
+                <span>{{ item.produto_nome }}</span>
+                <span>R$ {{ "%.2f"|format(item.subtotal) }}</span>
+            </div>
+
+            <div class="item-desc">
+                {{ item.quantidade }} ×
+                R$ {{ "%.2f"|format(item.preco_unitario) }}
+            </div>
+        {% else %}
+            <div class="item-desc">
+                Nenhum item encontrado nesta venda.
+            </div>
         {% endfor %}
 
         <hr class="linha-sep">
+
+        <!-- RESUMO FINANCEIRO -->
+        <div class="secao-titulo">Resumo financeiro</div>
 
         <div class="total-linha">
             <span>Subtotal</span>
             <span>R$ {{ "%.2f"|format(venda.total_bruto) }}</span>
         </div>
 
-        {% if venda.desconto_valor > 0 %}
         <div class="total-linha desc-linha">
-            <span>Desconto ({{ venda.desconto_percentual|int }}%)</span>
-            <span>− R$ {{ "%.2f"|format(venda.desconto_valor) }}</span>
+            <span>
+                Desconto ({{ "%.2f"|format(venda.desconto_percentual) }}%)
+            </span>
+            <span>
+                − R$ {{ "%.2f"|format(venda.desconto_valor) }}
+            </span>
         </div>
-        {% endif %}
 
         <div class="total-final">
             <span>TOTAL</span>
             <span>R$ {{ "%.2f"|format(venda.total_liquido) }}</span>
         </div>
 
-        {% if venda.observacao %}
         <hr class="linha-sep">
-        <div style="font-size:12px; color:#64748b">{{ venda.observacao }}</div>
-        {% endif %}
-    </div>
-    
 
-    <a href="/pdv" class="btn btn-nova">+ Nova venda</a>
-    <a href="/pdv/historico" class="btn btn-hist">Ver histórico</a>
+        <!-- PAGAMENTOS -->
+        <div class="secao-titulo">Formas de pagamento</div>
+
+        <div class="pagamento-linha">
+            <span>{{ (venda.forma_pagamento_1 or "Não informado")|title }}</span>
+            <span>
+                R$ {{ "%.2f"|format(venda.valor_pagamento_1 or 0) }}
+            </span>
+        </div>
+
+        {% if venda.forma_pagamento_2 %}
+            <div class="pagamento-linha">
+                <span>{{ venda.forma_pagamento_2|title }}</span>
+                <span>
+                    R$ {{ "%.2f"|format(venda.valor_pagamento_2 or 0) }}
+                </span>
+            </div>
+        {% endif %}
+
+        {% if venda.observacao %}
+            <hr class="linha-sep">
+
+            <div class="secao-titulo">Observação</div>
+            <div class="observacao">{{ venda.observacao }}</div>
+        {% endif %}
+
+        <hr class="linha-sep">
+
+        <div class="mensagem-final">
+            Obrigado pela compra!<br>
+            AAPM SENAI
+        </div>
+
+    </div>
+
+    <a href="/pdv/" class="btn btn-nova">+ Nova venda</a>
+
+    <a href="/pdv/historico" class="btn btn-hist">
+        Ver histórico
+    </a>
+
+    <button
+        type="button"
+        class="btn btn-imprimir"
+        onclick="window.print()"
+    >
+        Imprimir comprovante
+    </button>
+
 </body>
 </html>

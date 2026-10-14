@@ -1,74 +1,129 @@
 
-# Uma Venda tem um cabeçalho (quem comprou, quando, desconto)
-# e N ItensVenda (qual produto, quantos, a que preço).
-#
-# Separamos em duas tabelas para normalizar os dados —
-# o mesmo padrão usado em qualquer sistema comercial real.
-# ============================================================
-
-from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.database import Base
 
+
+# ============================================================
+# VENDA
+# ============================================================
 
 class Venda(Base):
     __tablename__ = "vendas"
 
-    id         = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
 
-    # Cliente pode ser NULL — venda para "balcão" sem identificação
+    # Cliente pode ser NULL em vendas de balcão.
     cliente_id = Column(
         Integer,
         ForeignKey("clientes.id", ondelete="SET NULL"),
         nullable=True
     )
 
-    # Usuário (operador/admin) que registrou a venda
+    # Usuário responsável pelo registro da venda.
     usuario_id = Column(
         Integer,
         ForeignKey("usuarios.id", ondelete="SET NULL"),
         nullable=True
     )
 
-    # Percentual de desconto aplicado — 0.0 ou 10.0
-    # Guardamos o valor histórico para não depender do cadastro do cliente
-    desconto_percentual = Column(Float, nullable=False, default=0.0)
+    # Percentual total de desconto aplicado.
+    desconto_percentual = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
 
-    # Valores calculados e persistidos para histórico imutável
-    # (mesmo que o preço do produto mude, a venda permanece correta)
-    total_bruto  = Column(Float, nullable=False, default=0.0)
-    total_liquido = Column(Float, nullable=False, default=0.0)
+    # Valores da venda.
+    total_bruto = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
 
-    # Observação opcional do operador
-    observacao = Column(String(255), nullable=True)
+    total_liquido = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
 
-    criado_em = Column(DateTime, server_default=func.now())
+    # Primeira forma de pagamento.
+    forma_pagamento_1 = Column(
+        String(30),
+        nullable=True
+    )
 
-    # Relacionamentos
-    cliente = relationship("Cliente", back_populates="vendas")
-    usuario = relationship("Usuario", backref="vendas")
-    itens   = relationship(
+    valor_pagamento_1 = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
+
+    # Segunda forma de pagamento, opcional.
+    forma_pagamento_2 = Column(
+        String(30),
+        nullable=True
+    )
+
+    valor_pagamento_2 = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
+
+    # Observação opcional.
+    observacao = Column(
+        String(255),
+        nullable=True
+    )
+
+    # Data e hora de criação.
+    criado_em = Column(
+        DateTime,
+        server_default=func.now()
+    )
+
+    # Relacionamentos.
+    cliente = relationship(
+        "Cliente",
+        back_populates="vendas"
+    )
+
+    usuario = relationship(
+        "Usuario",
+        backref="vendas"
+    )
+
+    itens = relationship(
         "ItemVenda",
         back_populates="venda",
-        cascade="all, delete-orphan"  # deleta itens se a venda for deletada
+        cascade="all, delete-orphan"
     )
 
     @property
     def desconto_valor(self) -> float:
-        """Valor monetário do desconto."""
+        """Retorna o valor monetário do desconto."""
         return self.total_bruto - self.total_liquido
 
     def __repr__(self):
-        return f"<Venda id={self.id} total={self.total_liquido}>"
+        return (
+            f"<Venda id={self.id} "
+            f"total={self.total_liquido}>"
+        )
 
+
+# ============================================================
+# ITENS DA VENDA
+# ============================================================
 
 class ItemVenda(Base):
     __tablename__ = "itens_venda"
 
-    id         = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
 
-    venda_id   = Column(
+    venda_id = Column(
         Integer,
         ForeignKey("vendas.id", ondelete="CASCADE"),
         nullable=False
@@ -80,15 +135,34 @@ class ItemVenda(Base):
         nullable=True
     )
 
-    # Dados históricos — não dependem do produto atual no banco
-    produto_nome   = Column(String(150), nullable=False)
-    quantidade     = Column(Integer, nullable=False)
-    preco_unitario = Column(Float, nullable=False)   # preço no momento da venda
+    # Dados históricos do produto no momento da venda.
+    produto_nome = Column(
+        String(150),
+        nullable=False
+    )
+
+    quantidade = Column(
+        Integer,
+        nullable=False
+    )
+
+    preco_unitario = Column(
+        Float,
+        nullable=False
+    )
 
     @property
     def subtotal(self) -> float:
+        """Calcula o subtotal do item."""
         return self.quantidade * self.preco_unitario
 
-    # Relacionamentos
-    venda   = relationship("Venda", back_populates="itens")
-    produto = relationship("Produto", backref="itens_venda")
+    # Relacionamentos.
+    venda = relationship(
+        "Venda",
+        back_populates="itens"
+    )
+
+    produto = relationship(
+        "Produto",
+        backref="itens_venda"
+    )
