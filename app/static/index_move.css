@@ -1,6 +1,13 @@
-/* ================================
+
+/* =========================================================
+   MOVIMENTAÇÕES — AAPM SENAI
+   Layout padronizado com a página de Clientes
+========================================================= */
+
+
+/* =========================================================
    CONFIGURAÇÕES GERAIS
-================================ */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -9,128 +16,175 @@
 }
 
 body {
+    width: 100%;
+    min-height: 100vh;
     padding: 30px 20px;
 
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+    font-family:
+        "Segoe UI",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Roboto",
+        sans-serif;
 
     background: #f4f6f8;
+    color: #263746;
+}
 
-    min-height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+.container {
+    display: block;
+
+    width: 100%;
+    max-width: 1280px;
+
+    margin: 0 auto;
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e0e6ec;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(15, 45, 70, 0.06);
 
     color: #263746;
 }
 
 
-/* ================================
-   CONTAINER PRINCIPAL
-================================ */
-
-.container {
-    width: 100%;
-    max-width: 1280px;
-
-    background: #ffffff;
-
-    padding: 30px;
-
-    border: 1px solid #e0e6ec;
-    border-radius: 10px;
-
-    margin: 0 auto;
-
-    box-shadow: 0 2px 8px rgba(15, 45, 70, 0.06);
-}
-
-
-/* ================================
-   CABEÇALHO
-================================ */
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+========================================================= */
 
 .header-section {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 25px;
-
+    gap: 15px;
     flex-wrap: wrap;
 
-    gap: 15px;
+    margin-bottom: 25px;
 }
 
 .title {
     margin: 0;
 
-    font-size: 24px;
-
-    font-weight: 700;
-
     color: #132f4c;
 
-    text-transform: none;
+    font-size: 24px;
+    font-weight: 700;
 
+    text-transform: none;
     letter-spacing: 0;
+    line-height: 1.4;
 }
 
 
-/* ================================
+/* =========================================================
+   BOTÃO PRINCIPAL
+========================================================= */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 18px;
+
+    background: #15588a;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn-primary:hover {
+    background: #124b76;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.22);
+}
+
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.btn-clear:focus-visible {
+    outline: 3px solid rgba(24, 91, 143, 0.30);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
    BARRA DE FILTROS
-================================ */
+========================================================= */
 
 .filter-bar {
     display: flex;
-
     align-items: center;
 
     gap: 10px;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    padding: 14px 16px;
+    margin-bottom: 25px;
 
     background: #ffffff;
 
-    padding: 14px 16px;
-
-    border-radius: 8px;
-
-    margin-bottom: 25px;
-
     border: 1px solid #e0e6ec;
-
-    flex-wrap: wrap;
+    border-radius: 8px;
 
     box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
 
-/* ================================
-   SELECT DO FILTRO
-================================ */
+/* =========================================================
+   CAMPOS DE SELEÇÃO
+========================================================= */
 
 .filter-bar select {
+    min-width: 180px;
+    height: 44px;
+
     padding: 10px 13px;
 
     background: #ffffff;
-
-    border: 1px solid #d9e1e8;
-
-    border-radius: 6px;
-
     color: #263746;
 
-    font-size: 14px;
+    border: 1px solid #d9e1e8;
+    border-radius: 6px;
 
     font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
 
     outline: none;
-
-    transition: all 0.2s ease;
-
-    min-width: 180px;
-
     cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .filter-bar select:hover {
@@ -140,133 +194,184 @@ body {
 .filter-bar select:focus {
     border-color: #185b8f;
 
-    background: #ffffff;
-
     box-shadow: 0 0 0 3px rgba(24, 91, 143, 0.10);
 }
 
-.filter-bar option {
+.filter-bar select option {
     background: #ffffff;
-
     color: #263746;
 }
 
 
-/* ================================
-   TABELA
-================================ */
+/* =========================================================
+   BOTÃO FILTRAR
+========================================================= */
+
+.btn-filter {
+    min-height: 44px;
+    padding: 10px 17px;
+}
+
+
+/* =========================================================
+   BOTÃO LIMPAR
+========================================================= */
+
+.btn-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 8px 12px;
+
+    color: #15588a;
+    background: #ffffff;
+
+    border: 1px solid #15588a;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.btn-clear:hover {
+    background: #eef5fa;
+    color: #124b76;
+
+    border-color: #124b76;
+}
+
+
+/* =========================================================
+   CONTAINER DA TABELA
+========================================================= */
 
 .table-wrapper {
+    width: 100%;
+
     overflow-x: auto;
 
     margin-bottom: 25px;
 
-    border-radius: 8px;
-
     background: #ffffff;
 
     border: 1px solid #e0e6ec;
+    border-radius: 8px;
 
     box-shadow: 0 2px 6px rgba(15, 45, 70, 0.04);
 }
 
-table {
+
+/* =========================================================
+   TABELA DE MOVIMENTAÇÕES
+========================================================= */
+
+.table-wrapper table {
     width: 100%;
+    min-width: 900px;
 
     border-collapse: collapse;
+    border-spacing: 0;
 
     text-align: left;
 }
 
 
-/* ================================
+/* =========================================================
    CABEÇALHO DA TABELA
-================================ */
+========================================================= */
 
-th,
-td {
+.table-wrapper th {
     padding: 14px 16px;
+
+    background: #f1f4f7;
+    color: #34495e;
 
     border-bottom: 1px solid #e8edf1;
 
-    font-size: 14px;
-}
-
-th {
-    background: #f1f4f7;
-
-    color: #34495e;
-
+    font-size: 13px;
     font-weight: 700;
 
     text-transform: none;
-
-    font-size: 13px;
-
     letter-spacing: 0;
 
     white-space: nowrap;
 }
 
 
-/* ================================
-   CÉLULAS
-================================ */
+/* =========================================================
+   CÉLULAS DA TABELA
+========================================================= */
 
-td {
+.table-wrapper td {
+    padding: 14px 16px;
+
     color: #435466;
+
+    border-bottom: 1px solid #e8edf1;
+
+    font-size: 14px;
+    font-weight: 400;
 
     vertical-align: middle;
 }
 
 
-/* ================================
-   HOVER DA TABELA
-================================ */
+/* =========================================================
+   HOVER DAS LINHAS
+========================================================= */
 
-tbody tr {
-    transition: background 0.2s ease;
+.table-wrapper tbody tr {
+    background: #ffffff;
+
+    transition: background-color 0.2s ease;
 }
 
-tbody tr:hover {
+.table-wrapper tbody tr:hover {
     background: #f7fafc;
 }
 
-tbody tr:last-child td {
+.table-wrapper tbody tr:last-child td {
     border-bottom: none;
 }
 
 
-/* ================================
+/* =========================================================
    LINKS DA TABELA
-================================ */
+========================================================= */
 
-td a {
+.table-wrapper td a {
     color: #15588a;
 
     text-decoration: none;
-
     font-weight: 600;
 
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
 }
 
-td a:hover {
+.table-wrapper td a:hover {
     color: #124b76;
-
     text-decoration: underline;
 }
 
 
-/* ================================
-   BADGES
-================================ */
+/* =========================================================
+   BADGES DE ENTRADA E SAÍDA
+========================================================= */
 
 .badge {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 5px 10px;
@@ -274,182 +379,107 @@ td a:hover {
     border-radius: 5px;
 
     font-size: 12px;
-
     font-weight: 600;
 
     white-space: nowrap;
 }
 
 
-/* Entrada */
+/* ENTRADA */
 
 .badge-entrada {
     background: #edf8f0;
-
     color: #2e7d32;
 
     border: 1px solid #c8e6c9;
 }
 
 
-/* Saída */
+/* SAÍDA */
 
 .badge-saida {
     background: #fff1f1;
-
     color: #c62828;
 
     border: 1px solid #f3caca;
 }
 
 
-/* ================================
-   BOTÃO PRINCIPAL
-================================ */
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
 
-.btn-primary {
-    display: inline-flex;
+.table-wrapper .empty-state {
+    padding: 40px 25px;
 
-    align-items: center;
+    color: #7a8997;
 
-    justify-content: center;
+    background: #ffffff;
 
-    padding: 11px 18px;
-
-    background: #15588a;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    border-radius: 6px;
-
-    font-weight: 600;
+    text-align: center;
 
     font-size: 14px;
+    font-weight: 400;
 
-    border: none;
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    transition: all 0.2s ease;
-
-    box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
-}
-
-.btn-primary:hover {
-    background: #124b76;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 4px 8px rgba(21, 88, 138, 0.22);
+    line-height: 1.5;
 }
 
 
-/* ================================
-   BOTÃO FILTRAR
-================================ */
+/* =========================================================
+   RODAPÉ / AÇÃO INFERIOR
+========================================================= */
 
-.btn-filter {
-    padding: 10px 17px;
+.footer-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-top: 5px;
 }
 
 
-/* ================================
-   BOTÃO OUTLINE
-================================ */
+/* =========================================================
+   BOTÃO OUTLINE — DASHBOARD
+========================================================= */
 
 .btn-outline {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
+
+    min-height: 44px;
 
     padding: 10px 17px;
 
     background: #ffffff;
-
     color: #15588a;
+
+    border: 1px solid #15588a;
+    border-radius: 6px;
 
     text-decoration: none;
 
-    border-radius: 6px;
-
+    font-family: inherit;
+    font-size: 14px;
     font-weight: 600;
 
-    font-size: 14px;
-
-    border: 1px solid #15588a;
-
-    transition: all 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .btn-outline:hover {
     background: #eef5fa;
-
     color: #124b76;
 
     border-color: #124b76;
 }
 
 
-/* ================================
-   BOTÃO LIMPAR
-================================ */
-
-.btn-clear {
-    color: #c62828;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    padding: 8px 12px;
-
-    border-radius: 6px;
-
-    transition: background 0.2s ease;
-}
-
-.btn-clear:hover {
-    background: #fff1f1;
-}
-
-
-/* ================================
-   ESTADO VAZIO
-================================ */
-
-.empty-state {
-    text-align: center;
-
-    padding: 35px;
-
-    color: #7a8997;
-
-    font-weight: 500;
-
-    font-size: 14px;
-}
-
-
-/* ================================
-   RODAPÉ
-================================ */
-
-.footer-section {
-    margin-top: 15px;
-}
-
-
-/* ================================
-   RESPONSIVIDADE
-================================ */
+/* =========================================================
+   RESPONSIVIDADE — TABLETS
+========================================================= */
 
 @media (max-width: 768px) {
 
@@ -463,7 +493,6 @@ td a:hover {
 
     .header-section {
         flex-direction: column;
-
         align-items: flex-start;
     }
 
@@ -471,19 +500,18 @@ td a:hover {
         font-size: 21px;
     }
 
-    .filter-bar {
-        align-items: stretch;
-
-        flex-direction: column;
-    }
-
-    .filter-bar select {
+    .header-section .btn-primary {
         width: 100%;
     }
 
-    .btn-primary,
-    .btn-filter,
-    .btn-outline {
+    .filter-bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .filter-bar select,
+    .filter-bar .btn-primary,
+    .filter-bar .btn-clear {
         width: 100%;
     }
 
@@ -491,13 +519,25 @@ td a:hover {
         overflow-x: auto;
     }
 
-    table {
-        min-width: 700px;
+    .table-wrapper table {
+        min-width: 900px;
+    }
+
+    .footer-section .btn-outline {
+        width: 100%;
     }
 }
 
 
+/* =========================================================
+   RESPONSIVIDADE — CELULARES
+========================================================= */
+
 @media (max-width: 480px) {
+
+    body {
+        padding: 15px 10px;
+    }
 
     .container {
         padding: 15px;
@@ -509,8 +549,42 @@ td a:hover {
         font-size: 20px;
     }
 
-    th,
-    td {
+    .header-section {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .filter-bar {
         padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 12px;
+    }
+
+    .table-wrapper .empty-state {
+        padding: 30px 15px;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .btn-primary:hover {
+        transform: none;
     }
 }

@@ -1,164 +1,438 @@
-/* ============================================================
-   ESTILOS GERAIS DE FUNDO E CONTAINER
-   ============================================================ */
-body {
+/* =========================================================
+   SISTEMA AAPM SENAI — PADRÃO PDV (LISTA E FORMULÁRIOS)
+========================================================= */
+
+:root {
+    --azul-senai: #164b7a;
+    --azul-escuro: #102d4a;
+    --azul-hover: #0d5ca8;
+
+    --fundo: #f5f7fa;
+    --branco: #ffffff;
+
+    --texto: #172033;
+    --texto-secundario: #64748b;
+
+    --borda: #e2e8f0;
+
+    --verde: #16a34a;
+    --vermelho: #dc2626;
+
+    --sombra: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+/* RESET E BASE */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Força o topo a ficar em cima e o container abaixo */
+}
+
+a {
+    text-decoration: none;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+/* =========================================================
+   CABEÇALHO FIXO SUPERIOR (.TOPO)
+========================================================= */
+.topo {
+    width: 100%;
+    height: 64px;
+    background: var(--azul-escuro);
+    color: var(--branco);
+    display: flex;
     align-items: center;
-    color: #ffffff;
-    padding: 20px;
+    padding: 0 26px;
+    border-bottom: 1px solid #dbe4ec;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.form-container {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 40px 30px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    box-sizing: border-box;
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 25px;
+    color: var(--branco);
 }
 
-/* ============================================================
-   CABEÇALHO E BADGES
-   ============================================================ */
-.header-box {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.title {
-    margin: 0 0 10px 0;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.role-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: rgba(0, 173, 181, 0.15);
-    border: 1px solid rgba(0, 173, 181, 0.3);
-    color: #00adb5;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ============================================================
-   MENSAGEM DE ERRO
-   ============================================================ */
-.alert-error {
-    background: rgba(244, 67, 54, 0.15);
-    border: 1px solid rgba(244, 67, 54, 0.4);
-    color: #ff8a80;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    font-size: 14px;
-    text-align: center;
-    font-weight: 500;
-}
-
-/* ============================================================
-   CAMPOS DO FORMULÁRIO (INPUTS & LABELS)
-   ============================================================ */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 25px;
-    text-align: left;
-}
-
-.form-group label {
-    font-size: 14px;
-    color: #b0bec5;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.form-group input[type="text"] {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    color: #ffffff;
+.titulo-topo {
     font-size: 15px;
-    box-sizing: border-box;
-    outline: none;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    flex: 1;
+    color: var(--branco);
 }
 
-.form-group input[type="text"]:focus {
-    border-color: #00adb5;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 10px rgba(0, 173, 181, 0.3);
+.voltar {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 7px;
+    color: var(--branco);
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-.form-group input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+.voltar:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: var(--branco);
 }
 
-/* ============================================================
-   BOTÕES E AÇÕES
-   ============================================================ */
-.form-actions {
+/* =========================================================
+   CONTAINER PRINCIPAL E ESTRUTURA
+========================================================= */
+.container {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 32px 0 50px;
+    flex: 1;
+}
+
+.titulo-pagina {
+    margin-bottom: 20px;
+}
+
+.titulo-pagina h1 {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--texto);
+    margin-bottom: 6px;
+}
+
+.titulo-pagina p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+.barra-acoes {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 12px 20px;
-    background: #00adb5;
-    color: #ffffff;
+.btn-novo {
+    height: 40px;
+    padding: 0 16px;
     border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 7px;
+    background: var(--azul-senai);
+    color: var(--branco);
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 173, 181, 0.3);
-}
-
-.btn-submit:hover {
-    background: #00969d;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0, 173, 181, 0.4);
-}
-
-.btn-cancel {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #b0bec5;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
-    box-sizing: border-box;
+    transition: 0.2s;
 }
 
-.btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.2);
+.btn-novo:hover {
+    background: var(--azul-hover);
+    transform: translateY(-1px);
+}
+
+.contador {
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+/* =========================================================
+   ALERTAS
+========================================================= */
+.alert {
+    padding: 11px 15px;
+    margin-bottom: 18px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: var(--verde);
+}
+
+.alert-danger, .alert-error, .alert.erro {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    color: var(--vermelho);
+}
+
+/* =========================================================
+   CARDS E TABELA DE LISTAGEM (INDEX.HTML)
+========================================================= */
+.container-card, .lista-card, .modal-card, .form-container-box {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.custom-table th {
+    background: #f8fafc;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.custom-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eef2f7;
+    font-size: 13px;
+    color: var(--texto);
+    vertical-align: middle;
+}
+
+.custom-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.custom-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-row {
+    text-align: center;
+    color: var(--texto-secundario);
+    padding: 40px 20px !important;
+    font-style: italic;
+}
+
+/* BADGES DE STATUS */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-ativo {
+    background: #f0fdf4;
+    color: var(--verde);
+    border: 1px solid #bbf7d0;
+}
+
+.badge-inativo {
+    background: #fff1f2;
+    color: var(--vermelho);
+    border: 1px solid #fecdd3;
+}
+
+/* BOTÕES DAS AÇÕES DA TABELA */
+.actions-cell {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.link-action {
+    height: 32px;
+    padding: 0 11px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    color: var(--azul-senai);
+    border: 1px solid #bfdbfe;
+    font-size: 11px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.link-action:hover {
+    background: #dbeafe;
+}
+
+.btn-inline {
+    height: 32px;
+    padding: 0 11px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    color: var(--texto-secundario);
+    border: 1px solid var(--borda);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-inline:hover {
+    background: #e2e8f0;
+    color: var(--texto);
+}
+
+.link-back {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 22px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.link-back:hover {
+    color: var(--azul-senai);
+}
+
+/* =========================================================
+   FORMULÁRIOS (FORM.HTML)
+========================================================= */
+.modal-card, .form-container-box {
+    padding: 24px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.form-input, 
+.form-group input[type="text"], 
+.form-group select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--borda);
+    border-radius: 7px;
+    background: var(--branco);
+    color: var(--texto);
+    outline: none;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.form-input:focus, 
+.form-group input[type="text"]:focus, 
+.form-group select:focus {
+    border-color: var(--azul-senai);
+    box-shadow: 0 0 0 3px rgba(22, 75, 122, 0.10);
+}
+
+.acoes-form, .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--borda);
+    margin-top: 8px;
+}
+
+.btn-salvar, .btn-submit {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 7px;
+    background: var(--azul-senai);
+    color: var(--branco);
+    border: 1px solid var(--azul-senai);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-salvar:hover, .btn-submit:hover {
+    background: var(--azul-hover);
+    border-color: var(--azul-hover);
+}
+
+.btn-cancelar, .btn-cancel {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 7px;
+    background: var(--branco);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cancelar:hover, .btn-cancel:hover {
+    background: #f8fafc;
+    color: var(--texto);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 700px) {
+    .topo {
+        padding: 0 16px;
+    }
+    .titulo-topo {
+        display: none;
+    }
+    .container {
+        width: calc(100% - 24px);
+        padding-top: 24px;
+    }
+    .barra-acoes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .btn-novo {
+        width: 100%;
+    }
 }

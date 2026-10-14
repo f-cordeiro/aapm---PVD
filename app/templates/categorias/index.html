@@ -1,13 +1,13 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 
 <html lang="pt-br">
+=======
+>>>>>>> 5f911e0f3b1b4e17ac1835be404d400317114470
 
-<head>
-    <meta charset="UTF-8">
-    <title>Categorias — AAPM SENAI</title>
-    <link rel="stylesheet" href="/static/categorias-css/form.css">
-</head>
+{% extends "base.html" %}
 
+<<<<<<< HEAD
 <body>
 
     <h1>Categorias</h1>
@@ -110,5 +110,195 @@
     </p>
 
 </body>
+=======
+{% block title %}Categorias — AAPM SENAI{% endblock %}
 
-</html>
+{% block extra_css %}
+<link rel="stylesheet" href="/static/categorias-css/index.css">
+{% endblock %}
+
+{% block content %}
+
+<main class="categorias-page">
+
+    <!-- CABEÇALHO DA PÁGINA -->
+    <div class="titulo-pagina">
+        <div>
+            <h1>Categorias de Produtos</h1>
+            <p>
+                Gerencie as categorias cadastradas para utilização no PDV.
+            </p>
+        </div>
+    </div>
+
+    <!-- BARRA DE AÇÕES -->
+    <div class="barra-acoes">
+
+        <div class="contador">
+            Total de categorias:
+            <strong>{{ categorias|length }}</strong>
+        </div>
+
+        {% if usuario and usuario.role == 'admin' %}
+        <a href="/categorias/nova" class="btn-novo">
+            <i data-lucide="plus"></i>
+            <span>Nova categoria</span>
+        </a>
+        {% endif %}
+
+    </div>
+
+    <!-- ALERTA DE SUCESSO: CRIAÇÃO -->
+    {% if request.query_params.get('criado') == 'ok' %}
+    <div class="alert alert-success">
+        <i data-lucide="check-circle"></i>
+        <span>Categoria criada com sucesso!</span>
+    </div>
+    {% endif %}
+
+    <!-- ALERTA DE SUCESSO: EDIÇÃO -->
+    {% if request.query_params.get('editado') == 'ok' %}
+    <div class="alert alert-success">
+        <i data-lucide="check-circle"></i>
+        <span>Categoria atualizada com sucesso!</span>
+    </div>
+    {% endif %}
+
+    <!-- ALERTA DE ERRO -->
+    {% if request.query_params.get('erro') == 'produtos_vinculados' %}
+    <div class="alert alert-danger">
+        <i data-lucide="alert-circle"></i>
+
+        <span>
+            Não é possível desativar a categoria
+            <strong>
+                "{{ request.query_params.get('categoria') }}"
+            </strong>,
+            pois existem produtos ativos vinculados a ela.
+        </span>
+    </div>
+    {% endif %}
+
+    <!-- TABELA DE CATEGORIAS -->
+    <div class="container-card">
+
+        <div class="table-responsive">
+
+            <table class="custom-table">
+
+                <thead>
+                    <tr>
+                        <th style="width: 90px;">ID</th>
+                        <th>NOME DA CATEGORIA</th>
+                        <th style="width: 140px;">STATUS</th>
+                        <th style="width: 190px;">AÇÕES</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for c in categorias %}
+                    <tr>
+
+                        <!-- ID -->
+                        <td>
+                            <strong>#{{ c.id }}</strong>
+                        </td>
+
+                        <!-- NOME -->
+                        <td>
+                            {{ c.nome }}
+                        </td>
+
+                        <!-- STATUS -->
+                        <td>
+                            {% if c.ativo %}
+                            <span class="badge badge-ativo">
+                                Ativo
+                            </span>
+                            {% else %}
+                            <span class="badge badge-inativo">
+                                Inativo
+                            </span>
+                            {% endif %}
+                        </td>
+
+                        <!-- AÇÕES -->
+                        <td>
+
+                            {% if usuario and usuario.role == 'admin' %}
+
+                            <div class="actions-cell">
+
+                                <a
+                                    href="/categorias/{{ c.id }}/editar"
+                                    class="link-action"
+                                >
+                                    Editar
+                                </a>
+
+                                <form
+                                    action="/categorias/{{ c.id }}/toggle-ativo"
+                                    method="post"
+                                    style="display: inline;"
+                                    onsubmit="return confirm('Deseja {% if c.ativo %}desativar{% else %}ativar{% endif %} a categoria {{ c.nome }}?')"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-inline"
+                                    >
+                                        {{ "Desativar" if c.ativo else "Ativar" }}
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            {% else %}
+
+                            <span class="sem-permissao">
+                                Sem permissão
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    <!-- ESTADO VAZIO -->
+                    {% if not categorias %}
+                    <tr>
+                        <td colspan="4" class="empty-row">
+                            <div class="empty-content">
+                                <i data-lucide="folder-open"></i>
+                                <span>Nenhuma categoria encontrada.</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+>>>>>>> 5f911e0f3b1b4e17ac1835be404d400317114470
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    });
+</script>
+{% endblock %}

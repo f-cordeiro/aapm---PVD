@@ -1,6 +1,13 @@
-/* ================================
+
+/* =========================================================
+   FORMULÁRIO — AAPM SENAI
+   Padrão visual de Clientes e Movimentações
+========================================================= */
+
+
+/* =========================================================
    CONFIGURAÇÕES GERAIS
-================================ */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -9,119 +16,171 @@
 }
 
 body {
-    padding: 40px 20px;
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
-    background-color: #f4f6f8;
+    width: 100%;
     min-height: 100vh;
-    color: #172b3f;
+    padding: 30px 20px;
+
+    font-family:
+        "Segoe UI",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Roboto",
+        sans-serif;
+
+    background: #f4f6f8;
+    color: #263746;
 }
 
 
-/* ================================
+/* =========================================================
    CONTAINER PRINCIPAL
-================================ */
+========================================================= */
 
 .container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #e0e6ec;
+    display: block;
+
     width: 100%;
-    max-width: 650px;
+    max-width: 1280px;
+
     margin: 0 auto;
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e0e6ec;
+    border-radius: 10px;
+
     box-shadow: 0 2px 8px rgba(15, 45, 70, 0.06);
+
+    color: #263746;
 }
 
 
-/* ================================
+/* =========================================================
    TÍTULO
-================================ */
+========================================================= */
 
 .title {
-    margin: 0 0 25px 0;
+    margin: 0 0 25px;
+
+    color: #132f4c;
+
     font-size: 24px;
     font-weight: 700;
-    color: #132f4c;
+
     text-align: left;
+    text-transform: none;
     letter-spacing: 0;
+
+    line-height: 1.4;
 }
 
 
-/* ================================
+/* =========================================================
    MENSAGEM DE ERRO
-================================ */
+========================================================= */
 
 .alert-error {
-    background: #fff1f1;
-    border: 1px solid #f0caca;
-    color: #c62828;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+    padding: 13px 16px;
     margin-bottom: 20px;
-    text-align: center;
-    font-weight: 600;
+
+    background: #fff1f1;
+    color: #c62828;
+
+    border: 1px solid #f0caca;
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.5;
 }
 
 
-/* ================================
+/* =========================================================
    FORMULÁRIO
-================================ */
+========================================================= */
 
 .form-container {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+
+    gap: 20px;
+
+    width: 100%;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+
     gap: 7px;
+
+    min-width: 0;
 }
 
 .form-row {
     display: flex;
+    align-items: flex-start;
+
     gap: 15px;
+
+    width: 100%;
 }
 
 .form-row .form-group {
     flex: 1;
+    min-width: 0;
 }
 
 
-/* ================================
+/* =========================================================
    LABELS
-================================ */
+========================================================= */
 
 .form-label {
-    font-size: 13px;
     color: #34495e;
+
+    font-size: 13px;
     font-weight: 600;
+
     padding-left: 0;
 }
 
 
-/* ================================
-   INPUTS E SELECT
-================================ */
+/* =========================================================
+   INPUTS E SELECTS
+========================================================= */
 
 .form-input,
 .form-select {
-    padding: 12px 14px;
-    background: #ffffff;
-    border: 1px solid #d9e1e8;
-    border-radius: 7px;
-    color: #263746;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: all 0.2s ease;
     width: 100%;
+    min-height: 42px;
+
+    padding: 10px 13px;
+
+    background: #ffffff;
+    color: #263746;
+
+    border: 1px solid #d9e1e8;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .form-input::placeholder {
-    color: #8a99a8;
+    color: #9aa7b2;
 }
 
 .form-input:hover,
@@ -132,8 +191,14 @@ body {
 .form-input:focus,
 .form-select:focus {
     border-color: #185b8f;
+
     background: #ffffff;
+
     box-shadow: 0 0 0 3px rgba(24, 91, 143, 0.10);
+}
+
+.form-select {
+    cursor: pointer;
 }
 
 .form-select option {
@@ -142,67 +207,90 @@ body {
 }
 
 
-/* ================================
+/* =========================================================
    BADGE DE INFORMAÇÃO
-================================ */
+========================================================= */
 
 .info-badge {
-    margin: 5px 0 0 0;
-    font-size: 12px;
-    color: #185b8f;
-    background: #eef5fa;
-    padding: 5px 10px;
-    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+
     align-self: flex-start;
+
+    margin-top: 5px;
+    padding: 5px 10px;
+
+    background: #eef5fa;
+    color: #185b8f;
+
+    border: 1px solid #dce7ef;
+    border-radius: 5px;
+
+    font-size: 12px;
     font-weight: 600;
 }
 
 
-/* ================================
+/* =========================================================
    CARD DE SUBTOTAL
-================================ */
+========================================================= */
 
 .subtotal-card {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 18px;
 
     background: #f4f8fb;
-    border: 1px solid #dce7ef;
 
-    padding: 14px 16px;
+    border: 1px solid #dce7ef;
     border-radius: 8px;
 
     color: #334e68;
+
     font-size: 14px;
     font-weight: 600;
 }
 
 .subtotal-card strong {
     color: #15588a;
-    font-size: 18px;
+
+    font-size: 20px;
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
 
-/* ================================
+/* =========================================================
    AÇÕES DO FORMULÁRIO
-================================ */
+========================================================= */
 
 .form-actions {
     display: flex;
     align-items: center;
+
     gap: 10px;
-    margin-top: 10px;
+
+    margin-top: 5px;
 }
 
 
-/* ================================
+/* =========================================================
    BOTÃO PRINCIPAL
-================================ */
+========================================================= */
 
 .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     flex: 1;
+
+    min-height: 42px;
 
     padding: 11px 18px;
 
@@ -212,114 +300,129 @@ body {
     border: none;
     border-radius: 6px;
 
-    font-weight: 600;
+    font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
-
     box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn-primary:hover {
     background: #124b76;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(21, 88, 138, 0.22);
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 6px 12px rgba(21, 88, 138, 0.22);
 }
 
 
-/* ================================
+/* =========================================================
    BOTÃO OUTLINE
-================================ */
+========================================================= */
 
 .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
+    min-height: 42px;
+
     padding: 10px 18px;
 
-    background: transparent;
-    color: #c62828;
+    background: #ffffff;
+    color: #15588a;
+
+    border: 1px solid #15588a;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
 
     text-decoration: none;
 
-    border-radius: 6px;
+    cursor: pointer;
 
-    font-weight: 600;
-    font-size: 14px;
-
-    border: 1px solid #d32f2f;
-
-    transition: all 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .btn-outline:hover {
-    background: #fff4f4;
+    background: #eef5fa;
+    color: #124b76;
+
+    border-color: #124b76;
 }
 
 
-/* ================================
+/* =========================================================
    MODAL — FUNDO
-================================ */
+========================================================= */
 
 .modal-overlay {
     position: fixed;
 
-    top: 0;
-    left: 0;
+    inset: 0;
 
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
 
     background: rgba(10, 35, 55, 0.55);
 
     backdrop-filter: blur(3px);
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
+    -webkit-backdrop-filter: blur(3px);
 
     z-index: 9999;
 }
-
-
-/* Modal ativo */
 
 .modal-overlay.active {
     display: flex;
 }
 
 
-/* ================================
+/* =========================================================
    CARD DO MODAL
-================================ */
+========================================================= */
 
 .modal-card {
-    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
 
     padding: 28px 25px;
 
-    border-radius: 10px;
+    background: #ffffff;
 
-    width: 90%;
-    max-width: 400px;
+    border: 1px solid #e0e6ec;
+    border-radius: 10px;
 
     text-align: center;
 
-    border: 1px solid #e0e6ec;
-
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 12px 30px rgba(15, 45, 70, 0.20);
 
     animation: modalPop 0.2s ease-out;
 }
 
 
-/* ================================
+/* =========================================================
    ANIMAÇÃO DO MODAL
-================================ */
+========================================================= */
 
 @keyframes modalPop {
     from {
@@ -334,62 +437,75 @@ body {
 }
 
 
-/* ================================
+/* =========================================================
    ÍCONE DO MODAL
-================================ */
+========================================================= */
 
 .modal-icon {
+    margin-bottom: 12px;
+
+    color: #15588a;
+
     font-size: 34px;
-    margin-bottom: 10px;
 }
 
 
-/* ================================
+/* =========================================================
    TÍTULO DO MODAL
-================================ */
+========================================================= */
 
 .modal-title {
-    font-size: 19px;
-    font-weight: 700;
+    margin-bottom: 8px;
+
     color: #132f4c;
 
-    margin-bottom: 8px;
+    font-size: 19px;
+    font-weight: 700;
 
     text-transform: none;
 }
 
 
-/* ================================
+/* =========================================================
    TEXTO DO MODAL
-================================ */
+========================================================= */
 
 .modal-text {
-    font-size: 14px;
+    margin-bottom: 22px;
+
     color: #617385;
 
-    margin-bottom: 22px;
+    font-size: 14px;
+    font-weight: 400;
 
     line-height: 1.5;
 }
 
 
-/* ================================
+/* =========================================================
    BOTÕES DO MODAL
-================================ */
+========================================================= */
 
 .modal-actions {
     display: flex;
+    align-items: center;
+
     gap: 10px;
 }
 
 
-/* ================================
+/* =========================================================
    BOTÃO CONFIRMAR
-================================ */
+========================================================= */
 
 .btn-confirm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     flex: 1;
 
+    min-height: 42px;
     padding: 11px;
 
     background: #15588a;
@@ -398,62 +514,96 @@ body {
     border: none;
     border-radius: 6px;
 
-    font-weight: 600;
+    font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
-
     box-shadow: 0 2px 5px rgba(21, 88, 138, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .btn-confirm:hover {
     background: #124b76;
-    transform: translateY(-1px);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 8px rgba(21, 88, 138, 0.22);
 }
 
 
-/* ================================
+/* =========================================================
    BOTÃO CANCELAR
-================================ */
+========================================================= */
 
 .btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     flex: 1;
 
+    min-height: 42px;
     padding: 11px;
 
-    background: #ffffff;
+    background: #fff1f1;
     color: #c62828;
 
-    border: 1px solid #d32f2f;
+    border: 1px solid #f3caca;
     border-radius: 6px;
 
-    font-weight: 600;
+    font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .btn-cancel:hover {
-    background: #fff4f4;
+    background: #ffe5e5;
+
+    border-color: #e8aaaa;
 }
 
 
-/* ================================
-   RESPONSIVIDADE
-================================ */
+/* =========================================================
+   ACESSIBILIDADE — FOCO
+========================================================= */
 
-@media (max-width: 600px) {
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.btn-confirm:focus-visible,
+.btn-cancel:focus-visible {
+    outline: 3px solid rgba(24, 91, 143, 0.30);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TABLETS E CELULARES
+========================================================= */
+
+@media (max-width: 768px) {
 
     body {
         padding: 20px 12px;
     }
 
     .container {
-        padding: 22px 18px;
+        padding: 22px 20px;
+    }
+
+    .title {
+        font-size: 21px;
     }
 
     .form-row {
@@ -461,16 +611,85 @@ body {
         gap: 18px;
     }
 
-    .form-actions {
-        flex-direction: column;
+    .form-row .form-group {
+        width: 100%;
     }
 
-    .btn-primary,
-    .btn-outline {
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions .btn-primary,
+    .form-actions .btn-outline {
         width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TELAS PEQUENAS
+========================================================= */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    .container {
+        padding: 18px 15px;
+
+        border-radius: 8px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        gap: 17px;
+    }
+
+    .subtotal-card {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .modal-card {
+        padding: 24px 18px;
     }
 
     .modal-actions {
         flex-direction: column;
+    }
+
+    .modal-actions .btn-confirm,
+    .modal-actions .btn-cancel {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE — MOVIMENTO REDUZIDO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .btn-primary:hover,
+    .btn-confirm:hover {
+        transform: none;
     }
 }
