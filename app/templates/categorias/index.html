@@ -1,6 +1,116 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+
+<html lang="pt-br">
+=======
+>>>>>>> 5f911e0f3b1b4e17ac1835be404d400317114470
 
 {% extends "base.html" %}
 
+<<<<<<< HEAD
+<body>
+
+    <h1>Categorias</h1>
+
+    <!-- Mensagens de Feedback -->
+
+    {% if request.query_params.get('criado') == 'ok' %}
+    <p style="color: green;">Categoria criada com sucesso!</p>
+    {% endif %}
+
+    {% if request.query_params.get('editado') == 'ok' %}
+    <p style="color: green;">Categoria atualizada com sucesso!</p>
+    {% endif %}
+
+    {% if request.query_params.get('erro') == 'produtos_vinculados' %}
+    <p style="color: red;">
+        Não é possível desativar a categoria
+        "<strong>{{ request.query_params.get('categoria') }}</strong>"
+        pois existem produtos ativos vinculados a ela.
+    </p>
+    {% endif %}
+
+    <!-- Botão de Criação -->
+
+    {% if usuario.role == 'admin' %}
+    <a href="/categorias/nova" class="btn-primary"
+        style="display: inline-block; width: auto; text-decoration: none; padding: 10px 15px; margin-bottom: 15px;">
+        + Nova categoria
+    </a>
+    {% endif %}
+
+    <!-- Tabela de Categorias -->
+
+    <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for c in categorias %}
+
+            <tr>
+
+                <td>{{ c.id }}</td>
+
+                <td>{{ c.nome }}</td>
+
+                <td>
+                    {% if c.ativo %}
+                    <span class="status ativo">Ativo</span>
+                    {% else %}
+                    <span class="status inativo">Inativo</span>
+                    {% endif %}
+                </td>
+
+                <td>
+
+                    {% if usuario.role == 'admin' %}
+
+                    <a href="/categorias/{{ c.id }}/editar">
+                        Editar
+                    </a>
+
+                    <form action="/categorias/{{ c.id }}/toggle-ativo" method="post" style="display: inline;"
+                        onsubmit="return confirm('Deseja {% if c.ativo %}desativar{% else %}ativar{% endif %} a categoria {{ c.nome }}?')">
+                        <button type="submit">
+                            {{ "Desativar" if c.ativo else "Ativar" }}
+                        </button>
+                    </form>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            {% if not categorias %}
+
+            <tr>
+                <td colspan="4" style="text-align: center;">
+                    Nenhuma categoria encontrada.
+                </td>
+            </tr>
+
+            {% endif %}
+
+        </tbody>
+    </table>
+
+    <p style="margin-top: 20px;">
+        <a href="/">← Dashboard</a>
+    </p>
+
+</body>
+=======
 {% block title %}Categorias — AAPM SENAI{% endblock %}
 
 {% block extra_css %}
@@ -173,6 +283,7 @@
                 </tbody>
 
             </table>
+>>>>>>> 5f911e0f3b1b4e17ac1835be404d400317114470
 
         </div>
 
