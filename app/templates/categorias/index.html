@@ -1,113 +1,193 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias — AAPM SENAI</title>
-    <link rel="stylesheet" href="/static/categorias-css/index.css">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <!-- CABEÇALHO FIXO -->
-    <header class="topo">
-        <div class="logo">AAPM SENAI</div>
-        <div class="titulo-topo">Gestão de Categorias</div>
-        <a href="/" class="voltar">← Voltar ao Início</a>
-    </header>
+{% block title %}Categorias — AAPM SENAI{% endblock %}
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="container">
-        <div class="titulo-pagina">
-            <h1>Categorias de Produtos</h1>
-            <p>Gerencie as categorias cadastradas para utilização no PDV</p>
-        </div>
+{% block extra_css %}
+<link rel="stylesheet" href="/static/categorias-css/index.css">
+{% endblock %}
 
-        <div class="barra-acoes">
-            <div class="contador">
-                Total de categorias: <strong>{{ categorias|length }}</strong>
-            </div>
-            {% if usuario.role == 'admin' %}
-            <a href="/categorias/nova" class="btn-novo">+ Nova categoria</a>
-            {% endif %}
-        </div>
+{% block content %}
 
-        {% if request.query_params.get('criado') == 'ok' %}
-        <div class="alert alert-success">
-            Categoria criada com sucesso!
-        </div>
-        {% endif %}
+<main class="categorias-page">
 
-        {% if request.query_params.get('editado') == 'ok' %}
-        <div class="alert alert-success">
-            Categoria atualizada com sucesso!
-        </div>
-        {% endif %}
-
-        {% if request.query_params.get('erro') == 'produtos_vinculados' %}
-        <div class="alert alert-danger">
-            Não é possível desativar a categoria "<strong>{{ request.query_params.get('categoria') }}</strong>" pois existem produtos ativos vinculados a ela.
-        </div>
-        {% endif %}
-
-        <div class="container-card">
-            <div class="table-responsive">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 90px;">ID</th>
-                            <th>NOME DA CATEGORIA</th>
-                            <th style="width: 140px;">STATUS</th>
-                            <th style="width: 190px;">AÇÕES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for c in categorias %}
-                        <tr>
-                            <td><strong>#{{ c.id }}</strong></td>
-                            <td>{{ c.nome }}</td>
-                            <td>
-                                {% if c.ativo %}
-                                <span class="badge badge-ativo">Ativo</span>
-                                {% else %}
-                                <span class="badge badge-inativo">Inativo</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if usuario.role == 'admin' %}
-                                <div class="actions-cell">
-                                    <a href="/categorias/{{ c.id }}/editar" class="link-action">Editar</a>
-
-                                    <form action="/categorias/{{ c.id }}/toggle-ativo" method="post" style="display:inline;"
-                                        onsubmit="return confirm('Deseja {% if c.ativo %}desativar{% else %}ativar{% endif %} a categoria {{ c.nome }}?')">
-                                        <button type="submit" class="btn-inline">
-                                            {{ "Desativar" if c.ativo else "Ativar" }}
-                                        </button>
-                                    </form>
-                                </div>
-                                {% else %}
-                                <span style="color: var(--texto-secundario); font-size: 12px;">Sem permissão</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-
-                        {% if not categorias %}
-                        <tr>
-                            <td colspan="4" class="empty-row">
-                                Nenhuma categoria encontrada.
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+    <!-- CABEÇALHO DA PÁGINA -->
+    <div class="titulo-pagina">
         <div>
-            <a href="/" class="link-back">← Voltar ao Dashboard</a>
+            <h1>Categorias de Produtos</h1>
+            <p>
+                Gerencie as categorias cadastradas para utilização no PDV.
+            </p>
         </div>
-    </main>
-</body>
+    </div>
 
-</html>
+    <!-- BARRA DE AÇÕES -->
+    <div class="barra-acoes">
+
+        <div class="contador">
+            Total de categorias:
+            <strong>{{ categorias|length }}</strong>
+        </div>
+
+        {% if usuario and usuario.role == 'admin' %}
+        <a href="/categorias/nova" class="btn-novo">
+            <i data-lucide="plus"></i>
+            <span>Nova categoria</span>
+        </a>
+        {% endif %}
+
+    </div>
+
+    <!-- ALERTA DE SUCESSO: CRIAÇÃO -->
+    {% if request.query_params.get('criado') == 'ok' %}
+    <div class="alert alert-success">
+        <i data-lucide="check-circle"></i>
+        <span>Categoria criada com sucesso!</span>
+    </div>
+    {% endif %}
+
+    <!-- ALERTA DE SUCESSO: EDIÇÃO -->
+    {% if request.query_params.get('editado') == 'ok' %}
+    <div class="alert alert-success">
+        <i data-lucide="check-circle"></i>
+        <span>Categoria atualizada com sucesso!</span>
+    </div>
+    {% endif %}
+
+    <!-- ALERTA DE ERRO -->
+    {% if request.query_params.get('erro') == 'produtos_vinculados' %}
+    <div class="alert alert-danger">
+        <i data-lucide="alert-circle"></i>
+
+        <span>
+            Não é possível desativar a categoria
+            <strong>
+                "{{ request.query_params.get('categoria') }}"
+            </strong>,
+            pois existem produtos ativos vinculados a ela.
+        </span>
+    </div>
+    {% endif %}
+
+    <!-- TABELA DE CATEGORIAS -->
+    <div class="container-card">
+
+        <div class="table-responsive">
+
+            <table class="custom-table">
+
+                <thead>
+                    <tr>
+                        <th style="width: 90px;">ID</th>
+                        <th>NOME DA CATEGORIA</th>
+                        <th style="width: 140px;">STATUS</th>
+                        <th style="width: 190px;">AÇÕES</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for c in categorias %}
+                    <tr>
+
+                        <!-- ID -->
+                        <td>
+                            <strong>#{{ c.id }}</strong>
+                        </td>
+
+                        <!-- NOME -->
+                        <td>
+                            {{ c.nome }}
+                        </td>
+
+                        <!-- STATUS -->
+                        <td>
+                            {% if c.ativo %}
+                            <span class="badge badge-ativo">
+                                Ativo
+                            </span>
+                            {% else %}
+                            <span class="badge badge-inativo">
+                                Inativo
+                            </span>
+                            {% endif %}
+                        </td>
+
+                        <!-- AÇÕES -->
+                        <td>
+
+                            {% if usuario and usuario.role == 'admin' %}
+
+                            <div class="actions-cell">
+
+                                <a
+                                    href="/categorias/{{ c.id }}/editar"
+                                    class="link-action"
+                                >
+                                    Editar
+                                </a>
+
+                                <form
+                                    action="/categorias/{{ c.id }}/toggle-ativo"
+                                    method="post"
+                                    style="display: inline;"
+                                    onsubmit="return confirm('Deseja {% if c.ativo %}desativar{% else %}ativar{% endif %} a categoria {{ c.nome }}?')"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-inline"
+                                    >
+                                        {{ "Desativar" if c.ativo else "Ativar" }}
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            {% else %}
+
+                            <span class="sem-permissao">
+                                Sem permissão
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    <!-- ESTADO VAZIO -->
+                    {% if not categorias %}
+                    <tr>
+                        <td colspan="4" class="empty-row">
+                            <div class="empty-content">
+                                <i data-lucide="folder-open"></i>
+                                <span>Nenhuma categoria encontrada.</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,22 +1,26 @@
-<!-- templates/pdv/historico.html -->
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Vendas — AAPM SENAI</title>
-    <link rel="stylesheet" href="/static/hist_vendas.css">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <div class="container">
-        <!-- Cabeçalho apenas com o Título -->
-        <div class="header-top">
+{% block title %}Histórico de Vendas — AAPM SENAI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/hist_vendas.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container historico-container">
+
+    <!-- Cabeçalho -->
+    <div class="header-top">
+        <div>
             <h1>Histórico de vendas</h1>
+            <p>Consulte as vendas realizadas no sistema.</p>
         </div>
+    </div>
 
-        <!-- Tabela de Histórico -->
+    <!-- Tabela de histórico -->
+    <div class="tabela-wrapper">
         <table>
             <thead>
                 <tr>
@@ -29,23 +33,44 @@
                     <th>Operador</th>
                 </tr>
             </thead>
+
             <tbody>
                 {% for v in vendas %}
                 <tr>
-                    <td><a href="/pdv/venda/{{ v.id }}">#{{ v.id }}</a></td>
-                    <td>{{ v.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
-                    <td>{{ v.cliente.nome if v.cliente else "Balcão" }}</td>
+                    <td>
+                        <a href="/pdv/venda/{{ v.id }}" class="venda-link">
+                            #{{ v.id }}
+                        </a>
+                    </td>
+
+                    <td>
+                        {{ v.criado_em.strftime('%d/%m/%Y %H:%M') }}
+                    </td>
+
+                    <td>
+                        {{ v.cliente.nome if v.cliente else "Balcão" }}
+                    </td>
+
                     <td>{{ v.itens | length }}</td>
+
                     <td>
                         {% if v.desconto_percentual > 0 %}
-                            <span>
+                            <span class="desconto">
                                 {{ v.desconto_percentual|int }}%
                                 (− R$ {{ "%.2f"|format(v.desconto_valor) }})
                             </span>
-                        {% else %}—{% endif %}
+                        {% else %}
+                            —
+                        {% endif %}
                     </td>
-                    <td>R$ {{ "%.2f"|format(v.total_liquido) }}</td>
-                    <td>{{ v.usuario.nome if v.usuario else "—" }}</td>
+
+                    <td class="valor-total">
+                        R$ {{ "%.2f"|format(v.total_liquido) }}
+                    </td>
+
+                    <td>
+                        {{ v.usuario.nome if v.usuario else "—" }}
+                    </td>
                 </tr>
                 {% endfor %}
 
@@ -58,10 +83,16 @@
                 {% endif %}
             </tbody>
         </table>
-
-        <!-- Botão Inferior -->
-        <a href="/pdv" class="btn-secondary">&larr; Voltar ao PDV</a>
     </div>
-</body>
 
-</html>
+    <!-- Botão para voltar ao PDV -->
+    <div class="acoes-historico">
+        <a href="/pdv" class="btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            <span>Voltar ao PDV</span>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
