@@ -1,442 +1,317 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
+{% block title %}Editar produto | Administração{% endblock %}
 
-    <meta charset="UTF-8">
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="/static/produtos-css/form.css"
+>
+{% endblock %}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+{% block content %}
+
+<!-- =====================================================
+     FLUIDOS DO BACKGROUND
+====================================================== -->
+
+<div class="fluidos">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+<!-- =====================================================
+     CONTEÚDO
+====================================================== -->
+
+<section class="container">
+
+    <!-- TÍTULO -->
+
+    <section class="titulo-pagina">
+
+        <h1>Editar produto</h1>
+
+        <p>
+            Altere as informações do produto abaixo.
+        </p>
+
+    </section>
+
+
+    <!-- FORMULÁRIO -->
+
+    <div
+        class="modal ativo"
+        style="position: relative; display: flex; min-height: auto; padding: 30px 0; background: transparent;"
     >
 
-    <title>Editar produto | Administração</title>
+        <div class="modal-card">
 
-    <link
-        rel="stylesheet"
-        href="/static/produtos-css/form.css"
-    >
+            <!-- CABEÇALHO DO FORMULÁRIO -->
 
-</head>
+            <div class="form-header">
 
+                <h2>Editar produto</h2>
 
-<body>
+                <p>
+                    Atualize os dados de
+                    <strong>{{ produto.nome }}</strong>.
+                </p>
 
-
-    <!-- =====================================================
-         FLUIDOS DO BACKGROUND
-    ====================================================== -->
-
-    <div class="fluidos">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </div>
+            </div>
 
 
+            <!-- MENSAGEM DE ERRO -->
 
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
+            {% if erro %}
 
-    <header class="topo">
+            <div class="alert erro">
+                {{ erro }}
+            </div>
 
-        <div class="logo">
-            AAPM
-        </div>
-
-
-        <div class="titulo-topo">
-            Administração de produtos
-        </div>
+            {% endif %}
 
 
-        <a
-            href="/produtos/form"
-            class="voltar"
-        >
-            ← Voltar
-        </a>
+            <!-- CAMPOS DO FORMULÁRIO -->
 
-    </header>
+            <form
+                method="POST"
+                action="/produtos/{{ produto.id }}/editar"
+                enctype="multipart/form-data"
+                class="form-container"
+            >
 
+                <!-- NOME -->
 
+                <div class="form-group">
 
-    <!-- =====================================================
-         CONTEÚDO
-    ====================================================== -->
+                    <label for="nome">
+                        Nome do produto
+                    </label>
 
-    <main class="container">
-
-
-        <!-- =================================================
-             TÍTULO
-        ================================================== -->
-
-        <section class="titulo-pagina">
-
-            <h1>
-                Editar produto
-            </h1>
-
-            <p>
-                Altere as informações do produto abaixo.
-            </p>
-
-        </section>
-
-
-
-        <!-- =================================================
-             FORMULÁRIO
-        ================================================== -->
-
-        <div
-            class="modal ativo"
-            style="position: relative; display: flex; min-height: auto; padding: 30px 0; background: transparent;"
-        >
-
-            <div class="modal-card">
-
-
-                <!-- =================================================
-                     CABEÇALHO DO FORMULÁRIO
-                ================================================== -->
-
-                <div class="form-header">
-
-                    <h2>
-                        Editar produto
-                    </h2>
-
-                    <p>
-                        Atualize os dados de
-                        <strong>{{ produto.nome }}</strong>.
-                    </p>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        class="form-input"
+                        value="{{ produto.nome }}"
+                        placeholder="Digite o nome do produto"
+                        required
+                    >
 
                 </div>
 
 
+                <!-- CATEGORIA E PREÇO -->
 
-                <!-- =================================================
-                     ERRO
-                ================================================== -->
+                <div class="form-row">
 
-                {% if erro %}
-
-                <div class="alert erro">
-
-                    {{ erro }}
-
-                </div>
-
-                {% endif %}
-
-
-
-                <!-- =================================================
-                     FORMULÁRIO
-                ================================================== -->
-
-                <form
-                    method="POST"
-                    action="/produtos/{{ produto.id }}/editar"
-                    enctype="multipart/form-data"
-                    class="form-container"
-                >
-
-
-                    <!-- =================================================
-                         NOME
-                    ================================================== -->
+                    <!-- CATEGORIA -->
 
                     <div class="form-group">
 
-                        <label for="nome">
-                            Nome do produto
+                        <label for="categoria">
+                            Categoria
                         </label>
 
-                        <input
-                            type="text"
-                            id="nome"
-                            name="nome"
+                        <select
+                            id="categoria"
+                            name="categoria_id"
                             class="form-input"
-                            value="{{ produto.nome }}"
-                            placeholder="Digite o nome do produto"
-                            required
                         >
 
-                    </div>
+                            <option value="0">
+                                Sem categoria
+                            </option>
 
+                            {% for categoria in categorias %}
 
-
-                    <!-- =================================================
-                         CATEGORIA + PREÇO
-                    ================================================== -->
-
-                    <div class="form-row">
-
-
-                        <!-- CATEGORIA -->
-
-                        <div class="form-group">
-
-                            <label for="categoria">
-                                Categoria
-                            </label>
-
-                            <select
-                                id="categoria"
-                                name="categoria_id"
-                                class="form-input"
+                            <option
+                                value="{{ categoria.id }}"
+                                {% if produto.categoria_id == categoria.id %}
+                                    selected
+                                {% endif %}
                             >
+                                {{ categoria.nome }}
+                            </option>
 
-                                <option value="0">
-                                    Sem categoria
-                                </option>
+                            {% endfor %}
 
-
-                                {% for categoria in categorias %}
-
-                                <option
-                                    value="{{ categoria.id }}"
-                                    {% if produto.categoria_id == categoria.id %}
-                                        selected
-                                    {% endif %}
-                                >
-
-                                    {{ categoria.nome }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- PREÇO -->
-
-                        <div class="form-group">
-
-                            <label for="preco">
-                                Preço
-                            </label>
-
-                            <input
-                                type="number"
-                                id="preco"
-                                name="preco"
-                                class="form-input"
-                                step="0.01"
-                                min="0"
-                                value="{{ produto.preco }}"
-                                placeholder="0,00"
-                                required
-                            >
-
-                        </div>
-
+                        </select>
 
                     </div>
 
 
-
-                    <!-- =================================================
-                         ESTOQUE
-                    ================================================== -->
+                    <!-- PREÇO -->
 
                     <div class="form-group">
 
-                        <label for="estoque">
-
-                            Quantidade em estoque
-
+                        <label for="preco">
+                            Preço
                         </label>
 
                         <input
                             type="number"
-                            id="estoque"
-                            name="estoque_atual"
+                            id="preco"
+                            name="preco"
                             class="form-input"
+                            step="0.01"
                             min="0"
-                            value="{{ produto.estoque_atual }}"
-                            placeholder="Digite a quantidade disponível"
+                            value="{{ produto.preco }}"
+                            placeholder="0,00"
                             required
                         >
 
                     </div>
 
+                </div>
 
 
-                    <!-- =================================================
-                         IMAGEM
-                    ================================================== -->
+                <!-- ESTOQUE -->
 
-                    <div class="form-group">
+                <div class="form-group">
 
-                        <label>
-                            Imagem do produto
-                        </label>
+                    <label for="estoque">
+                        Quantidade em estoque
+                    </label>
 
+                    <input
+                        type="number"
+                        id="estoque"
+                        name="estoque_atual"
+                        class="form-input"
+                        min="0"
+                        value="{{ produto.estoque_atual }}"
+                        placeholder="Digite a quantidade disponível"
+                        required
+                    >
 
-                        <div class="imagem-preview">
-
-                            {% if produto.imagem_path %}
-
-                            <img
-                                id="previewImagem"
-                                src="/static/{{ produto.imagem_path }}"
-                                alt="{{ produto.nome }}"
-                            >
-
-                            {% else %}
-
-                            <img
-                                id="previewImagem"
-                                src="/static/uploads/produto-generico.png"
-                                alt="Imagem padrão"
-                            >
-
-                            {% endif %}
-
-                        </div>
+                </div>
 
 
+                <!-- IMAGEM -->
 
-                        <label
-                            for="imagem"
-                            class="btn-imagem"
+                <div class="form-group">
+
+                    <label for="imagem">
+                        Imagem do produto
+                    </label>
+
+                    <div class="imagem-preview">
+
+                        {% if produto.imagem_path %}
+
+                        <img
+                            id="previewImagem"
+                            src="/static/{{ produto.imagem_path }}"
+                            alt="{{ produto.nome }}"
                         >
 
-                            📷 Escolher nova imagem
+                        {% else %}
 
-                        </label>
-
-
-                        <input
-                            type="file"
-                            id="imagem"
-                            name="imagem"
-                            accept="image/png, image/jpeg, image/webp"
-                            hidden
+                        <img
+                            id="previewImagem"
+                            src="/static/uploads/produto-generico.png"
+                            alt="Imagem padrão"
                         >
 
-
-                        <small class="imagem-info">
-
-                            Selecione uma nova imagem apenas se quiser
-                            substituir a atual.
-
-                        </small>
+                        {% endif %}
 
                     </div>
 
 
+                    <label
+                        for="imagem"
+                        class="btn-imagem"
+                    >
+                        📷 Escolher nova imagem
+                    </label>
 
-                    <!-- =================================================
-                         BOTÕES
-                    ================================================== -->
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept="image/png, image/jpeg, image/webp"
+                        hidden
+                    >
 
-                    <div class="acoes-form">
+                    <small class="imagem-info">
+                        Selecione uma nova imagem apenas se quiser
+                        substituir a atual.
+                    </small>
 
-
-                        <a
-                            href="/produtos/form"
-                            class="btn-cancelar"
-                        >
-
-                            Cancelar
-
-                        </a>
-
-
-                        <button
-                            type="submit"
-                            class="btn-salvar"
-                        >
-
-                            ✓ Salvar alterações
-
-                        </button>
+                </div>
 
 
-                    </div>
+                <!-- BOTÕES -->
 
+                <div class="acoes-form">
 
-                </form>
+                    <a
+                        href="/produtos/form"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
 
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+                        ✓ Salvar alterações
+                    </button>
 
-            </div>
+                </div>
+
+            </form>
 
         </div>
 
+    </div>
 
-    </main>
+</section>
 
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
-    <script>
-
-        /* =====================================================
-           PREVIEW DA IMAGEM
-        ===================================================== */
-
-        const inputImagem =
-            document.getElementById("imagem");
+{% endblock %}
 
 
-        const previewImagem =
-            document.getElementById("previewImagem");
+{% block scripts %}
 
+<script>
+    // Preview da imagem selecionada
 
-        if (inputImagem && previewImagem) {
+    const inputImagem = document.getElementById("imagem");
+    const previewImagem = document.getElementById("previewImagem");
 
-            inputImagem.addEventListener(
-                "change",
-                function () {
+    if (inputImagem && previewImagem) {
 
-                    const arquivo =
-                        this.files[0];
+        inputImagem.addEventListener("change", function () {
 
+            const arquivo = this.files[0];
 
-                    if (!arquivo) {
-                        return;
-                    }
+            if (!arquivo) {
+                return;
+            }
 
+            // Verifica se o arquivo é uma imagem
+            if (!arquivo.type.startsWith("image/")) {
+                return;
+            }
 
-                    const leitor =
-                        new FileReader();
+            const leitor = new FileReader();
 
+            leitor.onload = function (evento) {
+                previewImagem.src = evento.target.result;
+            };
 
-                    leitor.onload =
-                        function (evento) {
+            leitor.readAsDataURL(arquivo);
 
-                            previewImagem.src =
-                                evento.target.result;
+        });
 
-                        };
+    }
+</script>
 
-
-                    leitor.readAsDataURL(arquivo);
-
-                }
-            );
-
-        }
-
-    </script>
-
-
-</body>
-
-</html>
+{% endblock %}
