@@ -1,0 +1,511 @@
+/* =========================================================
+   TOKENS
+   ========================================================= */
+:root {
+  --color-primary: #014073;
+  --color-primary-dark: #012f54;
+  --color-primary-tint: #e8f0f7;
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-surface-alt: #eef2f6;
+  --color-border: #e1e7ed;
+  --color-text: #0f2438;
+  --color-text-muted: #5b7186;
+  --color-up: #1d7a4c;
+  --color-up-bg: #e7f4ec;
+  --color-down: #b23b3b;
+  --color-down-bg: #faeaea;
+  --color-gold: #b8862e;
+
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-panel: 0 1px 2px rgba(1, 64, 115, 0.06), 0 8px 24px -12px rgba(1, 64, 115, 0.15);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; margin: 0; }
+
+.app { max-width: 1240px; margin: 0 auto; padding: 0 28px 64px; }
+
+/* Esconde visualmente os inputs reais (radio/checkbox) mas mantém
+   foco por teclado e leitura por leitor de tela — eles continuam
+   sendo os controles de verdade, só não usamos o desenho nativo. */
+.visually-hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0 22px;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.topbar-brand { display: flex; align-items: center; gap: 14px; }
+
+.topbar-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.topbar-brand h1 { font-size: 22px; color: var(--color-primary-dark); line-height: 1.2; }
+.topbar-brand p { margin: 2px 0 0; font-size: 13.5px; color: var(--color-text-muted); }
+
+/* =========================================================
+   MÓDULO "ATENDENTE ATUAL" — sem JS
+   -----------------------------------------------------------
+   • Os 5 <input type="radio" name="attendant"> ficam soltos dentro
+     de .attendant (escondidos visualmente).
+   • .attendant-name e .attendant-avatar-stack guardam os 5 nomes /
+     avatares empilhados; apenas o que corresponde ao rádio marcado
+     fica visível, graças a `.attendant:has(#attendant-N:checked)`.
+   • O menu de opções usa <details>/<summary>, que abre e fecha de
+     forma nativa, sem nenhum script.
+   ========================================================= */
+.attendant {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px 8px 8px;
+}
+
+.attendant-info { display: flex; flex-direction: column; line-height: 1.25; }
+.attendant-label { font-size: 11px; color: var(--color-text-muted); }
+
+.attendant-name { font-size: 14.5px; font-weight: 700; color: var(--color-primary-dark); position: relative; }
+.attendant-name-variant { display: none; }
+.attendant:has(#attendant-1:checked) .attendant-name-variant[data-attendant="1"] { display: inline; }
+.attendant:has(#attendant-2:checked) .attendant-name-variant[data-attendant="2"] { display: inline; }
+.attendant:has(#attendant-3:checked) .attendant-name-variant[data-attendant="3"] { display: inline; }
+.attendant:has(#attendant-4:checked) .attendant-name-variant[data-attendant="4"] { display: inline; }
+.attendant:has(#attendant-5:checked) .attendant-name-variant[data-attendant="5"] { display: inline; }
+
+.attendant-avatar-stack { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
+.attendant-avatar-variant {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-primary-tint);
+  border: 1px solid var(--color-border);
+}
+.attendant:has(#attendant-1:checked) .attendant-avatar-variant[data-attendant="1"] { display: block; }
+.attendant:has(#attendant-2:checked) .attendant-avatar-variant[data-attendant="2"] { display: block; }
+.attendant:has(#attendant-3:checked) .attendant-avatar-variant[data-attendant="3"] { display: block; }
+.attendant:has(#attendant-4:checked) .attendant-avatar-variant[data-attendant="4"] { display: block; }
+.attendant:has(#attendant-5:checked) .attendant-avatar-variant[data-attendant="5"] { display: block; }
+
+/* Dropdown nativo (details/summary) */
+.select-fake { position: relative; }
+.select-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.select-trigger::-webkit-details-marker { display: none; }
+.select-trigger::after { content: '▾'; font-size: 11px; color: var(--color-text-muted); }
+.select-fake[open] .select-trigger { border-color: var(--color-primary); color: var(--color-primary-dark); }
+
+.select-options {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 190px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-panel);
+  padding: 6px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attendant-option {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 13.5px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.attendant-option:hover { background: var(--color-surface); }
+
+/* Destaca a opção atualmente selecionada dentro do menu */
+.attendant:has(#attendant-1:checked) label[for="attendant-1"],
+.attendant:has(#attendant-2:checked) label[for="attendant-2"],
+.attendant:has(#attendant-3:checked) label[for="attendant-3"],
+.attendant:has(#attendant-4:checked) label[for="attendant-4"],
+.attendant:has(#attendant-5:checked) label[for="attendant-5"] {
+  background: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ========================================================= */
+.content { padding-top: 28px; display: flex; flex-direction: column; gap: 22px; }
+
+/* =========================================================
+   FILTRO DE PERÍODO — controla KPIs, gráfico e listas de produtos
+   -----------------------------------------------------------
+   Os 4 <input type="radio" name="period"> ficam dentro do controle
+   segmentado. Como estão em .app, qualquer elemento com
+   [data-period-panel="X"] em qualquer lugar da página pode ser
+   revelado com `.app:has(#period-X:checked) [data-period-panel="X"]`.
+   ========================================================= */
+[data-period-panel] { display: none; }
+.app:has(#period-daily:checked)   [data-period-panel="daily"]   { display: revert; }
+.app:has(#period-weekly:checked)  [data-period-panel="weekly"]  { display: revert; }
+.app:has(#period-monthly:checked) [data-period-panel="monthly"] { display: revert; }
+.app:has(#period-yearly:checked)  [data-period-panel="yearly"]  { display: revert; }
+
+/* `revert` não é ideal para grid/flex, então definimos o display certo
+   por tipo de elemento assim que ele estiver "revelado" */
+.kpi-row[data-period-panel] { display: none; }
+.app:has(#period-daily:checked)   .kpi-row[data-period-panel="daily"]   { display: grid; }
+.app:has(#period-weekly:checked)  .kpi-row[data-period-panel="weekly"]  { display: grid; }
+.app:has(#period-monthly:checked) .kpi-row[data-period-panel="monthly"] { display: grid; }
+.app:has(#period-yearly:checked)  .kpi-row[data-period-panel="yearly"]  { display: grid; }
+
+.product-list[data-period-panel] { display: none; }
+.app:has(#period-daily:checked)   .product-list[data-period-panel="daily"]   { display: flex; }
+.app:has(#period-weekly:checked)  .product-list[data-period-panel="weekly"]  { display: flex; }
+.app:has(#period-monthly:checked) .product-list[data-period-panel="monthly"] { display: flex; }
+.app:has(#period-yearly:checked)  .product-list[data-period-panel="yearly"]  { display: flex; }
+
+.pill[data-period-panel] { display: none; }
+.app:has(#period-daily:checked)   .pill[data-period-panel="daily"]   { display: inline-block; }
+.app:has(#period-weekly:checked)  .pill[data-period-panel="weekly"]  { display: inline-block; }
+.app:has(#period-monthly:checked) .pill[data-period-panel="monthly"] { display: inline-block; }
+.app:has(#period-yearly:checked)  .pill[data-period-panel="yearly"]  { display: inline-block; }
+
+.range-label[data-period-panel] { display: none; }
+.app:has(#period-daily:checked)   .range-label[data-period-panel="daily"]   { display: block; }
+.app:has(#period-weekly:checked)  .range-label[data-period-panel="weekly"]  { display: block; }
+.app:has(#period-monthly:checked) .range-label[data-period-panel="monthly"] { display: block; }
+.app:has(#period-yearly:checked)  .range-label[data-period-panel="yearly"]  { display: block; }
+
+/* Cards de KPI */
+.kpi-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kpi-row { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.kpi-card-top { display: flex; align-items: center; justify-content: space-between; }
+.kpi-label { font-size: 13px; color: var(--color-text-muted); font-weight: 600; }
+
+.kpi-delta { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.kpi-delta.up { color: var(--color-up); background: var(--color-up-bg); }
+.kpi-delta.down { color: var(--color-down); background: var(--color-down-bg); }
+
+.kpi-value { font-family: var(--font-serif); font-size: 28px; color: var(--color-primary-dark); }
+.kpi-caption { font-size: 12.5px; color: var(--color-text-muted); }
+
+/* Painéis genéricos */
+.panel {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px 22px 22px;
+}
+.panel-main { box-shadow: var(--shadow-panel); }
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.panel-header-tight { align-items: center; margin-bottom: 12px; }
+
+.panel-header h2 { font-size: 18px; color: var(--color-primary-dark); }
+.panel-sub { margin: 4px 0 0; font-size: 13px; color: var(--color-text-muted); }
+
+.panel-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* =========================================================
+   CONTROLE SEGMENTADO (Diário/Semanal/Mensal/Anual e Linha/Pizza)
+   -----------------------------------------------------------
+   Cada opção é um <label for="id-do-radio">; o estado "ativo" vem
+   do seletor de irmão adjacente `input:checked + label`.
+   ========================================================= */
+.segmented {
+  display: inline-flex;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+.segmented-option {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+.segmented .visually-hidden-input:checked + .segmented-option {
+  background: var(--color-primary);
+  color: #fff;
+}
+.segmented-option:hover { color: var(--color-text); }
+.segmented .visually-hidden-input:focus-visible + .segmented-option {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+}
+.btn-outline {
+  background: #fff;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+}
+.btn-outline:hover { background: var(--color-primary-tint); }
+
+/* Estado ativo do botão "Comparar períodos" (checkbox + label) */
+#compare-toggle:checked + .compare-toggle-label {
+  background: var(--color-primary);
+  color: #fff;
+}
+#compare-toggle:focus-visible + .compare-toggle-label {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* No modo pizza a comparação não se aplica: desativa visualmente o botão */
+.panel-main:has(#chart-pie:checked) .compare-toggle-label {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Textos de apoio da barra de comparação */
+.compare-bar, .pie-hint {
+  display: none;
+  font-size: 12.5px;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-tint);
+  border: 1px solid #cfe0ee;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 0 0 16px;
+}
+.panel-main:has(#chart-line:checked):has(#compare-toggle:checked) .compare-bar { display: block; }
+.panel-main:has(#chart-pie:checked) .pie-hint {
+  display: block;
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   GRÁFICO — 12 SVGs estáticos (4 períodos × 3 modos), revelados
+   por combinação de período + tipo de gráfico + comparação
+   ========================================================= */
+.chart-wrap { position: relative; min-height: 300px; }
+.chart-instance { display: none; }
+.chart-svg { width: 100%; height: auto; display: block; }
+
+.chart-legend-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+}
+.chart-legend-dual { gap: 18px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.dot-primary { background: var(--color-primary); }
+.dot-secondary { background: var(--color-gold); }
+
+.pie-layout { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.chart-instance-pie .chart-svg { width: 240px; height: 208px; flex-shrink: 0; }
+.pie-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 6px 18px;
+  font-size: 13px;
+  color: var(--color-text);
+}
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 7px; }
+
+/* Combinações período × tipo de gráfico × comparação */
+.panel-main:has(#period-daily:checked):has(#chart-line:checked):not(:has(#compare-toggle:checked)) [data-chart="daily-single"] { display: block; }
+.panel-main:has(#period-daily:checked):has(#chart-line:checked):has(#compare-toggle:checked)      [data-chart="daily-compare"] { display: block; }
+.panel-main:has(#period-daily:checked):has(#chart-pie:checked)                                     [data-chart="daily-pie"]     { display: block; }
+
+.panel-main:has(#period-weekly:checked):has(#chart-line:checked):not(:has(#compare-toggle:checked)) [data-chart="weekly-single"] { display: block; }
+.panel-main:has(#period-weekly:checked):has(#chart-line:checked):has(#compare-toggle:checked)      [data-chart="weekly-compare"] { display: block; }
+.panel-main:has(#period-weekly:checked):has(#chart-pie:checked)                                     [data-chart="weekly-pie"]     { display: block; }
+
+.panel-main:has(#period-monthly:checked):has(#chart-line:checked):not(:has(#compare-toggle:checked)) [data-chart="monthly-single"] { display: block; }
+.panel-main:has(#period-monthly:checked):has(#chart-line:checked):has(#compare-toggle:checked)      [data-chart="monthly-compare"] { display: block; }
+.panel-main:has(#period-monthly:checked):has(#chart-pie:checked)                                     [data-chart="monthly-pie"]     { display: block; }
+
+.panel-main:has(#period-yearly:checked):has(#chart-line:checked):not(:has(#compare-toggle:checked)) [data-chart="yearly-single"] { display: block; }
+.panel-main:has(#period-yearly:checked):has(#chart-line:checked):has(#compare-toggle:checked)      [data-chart="yearly-compare"] { display: block; }
+.panel-main:has(#period-yearly:checked):has(#chart-pie:checked)                                     [data-chart="yearly-pie"]     { display: block; }
+
+/* =========================================================
+   LINHA INFERIOR: TOP / BOTTOM PRODUTOS
+   ========================================================= */
+.split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.pill { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.pill-up { color: var(--color-up); background: var(--color-up-bg); }
+.pill-down { color: var(--color-down); background: var(--color-down-bg); }
+
+.product-list { list-style: none; margin: 0; padding: 0; flex-direction: column; }
+
+.product-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.product-list li:last-child { border-bottom: none; }
+
+.product-rank {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.product-info { flex: 1; min-width: 0; }
+.product-name { font-size: 14px; font-weight: 600; color: var(--color-text); }
+.product-meta { font-size: 12px; color: var(--color-text-muted); }
+
+.product-bar-track {
+  width: 90px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.product-bar-fill { height: 100%; border-radius: 999px; }
+.product-bar-fill.up { background: var(--color-primary); }
+.product-bar-fill.down { background: var(--color-down); }
+
+.product-value { width: 74px; text-align: right; font-size: 13px; font-weight: 700; color: var(--color-text); flex-shrink: 0; }
+
+/* Rodapé */
+.app-footer { margin-top: 26px; text-align: center; font-size: 12.5px; color: var(--color-text-muted); }
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 980px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .split-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .app { padding: 0 16px 48px; }
+  .kpi-row { grid-template-columns: 1fr; }
+  .topbar { padding-top: 20px; }
+  .attendant { width: 100%; }
+  .panel-controls { width: 100%; }
+  .segmented { flex-wrap: wrap; }
+  .pie-layout { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* =========================================================
+   FALLBACK — navegadores sem suporte a :has()
+   -----------------------------------------------------------
+   Sem :has(), os controles continuam clicáveis e o layout
+   permanece íntegro, mas a página fica "congelada" no estado
+   inicial (Mensal, gráfico de linha, atendente 1): ainda é um
+   dashboard completo e legível, só não reage aos cliques.
+   ========================================================= */

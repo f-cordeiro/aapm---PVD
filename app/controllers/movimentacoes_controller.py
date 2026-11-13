@@ -243,3 +243,17 @@ def historico_produto(
             "total_saidas":   total_saidas,
         }
     )
+
+# ============================================================
+# DASHBOARD — acessível pelo botão em movimentacoes/index.html
+# ============================================================
+
+@router.get("/dashboard")
+def dashboard(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "movimentacoes/dashboard.html",
+        {
+            "request": request
+        }
+    )
