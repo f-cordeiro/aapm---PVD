@@ -21,7 +21,7 @@ body, html {
 
 /* --- Painel Esquerdo --- */
 .left-panel {
-    flex: 1;
+    flex: 1.5;
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -34,7 +34,7 @@ body, html {
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(45%) contrast(130%);
+    filter: brightness(90%) contrast(150%);
 }
 
 /* Camada escura sobre a foto */
@@ -63,7 +63,7 @@ body, html {
 /* --- Painel Direito --- */
 .right-panel {
     flex: 1;
-    background-color: #0d417a;
+    background-color: #A9321A;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,10 +73,10 @@ body, html {
 
 /* Card centralizado */
 .login-card {
-    background-color: #f2f2f2;
+    background-color: #D1B898;
     width: 100%;
     max-width: 420px;
-    padding: 70px 50px;
+    padding: 70px 85px;
     border-radius: 24px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -108,7 +108,7 @@ body, html {
 }
 
 .aapm-logo {
-    height: 50px;
+    height: 150px;
     object-fit: contain;
 }
 
@@ -163,7 +163,7 @@ body, html {
     padding: 12px;
     border: none;
     border-radius: 25px;
-    background-color: #0d417a;
+    background-color: #A9321A;
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
@@ -172,7 +172,7 @@ body, html {
 }
 
 .btn-login:hover {
-    background-color: #0a3360;
+    background-color: #962d18;
 }
 
 .btn-login:active {

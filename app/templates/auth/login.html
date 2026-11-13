@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AAPM SENAI</title>
-    <!-- CSS Font Awesome -->
+    <title>Pizzaria Coliseu - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/index.css">
 </head>
@@ -13,7 +12,7 @@
     <div class="login-container">
         <!-- Lado Esquerdo: Banner SENAI com filtro e efeitos JS -->
         <div class="left-panel js-animated-background">
-            <img src="{{ url_for('static', path='images/senai-imagem.jpg') }}" alt="Logo SENAI" class="senai-logo filtered-image">
+            <img src="{{ url_for('static', path='images/banner-esquerdo.jpg') }}" alt="Logo SENAI" class="senai-logo filtered-image">
             <div class="background-overlay"></div>
             <canvas id="canvas-matrix"></canvas>
         </div>
@@ -24,9 +23,7 @@
                 
                 <!-- Cabeçalho do Card -->
                 <div class="card-header">
-                    <h2>LOGIN</h2>
-                    <div class="divider"></div>
-                    <img src="{{ url_for('static', path='images/logo-senai.png') }}" alt="Logo AAPM SENAI" class="aapm-logo">
+                    <img src="{{ url_for('static', path='images/bannerpizzaria.jpg - Editado.png') }}" alt="Logo AAPM SENAI" class="aapm-logo">
                 </div>
 
                 <!-- Formulário conectado à rota /auth/login -->
